@@ -1,0 +1,8 @@
+*.log
+*.vscode
+*.bak
+*.json
+.DS_Store
+delphix.bad
+*.test
+test-data/
