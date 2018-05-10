@@ -227,6 +227,85 @@ func TestClient_CreateEnvironment(t *testing.T) {
 	}
 }
 
+func TestClient_CreateEnvironmentWithKey(t *testing.T) {
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	type args struct {
+		h *HostEnvironmentCreateParameters
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    interface{}
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			name: "test1",
+			fields: fields{
+				url:      "http://34.217.117.232/resources/json/delphix",
+				username: "delphix_admin",
+				password: "landshark",
+			},
+			want:    "An environment reference",
+			wantErr: false,
+			args: args{
+				h: &HostEnvironmentCreateParameters{
+					Type: "HostEnvironmentCreateParameters",
+					PrimaryUser: &EnvironmentUser{
+						Type: "EnvironmentUser",
+						Name: "delphix",
+						Credential: &SystemKeyCredential{
+							Type: "SystemKeyCredential",
+						},
+					},
+					HostEnvironment: &UnixHostEnvironment{
+						Type: "UnixHostEnvironment",
+						Name: "LINUXTARGET",
+					},
+					HostParameters: &UnixHostCreateParameters{
+						Type: "UnixHostCreateParameters",
+						Host: &UnixHost{
+							Type:        "UnixHost",
+							Address:     "10.0.1.95",
+							ToolkitPath: "/u01/app/toolkit",
+						},
+					},
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			fmt.Println(c)
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			got, err := c.CreateEnvironment(tt.args.h)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.CreateEnvironment() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got == nil {
+				t.Errorf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
+			} else {
+				log.Printf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestClient_DeleteEnvironment(t *testing.T) {
 	type fields struct {
 		url      string
