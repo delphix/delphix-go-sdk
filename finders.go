@@ -341,3 +341,16 @@ func (c *Client) FindObjectByName(u string, n string) (interface{}, error) {
 	}
 	return obj, err
 }
+
+func (c *Client) ReturnSshPublicKey() (string, error) {
+	systemObj, err := c.executeReadAndReturnObject("/system")
+	if err != nil {
+		return "", err
+	}
+	k, ok := systemObj.(map[string]interface{})["sshPublicKey"].(string) //grab the object reference
+	if !ok {
+		return "", fmt.Errorf("Did not find the sshPublicKey. Something went terribly wrong")
+	}
+	return k, err
+
+}

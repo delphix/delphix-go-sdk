@@ -379,3 +379,15 @@ func TestClient_FindEnvironmentUserByNameAndEnvironmentReference(t *testing.T) {
 		})
 	}
 }
+
+func TestReturnSshPublicKey(t *testing.T) {
+	err := testSysadminClient.LoadAndValidate()
+	k, err := testDelphixAdminClient.ReturnSshPublicKey()
+	if err != nil {
+		t.Fatalf("Wamp, Wamp: %s\n", err)
+	}
+	if k == "" {
+		log.Fatalf("publicSshKey not found\n")
+	}
+	fmt.Printf("publicSshKey: %s\n", k)
+}
