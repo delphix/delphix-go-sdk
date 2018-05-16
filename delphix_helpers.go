@@ -127,7 +127,7 @@ func (c *Client) CreateDomain() (interface{}, error) {
 		}
 	}
 
-	c.WaitForEngineReady()
+	c.WaitForEngineReady(10, 300)
 
 	return result, err
 }
@@ -165,14 +165,17 @@ func (c *Client) FactoryReset() error {
 		}
 	}
 
-	c.WaitForEngineReady()
+	c.WaitForEngineReady(10, 300)
 	return nil
 }
 
-func (c *Client) WaitForEngineReady() error {
-	for {
-		time.Sleep(10 * time.Second)
+func (c *Client) WaitForEngineReady(p int, t int) error {
+	log.Printf("Waiting up to %v for the DDDP to be ready", t)
+	timeOut := 0
+	for timeOut < t {
 		fmt.Println("Waiting for Delphix DDP to come back up")
+		time.Sleep(time.Duration(p) * time.Second)
+		timeOut = timeOut + p
 		if err := c.LoadAndValidate(); err == nil {
 			break
 		}
