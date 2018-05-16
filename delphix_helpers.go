@@ -170,6 +170,7 @@ func (c *Client) FactoryReset() error {
 }
 
 func (c *Client) WaitForEngineReady(p int, t int) error {
+
 	log.Printf("Waiting up to %v seconds for the DDDP to be ready", t)
 	timeOut := 0
 	for timeOut < t {
@@ -178,6 +179,8 @@ func (c *Client) WaitForEngineReady(p int, t int) error {
 		timeOut = timeOut + p
 		if err := c.LoadAndValidate(); err == nil {
 			break
+		} else if err.Error() == "Delphix Username/Password incorrect" {
+			return err
 		}
 	}
 	return nil
