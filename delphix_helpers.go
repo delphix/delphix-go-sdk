@@ -170,10 +170,10 @@ func (c *Client) FactoryReset() error {
 }
 
 func (c *Client) WaitForEngineReady(p int, t int) error {
-	log.Printf("Waiting up to %v for the DDDP to be ready", t)
+	log.Printf("Waiting up to %v seconds for the DDDP to be ready", t)
 	timeOut := 0
 	for timeOut < t {
-		fmt.Println("Waiting for Delphix DDP to come back up")
+		fmt.Println("Waiting for Delphix DDP")
 		time.Sleep(time.Duration(p) * time.Second)
 		timeOut = timeOut + p
 		if err := c.LoadAndValidate(); err == nil {
