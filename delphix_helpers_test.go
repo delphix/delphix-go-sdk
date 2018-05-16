@@ -6,6 +6,13 @@ import (
 	"testing"
 )
 
+func TestWaitForEngineReady(t *testing.T) {
+	err := testSysadminClient.WaitForEngineReady(10, 20)
+	if err != nil {
+		t.Errorf("Wamp, Wamp: %s\n", err)
+	}
+}
+
 func TestCheckStoragePool(t *testing.T) {
 	err := testSysadminClient.LoadAndValidate()
 	if err != nil {
