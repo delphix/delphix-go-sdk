@@ -355,9 +355,15 @@ func (c *Client) CreateDSource(l *LinkParameters) (
 	}
 
 	reference, err := c.executePostJobAndReturnObjectReference("/database/link", resultdat)
+	if err != nil {
+		return nil, err
+	}
 	//if "LinkNow" was set to true, then sync (snapshot) the dSource
 	if sync == true {
-		c.SyncDatabase(reference.(string))
+		if err = c.SyncDatabase(reference.(string)); err != nil {
+			errorMessage := fmt.Errorf("Unable to sync database: %s", err)
+			return nil, errorMessage
+		}
 	}
 	return reference, err
 }
