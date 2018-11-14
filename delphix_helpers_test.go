@@ -434,9 +434,8 @@ func TestClient_CreateEnvironment_And_DeleteEnvironment(t *testing.T) {
 			if got == nil {
 				t.Errorf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
 				return
-			} else {
-				log.Printf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
 			}
+			log.Printf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
 			err = c.DeleteEnvironment(got.(string))
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.DeleteEnvironment() error = %v, wantErr %v", err, tt.wantErr)
