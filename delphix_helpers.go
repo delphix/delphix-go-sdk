@@ -89,8 +89,8 @@ func (c *Client) CheckStoragePool() (interface{}, error) {
 	return s, nil
 }
 
-func (c *Client) CreateDomain() (interface{}, error) {
-	body, err := CreateDomainJSONBody(c)
+func (c *Client) InitializeSystem(d string, p string) (interface{}, error) {
+	body, err := CreateSystemInitializationParameters(c, d, p)
 	if err != nil {
 		return nil, err
 	}
@@ -220,7 +220,7 @@ func (c *Client) GetStorageDevices() ([]string, error) {
 	return devices, nil
 }
 
-func CreateDomainJSONBody(c *Client) (string, error) {
+func CreateSystemInitializationParameters(c *Client, d string, p string) (string, error) {
 	devices, err := c.GetStorageDevices()
 	if len(devices) == 0 {
 		err = fmt.Errorf("No devices available for assignment into the domain")
@@ -240,11 +240,13 @@ func CreateDomainJSONBody(c *Client) (string, error) {
 	return fmt.Sprintf(`
 		{
 					"type": "SystemInitializationParameters",
+					"defaultUser": "%s",
+					"defaultPassword": "%s",
 					"devices": [
 						%s
 					]
 				}
-		`, deviceString), nil
+		`, d, p, deviceString), nil
 }
 
 func (c *Client) UpdateUserPasswordByName(u string, p string) error {

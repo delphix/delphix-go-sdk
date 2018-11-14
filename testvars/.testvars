@@ -1,0 +1,5 @@
+export TEST_DELPHIX_URL="http://34.210.79.191"
+export TEST_DELPHIX_USERNAME="delphix_admin"
+export TEST_DELPHIX_PASSWORD="landshark"
+export TEST_VDBNAME="testAccSomething"
+export TEST_SYSADMIN_PASSWORD="sysadmin"

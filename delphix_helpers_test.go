@@ -24,12 +24,12 @@ func TestCheckStoragePool(t *testing.T) {
 	}
 }
 
-func TestCreateDomain(t *testing.T) {
+func TestInitializeSystem(t *testing.T) {
 	err := testSysadminClient.LoadAndValidate()
 	if err != nil {
 		t.Fatalf("Failure to Load and Validate sysadmin connection:  %s\n", err)
 	}
-	_, err = testSysadminClient.CreateDomain()
+	_, err = testSysadminClient.InitializeSystem(testAccDelphixAdminClient.username, testAccDelphixAdminClient.password)
 	if err != nil {
 		t.Errorf("Wamp, Wamp: %s\n", err)
 	}
@@ -57,12 +57,12 @@ func TestGetStorageDevices(t *testing.T) {
 	}
 }
 
-func TestCreateDomainJSONBody(t *testing.T) {
+func TestCreateSystemInitializationParameters(t *testing.T) {
 	err := testSysadminClient.LoadAndValidate()
 	if err != nil {
 		t.Fatalf("Failure to Load and Validate sysadmin connection:  %s\n", err)
 	}
-	body, err := CreateDomainJSONBody(&testSysadminClient)
+	body, err := CreateSystemInitializationParameters(&testSysadminClient, testAccDelphixAdminClient.username, testAccDelphixAdminClient.password)
 	if err != nil {
 		t.Errorf("Wamp, Wamp: %s\n", err)
 	}
@@ -102,16 +102,17 @@ func TestInitialSetup(t *testing.T) {
 		t.Fatalf("Failed to update sysadmin password: %s\n", err)
 	}
 
-	TestCreateDomain(t)
+	TestInitializeSystem(t)
 
 	userName = "delphix_admin"
-	newPassword = testDelphixAdminClient.password
-	testDelphixAdminClient.password = "delphix"
+	// newPassword = testDelphixAdminClient.password
+	// testDelphixAdminClient.password = "delphix"
 	err = testDelphixAdminClient.LoadAndValidate()
 	if err != nil {
 		t.Fatalf("Failure to Load and Validate delphix_admin connection:  %s\n", err)
 	}
-	err = testDelphixAdminClient.UpdateUserPasswordByName(userName, newPassword)
+	// err = testDelphixAdminClient.UpdateUserPasswordByName(userName, newPassword)
+	err = testDelphixAdminClient.UpdateUserPasswordByName(testDelphixAdminClient.username, testDelphixAdminClient.password)
 	if err != nil {
 		t.Fatalf("Failed to update delphix_admin password:  %s\n", err)
 	}
