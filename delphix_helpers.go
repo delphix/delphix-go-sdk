@@ -11,6 +11,7 @@ import (
 	resty "gopkg.in/resty.v1"
 )
 
+// WaitforDelphixJob waits for a job to complete
 func (c *Client) WaitforDelphixJob(j string) error {
 	var jobState string
 	var err error
@@ -42,12 +43,14 @@ func (c *Client) WaitforDelphixJob(j string) error {
 	return err
 }
 
+// CreateDatabase provisions an Oracle virtual database
 func (c *Client) CreateDatabase(o *OracleProvisionParameters) (
 	interface{}, error) {
 	reference, err := c.executePostJobAndReturnObjectReference("/database/provision", o)
 	return reference, err
 }
 
+// UpdateDatabase updates an Oracle virtual database object
 func (c *Client) UpdateDatabase(r string, o *OracleDatabaseContainer) error {
 	url := fmt.Sprintf("/database/%s", r)
 	err := c.executePostJobAndReturnErrOnly(url, o)
@@ -55,6 +58,7 @@ func (c *Client) UpdateDatabase(r string, o *OracleDatabaseContainer) error {
 
 }
 
+// DeleteDatabase deletes a virtual database
 func (c *Client) DeleteDatabase(v string) error {
 
 	o := OracleDeleteParameters{
@@ -65,6 +69,7 @@ func (c *Client) DeleteDatabase(v string) error {
 	return err
 }
 
+// CheckStoragePool checks whether the storage domain has been created
 func (c *Client) CheckStoragePool() (interface{}, error) {
 	resp, err := resty.R().
 		SetHeader("Content-Type", "application/json").
@@ -89,6 +94,7 @@ func (c *Client) CheckStoragePool() (interface{}, error) {
 	return s, nil
 }
 
+// InitializeSystem completes the initial setup wizard
 func (c *Client) InitializeSystem(d string, p string) (interface{}, error) {
 	body, err := CreateSystemInitializationParameters(c, d, p)
 	if err != nil {
@@ -132,6 +138,7 @@ func (c *Client) InitializeSystem(d string, p string) (interface{}, error) {
 	return result, err
 }
 
+// FactoryReset performs a factory reset on the Delphix engine
 func (c *Client) FactoryReset() error {
 	fmt.Println("Restoring Delphix DDP to factory defaults")
 	resp, err := resty.R().
@@ -169,6 +176,7 @@ func (c *Client) FactoryReset() error {
 	return nil
 }
 
+// WaitForEngineReady loops until the Client connection is successful or time (t) expires
 func (c *Client) WaitForEngineReady(p int, t int) error {
 
 	log.Printf("Waiting up to %v seconds for the DDDP to be ready", t)
@@ -186,6 +194,7 @@ func (c *Client) WaitForEngineReady(p int, t int) error {
 	return nil
 }
 
+// GetStorageDevices returns the list of unassigned storage devices on the Delphix engine
 func (c *Client) GetStorageDevices() ([]string, error) {
 	resp, err := resty.R().
 		SetHeader("Content-Type", "application/json").
@@ -220,6 +229,7 @@ func (c *Client) GetStorageDevices() ([]string, error) {
 	return devices, nil
 }
 
+// CreateSystemInitializationParameters assembles the object necessary to feed the InitializeSystem function
 func CreateSystemInitializationParameters(c *Client, d string, p string) (string, error) {
 	devices, err := c.GetStorageDevices()
 	if len(devices) == 0 {
@@ -249,6 +259,7 @@ func CreateSystemInitializationParameters(c *Client, d string, p string) (string
 		`, d, p, deviceString), nil
 }
 
+// UpdateUserPasswordByName updates the specified username's(u) password(p)
 func (c *Client) UpdateUserPasswordByName(u string, p string) error {
 	userRef, err := c.FindUserByName(u)
 	if err != nil {
@@ -305,6 +316,7 @@ func (c *Client) UpdateUserPasswordByName(u string, p string) error {
 	return nil
 }
 
+// GrabObjectNameAndReference parses a results object(o) and returns the name and reference of that object in Delphix
 func GrabObjectNameAndReference(o interface{}) (string, string, error) {
 	var objName, objReference interface{}
 	objMap := o.(map[string]interface{})
@@ -318,6 +330,7 @@ func GrabObjectNameAndReference(o interface{}) (string, string, error) {
 	return objName.(string), objReference.(string), nil
 }
 
+// CreateEnvironment creates a new environment in Delphix
 func (c *Client) CreateEnvironment(h *HostEnvironmentCreateParameters) (
 	interface{}, error) {
 	url := "/environment"
@@ -326,6 +339,7 @@ func (c *Client) CreateEnvironment(h *HostEnvironmentCreateParameters) (
 	return reference, err
 }
 
+// DeleteEnvironment deletes an environment in Delphix
 func (c *Client) DeleteEnvironment(r string) error {
 	url := fmt.Sprintf("/environment/%s/delete", strings.ToUpper(r))
 	err := c.executePostJobAndReturnErrOnly(url, "{}")
@@ -333,6 +347,7 @@ func (c *Client) DeleteEnvironment(r string) error {
 	return err
 }
 
+// UpdateEnvironment updates an environment in Delphix
 func (c *Client) UpdateEnvironment(r string, h *UnixHostEnvironment) error {
 	url := fmt.Sprintf("/environment/%s", r)
 
@@ -341,6 +356,7 @@ func (c *Client) UpdateEnvironment(r string, h *UnixHostEnvironment) error {
 	return err
 }
 
+// CreateDSource creates a dSource in Delphix
 func (c *Client) CreateDSource(l *LinkParameters) (
 	interface{}, error) {
 
@@ -370,18 +386,19 @@ func (c *Client) CreateDSource(l *LinkParameters) (
 	return reference, err
 }
 
-//DeleteDSource is a convenience function, as it just invokes DeleteDatabase()
+// DeleteDSource is a convenience function, as it just invokes DeleteDatabase()
 func (c *Client) DeleteDSource(v string) error {
 	err := c.DeleteDatabase(strings.ToUpper(v))
 	return err
 }
 
-//UpdateDSource is a convenience function, as it just invokes UpdateDatabase()
+// UpdateDSource is a convenience function, as it just invokes UpdateDatabase()
 func (c *Client) UpdateDSource(r string, o *OracleDatabaseContainer) error {
 	err := c.UpdateDatabase(r, o)
 	return err
 }
 
+// SyncDatabase performs a snapsync on a database
 func (c *Client) SyncDatabase(r string) error {
 	url := fmt.Sprintf("/database/%s/sync", strings.ToUpper(r))
 	oracleSyncParameters := OracleSyncParameters{
