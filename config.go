@@ -67,7 +67,7 @@ type ErrorStruct struct {
 	Details       string `json:"details,omitempty"`
 	ID            string `json:"id,omitempty"`
 	CommandOutput string `json:"commandOutput,omitempty"`
-	diagnosis     string `json:"diagnosis,omitempty"`
+	Diagnosis     string `json:"diagnosis,omitempty"`
 }
 
 // Client the structure of a client request
