@@ -9,7 +9,7 @@ import (
 	resty "gopkg.in/resty.v1"
 )
 
-//return an APISession object
+// CreateAPISession returns an APISession object
 //v = APIVersion Struct
 //l = Locale as an IETF BCP 47 language tag, defaults to 'en-US'.
 //c = Client software identification token.
@@ -30,7 +30,7 @@ func CreateAPISession(v APIVersion, l string, c string) (APISession, error) {
 	return apiSession, nil
 }
 
-//return an APISession object
+//CreateAPIVersion returns an APISession object
 func CreateAPIVersion(major int, minor int, micro int) (APIVersion, error) {
 	maj := new(int)
 	min := new(int)
@@ -49,16 +49,19 @@ func CreateAPIVersion(major int, minor int, micro int) (APIVersion, error) {
 	return apiVersion, nil
 }
 
+// AuthSuccess holds the resty response success message
 type AuthSuccess struct {
 	ID, Message string
 }
 
+// RespError holds the resty response failure message
 type RespError struct {
 	Type        string `json:"type,omitempty"`
 	Status      string `json:"status,omitempty"`
 	ErrorStruct `json:"error,omitempty"`
 }
 
+// ErrorStruct is the struct of a resty error
 type ErrorStruct struct {
 	Type          string `json:"type,omitempty"`
 	Details       string `json:"details,omitempty"`
@@ -66,10 +69,13 @@ type ErrorStruct struct {
 	CommandOutput string `json:"commandOutput,omitempty"`
 	diagnosis     string `json:"diagnosis,omitempty"`
 }
+
+// Client the structure of a client request
 type Client struct {
 	url, username, password string
 }
 
+// NewClient creates a new client object
 func NewClient(username, password, url string) *Client {
 	return &Client{
 		url:      url,
@@ -78,6 +84,7 @@ func NewClient(username, password, url string) *Client {
 	}
 }
 
+// LoadAndValidate establishes a new client connection
 func (c *Client) LoadAndValidate() error {
 
 	versionStruct, err := CreateAPIVersion(1, 9, 0)
