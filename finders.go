@@ -9,6 +9,7 @@ import (
 	resty "gopkg.in/resty.v1"
 )
 
+// FindSourceByName returns the reference of the named source(n)
 func (c *Client) FindSourceByName(n string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -44,6 +45,7 @@ func (c *Client) FindSourceByName(n string) (interface{}, error) {
 	return nil, nil
 }
 
+// FindDatabaseByReference returns the database object (interface) of the reference (r) database
 func (c *Client) FindDatabaseByReference(r string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -78,6 +80,7 @@ func (c *Client) FindDatabaseByReference(r string) (interface{}, error) {
 	return nil, nil
 }
 
+// FindDatabaseByName returns the database object (interface) of the named (n) database
 func (c *Client) FindDatabaseByName(n string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -113,6 +116,7 @@ func (c *Client) FindDatabaseByName(n string) (interface{}, error) {
 	return nil, nil
 }
 
+// FindGroupByName returns the group object (interface) of the named (n) group
 func (c *Client) FindGroupByName(n string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -148,6 +152,8 @@ func (c *Client) FindGroupByName(n string) (interface{}, error) {
 	return nil, nil
 }
 
+// FindRepoReferenceByEnvironmentRefAndOracleHome returns the reference of the Repository by
+// environment reference (e) and oracle home (oh) path
 func (c *Client) FindRepoReferenceByEnvironmentRefAndOracleHome(e string, oh string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -183,6 +189,7 @@ func (c *Client) FindRepoReferenceByEnvironmentRefAndOracleHome(e string, oh str
 	return nil, nil
 }
 
+// FindEnvironmentByName returns the environment object (interface) of the named (n) environment
 func (c *Client) FindEnvironmentByName(n string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -217,6 +224,7 @@ func (c *Client) FindEnvironmentByName(n string) (interface{}, error) {
 	return nil, nil
 }
 
+// FindEnvironmentByReference returns the environment object (interface) of the referenced (r) environment
 func (c *Client) FindEnvironmentByReference(r string) (interface{}, error) {
 	var err error
 	url := fmt.Sprintf("/environment/%s", r)
@@ -227,6 +235,7 @@ func (c *Client) FindEnvironmentByReference(r string) (interface{}, error) {
 	return envObj, nil
 }
 
+// FindUserByName returns the user object (interface) of the named (n) user
 func (c *Client) FindUserByName(n string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
@@ -262,6 +271,8 @@ func (c *Client) FindUserByName(n string) (interface{}, error) {
 	return nil, nil
 }
 
+// FindSourceConfigByNameAndRepoReference returns the sourceconfig object (interface) of the
+// named (n) sourceconfig for the specified repo reference (r)
 func (c *Client) FindSourceConfigByNameAndRepoReference(n string, r string) (interface{}, error) {
 	url := fmt.Sprintf("/sourceconfig?repository=%s", r)
 	results, err := c.executeListAndReturnResults(url) //grab the query results
@@ -307,6 +318,8 @@ func returnObjectByReference(o []interface{}, r string) (interface{}, error) {
 	return nil, fmt.Errorf("Could not find object reference %s in %v", r, o)
 }
 
+// FindEnvironmentUserByNameAndEnvironmentReference returns the reference of the environment user by
+// environment user name (n) and environment reference (r)
 func (c *Client) FindEnvironmentUserByNameAndEnvironmentReference(n string, r string) (interface{}, error) {
 	url := fmt.Sprintf("/environment/user?environment=%s", r)
 	results, err := c.executeListAndReturnResults(url)
@@ -320,6 +333,7 @@ func (c *Client) FindEnvironmentUserByNameAndEnvironmentReference(n string, r st
 	return reference, err
 }
 
+// FindObjectByReference returns the referenced (r) object type (u)
 func (c *Client) FindObjectByReference(u string, r string) (interface{}, error) {
 	url := fmt.Sprintf("%s/%s", u, r)
 	obj, err := c.executeReadAndReturnObject(url)
@@ -329,6 +343,7 @@ func (c *Client) FindObjectByReference(u string, r string) (interface{}, error) 
 	return obj, err
 }
 
+// FindObjectByName returns the named (n) object type (u)
 func (c *Client) FindObjectByName(u string, n string) (interface{}, error) {
 	url := u
 	results, err := c.executeListAndReturnResults(url)
@@ -342,6 +357,7 @@ func (c *Client) FindObjectByName(u string, n string) (interface{}, error) {
 	return obj, err
 }
 
+// ReturnSshPublicKey returns the SSH Public Key of the Delphix Engine
 func (c *Client) ReturnSshPublicKey() (string, error) {
 	systemObj, err := c.executeReadAndReturnObject("/system")
 	if err != nil {
