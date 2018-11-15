@@ -32,11 +32,10 @@ func CreateAPISession(v APIVersion, l string, c string) (APISession, error) {
 
 //return an APISession object
 func CreateAPIVersion(major int, minor int, micro int) (APIVersion, error) {
-	t := new(string)
 	maj := new(int)
 	min := new(int)
 	mic := new(int)
-	*t = "APIVersion"
+	t := "APIVersion"
 	*maj = major
 	*min = minor
 	*mic = micro
