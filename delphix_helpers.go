@@ -44,14 +44,14 @@ func (c *Client) WaitforDelphixJob(j string) error {
 }
 
 // CreateDatabase provisions an Oracle virtual database
-func (c *Client) CreateDatabase(o *OracleProvisionParameters) (
+func (c *Client) CreateDatabase(o *OracleProvisionParametersStruct) (
 	interface{}, error) {
 	reference, err := c.executePostJobAndReturnObjectReference("/database/provision", o)
 	return reference, err
 }
 
 // UpdateDatabase updates an Oracle virtual database object
-func (c *Client) UpdateDatabase(r string, o *OracleDatabaseContainer) error {
+func (c *Client) UpdateDatabase(r string, o *OracleDatabaseContainerStruct) error {
 	url := fmt.Sprintf("/database/%s", r)
 	err := c.executePostJobAndReturnErrOnly(url, o)
 	return err
@@ -61,7 +61,7 @@ func (c *Client) UpdateDatabase(r string, o *OracleDatabaseContainer) error {
 // DeleteDatabase deletes a virtual database
 func (c *Client) DeleteDatabase(v string) error {
 
-	o := OracleDeleteParameters{
+	o := OracleDeleteParametersStruct{
 		Type: "OracleDeleteParameters",
 	}
 	url := fmt.Sprintf("/database/%s/delete", strings.ToUpper(v))
@@ -331,7 +331,7 @@ func GrabObjectNameAndReference(o interface{}) (string, string, error) {
 }
 
 // CreateEnvironment creates a new environment in Delphix
-func (c *Client) CreateEnvironment(h *HostEnvironmentCreateParameters) (
+func (c *Client) CreateEnvironment(h *HostEnvironmentCreateParametersStruct) (
 	interface{}, error) {
 	url := "/environment"
 	reference, err := c.executePostJobAndReturnObjectReference(url, h)
@@ -348,7 +348,7 @@ func (c *Client) DeleteEnvironment(r string) error {
 }
 
 // UpdateEnvironment updates an environment in Delphix
-func (c *Client) UpdateEnvironment(r string, h *UnixHostEnvironment) error {
+func (c *Client) UpdateEnvironment(r string, h *UnixHostEnvironmentStruct) error {
 	url := fmt.Sprintf("/environment/%s", r)
 
 	err := c.executePostJobAndReturnErrOnly(url, h)
@@ -357,7 +357,7 @@ func (c *Client) UpdateEnvironment(r string, h *UnixHostEnvironment) error {
 }
 
 // CreateDSource creates a dSource in Delphix
-func (c *Client) CreateDSource(l *LinkParameters) (
+func (c *Client) CreateDSource(l *LinkParametersStruct) (
 	interface{}, error) {
 
 	sync := false
@@ -393,7 +393,7 @@ func (c *Client) DeleteDSource(v string) error {
 }
 
 // UpdateDSource is a convenience function, as it just invokes UpdateDatabase()
-func (c *Client) UpdateDSource(r string, o *OracleDatabaseContainer) error {
+func (c *Client) UpdateDSource(r string, o *OracleDatabaseContainerStruct) error {
 	err := c.UpdateDatabase(r, o)
 	return err
 }
@@ -401,9 +401,10 @@ func (c *Client) UpdateDSource(r string, o *OracleDatabaseContainer) error {
 // SyncDatabase performs a snapsync on a database
 func (c *Client) SyncDatabase(r string) error {
 	url := fmt.Sprintf("/database/%s/sync", strings.ToUpper(r))
-	oracleSyncParameters := OracleSyncParameters{
-		Type: "OracleSyncParameters",
-	}
+	// oracleSyncParameters := OracleSyncParameters{
+	// 	Type: "OracleSyncParameters",
+	// }
+	oracleSyncParameters := CreateOracleSyncParameters(nil, nil, nil, nil)
 	err := c.executePostJobAndReturnErrOnly(url, oracleSyncParameters)
 	return err
 }

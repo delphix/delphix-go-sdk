@@ -13,15 +13,15 @@ import (
 //v = APIVersion Struct
 //l = Locale as an IETF BCP 47 language tag, defaults to 'en-US'.
 //c = Client software identification token.
-func CreateAPISession(v APIVersion, l string, c string) (APISession, error) {
+func CreateAPISession(v APIVersionStruct, l string, c string) (APISessionStruct, error) {
 	if l == "" {
 		l = "en-US"
 	}
 	if len(c) > 63 {
 		err := fmt.Errorf("Client ID specified cannot be longer than 64 characters.\nYou provided %s", c)
-		return APISession{}, err
+		return APISessionStruct{}, err
 	}
-	apiSession := APISession{
+	apiSession := APISessionStruct{
 		Type:    "APISession",
 		Version: &v,
 		Locale:  l,
@@ -31,7 +31,7 @@ func CreateAPISession(v APIVersion, l string, c string) (APISession, error) {
 }
 
 //CreateAPIVersion returns an APISession object
-func CreateAPIVersion(major int, minor int, micro int) (APIVersion, error) {
+func CreateAPIVersion(major int, minor int, micro int) (APIVersionStruct, error) {
 	maj := new(int)
 	min := new(int)
 	mic := new(int)
@@ -40,7 +40,7 @@ func CreateAPIVersion(major int, minor int, micro int) (APIVersion, error) {
 	*min = minor
 	*mic = micro
 
-	apiVersion := APIVersion{
+	apiVersion := APIVersionStruct{
 		Type:  t,
 		Major: maj,
 		Minor: min,
@@ -123,7 +123,7 @@ func (c *Client) LoadAndValidate() error {
 	resp, err = resty.R().
 		SetHeader("Content-Type", "application/json").
 		SetResult(AuthSuccess{}).
-		SetBody(LoginRequest{
+		SetBody(LoginRequestStruct{
 			Type:     "LoginRequest",
 			Username: c.username,
 			Password: c.password,
