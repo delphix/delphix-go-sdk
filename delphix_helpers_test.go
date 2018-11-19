@@ -1154,12 +1154,14 @@ func TestClient_SyncDatabase(t *testing.T) {
 				return
 			}
 			got, err := c.FindDatabaseByName(tt.args.n)
+
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.FindDatabaseByName() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got.(string), tt.want) {
-				t.Errorf("Client.FindDatabaseByName() = %v, want %v", got.(string), tt.want)
+			if _, ok := got.(string); !ok || !reflect.DeepEqual(got.(string), tt.want) {
+				t.Errorf("Client.FindDatabaseByName() = %v, want %v", got, tt.want)
+				return
 			}
 			err = c.SyncDatabase(got.(string))
 			if (err != nil) != tt.wantErr {
