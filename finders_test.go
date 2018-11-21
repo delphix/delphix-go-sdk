@@ -74,7 +74,7 @@ func TestFindDatabaseByNameAndFindRepoByEnvironmentRefAndOracleHome(t *testing.T
 	if err != nil {
 		t.Errorf("Wamp, Wamp: %s\n", err)
 	}
-	if r == nil {
+	if r == "" {
 		log.Fatalf("Repo %s not found\n", oracleHome)
 	}
 	fmt.Printf("Repo %s%s: %s\n", environmentName, oracleHome, r)
@@ -133,18 +133,6 @@ func TestFindEnvironmentByReference(t *testing.T) {
 	}
 	fmt.Printf("Environment %s: %s\n", "test", reference)
 }
-func TestFindUserByName(t *testing.T) {
-	userName := "sysadmin"
-	testSysadminClient.LoadAndValidate()
-	r, err := testSysadminClient.FindUserByName(userName)
-	if err != nil {
-		t.Errorf("Wamp, Wamp: %s\n", err)
-	}
-	if r == nil {
-		log.Fatalf("User %s not found\n", userName)
-	}
-	fmt.Printf("Group %s: %s\n", userName, r)
-}
 
 func TestClient_FindSourceConfigByNameAndRepoReference(t *testing.T) {
 	type fields struct {
@@ -191,131 +179,13 @@ func TestClient_FindSourceConfigByNameAndRepoReference(t *testing.T) {
 				t.Errorf("Cannot get session: %v", err)
 				return
 			}
-			got, err := c.FindSourceConfigByNameAndRepoReference(tt.args.n, tt.args.r)
+			got, err := c.FindSourceConfigReferenceByNameAndRepoReference(tt.args.n, tt.args.r)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.FindSourceConfigByNameAndRepoReference() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Client.FindSourceConfigByNameAndRepoReference() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestClient_FindObjectByName(t *testing.T) {
-	type fields struct {
-		url      string
-		username string
-		password string
-	}
-	type args struct {
-		u string
-		n string
-	}
-	tests := []struct {
-		name    string
-		fields  fields
-		args    args
-		want    interface{}
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-		{
-			name: "test1",
-			fields: fields{
-				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
-				username: testAccDelphixAdminClient.username,
-				password: testAccDelphixAdminClient.password,
-			},
-			want:    "An Environment Object",
-			wantErr: false,
-			args: args{
-				u: "/environment",
-				n: "LINUXSOURCE",
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{
-				url:      tt.fields.url,
-				username: tt.fields.username,
-				password: tt.fields.password,
-			}
-			err := c.LoadAndValidate()
-			if err != nil {
-				t.Errorf("Cannot get session: %v", err)
-				return
-			}
-			got, err := c.FindObjectByName(tt.args.u, tt.args.n)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Client.FindObjectByName() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if got == nil {
-				t.Errorf("Client.FindObjectByName() = %v, want %v", got, tt.want)
-			} else {
-				fmt.Printf("Client.FindObjectByName() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestClient_FindObjectByReference(t *testing.T) {
-	type fields struct {
-		url      string
-		username string
-		password string
-	}
-	type args struct {
-		u string
-		r string
-	}
-	tests := []struct {
-		name    string
-		fields  fields
-		args    args
-		want    interface{}
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-		{
-			name: "test1",
-			fields: fields{
-				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
-				username: testAccDelphixAdminClient.username,
-				password: testAccDelphixAdminClient.password,
-			},
-			want:    "An Environment Object",
-			wantErr: false,
-			args: args{
-				u: "/environment",
-				r: "UNIX_HOST_ENVIRONMENT-51",
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{
-				url:      tt.fields.url,
-				username: tt.fields.username,
-				password: tt.fields.password,
-			}
-			err := c.LoadAndValidate()
-			if err != nil {
-				t.Errorf("Cannot get session: %v", err)
-				return
-			}
-			got, err := c.FindObjectByReference(tt.args.u, tt.args.r)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Client.FindObjectByReference() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if got == nil {
-				t.Errorf("Client.FindObjectByReference() = %v, want %v", got, tt.want)
-			} else {
-				fmt.Printf("Client.FindObjectByReference() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -366,12 +236,12 @@ func TestClient_FindEnvironmentUserByNameAndEnvironmentReference(t *testing.T) {
 				t.Errorf("Cannot get session: %v", err)
 				return
 			}
-			got, err := c.FindEnvironmentUserByNameAndEnvironmentReference(tt.args.n, tt.args.r)
+			got, err := c.FindEnvironmentUserRefByNameAndEnvironmentReference(tt.args.n, tt.args.r)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.FindEnvironmentUserByNameAndEnvironmentReference() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if got == nil {
+			if got == "" {
 				t.Errorf("Client.FindEnvironmentUserByNameAndEnvironmentReference() = %v, want %v", got, tt.want)
 			} else {
 				fmt.Printf("Client.FindEnvironmentUserByNameAndEnvironmentReference() = %v, want %v", got, tt.want)
@@ -443,6 +313,202 @@ func TestClient_FindEnvironmentByName(t *testing.T) {
 			if !reflect.DeepEqual(got.(map[string]interface{})["name"], tt.want) {
 				t.Errorf("Client.FindEnvironmentByName() = %v, want %v", got.(map[string]interface{})["name"], tt.want)
 			}
+		})
+	}
+}
+
+func TestClient_FindUserByName(t *testing.T) {
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	type args struct {
+		n string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    interface{}
+		wantErr bool
+	}{
+		{
+			name: "test1",
+			fields: fields{
+				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+				username: testAccDelphixAdminClient.username,
+				password: testAccDelphixAdminClient.password,
+			},
+			want:    "sysadmin",
+			wantErr: false,
+			args: args{
+				n: "sysadmin",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			got, err := c.FindUserByName(tt.args.n)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.FindUserByName() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got.(map[string]interface{})["name"], tt.want) {
+				t.Errorf("Client.FindUserByName() = %v, want %v", got.(map[string]interface{})["name"], tt.want)
+			}
+		})
+	}
+}
+
+func TestClient_FindEnvironmentByReference(t *testing.T) {
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	type args struct {
+		r string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    interface{}
+		wantErr bool
+	}{
+		{
+			name: "test1",
+			fields: fields{
+				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+				username: testAccDelphixAdminClient.username,
+				password: testAccDelphixAdminClient.password,
+			},
+			want:    "UNIX_HOST_ENVIRONMENT-1",
+			wantErr: false,
+			args: args{
+				r: "UNIX_HOST_ENVIRONMENT-1",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			got, err := c.FindEnvironmentByReference(tt.args.r)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.FindEnvironmentByReference() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got.(map[string]interface{})["reference"], tt.want) {
+				t.Errorf("Client.FindEnvironmentByReference() = %v, want %v", got.(map[string]interface{})["reference"], tt.want)
+			}
+		})
+	}
+}
+
+func TestClient_SourceEnvironmentList(t *testing.T) {
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		want    interface{}
+		wantErr bool
+	}{
+		{
+			name: "test1",
+			fields: fields{
+				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+				username: testAccDelphixAdminClient.username,
+				password: testAccDelphixAdminClient.password,
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			got, err := c.SourceEnvironmentList("")
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.SourceEnvironmentList() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			fmt.Printf("GOT: %v", got)
+		})
+	}
+}
+
+func TestClient_SourceEnvironmentListTest(t *testing.T) {
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		want    interface{}
+		wantErr bool
+	}{
+		{
+			name: "test1",
+			fields: fields{
+				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+				username: testAccDelphixAdminClient.username,
+				password: testAccDelphixAdminClient.password,
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			got, err := c.SourceEnvironmentListTest("")
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.SourceEnvironmentListTest() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			fmt.Printf("GOT: %v", got)
 		})
 	}
 }

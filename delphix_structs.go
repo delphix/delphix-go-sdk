@@ -35,8 +35,8 @@ type APISessionStruct struct {
 	// required = false
 	Locale string `json:"locale,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Version of the API to use.
 	// required = true
@@ -47,8 +47,8 @@ type APISessionStruct struct {
 // extends TypedObject
 type APIVersionStruct struct {
 	// Major API version number.
-	// required = true
 	// minimum = 0
+	// required = true
 	Major *int `json:"major,omitempty"`
 	// Micro API version number.
 	// minimum = 0
@@ -59,8 +59,8 @@ type APIVersionStruct struct {
 	// required = true
 	Minor *int `json:"minor,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -68,9 +68,9 @@ type APIVersionStruct struct {
 // extends AttachData
 type ASEAttachDataStruct struct {
 	// Reference to the configuration for the source.
-	// format = objectReference
 	// referenceTo = /delphix-ase-db-config.json
 	// required = true
+	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// The credentials of the database user.
 	// required = true
@@ -144,10 +144,10 @@ type ASEAttachDataStruct struct {
 // extends TypedObject
 type ASEBackupLocationStruct struct {
 	// Host environment where the backup server is located.
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-host-environment.json
 	// create = required
+	// update = optional
 	BackupHost string `json:"backupHost,omitempty"`
 	// OS user for the host where the backup server is located.
 	// format = objectReference
@@ -156,12 +156,12 @@ type ASEBackupLocationStruct struct {
 	// update = optional
 	BackupHostUser string `json:"backupHostUser,omitempty"`
 	// Name of the backup server instance.
-	// create = required
 	// update = optional
+	// create = required
 	BackupServerName string `json:"backupServerName,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -173,8 +173,8 @@ type ASECompatibilityCriteriaStruct struct {
 	// architecture (32-bit or 64-bit).
 	Architecture *int `json:"architecture,omitempty"`
 	// Selected repositories are installed on this environment.
-	// referenceTo = /delphix-source-environment.json
 	// format = objectReference
+	// referenceTo = /delphix-source-environment.json
 	Environment string `json:"environment,omitempty"`
 	// Selected repositories are installed on a host with this OS.
 	// enum = [Linux AIX HPUX SunOS Windows]
@@ -211,9 +211,9 @@ type ASECreateTransformationParametersStruct struct {
 	Operations []SourceOperation `json:"operations,omitempty"`
 	// Reference to the repository used during application of the
 	// transformation.
-	// format = objectReference
 	// referenceTo = /delphix-source-repository.json
 	// create = required
+	// format = objectReference
 	Repository string `json:"repository,omitempty"`
 	// Object type.
 	// required = true
@@ -228,8 +228,8 @@ type ASEDBContainerStruct struct {
 	// format = date
 	CreationTime string `json:"creationTime,omitempty"`
 	// A reference to the currently active TimeFlow for this container.
-	// format = objectReference
 	// referenceTo = /delphix-timeflow.json
+	// format = objectReference
 	CurrentTimeflow string `json:"currentTimeflow,omitempty"`
 	// Optional user-provided description for the container.
 	// maxLength = 1024
@@ -256,10 +256,10 @@ type ASEDBContainerStruct struct {
 	// The operating system for the source database.
 	Os string `json:"os,omitempty"`
 	// Whether to enable high performance mode.
-	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
-	// default = DISABLED
 	// create = readonly
 	// update = readonly
+	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
+	// default = DISABLED
 	PerformanceMode string `json:"performanceMode,omitempty"`
 	// A reference to the previous TimeFlow for this container.
 	// format = objectReference
@@ -305,8 +305,8 @@ type ASEDBContainerRuntimeStruct struct {
 	// The pre-provisioning runtime for the container.
 	PreProvisioningStatus *PreProvisioningRuntimeStruct `json:"preProvisioningStatus,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -321,20 +321,20 @@ type ASEExportParametersStruct struct {
 	FileMappingRules string `json:"fileMappingRules,omitempty"`
 	// If specified, then take the exported database through recovery
 	// procedures, if necessary, to reach a consistent point.
-	// default = true
 	// create = optional
+	// default = true
 	RecoverDatabase *bool `json:"recoverDatabase,omitempty"`
 	// The source config to use when creating the exported DB.
 	// required = true
 	SourceConfig ASEDBConfig `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base export
 	// on.
-	// required = true
 	// properties = map[type:map[default:TimeflowPointSemantic]]
+	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -342,9 +342,9 @@ type ASEExportParametersStruct struct {
 // extends TypedObject
 type ASEHostEnvironmentParametersStruct struct {
 	// The credentials of the database user.
-	// create = required
 	// update = optional
 	// properties = map[type:map[type:string description:Object type. required:true format:type default:PasswordCredential]]
+	// create = required
 	Credentials Credential `json:"credentials,omitempty"`
 	// The username of the database user.
 	// create = optional
@@ -363,19 +363,19 @@ type ASEInstanceStruct struct {
 	// The credentials of the database user.
 	// create = optional
 	// update = optional
-	// properties = map[type:map[required:true format:type default:PasswordCredential type:string description:Object type.]]
+	// properties = map[type:map[type:string description:Object type. required:true format:type default:PasswordCredential]]
 	Credentials Credential `json:"credentials,omitempty"`
 	// The username of the database user.
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// create = optional
 	DbUser string `json:"dbUser,omitempty"`
 	// True if the SAP ASE instance was automatically discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// Reference to the environment containing this repository.
+	// create = required
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
-	// create = required
 	Environment string `json:"environment,omitempty"`
 	// The SAP ASE instance home.
 	// create = required
@@ -393,17 +393,17 @@ type ASEInstanceStruct struct {
 	// update = readonly
 	InstanceOwnerGid *int `json:"instanceOwnerGid,omitempty"`
 	// The uid of the account the SAP ASE instance is running as.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	InstanceOwnerUid *int `json:"instanceOwnerUid,omitempty"`
 	// The path to the isql binary to use for this SAP ASE instance.
 	// create = optional
 	// update = optional
 	IsqlPath string `json:"isqlPath,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Object name.
 	// create = readonly
@@ -411,8 +411,8 @@ type ASEInstanceStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// Database page size for the SAP ASE instance.
 	PageSize *int `json:"pageSize,omitempty"`
@@ -441,8 +441,8 @@ type ASEInstanceStruct struct {
 	// default = false
 	Staging *bool `json:"staging,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// Version of the repository.
 	// create = optional
@@ -464,13 +464,13 @@ type ASELatestBackupSyncParametersStruct struct {
 // extends LinkData
 type ASELinkDataStruct struct {
 	// Reference to the configuration for the source.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-ase-db-config.json
-	// required = true
 	Config string `json:"config,omitempty"`
 	// The credentials of the database user.
 	// required = true
-	// properties = map[type:map[format:type default:PasswordCredential type:string description:Object type. required:true]]
+	// properties = map[type:map[type:string description:Object type. required:true format:type default:PasswordCredential]]
 	DbCredentials Credential `json:"dbCredentials,omitempty"`
 	// The user name for the source DB user.
 	// create = optional
@@ -507,9 +507,9 @@ type ASELinkDataStruct struct {
 	SourcingPolicy *SourcingPolicyStruct `json:"sourcingPolicy,omitempty"`
 	// Information about the host OS user on the staging environment to
 	// use for linking.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
+	// required = true
 	StagingHostUser string `json:"stagingHostUser,omitempty"`
 	// A user-provided shell script or executable to run after restoring
 	// from a backup during validated sync.
@@ -537,9 +537,9 @@ type ASELinkDataStruct struct {
 	Type string `json:"type,omitempty"`
 	// Specifies the validated sync mode to synchronize the dSource with
 	// the source database.
-	// create = optional
 	// enum = [ENABLED DISABLED]
 	// default = ENABLED
+	// create = optional
 	ValidatedSyncMode string `json:"validatedSyncMode,omitempty"`
 }
 
@@ -553,8 +553,8 @@ type ASELinkedSourceStruct struct {
 	// update = optional
 	Config string `json:"config,omitempty"`
 	// Reference to the container being fed by this source, if any.
-	// format = objectReference
 	// referenceTo = /delphix-container.json
+	// format = objectReference
 	Container string `json:"container,omitempty"`
 	// A user-provided description of the source.
 	Description string `json:"description,omitempty"`
@@ -585,15 +585,15 @@ type ASELinkedSourceStruct struct {
 	LoadLocation string `json:"loadLocation,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// update = optional
 	// default = false
 	// create = optional
-	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -627,10 +627,10 @@ type ASELinkedSourceStruct struct {
 	Type string `json:"type,omitempty"`
 	// Specifies the validated sync mode to synchronize the dSource with
 	// the source database.
-	// enum = [ENABLED DISABLED]
 	// default = ENABLED
 	// create = optional
 	// update = optional
+	// enum = [ENABLED DISABLED]
 	ValidatedSyncMode string `json:"validatedSyncMode,omitempty"`
 	// Flag indicating whether the source is a virtual source in the
 	// Delphix system.
@@ -651,8 +651,8 @@ type ASENewBackupSyncParametersStruct struct {
 // extends BasePlatformParameters
 type ASEPlatformParametersStruct struct {
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -669,10 +669,10 @@ type ASEProvisionParametersStruct struct {
 	Masked *bool `json:"masked,omitempty"`
 	// The Masking Job to be run when this dataset is provisioned or
 	// refreshed.
-	// update = readonly
 	// format = objectReference
 	// referenceTo = /delphix-masking-job.json
 	// create = optional
+	// update = readonly
 	MaskingJob string `json:"maskingJob,omitempty"`
 	// The source that describes an external database instance.
 	// required = true
@@ -703,18 +703,18 @@ type ASESIConfigStruct struct {
 	// update = optional
 	Credentials Credential `json:"credentials,omitempty"`
 	// The name of the database.
+	// maxLength = 30
 	// create = required
 	// update = optional
 	// pattern = ^[a-zA-Z0-9_]+$
-	// maxLength = 30
 	DatabaseName string `json:"databaseName,omitempty"`
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The user used to create and manage the configuration.
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
+	// update = optional
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Whether this source should be used for linking.
 	// default = true
@@ -735,10 +735,10 @@ type ASESIConfigStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The object reference of the source repository.
-	// create = required
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-ase-instance.json
+	// create = required
+	// update = optional
 	Repository string `json:"repository,omitempty"`
 	// Object type.
 	// required = true
@@ -836,8 +836,8 @@ type ASESourceConnectionInfoStruct struct {
 	// Port to use for connecting to the source.
 	Port *int `json:"port,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// User to use for connecting to the source.
 	User string `json:"user,omitempty"`
@@ -874,8 +874,8 @@ type ASESourceRuntimeStruct struct {
 	// True if configured to truncate log on checkpoint.
 	TruncateLogOnCheckpoint *bool `json:"truncateLogOnCheckpoint,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -886,9 +886,9 @@ type ASESpecificBackupSyncParametersStruct struct {
 	// The location of the full backup of the source database to restore
 	// from. The backup should be present in the shared backup location
 	// for the source database.
+	// create = required
 	// uniqueItems = true
 	// minItems = 1
-	// create = required
 	BackupFiles []string `json:"backupFiles,omitempty"`
 	// Object type.
 	// required = true
@@ -900,9 +900,9 @@ type ASESpecificBackupSyncParametersStruct struct {
 // extends ASESource
 type ASEStagingSourceStruct struct {
 	// Reference to the configuration for the source.
-	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-config.json
+	// create = optional
 	Config string `json:"config,omitempty"`
 	// Reference to the container being fed by this source, if any.
 	// format = objectReference
@@ -928,10 +928,10 @@ type ASEStagingSourceStruct struct {
 	// maxLength = 87
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -948,9 +948,9 @@ type ASEStagingSourceStruct struct {
 	// The path to a user-provided script or executable to run on the
 	// staging host prior to restoring from a backup during validated
 	// sync.
+	// maxLength = 1024
 	// create = optional
 	// update = optional
-	// maxLength = 1024
 	PreScript string `json:"preScript,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -992,8 +992,8 @@ type ASETimeflowStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The origin point on the parent TimeFlow from which this TimeFlow
 	// was provisioned. This will not be present for TimeFlows derived
@@ -1003,8 +1003,8 @@ type ASETimeflowStruct struct {
 	// base for this object. This may be different from the snapshot
 	// within the parent point, and is only present for virtual
 	// TimeFlows.
-	// format = objectReference
 	// referenceTo = /delphix-timeflow-snapshot.json
+	// format = objectReference
 	ParentSnapshot string `json:"parentSnapshot,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -1023,9 +1023,9 @@ type ASETimeflowPointStruct struct {
 	// create = optional
 	Location string `json:"location,omitempty"`
 	// Reference to TimeFlow containing this point.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-ase-timeflow.json
-	// required = true
 	Timeflow string `json:"timeflow,omitempty"`
 	// The logical time corresponding to the TimeFlow location.
 	// format = date
@@ -1206,8 +1206,8 @@ type AlertStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Reference to target object.
 	// referenceTo = /delphix-user-object.json
@@ -1238,10 +1238,10 @@ type AlertActionEmailListStruct struct {
 	// explicitly generate text-only mail. The JSON format will generate
 	// a JSON object identical to the $Alert format returned through the
 	// web services API.
-	// enum = [HTML TEXT JSON]
-	// default = HTML
 	// create = optional
 	// update = optional
+	// enum = [HTML TEXT JSON]
+	// default = HTML
 	Format string `json:"format,omitempty"`
 	// Object type.
 	// required = true
@@ -1258,10 +1258,10 @@ type AlertActionEmailUserStruct struct {
 	// explicitly generate text-only mail. The JSON format will generate
 	// a JSON object identical to the $Alert format returned through the
 	// web services API.
-	// default = HTML
 	// create = optional
 	// update = optional
 	// enum = [HTML TEXT JSON]
+	// default = HTML
 	Format string `json:"format,omitempty"`
 	// Object type.
 	// required = true
@@ -1277,8 +1277,8 @@ type AlertProfileStruct struct {
 	// matching the optional filters are included. If there are multiple
 	// actions with the same result (such as emailing a user), only one
 	// result is acted upon.
-	// update = optional
 	// create = required
+	// update = optional
 	Actions []AlertAction `json:"actions,omitempty"`
 	// Specifies which alerts should be matched by this profile.
 	// create = optional
@@ -1291,12 +1291,12 @@ type AlertProfileStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -1305,9 +1305,9 @@ type AlertProfileStruct struct {
 // extends AlertFilter
 type AndFilterStruct struct {
 	// Filters which are combined together using AND logic.
+	// create = required
 	// update = optional
 	// minItems = 2
-	// create = required
 	SubFilters []AlertFilter `json:"subFilters,omitempty"`
 	// Object type.
 	// required = true
@@ -1321,22 +1321,22 @@ type AndFilterStruct struct {
 type AppDataAdditionalMountPointStruct struct {
 	// Reference to the environment on which the file system will be
 	// mounted.
+	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-host-environment.json
 	// create = required
-	// update = optional
 	Environment string `json:"environment,omitempty"`
 	// Absolute path on the target environment were the filesystem should
 	// be mounted.
+	// update = optional
 	// format = unixpath
 	// create = required
-	// update = optional
 	MountPath string `json:"mountPath,omitempty"`
 	// Relative path within the container of the directory that should be
 	// mounted.
-	// format = unixpath
 	// create = optional
 	// update = optional
+	// format = unixpath
 	SharedPath string `json:"sharedPath,omitempty"`
 	// Object type.
 	// required = true
@@ -1348,10 +1348,10 @@ type AppDataAdditionalMountPointStruct struct {
 // extends TypedObject
 type AppDataCachedMountPointStruct struct {
 	// Reference to the environment on which the file system is mounted.
-	// format = objectReference
-	// referenceTo = /delphix-host-environment.json
 	// create = required
 	// update = optional
+	// format = objectReference
+	// referenceTo = /delphix-host-environment.json
 	Environment string `json:"environment,omitempty"`
 	// Absolute path on the target environment were the filesystem is
 	// mounted.
@@ -1360,8 +1360,8 @@ type AppDataCachedMountPointStruct struct {
 	// update = optional
 	MountPath string `json:"mountPath,omitempty"`
 	// Order in mount sequence.
-	// update = optional
 	// create = required
+	// update = optional
 	Ordinal *int `json:"ordinal,omitempty"`
 	// Relative path within the container of the directory that is
 	// mounted.
@@ -1386,9 +1386,9 @@ type AppDataContainerStruct struct {
 	// referenceTo = /delphix-timeflow.json
 	CurrentTimeflow string `json:"currentTimeflow,omitempty"`
 	// Optional user-provided description for the container.
-	// update = optional
 	// maxLength = 1024
 	// create = optional
+	// update = optional
 	Description string `json:"description,omitempty"`
 	// A reference to the group containing this container.
 	// format = objectReference
@@ -1413,10 +1413,10 @@ type AppDataContainerStruct struct {
 	// Native operating system of the original database source system.
 	Os string `json:"os,omitempty"`
 	// Whether to enable high performance mode.
+	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
 	// default = DISABLED
 	// create = readonly
 	// update = readonly
-	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
 	PerformanceMode string `json:"performanceMode,omitempty"`
 	// A reference to the previous TimeFlow for this container.
 	// format = objectReference
@@ -1541,15 +1541,15 @@ type AppDataDirectSourceConfigStruct struct {
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The user used to create and manage the configuration.
+	// create = optional
+	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
-	// create = optional
-	// update = optional
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Whether this source should be used for linking.
-	// update = optional
 	// default = true
 	// create = optional
+	// update = optional
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// The name of the config.
 	// create = required
@@ -1572,8 +1572,8 @@ type AppDataDirectSourceConfigStruct struct {
 	// maxLength = 1024
 	Path string `json:"path,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The object reference of the source repository.
 	// update = optional
@@ -1582,12 +1582,12 @@ type AppDataDirectSourceConfigStruct struct {
 	// create = required
 	Repository string `json:"repository,omitempty"`
 	// The toolkit associated with this source config.
-	// referenceTo = /delphix-toolkit.json
 	// format = objectReference
+	// referenceTo = /delphix-toolkit.json
 	Toolkit string `json:"toolkit,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -1622,12 +1622,12 @@ type AppDataExportParametersStruct struct {
 	SourceConfig AppDataSourceConfig `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base export
 	// on.
-	// properties = map[type:map[default:TimeflowPointSemantic]]
 	// required = true
+	// properties = map[type:map[default:TimeflowPointSemantic]]
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -1653,15 +1653,15 @@ type AppDataLinkedDirectSourceStruct struct {
 	// update = optional
 	Config string `json:"config,omitempty"`
 	// Reference to the container being fed by this source, if any.
-	// format = objectReference
 	// referenceTo = /delphix-container.json
+	// format = objectReference
 	Container string `json:"container,omitempty"`
 	// A user-provided description of the source.
 	Description string `json:"description,omitempty"`
 	// List of subdirectories in the source to exclude when syncing data.
 	// These paths are relative to the root of the source directory.
-	// create = optional
 	// update = optional
+	// create = optional
 	Excludes []string `json:"excludes,omitempty"`
 	// List of symlinks in the source to follow when syncing data. These
 	// paths are relative to the root of the source directory. All other
@@ -1757,10 +1757,10 @@ type AppDataLinkedStagedSourceStruct struct {
 	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
+	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
-	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -1788,16 +1788,16 @@ type AppDataLinkedStagedSourceStruct struct {
 	Staging *bool `json:"staging,omitempty"`
 	// The environment used as an intermediate stage to pull data into
 	// Delphix.
-	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
 	// create = required
 	// update = optional
+	// format = objectReference
 	StagingEnvironment string `json:"stagingEnvironment,omitempty"`
 	// The environment user used to access the staging environment.
+	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = required
 	// update = optional
-	// format = objectReference
 	StagingEnvironmentUser string `json:"stagingEnvironmentUser,omitempty"`
 	// The base mount point for the NFS mount on the staging environment.
 	// maxLength = 256
@@ -1808,8 +1808,8 @@ type AppDataLinkedStagedSourceStruct struct {
 	// enum = [DEFAULT PENDING_UPGRADE]
 	Status string `json:"status,omitempty"`
 	// The toolkit associated with this source.
-	// format = objectReference
 	// referenceTo = /delphix-toolkit.json
+	// format = objectReference
 	Toolkit string `json:"toolkit,omitempty"`
 	// Object type.
 	// format = type
@@ -1829,8 +1829,8 @@ type AppDataPlatformParametersStruct struct {
 	// create = required
 	Payload *JsonStruct `json:"payload,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -1861,8 +1861,8 @@ type AppDataProvisionParametersStruct struct {
 	SourceConfig AppDataSourceConfig `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base
 	// provisioning on.
-	// required = true
 	// properties = map[type:map[default:TimeflowPointSemantic]]
+	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
 	// required = true
@@ -1874,9 +1874,9 @@ type AppDataProvisionParametersStruct struct {
 // extends SourceRepository
 type AppDataRepositoryStruct struct {
 	// Reference to the environment containing this repository.
+	// referenceTo = /delphix-source-environment.json
 	// create = required
 	// format = objectReference
-	// referenceTo = /delphix-source-environment.json
 	Environment string `json:"environment,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
 	// default = true
@@ -1898,9 +1898,9 @@ type AppDataRepositoryStruct struct {
 	Parameters *JsonStruct `json:"parameters,omitempty"`
 	// Flag indicating whether the repository should be used for
 	// provisioning.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	ProvisioningEnabled *bool `json:"provisioningEnabled,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -1908,23 +1908,23 @@ type AppDataRepositoryStruct struct {
 	Reference string `json:"reference,omitempty"`
 	// Flag indicating whether this repository can be used by the Delphix
 	// Engine for internal processing.
+	// update = optional
 	// default = false
 	// create = optional
-	// update = optional
 	Staging *bool `json:"staging,omitempty"`
 	// The toolkit associated with this repository.
+	// format = objectReference
 	// referenceTo = /delphix-toolkit.json
 	// create = required
 	// update = optional
-	// format = objectReference
 	Toolkit string `json:"toolkit,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// Version of the repository.
-	// update = optional
 	// create = optional
+	// update = optional
 	Version string `json:"version,omitempty"`
 }
 
@@ -1961,8 +1961,8 @@ type AppDataSnapshotStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -1978,15 +1978,15 @@ type AppDataSnapshotStruct struct {
 	// state and should not be user visible.
 	Temporary *bool `json:"temporary,omitempty"`
 	// TimeFlow of which this snapshot is a part.
-	// format = objectReference
 	// referenceTo = /delphix-timeflow.json
+	// format = objectReference
 	Timeflow string `json:"timeflow,omitempty"`
 	// Time zone of the source database at the time the snapshot was
 	// taken.
 	Timezone string `json:"timezone,omitempty"`
 	// The toolkit associated with this snapshot.
-	// referenceTo = /delphix-toolkit.json
 	// format = objectReference
+	// referenceTo = /delphix-toolkit.json
 	Toolkit string `json:"toolkit,omitempty"`
 	// Object type.
 	// required = true
@@ -2004,8 +2004,8 @@ type AppDataSnapshotRuntimeStruct struct {
 	// new TimeFlow.
 	Provisionable *bool `json:"provisionable,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2035,8 +2035,8 @@ type AppDataSourceRuntimeStruct struct {
 	// format = date
 	AccessibleTimestamp string `json:"accessibleTimestamp,omitempty"`
 	// Size of the database in bytes.
-	// units = B
 	// base = 1024
+	// units = B
 	DatabaseSize float64 `json:"databaseSize,omitempty"`
 	// Status indicating whether the source is enabled. A source has a
 	// 'PARTIAL' status if its sub-sources are not all enabled.
@@ -2080,14 +2080,14 @@ type AppDataStagedLinkDataStruct struct {
 	SourcingPolicy *SourcingPolicyStruct `json:"sourcingPolicy,omitempty"`
 	// The environment used as an intermediate stage to pull data into
 	// Delphix.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
+	// required = true
 	StagingEnvironment string `json:"stagingEnvironment,omitempty"`
 	// The environment user used to access the staging environment.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
-	// required = true
 	StagingEnvironmentUser string `json:"stagingEnvironmentUser,omitempty"`
 	// The base mount point for the NFS mount on the staging environment.
 	// maxLength = 256
@@ -2196,8 +2196,8 @@ type AppDataTimeflowStruct struct {
 	// referenceTo = /delphix-timeflow-snapshot.json
 	ParentSnapshot string `json:"parentSnapshot,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -2212,17 +2212,17 @@ type AppDataTimeflowPointStruct struct {
 	// create = optional
 	Location string `json:"location,omitempty"`
 	// Reference to TimeFlow containing this point.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-timeflow.json
-	// required = true
 	Timeflow string `json:"timeflow,omitempty"`
 	// The logical time corresponding to the TimeFlow location.
 	// format = date
 	// create = optional
 	Timestamp string `json:"timestamp,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2237,8 +2237,8 @@ type AppDataVirtualSourceStruct struct {
 	AdditionalMountPoints []*AppDataAdditionalMountPointStruct `json:"additionalMountPoints,omitempty"`
 	// Indicates whether Delphix should automatically restart this
 	// virtual source when target host reboot is detected.
-	// create = required
 	// update = optional
+	// create = required
 	AllowAutoVDBRestartOnHostReboot *bool `json:"allowAutoVDBRestartOnHostReboot,omitempty"`
 	// Reference to the configuration for the source.
 	// format = objectReference
@@ -2276,8 +2276,8 @@ type AppDataVirtualSourceStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// User-specified operation hooks for this source.
-	// create = optional
 	// update = optional
+	// create = optional
 	Operations *VirtualSourceOperationsStruct `json:"operations,omitempty"`
 	// The JSON payload conforming to the DraftV4 schema based on the
 	// type of application data being manipulated.
@@ -2298,8 +2298,8 @@ type AppDataVirtualSourceStruct struct {
 	// enum = [DEFAULT PENDING_UPGRADE]
 	Status string `json:"status,omitempty"`
 	// The toolkit associated with this source.
-	// referenceTo = /delphix-toolkit.json
 	// format = objectReference
+	// referenceTo = /delphix-toolkit.json
 	Toolkit string `json:"toolkit,omitempty"`
 	// Object type.
 	// required = true
@@ -2322,9 +2322,9 @@ type AppDataWindowsTimeflowStruct struct {
 	// enum = [INITIAL INDETERMINATE REFRESH ROLLBACK TEMPORARY TRANSFORMATION V2P PDB_PLUG WAREHOUSE ORACLE_LIVE_SOURCE_RESYNC SOURCE_CONTINUITY]
 	CreationType string `json:"creationType,omitempty"`
 	// Object name.
+	// create = required
 	// update = optional
 	// maxLength = 256
-	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -2347,8 +2347,8 @@ type AppDataWindowsTimeflowStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -2369,8 +2369,8 @@ type ApplyVersionParametersStruct struct {
 	// This property governs whether or not data sources are re-enabled
 	// or left disabled in the event that upgrade fails before the
 	// Delphix Engine is restarted.
-	// create = optional
 	// default = true
+	// create = optional
 	EnableSourcesOnFailure *bool `json:"enableSourcesOnFailure,omitempty"`
 	// If true, a failure to quiesce sources will not block the upgrade.
 	// create = optional
@@ -2386,8 +2386,8 @@ type ApplyVersionParametersStruct struct {
 	QuiesceSources *bool `json:"quiesceSources,omitempty"`
 	// If true, the system reboots immediately after upgrade. If false,
 	// the system is shutdown.
-	// default = true
 	// create = optional
+	// default = true
 	Reboot *bool `json:"reboot,omitempty"`
 	// Object type.
 	// required = true
@@ -2460,13 +2460,13 @@ type AuthGetByPropertiesParametersStruct struct {
 	// referenceTo = /delphix-user-object.json
 	Target string `json:"target,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The user authorizations are applied to.
-	// format = objectReference
 	// required = true
 	// referenceTo = /delphix-user.json
+	// format = objectReference
 	User string `json:"user,omitempty"`
 }
 
@@ -2492,9 +2492,9 @@ type AuthorizationStruct struct {
 	// referenceTo = /delphix-role.json
 	Role string `json:"role,omitempty"`
 	// Reference to the object that the authorization applies to.
-	// create = required
 	// format = objectReference
 	// referenceTo = /delphix-user-object.json
+	// create = required
 	Target string `json:"target,omitempty"`
 	// Object type.
 	// required = true
@@ -2517,8 +2517,8 @@ type AuthorizationConfigStruct struct {
 	// default = false
 	EnvironmentAndHostAuth *bool `json:"environmentAndHostAuth,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2533,8 +2533,8 @@ type BatchContainerDeleteParametersStruct struct {
 	// required = false
 	DeleteParameters *DeleteParametersStruct `json:"deleteParameters,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2561,8 +2561,8 @@ type BatchContainerRefreshParametersStruct struct {
 // extends TypedObject
 type BatchSnapshotDeleteParametersStruct struct {
 	// TimeFlow snapshots to delete.
-	// required = true
 	// minItems = 1
+	// required = true
 	Snapshots []string `json:"snapshots,omitempty"`
 	// Object type.
 	// required = true
@@ -2580,8 +2580,8 @@ type BooleanEqualConstraintStruct struct {
 	// create = required
 	Equals *bool `json:"equals,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2649,8 +2649,8 @@ type CaCertificateStruct struct {
 // extends TypedObject
 type CapacityBreakdownStruct struct {
 	// Amount of space used for the active copy of the container.
-	// base = 1024
 	// units = B
+	// base = 1024
 	ActiveSpace float64 `json:"activeSpace,omitempty"`
 	// Actual space used by the container.
 	// units = B
@@ -2667,28 +2667,28 @@ type CapacityBreakdownStruct struct {
 	LogSpace float64 `json:"logSpace,omitempty"`
 	// Amount of space used for snapshots held by manual retention
 	// settings.
-	// base = 1024
 	// units = B
+	// base = 1024
 	ManualSpace float64 `json:"manualSpace,omitempty"`
 	// Amount of space used for snapshots held by policy settings.
 	// base = 1024
 	// units = B
 	PolicySpace float64 `json:"policySpace,omitempty"`
 	// Amount of space used by snapshots.
-	// units = B
 	// base = 1024
+	// units = B
 	SyncSpace float64 `json:"syncSpace,omitempty"`
 	// Unvirtualized space used by the TimeFlow.
 	// units = B
 	// base = 1024
 	TimeflowUnvirtualizedSpace float64 `json:"timeflowUnvirtualizedSpace,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Amount of space used for snapshots part of held space.
-	// units = B
 	// base = 1024
+	// units = B
 	UnownedSnapshotSpace float64 `json:"unownedSnapshotSpace,omitempty"`
 	// Unvirtualized space used by the container.
 	// units = B
@@ -2776,8 +2776,8 @@ type CertificateFetchParametersStruct struct {
 	// required = true
 	Port *int `json:"port,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2794,8 +2794,8 @@ type CertificateSigningRequestStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// referenceTo = /delphix-persistent-object.json
@@ -2860,8 +2860,8 @@ type CertificateUploadParametersStruct struct {
 	// required = true
 	Storepass string `json:"storepass,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -2897,8 +2897,8 @@ type ChecklistStruct struct {
 // extends TypedObject
 type ChecklistItemStruct struct {
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -2929,8 +2929,8 @@ type CompatibilityCriteriaStruct struct {
 	// architecture (32-bit or 64-bit).
 	Architecture *int `json:"architecture,omitempty"`
 	// Selected repositories are installed on this environment.
-	// referenceTo = /delphix-source-environment.json
 	// format = objectReference
+	// referenceTo = /delphix-source-environment.json
 	Environment string `json:"environment,omitempty"`
 	// Selected repositories are installed on a host with this OS.
 	// enum = [Linux AIX HPUX SunOS Windows]
@@ -2997,8 +2997,8 @@ type ConfiguredStorageDeviceStruct struct {
 	// units = B
 	Size float64 `json:"size,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// Size of allocated space on the device.
 	// base = 1024
@@ -3103,8 +3103,8 @@ type CpuUtilDatapointStreamStruct struct {
 	// The set of datapoints in the stream.
 	Datapoints []Datapoint `json:"datapoints,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -3118,19 +3118,19 @@ type CreateMaskingJobTransformationParametersStruct struct {
 	Container Container `json:"container,omitempty"`
 	// Reference to the user used during application of the
 	// transformation.
+	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
-	// create = optional
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Reference to the repository used during application of the
 	// transformation.
+	// format = objectReference
 	// referenceTo = /delphix-source-repository.json
 	// create = required
-	// format = objectReference
 	Repository string `json:"repository,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -3275,8 +3275,8 @@ type DSPAutotunerParametersStruct struct {
 type DSPBestParametersStruct struct {
 	// The size of the send and receive socket buffers in bytes used to
 	// achieve maximum throughput.
-	// units = B
 	// base = 1024
+	// units = B
 	BufferSize *int `json:"bufferSize,omitempty"`
 	// Whether the test is testing connectivity to a Delphix Engine or
 	// remote host.
@@ -3284,23 +3284,23 @@ type DSPBestParametersStruct struct {
 	DestinationType string `json:"destinationType,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The number of connections used to achieve maximum throughput.
 	NumConnections *int `json:"numConnections,omitempty"`
 	// The queue depth used to achieve maximum throughput.
 	QueueDepth *int `json:"queueDepth,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Information used when running a test to another Delphix Engine.
 	RemoteDelphixEngineInfo *RemoteDelphixEngineInfoStruct `json:"remoteDelphixEngineInfo,omitempty"`
 	// The remote host for the test. The host must be part of an existing
 	// environment.
-	// referenceTo = /delphix-host.json
 	// format = objectReference
+	// referenceTo = /delphix-host.json
 	RemoteHost string `json:"remoteHost,omitempty"`
 	// The average throughput measured.
 	// base = 1024
@@ -3317,9 +3317,9 @@ type DSPBestParametersStruct struct {
 type DSPOptionsStruct struct {
 	// Bandwidth limit (MB/s) for network traffic. A value of 0 means no
 	// limit.
-	// minimum = 0
 	// create = optional
 	// default = 0
+	// minimum = 0
 	BandwidthLimit *int `json:"bandwidthLimit,omitempty"`
 	// Compress the data stream over the network.
 	// create = optional
@@ -3336,8 +3336,8 @@ type DSPOptionsStruct struct {
 	// maximum = 16
 	NumConnections *int `json:"numConnections,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -3346,8 +3346,8 @@ type DSPOptionsStruct struct {
 // extends OKResult
 type DataResultStruct struct {
 	// Reference to the action associated with the operation, if any.
-	// referenceTo = /delphix-action.json
 	// format = objectReference
+	// referenceTo = /delphix-action.json
 	Action string `json:"action,omitempty"`
 	// Reference to the job started by the operation, if any.
 	// format = objectReference
@@ -3360,8 +3360,8 @@ type DataResultStruct struct {
 	// enum = [OK ERROR]
 	Status string `json:"status,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -3391,10 +3391,10 @@ type DatabaseTemplateStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The type of the source associated with the template.
-	// enum = [MySQLVirtualSource OracleVirtualSource MSSqlVirtualSource MSSqlLinkedSource PgSQLVirtualSource]
-	// format = type
 	// create = required
 	// update = optional
+	// enum = [MySQLVirtualSource OracleVirtualSource MSSqlVirtualSource MSSqlLinkedSource PgSQLVirtualSource]
+	// format = type
 	SourceType string `json:"sourceType,omitempty"`
 	// Object type.
 	// required = true
@@ -3430,8 +3430,8 @@ type DatapointSetStruct struct {
 	// units = sec
 	Resolution *int `json:"resolution,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -3454,9 +3454,9 @@ type DeleteParametersStruct struct {
 type DelphixManagedBackupIngestionStrategyStruct struct {
 	// Specify whether the backups taken should be compressed or
 	// uncompressed.
+	// update = optional
 	// default = false
 	// create = optional
-	// update = optional
 	CompressionEnabled *bool `json:"compressionEnabled,omitempty"`
 	// Object type.
 	// required = true
@@ -3469,9 +3469,9 @@ type DelphixManagedBackupIngestionStrategyStruct struct {
 type DetachSourceParametersStruct struct {
 	// Reference to the source to be removed. This must be a linked
 	// source attached to the target database.
+	// format = objectReference
 	// referenceTo = /delphix-source.json
 	// required = true
-	// format = objectReference
 	Source string `json:"source,omitempty"`
 	// Object type.
 	// required = true
@@ -3547,8 +3547,8 @@ type DxFsIoQueueOpsDatapointStreamStruct struct {
 	// enum = [sync cache/agg asyncw asyncr resilver scrub ddt_prefetch]
 	Priority string `json:"priority,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -3577,16 +3577,16 @@ type DxFsOpsDatapointStreamStruct struct {
 // extends KeyPair
 type EcdsaKeyPairStruct struct {
 	// The size of each key to be generated.
-	// default = 256
 	// create = optional
 	// minimum = 256
 	// maximum = 571
+	// default = 256
 	KeySize *int `json:"keySize,omitempty"`
 	// The signature algorithm this key pair will use to sign
 	// certificates and CSRs.
-	// default = SHA256withECDSA
 	// create = optional
 	// enum = [SHA256withECDSA SHA384withECDSA SHA512withECDSA]
+	// default = SHA256withECDSA
 	SignatureAlgorithm string `json:"signatureAlgorithm,omitempty"`
 	// Object type.
 	// required = true
@@ -3614,8 +3614,8 @@ type EndEntityCertificateStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// End of validity.
 	// format = date
@@ -3624,8 +3624,8 @@ type EndEntityCertificateStruct struct {
 	// format = date
 	NotBefore string `json:"notBefore,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Certificate serial number.
 	SerialNumber string `json:"serialNumber,omitempty"`
@@ -3711,14 +3711,14 @@ type EnumEqualConstraintStruct struct {
 // extends UserObject
 type EnvironmentUserStruct struct {
 	// The credential for the environment user.
+	// properties = map[type:map[type:string description:Object type. required:true format:type default:PasswordCredential]]
 	// create = required
 	// update = optional
-	// properties = map[type:map[type:string description:Object type. required:true format:type default:PasswordCredential]]
 	Credential Credential `json:"credential,omitempty"`
 	// A reference to the associated environment.
+	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
-	// create = optional
 	Environment string `json:"environment,omitempty"`
 	// Group ID of the user.
 	// create = optional
@@ -3789,15 +3789,15 @@ type EventFilterStruct struct {
 // extends IngestionStrategy
 type ExternalBackupIngestionStrategyStruct struct {
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Specifies the backup types ValidatedSync will use to synchronize
 	// the dSource with the source database.
-	// default = TRANSACTION_LOG
 	// create = required
 	// update = optional
 	// enum = [TRANSACTION_LOG FULL_OR_DIFFERENTIAL FULL]
+	// default = TRANSACTION_LOG
 	ValidatedSyncMode string `json:"validatedSyncMode,omitempty"`
 }
 
@@ -3877,8 +3877,8 @@ type FaultEffectStruct struct {
 	Description string `json:"description,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -3905,8 +3905,8 @@ type FaultEffectStruct struct {
 	// Summary of the fault effect.
 	Title string `json:"title,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -3919,8 +3919,8 @@ type FaultResolveParametersStruct struct {
 	Comments string `json:"comments,omitempty"`
 	// Flag indicating whether to ignore this fault if it is detected on
 	// the same object in the future.
-	// default = false
 	// create = optional
+	// default = false
 	Ignore *bool `json:"ignore,omitempty"`
 	// Object type.
 	// required = true
@@ -3965,8 +3965,8 @@ type FileMappingParametersStruct struct {
 	// minItems = 1
 	TimeflowPointParameters []TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -3987,8 +3987,8 @@ type FileUploadResultStruct struct {
 	// Token to pass as parameter to identify the file.
 	Token string `json:"token,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// URL to download from or upload to.
 	Url string `json:"url,omitempty"`
@@ -3999,10 +3999,10 @@ type FileUploadResultStruct struct {
 // extends TypedObject
 type FractionPlugParametersStruct struct {
 	// Optional prefix to add to schemas being moved into warehouse.
-	// maxLength = 28
-	// create = optional
 	// update = optional
 	// pattern = ^([A-Za-z][A-Za-z0-9_]+)|("[A-Za-z][A-Za-z0-9_]+")$
+	// maxLength = 28
+	// create = optional
 	SchemasPrefix string `json:"schemasPrefix,omitempty"`
 	// Optional prefix to add to tablespaces being moved into warehouse.
 	// create = optional
@@ -4012,8 +4012,8 @@ type FractionPlugParametersStruct struct {
 	TablespacesPrefix string `json:"tablespacesPrefix,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base
 	// provisioning on.
-	// required = true
 	// properties = map[type:map[default:TimeflowPointSemantic]]
+	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
 	// required = true
@@ -4063,16 +4063,16 @@ type GroupStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -4112,8 +4112,8 @@ type HistoricalConsumerCapacityDataStruct struct {
 // cliVisibility = [DOMAIN]
 type HistoricalGroupCapacityDataStruct struct {
 	// Which group these stats represent.
-	// referenceTo = /delphix-group.json
 	// format = objectReference
+	// referenceTo = /delphix-group.json
 	Group string `json:"group,omitempty"`
 	// Statistics for dSources in this aggregation.
 	Source *CapacityBreakdownStruct `json:"source,omitempty"`
@@ -4181,9 +4181,9 @@ type HostEnvironmentCreateParametersStruct struct {
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to the created source
 	// environment.
-	// default = false
 	// create = optional
 	// update = optional
+	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The primary user associated with the environment.
 	// create = required
@@ -4223,8 +4223,8 @@ type HostOSStruct struct {
 	// The OS timezone.
 	Timezone string `json:"timezone,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The OS version.
 	Version string `json:"version,omitempty"`
@@ -4257,8 +4257,8 @@ type HostPrivilegeElevationProfileStruct struct {
 	// format = type
 	Type string `json:"type,omitempty"`
 	// Privilege elevation profile version.
-	// update = optional
 	// create = required
+	// update = optional
 	Version string `json:"version,omitempty"`
 }
 
@@ -4268,12 +4268,12 @@ type HostPrivilegeElevationProfileStruct struct {
 // cliVisibility = [DOMAIN]
 type HostPrivilegeElevationProfileScriptStruct struct {
 	// The contents of the privilege elevation profile script.
-	// create = required
 	// update = optional
+	// create = required
 	Contents string `json:"contents,omitempty"`
 	// The privilege elevation profile script name.
-	// update = optional
 	// create = required
+	// update = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -4291,8 +4291,8 @@ type HostPrivilegeElevationProfileScriptStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -4334,16 +4334,16 @@ type HostRuntimeStruct struct {
 // cliVisibility = [SYSTEM]
 type HttpConnectorConfigStruct struct {
 	// Controls the HTTP(s) protocol configuration of this appliance.
-	// enum = [HTTP_ONLY HTTPS_ONLY HTTP_REDIRECT BOTH]
 	// default = BOTH
 	// update = optional
+	// enum = [HTTP_ONLY HTTPS_ONLY HTTP_REDIRECT BOTH]
 	HttpMode string `json:"httpMode,omitempty"`
 	// The HTTP port for the Delphix web UI.
+	// update = optional
 	// create = optional
 	// default = 80
 	// minimum = 1
 	// maximum = 65535
-	// update = optional
 	HttpPort *int `json:"httpPort,omitempty"`
 	// The HTTPS port for the Delphix web UI.
 	// update = optional
@@ -4358,8 +4358,8 @@ type HttpConnectorConfigStruct struct {
 	// update = optional
 	TlsVersions []string `json:"tlsVersions,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -4429,9 +4429,9 @@ type IntegerLessThanConstraintStruct struct {
 // extends TypedObject
 type InterfaceAddressStruct struct {
 	// The address in Classless Inter-Domain Routing (CIDR) notation.
+	// update = optional
 	// format = cidrAddress
 	// create = optional
-	// update = optional
 	Address string `json:"address,omitempty"`
 	// The type of address (STATIC or DHCP).
 	// enum = [STATIC DHCP]
@@ -4544,9 +4544,9 @@ type JSBookmarkStruct struct {
 	// update = optional
 	Expiration string `json:"expiration,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -4590,8 +4590,8 @@ type JSBookmarkStruct struct {
 // extends PersistentObject
 type JSBookmarkCheckoutCountStruct struct {
 	// The bookmark that this checkout count is associated with.
-	// format = objectReference
 	// referenceTo = /delphix-js-bookmark.json
+	// format = objectReference
 	Bookmark string `json:"bookmark,omitempty"`
 	// The number of times the bookmark has been checked out. This means
 	// it was used as input to a RESTORE, CREATE_BRANCH, or RESET
@@ -4633,8 +4633,8 @@ type JSBookmarkCreateParametersStruct struct {
 type JSBookmarkDataParentStruct struct {
 	// The bookmark that this operation's data came from. This will be
 	// null if the bookmark has been deleted.
-	// format = objectReference
 	// referenceTo = /delphix-js-bookmark.json
+	// format = objectReference
 	Bookmark string `json:"bookmark,omitempty"`
 	// This will always contain the name of the bookmark, even if it has
 	// been deleted.
@@ -4708,16 +4708,16 @@ type JSBookmarkUsageDataStruct struct {
 // extends NamedUserObject
 type JSBranchStruct struct {
 	// A reference to the data layout this branch was created on.
-	// referenceTo = /delphix-js-data-layout.json
 	// format = objectReference
+	// referenceTo = /delphix-js-data-layout.json
 	DataLayout string `json:"dataLayout,omitempty"`
 	// The first JSOperation on this branch by data time.
-	// referenceTo = /delphix-js-operation.json
 	// format = objectReference
+	// referenceTo = /delphix-js-operation.json
 	FirstOperation string `json:"firstOperation,omitempty"`
 	// The last JSOperation on this branch by data time.
-	// referenceTo = /delphix-js-operation.json
 	// format = objectReference
+	// referenceTo = /delphix-js-operation.json
 	LastOperation string `json:"lastOperation,omitempty"`
 	// Object name.
 	// create = required
@@ -4743,13 +4743,13 @@ type JSBranchStruct struct {
 // extends TypedObject
 type JSBranchCreateParametersStruct struct {
 	// A reference to the data container to create this branch on.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-js-data-container.json
+	// required = true
 	DataContainer string `json:"dataContainer,omitempty"`
 	// The name of the branch.
-	// required = true
 	// maxLength = 256
+	// required = true
 	Name string `json:"name,omitempty"`
 	// The Self-Service data timeline point from which the branch will be
 	// created.
@@ -4807,8 +4807,8 @@ type JSConfigStruct struct {
 	// minimum = 0
 	RetryAttempts *int `json:"retryAttempts,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -4839,13 +4839,13 @@ type JSContainerUsageDataStruct struct {
 	// The amount of space that will be freed if this data container is
 	// deleted or purged. This assumes that the data container is deleted
 	// along with underlying data sources.
-	// units = B
 	// base = 1024
+	// units = B
 	Unique float64 `json:"unique,omitempty"`
 	// The amount of space that would be consumed by the data in this
 	// container without Delphix.
-	// base = 1024
 	// units = B
+	// base = 1024
 	Unvirtualized float64 `json:"unvirtualized,omitempty"`
 }
 
@@ -4877,8 +4877,8 @@ type JSDailyOperationDurationStruct struct {
 	// enum = [REFRESH RESET CREATE_BRANCH RESTORE UNDO]
 	Operation string `json:"operation,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The date at the beginning of the time period this datapoint
 	// corresponds to. The time period itself varies between datapoint
@@ -4886,8 +4886,8 @@ type JSDailyOperationDurationStruct struct {
 	// format = date
 	StartDate string `json:"startDate,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// The object the usage data is centered around.
 	// format = objectReference
@@ -4927,8 +4927,8 @@ type JSDataChildStruct struct {
 // extends JSDataLayout
 type JSDataContainerStruct struct {
 	// The active branch of the data layout.
-	// format = objectReference
 	// referenceTo = /delphix-js-branch.json
+	// format = objectReference
 	ActiveBranch string `json:"activeBranch,omitempty"`
 	// The first JSOperation on this data layout by data time.
 	// format = objectReference
@@ -4966,10 +4966,10 @@ type JSDataContainerStruct struct {
 	// The number of operations performed on this data container.
 	OperationCount *int `json:"operationCount,omitempty"`
 	// For backward compatibility. The owner of the data container.
-	// update = optional
-	// internal = true
 	// format = objectReference
 	// referenceTo = /delphix-user.json
+	// update = optional
+	// internal = true
 	Owner string `json:"owner,omitempty"`
 	// Key/value pairs used to specify attributes for this data layout.
 	// update = optional
@@ -4982,8 +4982,8 @@ type JSDataContainerStruct struct {
 	// enum = [ONLINE OFFLINE INCONSISTENT]
 	State string `json:"state,omitempty"`
 	// The data template that this data container was provisioned from.
-	// format = objectReference
 	// referenceTo = /delphix-js-data-template.json
+	// format = objectReference
 	Template string `json:"template,omitempty"`
 	// Object type.
 	// required = true
@@ -4997,8 +4997,8 @@ type JSDataContainerStruct struct {
 type JSDataContainerActiveBranchParametersStruct struct {
 	// The time that will be used to find which branch was active in the
 	// data layout.
-	// required = true
 	// format = date
+	// required = true
 	Time string `json:"time,omitempty"`
 	// Object type.
 	// required = true
@@ -5085,8 +5085,8 @@ type JSDataContainerDeleteParametersStruct struct {
 	// default = true
 	DeleteDataSources *bool `json:"deleteDataSources,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -5114,8 +5114,8 @@ type JSDataContainerModifyOwnerParametersStruct struct {
 	// referenceTo = /delphix-user.json
 	Owner string `json:"owner,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -5169,13 +5169,13 @@ type JSDataContainerRestoreParametersStruct struct {
 type JSDataContainerUndoParametersStruct struct {
 	// The operation to undo. This is only valid for RESET, RESTORE,
 	// UNDO, and REFRESH operations.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-js-operation.json
+	// required = true
 	Operation string `json:"operation,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -5192,9 +5192,9 @@ type JSDataSourceStruct struct {
 	// referenceTo = /delphix-js-data-layout.json
 	DataLayout string `json:"dataLayout,omitempty"`
 	// A description of this data source.
+	// maxLength = 4096
 	// create = optional
 	// update = optional
-	// maxLength = 4096
 	Description string `json:"description,omitempty"`
 	// Flag indicating whether the source is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -5243,9 +5243,9 @@ type JSDataSourceStruct struct {
 // extends TypedObject
 type JSDataSourceCreateParametersStruct struct {
 	// A reference to the underlying container object.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-container.json
+	// required = true
 	Container string `json:"container,omitempty"`
 	// Key/value pairs used to specify attributes for this data source.
 	// create = optional
@@ -5270,9 +5270,9 @@ type JSDataTemplateStruct struct {
 	ActiveBranch string `json:"activeBranch,omitempty"`
 	// A client should consider warning the user before performing an
 	// operation which may take a long time, if this is true.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	ConfirmTimeConsumingOperations *bool `json:"confirmTimeConsumingOperations,omitempty"`
 	// The first JSOperation on this data layout by data time.
 	// format = objectReference
@@ -5323,8 +5323,8 @@ type JSDataTemplateCreateParametersStruct struct {
 	// required = true
 	Name string `json:"name,omitempty"`
 	// A description of this data layout to define what it is used for.
-	// maxLength = 4096
 	// create = optional
+	// maxLength = 4096
 	Notes string `json:"notes,omitempty"`
 	// Key/value pairs used to specify attributes for this data layout.
 	// create = optional
@@ -5366,9 +5366,9 @@ type JSOperationStruct struct {
 	// pre-operation snapshot was taken.
 	ForceOption *bool `json:"forceOption,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -5390,8 +5390,8 @@ type JSOperationStruct struct {
 	// format = date
 	StartTime string `json:"startTime,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// The user who performed the operation.
 	// format = objectReference
@@ -5403,8 +5403,8 @@ type JSOperationStruct struct {
 // extends TypedObject
 type JSOperationEndpointStruct struct {
 	// The first JSOperation.
-	// format = objectReference
 	// referenceTo = /delphix-js-operation.json
+	// format = objectReference
 	First string `json:"first,omitempty"`
 	// The last JSOperation.
 	// format = objectReference
@@ -5425,8 +5425,8 @@ type JSOperationEndpointBranchParametersStruct struct {
 	// create = required
 	Branch string `json:"branch,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -5482,8 +5482,8 @@ type JSSourceDataTimestampParametersStruct struct {
 	Branch string `json:"branch,omitempty"`
 	// The time that will be used to find provisionable timestamps for
 	// the sources in the branch's data layout.
-	// required = true
 	// format = date
+	// required = true
 	Time string `json:"time,omitempty"`
 	// Object type.
 	// required = true
@@ -5498,16 +5498,16 @@ type JSTemplateUsageDataStruct struct {
 	// template. This is the space that will be freed up if all bookmarks
 	// on the template were deleted. This presumes that all of child data
 	// containers are purged first.
-	// base = 1024
 	// units = B
+	// base = 1024
 	Bookmarks float64 `json:"bookmarks,omitempty"`
 	// The amount of space consumed by data containers that were
 	// provisioned from this data template. This is the space that will
 	// be freed up if all of those data containers are deleted or purged.
 	// This assumes that the data containers are deleted along with
 	// underlying data sources.
-	// base = 1024
 	// units = B
+	// base = 1024
 	Containers float64 `json:"containers,omitempty"`
 	// The data template that this usage information is for.
 	// referenceTo = /delphix-js-data-template.json
@@ -5534,13 +5534,13 @@ type JSTemplateUsageDataStruct struct {
 // extends JSTimelinePointParameters
 type JSTimelinePointBookmarkInputStruct struct {
 	// The Self-Service bookmark.
+	// referenceTo = /delphix-js-bookmark.json
 	// required = true
 	// format = objectReference
-	// referenceTo = /delphix-js-bookmark.json
 	Bookmark string `json:"bookmark,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -5549,9 +5549,9 @@ type JSTimelinePointBookmarkInputStruct struct {
 // extends JSTimelinePointTimeParameters
 type JSTimelinePointLatestTimeInputStruct struct {
 	// The reference to the data layout used for this operation.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-js-data-layout.json
-	// required = true
 	SourceDataLayout string `json:"sourceDataLayout,omitempty"`
 	// Object type.
 	// required = true
@@ -5570,8 +5570,8 @@ type JSTimelinePointTimeInputStruct struct {
 	// required = true
 	Branch string `json:"branch,omitempty"`
 	// A point in time on the given branch.
-	// required = true
 	// format = date
+	// required = true
 	Time string `json:"time,omitempty"`
 	// Object type.
 	// required = true
@@ -5608,8 +5608,8 @@ type JSUserUsageDataStruct struct {
 	NumContainers *int `json:"numContainers,omitempty"`
 	// The amount of space referenced by the data containers owned by
 	// this user.
-	// units = B
 	// base = 1024
+	// units = B
 	Total float64 `json:"total,omitempty"`
 	// Object type.
 	// required = true
@@ -5676,14 +5676,14 @@ type JobStruct struct {
 	// enum = [RUNNING SUSPENDED CANCELED COMPLETED FAILED]
 	JobState string `json:"jobState,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// This job's parent action.
 	// format = objectReference
@@ -5712,8 +5712,8 @@ type JobStruct struct {
 	// Whether this job can be suspended.
 	Suspendable *bool `json:"suspendable,omitempty"`
 	// Object reference of the target.
-	// format = objectReference
 	// referenceTo = /delphix-user-object.json
+	// format = objectReference
 	Target string `json:"target,omitempty"`
 	// A cached copy of the target object name.
 	TargetName string `json:"targetName,omitempty"`
@@ -5778,20 +5778,20 @@ type KerberosConfigStruct struct {
 	// Indicates whether kerberos has been configured or not.
 	Enabled *bool `json:"enabled,omitempty"`
 	// One of more KDC servers.
-	// minItems = 1
 	// create = required
 	// update = optional
+	// minItems = 1
 	Kdcs []*KerberosKDCStruct `json:"kdcs,omitempty"`
 	// Kerberos keytab file data in base64 encoding.
+	// format = password
 	// create = required
 	// update = optional
-	// format = password
 	Keytab string `json:"keytab,omitempty"`
 	// Object name.
+	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
-	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -5803,8 +5803,8 @@ type KerberosConfigStruct struct {
 	// update = optional
 	Principal string `json:"principal,omitempty"`
 	// Kerberos Realm name.
-	// create = required
 	// update = optional
+	// create = required
 	Realm string `json:"realm,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -5859,8 +5859,8 @@ type KeyPairCredentialStruct struct {
 	// required = true
 	PublicKey string `json:"publicKey,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -5886,12 +5886,12 @@ type LdapServerStruct struct {
 	// required = true
 	AuthMethod string `json:"authMethod,omitempty"`
 	// LDAP server host name.
-	// required = true
 	// format = host
+	// required = true
 	Host string `json:"host,omitempty"`
 	// Object name.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -5899,9 +5899,9 @@ type LdapServerStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// LDAP server port.
-	// minimum = 1
 	// maximum = 65535
 	// required = true
+	// minimum = 1
 	Port *int `json:"port,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -5920,8 +5920,8 @@ type LdapServerStruct struct {
 // extends TypedObject
 type LinkParametersStruct struct {
 	// Optional user-provided description for the container.
-	// maxLength = 1024
 	// create = optional
+	// maxLength = 1024
 	Description string `json:"description,omitempty"`
 	// A reference to the group containing this container.
 	// format = objectReference
@@ -5938,8 +5938,8 @@ type LinkParametersStruct struct {
 	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -5966,8 +5966,8 @@ type LinkedSourceOperationsStruct struct {
 // extends OKResult
 type ListResultStruct struct {
 	// Reference to the action associated with the operation, if any.
-	// format = objectReference
 	// referenceTo = /delphix-action.json
+	// format = objectReference
 	Action string `json:"action,omitempty"`
 	// Reference to the job started by the operation, if any.
 	// format = objectReference
@@ -5978,7 +5978,7 @@ type ListResultStruct struct {
 	Overflow *bool `json:"overflow,omitempty"`
 	// Result of the operation. This will be specific to the API being
 	// invoked.
-	Result string `json:"result,omitempty"`
+	Result interface{} `json:"result,omitempty"`
 	// Indicates whether an error occurred during the call.
 	// enum = [OK ERROR]
 	Status string `json:"status,omitempty"`
@@ -5997,16 +5997,16 @@ type ListResultStruct struct {
 type LocaleSettingsStruct struct {
 	// System default locale as an IETF BCP 47 language tag, defaults to
 	// 'en-US'.
-	// format = locale
-	// default = en-US
 	// create = required
 	// update = optional
+	// format = locale
+	// default = en-US
 	Locale string `json:"locale,omitempty"`
 	// Object name.
-	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -6055,8 +6055,8 @@ type MSSqlAttachDataStruct struct {
 	// create = optional
 	BackupLocationCredentials *PasswordCredentialStruct `json:"backupLocationCredentials,omitempty"`
 	// The user for accessing the shared backup location.
-	// maxLength = 256
 	// create = optional
+	// maxLength = 256
 	BackupLocationUser string `json:"backupLocationUser,omitempty"`
 	// Reference to the configuration for the source.
 	// format = objectReference
@@ -6088,9 +6088,9 @@ type MSSqlAttachDataStruct struct {
 	// create = optional
 	Operations *LinkedSourceOperationsStruct `json:"operations,omitempty"`
 	// OS user on the PPT host to use for linking.
-	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
+	// create = optional
 	PptHostUser string `json:"pptHostUser,omitempty"`
 	// The SQL Server instance on the staging environment to use for
 	// pre-provisioning.
@@ -6099,13 +6099,13 @@ type MSSqlAttachDataStruct struct {
 	// required = true
 	PptRepository string `json:"pptRepository,omitempty"`
 	// Shared source database backup locations.
-	// maxItems = 1000
 	// create = required
+	// maxItems = 1000
 	SharedBackupLocations []string `json:"sharedBackupLocations,omitempty"`
 	// OS user on the source to use for linking.
-	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
+	// create = optional
 	SourceHostUser string `json:"sourceHostUser,omitempty"`
 	// The path to a user-provided PowerShell script or executable to run
 	// after restoring from a backup during pre-provisioning.
@@ -6138,9 +6138,9 @@ type MSSqlAvailabilityGroupStruct struct {
 	// The list of MSSQL Cluster instances belonging to this repository.
 	Instances []MSSqlBaseClusterInstance `json:"instances,omitempty"`
 	// Internal version of the SQL Server instance.
+	// minimum = 1
 	// create = required
 	// update = optional
-	// minimum = 1
 	InternalVersion *int `json:"internalVersion,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
 	// default = true
@@ -6170,9 +6170,9 @@ type MSSqlAvailabilityGroupStruct struct {
 	Reference string `json:"reference,omitempty"`
 	// Flag indicating whether this repository can be used by the Delphix
 	// Engine for internal processing.
-	// default = false
 	// create = optional
 	// update = optional
+	// default = false
 	Staging *bool `json:"staging,omitempty"`
 	// Object type.
 	// format = type
@@ -6191,17 +6191,17 @@ type MSSqlAvailabilityGroupDBConfigStruct struct {
 	// update = optional
 	Credentials Credential `json:"credentials,omitempty"`
 	// The name of the database.
+	// maxLength = 128
 	// create = required
 	// update = optional
-	// maxLength = 128
 	DatabaseName string `json:"databaseName,omitempty"`
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The user used to create and manage the configuration.
+	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
 	// update = optional
-	// format = objectReference
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Whether this source should be used for linking.
 	// default = true
@@ -6218,10 +6218,10 @@ type MSSqlAvailabilityGroupDBConfigStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// Specifies the current recovery model of the source database.
+	// default = SIMPLE
 	// create = optional
 	// update = readonly
 	// enum = [FULL SIMPLE BULK_LOGGED]
-	// default = SIMPLE
 	RecoveryModel string `json:"recoveryModel,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -6269,16 +6269,16 @@ type MSSqlClusterInstanceStruct struct {
 	// maxLength = 16
 	Name string `json:"name,omitempty"`
 	// A reference to the Windows Cluster Node for this instance.
-	// format = objectReference
 	// referenceTo = /delphix-windows-cluster-node.json
+	// format = objectReference
 	Node string `json:"node,omitempty"`
 	// The port to connect to the SQL Server Instance.
 	Port *int `json:"port,omitempty"`
 	// The Servername of the SQL Server Instance.
 	ServerName string `json:"serverName,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The version of the SQL Server Instance.
 	Version string `json:"version,omitempty"`
@@ -6305,8 +6305,8 @@ type MSSqlCompatibilityCriteriaStruct struct {
 	// If true, selected repositories have staging enabled.
 	StagingEnabled *bool `json:"stagingEnabled,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// Selected repositories are this database version. In case of
 	// upgrade, selected repositories are strictly greater than this
@@ -6339,8 +6339,8 @@ type MSSqlCreateTransformationParametersStruct struct {
 	// create = required
 	Repository string `json:"repository,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -6395,10 +6395,10 @@ type MSSqlDatabaseContainerStruct struct {
 	// Native operating system of the original database source system.
 	Os string `json:"os,omitempty"`
 	// Whether to enable high performance mode.
-	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
-	// default = DISABLED
 	// create = readonly
 	// update = readonly
+	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
+	// default = DISABLED
 	PerformanceMode string `json:"performanceMode,omitempty"`
 	// A reference to the previous TimeFlow for this container.
 	// format = objectReference
@@ -6407,12 +6407,12 @@ type MSSqlDatabaseContainerStruct struct {
 	// Native processor type of the original database source system.
 	Processor string `json:"processor,omitempty"`
 	// A reference to the container this container was provisioned from.
-	// format = objectReference
 	// referenceTo = /delphix-container.json
+	// format = objectReference
 	ProvisionContainer string `json:"provisionContainer,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Runtime properties of this container.
 	Runtime *MSSqlDBContainerRuntimeStruct `json:"runtime,omitempty"`
@@ -6471,9 +6471,9 @@ type MSSqlExportParametersStruct struct {
 	// create = optional
 	RecoverDatabase *bool `json:"recoverDatabase,omitempty"`
 	// Recovery model of the database.
-	// enum = [SIMPLE BULK_LOGGED FULL]
 	// default = FULL
 	// create = optional
+	// enum = [SIMPLE BULK_LOGGED FULL]
 	RecoveryModel string `json:"recoveryModel,omitempty"`
 	// The source config to use when creating the exported DB.
 	// required = true
@@ -6484,8 +6484,8 @@ type MSSqlExportParametersStruct struct {
 	// properties = map[type:map[default:TimeflowPointSemantic]]
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -6496,16 +6496,16 @@ type MSSqlFailoverClusterDBConfigStruct struct {
 	// update = optional
 	Credentials Credential `json:"credentials,omitempty"`
 	// The name of the database.
+	// maxLength = 128
 	// create = required
 	// update = optional
-	// maxLength = 128
 	DatabaseName string `json:"databaseName,omitempty"`
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// Base drive letter location for mount points.
-	// create = required
 	// minLength = 1
 	// maxLength = 1
+	// create = required
 	DriveLetter string `json:"driveLetter,omitempty"`
 	// The user used to create and manage the configuration.
 	// format = objectReference
@@ -6518,8 +6518,8 @@ type MSSqlFailoverClusterDBConfigStruct struct {
 	// update = readonly
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -6533,14 +6533,14 @@ type MSSqlFailoverClusterDBConfigStruct struct {
 	// update = readonly
 	RecoveryModel string `json:"recoveryModel,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The object reference of the source repository.
+	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-mssql-repository.json
 	// create = required
-	// update = optional
 	Repository string `json:"repository,omitempty"`
 	// Object type.
 	// required = true
@@ -6580,8 +6580,8 @@ type MSSqlFailoverClusterInstanceStruct struct {
 	// maxLength = 16
 	Name string `json:"name,omitempty"`
 	// A reference to the Windows Cluster Node for this instance.
-	// format = objectReference
 	// referenceTo = /delphix-windows-cluster-node.json
+	// format = objectReference
 	Node string `json:"node,omitempty"`
 	// The port to connect to the SQL Server Instance.
 	Port *int `json:"port,omitempty"`
@@ -6690,10 +6690,10 @@ type MSSqlInstanceStruct struct {
 	// update = optional
 	FulltextInstalled *bool `json:"fulltextInstalled,omitempty"`
 	// The SQL Server instance home.
-	// update = optional
 	// minLength = 1
 	// maxLength = 300
 	// create = required
+	// update = optional
 	InstallationPath string `json:"installationPath,omitempty"`
 	// The name of the SQL Server instance.
 	// minLength = 1
@@ -6707,9 +6707,9 @@ type MSSqlInstanceStruct struct {
 	// update = optional
 	InstanceOwner string `json:"instanceOwner,omitempty"`
 	// Internal version of the SQL Server instance.
+	// create = required
 	// update = optional
 	// minimum = 1
-	// create = required
 	InternalVersion *int `json:"internalVersion,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
 	// default = true
@@ -6742,9 +6742,9 @@ type MSSqlInstanceStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The Server Name of the SQL Server instance.
-	// update = optional
 	// maxLength = 128
 	// create = optional
+	// update = optional
 	ServerName string `json:"serverName,omitempty"`
 	// Flag indicating whether this repository can be used by the Delphix
 	// Engine for internal processing.
@@ -6753,8 +6753,8 @@ type MSSqlInstanceStruct struct {
 	// update = optional
 	Staging *bool `json:"staging,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The version of the SQL Server instance.
 	// create = required
@@ -6816,22 +6816,22 @@ type MSSqlLinkDataStruct struct {
 	// required = true
 	PptRepository string `json:"pptRepository,omitempty"`
 	// Shared source database backup locations.
-	// maxItems = 1000
 	// create = required
+	// maxItems = 1000
 	SharedBackupLocations []string `json:"sharedBackupLocations,omitempty"`
 	// Information about the host OS user on the source to use for
 	// linking.
-	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
+	// format = objectReference
 	SourceHostUser string `json:"sourceHostUser,omitempty"`
 	// Policies for managing LogSync and SnapSync across sources.
 	// create = optional
 	SourcingPolicy *SourcingPolicyStruct `json:"sourcingPolicy,omitempty"`
 	// A user-provided PowerShell script or executable to run after
 	// restoring from a backup during pre-provisioning.
-	// maxLength = 1024
 	// create = optional
+	// maxLength = 1024
 	StagingPostScript string `json:"stagingPostScript,omitempty"`
 	// A user-provided PowerShell script or executable to run prior to
 	// restoring from a backup during pre-provisioning.
@@ -6860,10 +6860,10 @@ type MSSqlLinkedSourceStruct struct {
 	// maxLength = 256
 	BackupLocationUser string `json:"backupLocationUser,omitempty"`
 	// Reference to the configuration for the source.
+	// format = objectReference
 	// referenceTo = /delphix-mssql-db-config.json
 	// create = required
 	// update = optional
-	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// Reference to the container being fed by this source, if any.
 	// format = objectReference
@@ -6894,9 +6894,9 @@ type MSSqlLinkedSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
-	// default = false
 	// create = optional
 	// update = optional
+	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Configuration for source that allows ingesting NetBackup backups
 	// for SQL Server.
@@ -6915,8 +6915,8 @@ type MSSqlLinkedSourceStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// User-specified operation hooks for this source.
-	// update = optional
 	// create = optional
+	// update = optional
 	Operations *LinkedSourceOperationsStruct `json:"operations,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -6962,8 +6962,8 @@ type MSSqlLinkedSourceUpgradeParametersStruct struct {
 	// required = true
 	SourceConfig MSSqlDBConfig `json:"sourceConfig,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -6971,25 +6971,25 @@ type MSSqlLinkedSourceUpgradeParametersStruct struct {
 // extends TypedObject
 type MSSqlNetbackupConfigStruct struct {
 	// NetBackup configuration parameter overrides.
-	// update = optional
 	// create = optional
+	// update = optional
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional config template selection for NetBackup configurations.
 	// If set, configParams will be ignored.
+	// referenceTo = /delphix-database-template.json
 	// create = optional
 	// update = optional
 	// format = objectReference
-	// referenceTo = /delphix-database-template.json
 	ConfigTemplate string `json:"configTemplate,omitempty"`
 	// The master server name of this NetBackup configuration.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	MasterName string `json:"masterName,omitempty"`
 	// The source's client server name of this NetBackup configuration.
+	// create = required
 	// update = optional
 	// maxLength = 256
-	// create = required
 	SourceClientName string `json:"sourceClientName,omitempty"`
 	// Object type.
 	// required = true
@@ -7036,10 +7036,10 @@ type MSSqlProvisionParametersStruct struct {
 	Masked *bool `json:"masked,omitempty"`
 	// The Masking Job to be run when this dataset is provisioned or
 	// refreshed.
-	// create = optional
 	// update = readonly
 	// format = objectReference
 	// referenceTo = /delphix-masking-job.json
+	// create = optional
 	MaskingJob string `json:"maskingJob,omitempty"`
 	// The source that describes an external database instance.
 	// required = true
@@ -7050,8 +7050,8 @@ type MSSqlProvisionParametersStruct struct {
 	SourceConfig MSSqlDBConfig `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base
 	// provisioning on.
-	// required = true
 	// properties = map[type:map[default:TimeflowPointSemantic]]
+	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
 	// required = true
@@ -7073,10 +7073,10 @@ type MSSqlSIConfigStruct struct {
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The user used to create and manage the configuration.
+	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
-	// update = optional
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Whether this source should be used for linking.
 	// create = optional
@@ -7109,12 +7109,12 @@ type MSSqlSIConfigStruct struct {
 	// update = optional
 	Repository string `json:"repository,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The username of the database user.
-	// update = optional
 	// maxLength = 256
+	// update = optional
 	User string `json:"user,omitempty"`
 }
 
@@ -7158,8 +7158,8 @@ type MSSqlSnapshotStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Retention policy, in days. A value of -1 indicates the snapshot
 	// should be kept forever.
@@ -7253,9 +7253,9 @@ type MSSqlSourceRuntimeStruct struct {
 // extends MSSqlSource
 type MSSqlStagingSourceStruct struct {
 	// Reference to the configuration for the source.
+	// format = objectReference
 	// referenceTo = /delphix-source-config.json
 	// create = optional
-	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// Reference to the container being fed by this source, if any.
 	// format = objectReference
@@ -7272,9 +7272,9 @@ type MSSqlStagingSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
-	// create = optional
 	// update = optional
 	// default = false
+	// create = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point for the iSCSI LUN mounts.
 	MountBase string `json:"mountBase,omitempty"`
@@ -7291,9 +7291,9 @@ type MSSqlStagingSourceStruct struct {
 	Namespace string `json:"namespace,omitempty"`
 	// A user-provided PowerShell script or executable to run after
 	// restoring from a backup during pre-provisioning.
+	// maxLength = 1024
 	// create = optional
 	// update = optional
-	// maxLength = 1024
 	PostScript string `json:"postScript,omitempty"`
 	// A user-provided PowerShell script or executable to run prior to
 	// restoring from a backup during pre-provisioning.
@@ -7302,8 +7302,8 @@ type MSSqlStagingSourceStruct struct {
 	// maxLength = 1024
 	PreScript string `json:"preScript,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Runtime properties of this source.
 	Runtime *MSSqlSourceRuntimeStruct `json:"runtime,omitempty"`
@@ -7337,14 +7337,14 @@ type MSSqlTimeflowStruct struct {
 	// MSSQL-specific recovery branch identifier for this TimeFlow.
 	DatabaseGuid string `json:"databaseGuid,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The origin point on the parent TimeFlow from which this TimeFlow
 	// was provisioned. This will not be present for TimeFlows derived
@@ -7354,16 +7354,16 @@ type MSSqlTimeflowStruct struct {
 	// base for this object. This may be different from the snapshot
 	// within the parent point, and is only present for virtual
 	// TimeFlows.
-	// referenceTo = /delphix-timeflow-snapshot.json
 	// format = objectReference
+	// referenceTo = /delphix-timeflow-snapshot.json
 	ParentSnapshot string `json:"parentSnapshot,omitempty"`
 	// The object reference.
 	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -7374,13 +7374,13 @@ type MSSqlTimeflowPointStruct struct {
 	// create = optional
 	Location string `json:"location,omitempty"`
 	// Reference to TimeFlow containing this point.
-	// format = objectReference
 	// referenceTo = /delphix-mssql-timeflow.json
 	// required = true
+	// format = objectReference
 	Timeflow string `json:"timeflow,omitempty"`
 	// The logical time corresponding to the TimeFlow location.
-	// format = date
 	// create = optional
+	// format = date
 	Timestamp string `json:"timestamp,omitempty"`
 	// Object type.
 	// required = true
@@ -7393,9 +7393,9 @@ type MSSqlTimeflowPointStruct struct {
 type MSSqlVirtualSourceStruct struct {
 	// Indicates whether Delphix should automatically restart this
 	// virtual source when target host reboot is detected.
-	// default = true
 	// create = required
 	// update = optional
+	// default = true
 	AllowAutoVDBRestartOnHostReboot *bool `json:"allowAutoVDBRestartOnHostReboot,omitempty"`
 	// Reference to the configuration for the source.
 	// format = objectReference
@@ -7438,8 +7438,8 @@ type MSSqlVirtualSourceStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// User-specified operation hooks for this source.
 	// create = optional
@@ -7447,15 +7447,15 @@ type MSSqlVirtualSourceStruct struct {
 	Operations *VirtualSourceOperationsStruct `json:"operations,omitempty"`
 	// A user-provided PowerShell script or executable to run after
 	// provisioning.
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// create = optional
 	PostScript string `json:"postScript,omitempty"`
 	// A user-provided PowerShell script or executable to run prior to
 	// provisioning.
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// create = optional
 	PreScript string `json:"preScript,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -7484,15 +7484,15 @@ type MSSqlVirtualSourceStruct struct {
 type MaskingJobStruct struct {
 	// A reference to the container that the Masking Job is intended to
 	// operate on.
+	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-container.json
 	// create = optional
-	// update = optional
 	AssociatedContainer string `json:"associatedContainer,omitempty"`
 	// The masking job id from the Delphix Masking Engine instance that
 	// specifies the desired Masking Job.
-	// update = readonly
 	// create = required
+	// update = readonly
 	MaskingJobId string `json:"maskingJobId,omitempty"`
 	// Object name.
 	// format = objectName
@@ -7536,8 +7536,8 @@ type MaskingServiceConfigStruct struct {
 	// update = optional
 	Port *int `json:"port,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Protocol scheme for use when communicating with server.
 	// enum = [HTTP HTTPS]
@@ -7560,15 +7560,15 @@ type MaskingServiceConfigStruct struct {
 // extends CompatibleRepositoriesParameters
 type MigrateCompatibilityParametersStruct struct {
 	// Restrict returned repositories to this environment.
+	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
 	// create = optional
-	// update = optional
 	Environment string `json:"environment,omitempty"`
 	// The repository to use as a source of compatibility information.
-	// format = objectReference
 	// referenceTo = /delphix-source-repository.json
 	// required = true
+	// format = objectReference
 	SourceRepository string `json:"sourceRepository,omitempty"`
 	// Object type.
 	// required = true
@@ -7603,15 +7603,15 @@ type MySQLAttachDataStruct struct {
 	// required = true
 	StagingHostUser string `json:"stagingHostUser,omitempty"`
 	// The port on which the MySQL staging instance will listen.
+	// required = true
 	// minimum = 1
 	// maximum = 65535
-	// required = true
 	StagingPort *int `json:"stagingPort,omitempty"`
 	// The MySQL installation on the staging environment to use for
 	// validated sync.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-mysql-install.json
+	// required = true
 	StagingRepository string `json:"stagingRepository,omitempty"`
 	// Object type.
 	// required = true
@@ -7683,9 +7683,9 @@ type MySQLCreateTransformationParametersStruct struct {
 	Operations []SourceOperation `json:"operations,omitempty"`
 	// The port number used for provisioning a MySQL container during
 	// transformation application.
+	// maximum = 65535
 	// create = required
 	// minimum = 1
-	// maximum = 65535
 	Port *int `json:"port,omitempty"`
 	// Reference to the repository used during application of the
 	// transformation.
@@ -7707,8 +7707,8 @@ type MySQLDBContainerRuntimeStruct struct {
 	// The pre-provisioning runtime for the container.
 	PreProvisioningStatus *PreProvisioningRuntimeStruct `json:"preProvisioningStatus,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -7719,8 +7719,8 @@ type MySQLDatabaseContainerStruct struct {
 	// format = date
 	CreationTime string `json:"creationTime,omitempty"`
 	// A reference to the currently active TimeFlow for this container.
-	// format = objectReference
 	// referenceTo = /delphix-timeflow.json
+	// format = objectReference
 	CurrentTimeflow string `json:"currentTimeflow,omitempty"`
 	// Optional user-provided description for the container.
 	// maxLength = 1024
@@ -7728,16 +7728,16 @@ type MySQLDatabaseContainerStruct struct {
 	// update = optional
 	Description string `json:"description,omitempty"`
 	// A reference to the group containing this container.
+	// format = objectReference
 	// referenceTo = /delphix-group.json
 	// create = required
-	// format = objectReference
 	Group string `json:"group,omitempty"`
 	// True if this container is a masked container.
 	Masked *bool `json:"masked,omitempty"`
 	// Object name.
+	// maxLength = 256
 	// create = required
 	// update = optional
-	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -7747,10 +7747,10 @@ type MySQLDatabaseContainerStruct struct {
 	// Native operating system of the original database source system.
 	Os string `json:"os,omitempty"`
 	// Whether to enable high performance mode.
+	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
 	// default = DISABLED
 	// create = readonly
 	// update = readonly
-	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
 	PerformanceMode string `json:"performanceMode,omitempty"`
 	// A reference to the previous TimeFlow for this container.
 	// format = objectReference
@@ -7763,8 +7763,8 @@ type MySQLDatabaseContainerStruct struct {
 	// referenceTo = /delphix-container.json
 	ProvisionContainer string `json:"provisionContainer,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Runtime properties of this container.
 	Runtime *MySQLDBContainerRuntimeStruct `json:"runtime,omitempty"`
@@ -7822,8 +7822,8 @@ type MySQLExportParametersStruct struct {
 	SourceConfig *MySQLServerConfigStruct `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base export
 	// on.
-	// required = true
 	// properties = map[type:map[default:TimeflowPointSemantic]]
+	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
 	// required = true
@@ -7861,9 +7861,9 @@ type MySQLInstallStruct struct {
 	// Version of the MySQL installation.
 	InternalVersion *MySQLVersionStruct `json:"internalVersion,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Object name.
 	// create = readonly
@@ -7876,9 +7876,9 @@ type MySQLInstallStruct struct {
 	Namespace string `json:"namespace,omitempty"`
 	// Flag indicating whether the repository should be used for
 	// provisioning.
-	// update = optional
 	// default = true
 	// create = optional
+	// update = optional
 	ProvisioningEnabled *bool `json:"provisioningEnabled,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -7895,8 +7895,8 @@ type MySQLInstallStruct struct {
 	// format = type
 	Type string `json:"type,omitempty"`
 	// Version string for the repository.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Version string `json:"version,omitempty"`
 }
 
@@ -7904,9 +7904,9 @@ type MySQLInstallStruct struct {
 // extends LinkData
 type MySQLLinkDataStruct struct {
 	// Reference to the configuration for the source.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-mysql-server-config.json
-	// required = true
 	Config string `json:"config,omitempty"`
 	// MySQL database configuration parameter overrides.
 	// create = optional
@@ -7930,9 +7930,9 @@ type MySQLLinkDataStruct struct {
 	StagingHostUser string `json:"stagingHostUser,omitempty"`
 	// The port on the staging host that the MySQL staging server can
 	// listen on for TCP/IP connections.
-	// required = true
 	// minimum = 1
 	// maximum = 65535
+	// required = true
 	StagingPort *int `json:"stagingPort,omitempty"`
 	// The MySQL installation on the staging environment that will be
 	// used for validated sync.
@@ -7953,10 +7953,10 @@ type MySQLLinkDataStruct struct {
 // extends MySQLSource
 type MySQLLinkedSourceStruct struct {
 	// Reference to the configuration for the source.
-	// format = objectReference
 	// referenceTo = /delphix-mysql-server-config.json
 	// create = required
 	// update = optional
+	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// MySQL database configuration parameter overrides.
 	// create = optional
@@ -8063,10 +8063,10 @@ type MySQLProvisionParametersStruct struct {
 	Masked *bool `json:"masked,omitempty"`
 	// The Masking Job to be run when this dataset is provisioned or
 	// refreshed.
-	// update = readonly
 	// format = objectReference
 	// referenceTo = /delphix-masking-job.json
 	// create = optional
+	// update = readonly
 	MaskingJob string `json:"maskingJob,omitempty"`
 	// The source that describes an external database instance.
 	// required = true
@@ -8098,10 +8098,10 @@ type MySQLServerConfigStruct struct {
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The user used to create and manage the configuration.
-	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
 	// update = optional
+	// format = objectReference
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Whether this source should be used for linking.
 	// default = true
@@ -8118,14 +8118,14 @@ type MySQLServerConfigStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The port on which the MySQL server instance is listening.
+	// create = required
 	// update = optional
 	// minimum = 1
 	// maximum = 65535
-	// create = required
 	Port *int `json:"port,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// The object reference of the source repository.
 	// format = objectReference
@@ -8138,8 +8138,8 @@ type MySQLServerConfigStruct struct {
 	// format = type
 	Type string `json:"type,omitempty"`
 	// The username of the server instance user.
-	// update = optional
 	// maxLength = 256
+	// update = optional
 	User string `json:"user,omitempty"`
 }
 
@@ -8151,8 +8151,8 @@ type MySQLSnapshotStruct struct {
 	// provisioning from this snapshot.
 	Consistency string `json:"consistency,omitempty"`
 	// Reference to the database of which this TimeFlow is a part.
-	// referenceTo = /delphix-container.json
 	// format = objectReference
+	// referenceTo = /delphix-container.json
 	Container string `json:"container,omitempty"`
 	// Point in time at which this snapshot was created. This may be
 	// different from the time corresponding to the TimeFlow.
@@ -8170,13 +8170,13 @@ type MySQLSnapshotStruct struct {
 	// this snapshot will be missing nologging changes.
 	MissingNonLoggedData *bool `json:"missingNonLoggedData,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -8214,8 +8214,8 @@ type MySQLSnapshotRuntimeStruct struct {
 	// new TimeFlow.
 	Provisionable *bool `json:"provisionable,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -8293,18 +8293,18 @@ type MySQLStagingSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point for the NFS mounts on the staging host.
 	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// update = optional
-	// maxLength = 256
 	// format = objectName
 	// create = optional
+	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -8316,8 +8316,8 @@ type MySQLStagingSourceStruct struct {
 	// update = optional
 	PostScript string `json:"postScript,omitempty"`
 	// A user-provided script to run prior to taking a snapshot.
-	// update = optional
 	// create = optional
+	// update = optional
 	PreScript string `json:"preScript,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -8353,9 +8353,9 @@ type MySQLTimeflowStruct struct {
 	// enum = [INITIAL INDETERMINATE REFRESH ROLLBACK TEMPORARY TRANSFORMATION V2P PDB_PLUG WAREHOUSE ORACLE_LIVE_SOURCE_RESYNC SOURCE_CONTINUITY]
 	CreationType string `json:"creationType,omitempty"`
 	// Object name.
+	// create = required
 	// update = optional
 	// maxLength = 256
-	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -8390,13 +8390,13 @@ type MySQLTimeflowPointStruct struct {
 	// create = optional
 	Location string `json:"location,omitempty"`
 	// Reference to TimeFlow containing this point.
-	// referenceTo = /delphix-mysql-timeflow.json
 	// required = true
 	// format = objectReference
+	// referenceTo = /delphix-mysql-timeflow.json
 	Timeflow string `json:"timeflow,omitempty"`
 	// The logical time corresponding to the TimeFlow location.
-	// format = date
 	// create = optional
+	// format = date
 	Timestamp string `json:"timestamp,omitempty"`
 	// Object type.
 	// required = true
@@ -8454,9 +8454,9 @@ type MySQLVirtualSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
-	// default = false
 	// create = optional
 	// update = optional
+	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point for the NFS mounts.
 	// maxLength = 256
@@ -8537,8 +8537,8 @@ type NTPConfigStruct struct {
 	// update = optional
 	Servers []string `json:"servers,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// If true, discover NTP servers using multicast.
 	// update = optional
@@ -8561,9 +8561,9 @@ type NamespaceStruct struct {
 	// during failover.
 	FailoverReport string `json:"failoverReport,omitempty"`
 	// Object name.
+	// create = required
 	// update = optional
 	// maxLength = 256
-	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -8607,14 +8607,14 @@ type NamespaceFailoverParametersStruct struct {
 // extends TypedObject
 type NetbackupConnectivityParametersStruct struct {
 	// Target environment to test NetBackup connectivity from.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
-	// required = true
 	Environment string `json:"environment,omitempty"`
 	// The environment user to use to connect to the environment.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
+	// required = true
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// The name of the NetBackup master server to attempt to connect to.
 	// required = true
@@ -8667,8 +8667,8 @@ type NetworkDSPTestStruct struct {
 	// units = bps
 	Throughput float64 `json:"throughput,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -8677,12 +8677,12 @@ type NetworkDSPTestStruct struct {
 // extends NetworkThroughputTestBaseParameters
 type NetworkDSPTestParametersStruct struct {
 	// The size of each transmit request in bytes.
+	// maximum = 1.048576e+06
 	// base = 1024
 	// units = B
 	// create = optional
 	// default = 65536
 	// minimum = 0
-	// maximum = 1.048576e+06
 	BlockSize *int `json:"blockSize,omitempty"`
 	// Whether or not compression is used for the test.
 	// default = false
@@ -8690,9 +8690,9 @@ type NetworkDSPTestParametersStruct struct {
 	Compression *bool `json:"compression,omitempty"`
 	// Whether the test is testing connectivity to a Delphix Engine or
 	// remote host.
-	// create = optional
 	// enum = [REMOTE_HOST DELPHIX_ENGINE]
 	// default = REMOTE_HOST
+	// create = optional
 	DestinationType string `json:"destinationType,omitempty"`
 	// Whether the test is a transmit or receive test.
 	// enum = [TRANSMIT RECEIVE]
@@ -8703,10 +8703,10 @@ type NetworkDSPTestParametersStruct struct {
 	// is 0, an initial period of time will be spent calculating the
 	// optimal number of connections, and that time does not count toward
 	// the duration of the test.
-	// default = 30
-	// create = optional
 	// minimum = 1
 	// maximum = 3600
+	// default = 30
+	// create = optional
 	Duration *int `json:"duration,omitempty"`
 	// Whether or not encryption is used for the test.
 	// default = false
@@ -8715,10 +8715,10 @@ type NetworkDSPTestParametersStruct struct {
 	// The number of connections to use for the test. The special value 0
 	// (the default) causes the test to automatically discover and use
 	// the optimal number of connections to use for maximum throughput.
+	// create = optional
 	// minimum = 0
 	// maximum = 32
 	// default = 0
-	// create = optional
 	NumConnections *int `json:"numConnections,omitempty"`
 	// The queue depth used for the DSP throughput test.
 	// default = 32
@@ -8727,12 +8727,12 @@ type NetworkDSPTestParametersStruct struct {
 	// create = optional
 	QueueDepth *int `json:"queueDepth,omitempty"`
 	// The size of the receive socket buffer in bytes.
-	// default = 262144
-	// minimum = 0
-	// maximum = 1.6777216e+07
 	// base = 1024
 	// units = B
 	// create = optional
+	// default = 262144
+	// minimum = 0
+	// maximum = 1.6777216e+07
 	ReceiveSocketBuffer *int `json:"receiveSocketBuffer,omitempty"`
 	// Address, username and password used when running a test to another
 	// Delphix Engine.
@@ -8745,12 +8745,12 @@ type NetworkDSPTestParametersStruct struct {
 	// create = optional
 	RemoteHost string `json:"remoteHost,omitempty"`
 	// The size of the send socket buffer in bytes.
-	// create = optional
 	// default = 262144
 	// minimum = 0
 	// maximum = 1.6777216e+07
 	// base = 1024
 	// units = B
+	// create = optional
 	SendSocketBuffer *int `json:"sendSocketBuffer,omitempty"`
 	// Object type.
 	// required = true
@@ -8776,10 +8776,10 @@ type NetworkInterfaceStruct struct {
 	// The range of possible values for the mtu property.
 	MtuRange string `json:"mtuRange,omitempty"`
 	// Object name.
+	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
-	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -8794,8 +8794,8 @@ type NetworkInterfaceStruct struct {
 	// enum = [OK DOWN FAILED]
 	State string `json:"state,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -8852,13 +8852,13 @@ type NetworkLatencyTestStruct struct {
 	// units = usec
 	Minimum *int `json:"minimum,omitempty"`
 	// Object name.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The parameters used to execute the test.
 	Parameters *NetworkLatencyTestParametersStruct `json:"parameters,omitempty"`
@@ -8879,8 +8879,8 @@ type NetworkLatencyTestStruct struct {
 	// units = usec
 	Stddev *int `json:"stddev,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -8899,22 +8899,22 @@ type NetworkLatencyTestParametersStruct struct {
 	// create = optional
 	RemoteHost string `json:"remoteHost,omitempty"`
 	// Number of requests to send.
-	// create = optional
 	// minimum = 1
 	// maximum = 3600
 	// default = 20
+	// create = optional
 	RequestCount *int `json:"requestCount,omitempty"`
 	// The size of requests to send (bytes).
+	// units = B
+	// base = 1024
 	// minimum = 8
 	// maximum = 65507
 	// default = 8
 	// create = optional
-	// units = B
-	// base = 1024
 	RequestSize *int `json:"requestSize,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -8924,21 +8924,21 @@ type NetworkLatencyTestParametersStruct struct {
 type NetworkRouteStruct struct {
 	// Destination for the route in Classless Inter-Domain Routing (CIDR)
 	// notation or the keyword 'default'.
-	// format = routeDestination
 	// create = required
+	// format = routeDestination
 	Destination string `json:"destination,omitempty"`
 	// Next hop for the route.
-	// create = required
 	// format = ipAddress
+	// create = required
 	Gateway string `json:"gateway,omitempty"`
 	// Output interface to use for the route.
-	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-network-interface.json
+	// create = optional
 	OutInterface string `json:"outInterface,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -8990,12 +8990,12 @@ type NetworkThroughputTestStruct struct {
 	// enum = [RUNNING COMPLETED FAILED CANCELED]
 	State string `json:"state,omitempty"`
 	// Average throughput measured.
-	// base = 1024
 	// units = bps
+	// base = 1024
 	Throughput float64 `json:"throughput,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -9003,12 +9003,12 @@ type NetworkThroughputTestStruct struct {
 // extends NetworkThroughputTestBaseParameters
 type NetworkThroughputTestParametersStruct struct {
 	// The size of each transmit request in bytes.
+	// maximum = 1.048576e+06
 	// base = 1024
 	// units = B
 	// create = optional
 	// default = 131072
 	// minimum = 0
-	// maximum = 1.048576e+06
 	BlockSize *int `json:"blockSize,omitempty"`
 	// Whether the test is a transmit or receive test.
 	// enum = [TRANSMIT RECEIVE]
@@ -9019,10 +9019,10 @@ type NetworkThroughputTestParametersStruct struct {
 	// is 0, an initial period of time will be spent calculating the
 	// optimal number of connections, and that time does not count toward
 	// the duration of the test.
-	// minimum = 1
-	// maximum = 3600
 	// default = 30
 	// create = optional
+	// minimum = 1
+	// maximum = 3600
 	Duration *int `json:"duration,omitempty"`
 	// The number of connections to use for the test. The special value 0
 	// (the default) causes the test to automatically discover and use
@@ -9034,9 +9034,9 @@ type NetworkThroughputTestParametersStruct struct {
 	NumConnections *int `json:"numConnections,omitempty"`
 	// The TCP port number that the server (the receiver) will be
 	// listening on.
+	// minimum = 1
 	// maximum = 65535
 	// create = optional
-	// minimum = 1
 	Port *int `json:"port,omitempty"`
 	// A hostname or literal IP address to test. This parameter is
 	// optional and can be provided if the remoteHost has multiple
@@ -9048,9 +9048,9 @@ type NetworkThroughputTestParametersStruct struct {
 	// environment. If the host has multiple addresses and remoteAddress
 	// is not specified, then the default address used when adding the
 	// host will be used.
+	// create = required
 	// format = objectReference
 	// referenceTo = /delphix-host.json
-	// create = required
 	RemoteHost string `json:"remoteHost,omitempty"`
 	// The size of the send socket buffer in bytes.
 	// base = 1024
@@ -9085,8 +9085,8 @@ type NfsOpsDatapointStreamStruct struct {
 	// Whether writes were synchronous.
 	Sync *bool `json:"sync,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -9095,8 +9095,8 @@ type NfsOpsDatapointStreamStruct struct {
 // extends IngestionStrategy
 type NoBackupIngestionStrategyStruct struct {
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -9150,18 +9150,18 @@ type OKResultStruct struct {
 	// referenceTo = /delphix-action.json
 	Action string `json:"action,omitempty"`
 	// Reference to the job started by the operation, if any.
-	// format = objectReference
 	// referenceTo = /delphix-job.json
+	// format = objectReference
 	Job string `json:"job,omitempty"`
 	// Result of the operation. This will be specific to the API being
 	// invoked.
-	Result string `json:"result,omitempty"`
+	Result interface{} `json:"result,omitempty"`
 	// Indicates whether an error occurred during the call.
 	// enum = [OK ERROR]
 	Status string `json:"status,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -9188,8 +9188,8 @@ type ObjectNotificationStruct struct {
 // extends NamedUserObject
 type OperationTemplateStruct struct {
 	// User provided description for this template.
-	// create = optional
 	// update = optional
+	// create = optional
 	Description string `json:"description,omitempty"`
 	// Most recently modified time.
 	// format = date
@@ -9280,9 +9280,9 @@ type OracleAttachDataStruct struct {
 	BackupLevelEnabled *bool `json:"backupLevelEnabled,omitempty"`
 	// Bandwidth limit (MB/s) for SnapSync and LogSync network traffic. A
 	// value of 0 means no limit.
+	// create = optional
 	// minimum = 0
 	// default = 0
-	// create = optional
 	BandwidthLimit *int `json:"bandwidthLimit,omitempty"`
 	// True if extended block checking should be used for this linked
 	// database.
@@ -9297,9 +9297,9 @@ type OracleAttachDataStruct struct {
 	// create = optional
 	CompressedLinkingEnabled *bool `json:"compressedLinkingEnabled,omitempty"`
 	// Reference to the configuration for the source.
-	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-oracle-db-config.json
+	// required = true
 	Config string `json:"config,omitempty"`
 	// The password for the DB user.
 	// required = true
@@ -9322,13 +9322,13 @@ type OracleAttachDataStruct struct {
 	// create = optional
 	EncryptedLinkingEnabled *bool `json:"encryptedLinkingEnabled,omitempty"`
 	// Information about the OS user to use for linking.
+	// referenceTo = /delphix-source-environment-user.json
 	// required = true
 	// format = objectReference
-	// referenceTo = /delphix-source-environment-user.json
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// External file path.
-	// create = optional
 	// maxLength = 1024
+	// create = optional
 	ExternalFilePath string `json:"externalFilePath,omitempty"`
 	// Number of data files to include in each RMAN backup set.
 	// minimum = 1
@@ -9367,8 +9367,8 @@ type OracleAttachDataStruct struct {
 	// create = optional
 	RmanChannels *int `json:"rmanChannels,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -9397,8 +9397,8 @@ type OracleClusterStruct struct {
 	// maxLength = 256
 	CrsClusterHome string `json:"crsClusterHome,omitempty"`
 	// The name of the cluster.
-	// maxLength = 15
 	// create = optional
+	// maxLength = 15
 	CrsClusterName string `json:"crsClusterName,omitempty"`
 	// The environment description.
 	// create = optional
@@ -9415,15 +9415,15 @@ type OracleClusterStruct struct {
 	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// A reference to the primary user for this environment.
 	// format = objectReference
@@ -9498,8 +9498,8 @@ type OracleClusterNodeStruct struct {
 	// update = optional
 	Enabled *bool `json:"enabled,omitempty"`
 	// The reference to the associated host object.
-	// referenceTo = /delphix-host.json
 	// format = objectReference
+	// referenceTo = /delphix-host.json
 	Host string `json:"host,omitempty"`
 	// Object name.
 	// create = required
@@ -9512,8 +9512,8 @@ type OracleClusterNodeStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -9528,9 +9528,9 @@ type OracleClusterNodeStruct struct {
 // extends TypedObject
 type OracleClusterNodeCreateParametersStruct struct {
 	// The cluster to which the node belongs.
+	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-oracle-cluster.json
-	// create = optional
 	Cluster string `json:"cluster,omitempty"`
 	// The host object associated with the cluster node.
 	// create = required
@@ -9588,9 +9588,9 @@ type OracleCreateTransformationParametersStruct struct {
 	Container *OracleDatabaseContainerStruct `json:"container,omitempty"`
 	// Reference to the user used during application of the
 	// transformation.
+	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
-	// create = optional
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Operations to perform when this transformation is applied.
 	// create = required
@@ -9616,9 +9616,9 @@ type OracleCreateTransformationParametersStruct struct {
 // extends OracleCustomEnvVarFile
 type OracleCustomEnvVarRACFileStruct struct {
 	// The cluster node on which the target environment file exists.
-	// format = objectReference
 	// referenceTo = /delphix-oracle-cluster-node.json
 	// required = true
+	// format = objectReference
 	ClusterNode string `json:"clusterNode,omitempty"`
 	// A string of whitespace-separated parameters to be passed to the
 	// source command. The first parameter must be an absolute path to a
@@ -9686,8 +9686,8 @@ type OracleCustomEnvVarSIPairStruct struct {
 	// format = type
 	Type string `json:"type,omitempty"`
 	// The name of the environment variable.
-	// format = envvarIdentifier
 	// required = true
+	// format = envvarIdentifier
 	VarName string `json:"varName,omitempty"`
 	// The value of the environment variable.
 	// required = true
@@ -9707,8 +9707,8 @@ type OracleDBConfigConnectivityStruct struct {
 	// format = type
 	Type string `json:"type,omitempty"`
 	// Database username.
-	// create = optional
 	// update = optional
+	// create = optional
 	Username string `json:"username,omitempty"`
 }
 
@@ -9761,9 +9761,9 @@ type OracleDatabaseContainerStruct struct {
 	// default = false
 	DatabaseFraction *bool `json:"databaseFraction,omitempty"`
 	// Optional user-provided description for the container.
-	// maxLength = 1024
 	// create = optional
 	// update = optional
+	// maxLength = 1024
 	Description string `json:"description,omitempty"`
 	// If true, NOLOGGING operations on this container are treated as
 	// faults and cannot be resolved manually. Otherwise, these
@@ -9773,9 +9773,9 @@ type OracleDatabaseContainerStruct struct {
 	// update = optional
 	DiagnoseNoLoggingFaults *bool `json:"diagnoseNoLoggingFaults,omitempty"`
 	// A reference to the group containing this container.
-	// format = objectReference
 	// referenceTo = /delphix-group.json
 	// create = required
+	// format = objectReference
 	Group string `json:"group,omitempty"`
 	// Indicates whether or not this container has an associated
 	// LiveSource.
@@ -9784,9 +9784,9 @@ type OracleDatabaseContainerStruct struct {
 	// True if this container is a masked container.
 	Masked *bool `json:"masked,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -9796,10 +9796,10 @@ type OracleDatabaseContainerStruct struct {
 	// Native operating system of the original database source system.
 	Os string `json:"os,omitempty"`
 	// Whether to enable high performance mode.
+	// update = optional
 	// enum = [TEMPORARILY_ENABLED ENABLED DISABLED]
 	// default = DISABLED
 	// create = optional
-	// update = optional
 	PerformanceMode string `json:"performanceMode,omitempty"`
 	// Indicates whether or not the database in this container is a
 	// physical standby.
@@ -9842,10 +9842,10 @@ type OracleDatabaseContainerStruct struct {
 // extends EmptyDatasetCreationParameters
 type OracleDatabaseCreationParametersStruct struct {
 	// The character set the database uses to store data.
-	// update = optional
-	// pattern = ^UTF8|UTFE|[A-Z]+[0-9]+[A-Z0-9]+$
 	// default = AL32UTF8
 	// create = optional
+	// update = optional
+	// pattern = ^UTF8|UTFE|[A-Z]+[0-9]+[A-Z0-9]+$
 	CharacterSet string `json:"characterSet,omitempty"`
 	// The new container for the created database.
 	// required = true
@@ -9861,32 +9861,32 @@ type OracleDatabaseCreationParametersStruct struct {
 	// Puts the database into FORCE LOGGING mode. Oracle Database will
 	// log all changes in the database except for changes in temporary
 	// tablespaces and temporary segments.
-	// default = false
 	// create = optional
 	// update = optional
+	// default = false
 	ForceLogging *bool `json:"forceLogging,omitempty"`
 	// Grants the SELECT ANY DICTIONARY system privilege to the Delphix
 	// database user. If disabled, the Delphix database user will only
 	// have SELECT access to a limited set of views.
+	// create = optional
 	// update = optional
 	// default = true
-	// create = optional
 	GrantSelectAnyDictionary *bool `json:"grantSelectAnyDictionary,omitempty"`
 	// The initial sizing of the data files section of the control file
 	// at CREATE DATABASE or CREATE CONTROLFILE time.
-	// create = optional
 	// update = optional
 	// minimum = 2
 	// default = 32
 	// maximum = 65535
+	// create = optional
 	MaxDataFiles *int `json:"maxDataFiles,omitempty"`
 	// The maximum number of instances that can simultaneously have this
 	// database mounted and open.
-	// minimum = 1
-	// default = 32
 	// maximum = 1055
 	// create = optional
 	// update = optional
+	// minimum = 1
+	// default = 32
 	MaxInstances *int `json:"maxInstances,omitempty"`
 	// The maximum number of redo log files that can ever be created for
 	// the database.
@@ -9898,11 +9898,11 @@ type OracleDatabaseCreationParametersStruct struct {
 	MaxLogFiles *int `json:"maxLogFiles,omitempty"`
 	// The maximum number of archived redo log files for automatic media
 	// recovery of Oracle RAC.
-	// default = 100
 	// maximum = 65535
 	// create = optional
 	// update = optional
 	// minimum = 0
+	// default = 100
 	MaxLogHistory *int `json:"maxLogHistory,omitempty"`
 	// The national character set used to store data in columns
 	// specifically defined as NCHAR, NCLOB, or NVARCHAR2.
@@ -9939,8 +9939,8 @@ type OracleDatabaseCreationParametersStruct struct {
 	// update = optional
 	SysauxDatafile *OracleSysauxDatafileSpecificationStruct `json:"sysauxDatafile,omitempty"`
 	// The password for the SYSTEM user.
-	// format = password
 	// required = true
+	// format = password
 	SystemPassword string `json:"systemPassword,omitempty"`
 	// The tempfile for the database. If no filename is provided,
 	// Oracle-managed files will be used.
@@ -9949,10 +9949,10 @@ type OracleDatabaseCreationParametersStruct struct {
 	TempTablespace *OracleTempfileSpecificationStruct `json:"tempTablespace,omitempty"`
 	// Indicates the timezone file version that will be used to create
 	// the database.
-	// create = optional
 	// update = optional
 	// minimum = 1
 	// maximum = 22
+	// create = optional
 	TimezoneFileVersion *int `json:"timezoneFileVersion,omitempty"`
 	// Object type.
 	// required = true
@@ -9960,8 +9960,8 @@ type OracleDatabaseCreationParametersStruct struct {
 	Type string `json:"type,omitempty"`
 	// The datafile to be used for undo data. If no filename is provided,
 	// Oracle-managed files will be used.
-	// create = optional
 	// update = optional
+	// create = optional
 	UndoTablespace *OracleUndoDatafileSpecificationStruct `json:"undoTablespace,omitempty"`
 }
 
@@ -10085,16 +10085,16 @@ type OracleExportParametersStruct struct {
 	OpenDatabase *bool `json:"openDatabase,omitempty"`
 	// If specified, then take the exported database through recovery
 	// procedures, if necessary, to reach a consistent point.
-	// default = true
 	// create = optional
+	// default = true
 	RecoverDatabase *bool `json:"recoverDatabase,omitempty"`
 	// The source config to use when creating the exported DB.
 	// required = true
 	SourceConfig OracleDBConfig `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base export
 	// on.
-	// required = true
 	// properties = map[type:map[default:TimeflowPointSemantic]]
+	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
 	// required = true
@@ -10141,9 +10141,9 @@ type OracleInstallStruct struct {
 	// create = optional
 	AppliedPatches []*int `json:"appliedPatches,omitempty"`
 	// 32 or 64 bits.
+	// update = optional
 	// enum = [32 64]
 	// create = required
-	// update = optional
 	Bits *int `json:"bits,omitempty"`
 	// Flag indicating whether the install was discovered or manually
 	// entered.
@@ -10162,9 +10162,9 @@ type OracleInstallStruct struct {
 	// maxLength = 256
 	InstallationHome string `json:"installationHome,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Flag indicating whether this repository can use LogSync.
 	LogsyncPossible *bool `json:"logsyncPossible,omitempty"`
@@ -10184,9 +10184,9 @@ type OracleInstallStruct struct {
 	OracleBase string `json:"oracleBase,omitempty"`
 	// Flag indicating whether the repository should be used for
 	// provisioning.
-	// default = true
 	// create = optional
 	// update = optional
+	// default = true
 	ProvisioningEnabled *bool `json:"provisioningEnabled,omitempty"`
 	// Flag indicating whether the install supports Oracle RAC.
 	Rac *bool `json:"rac,omitempty"`
@@ -10196,9 +10196,9 @@ type OracleInstallStruct struct {
 	Reference string `json:"reference,omitempty"`
 	// Flag indicating whether this repository can be used by the Delphix
 	// Engine for internal processing.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	Staging *bool `json:"staging,omitempty"`
 	// Object type.
 	// required = true
@@ -10369,9 +10369,9 @@ type OracleLinkedSourceStruct struct {
 	BandwidthLimit *int `json:"bandwidthLimit,omitempty"`
 	// True if extended block checking should be used for this linked
 	// database.
-	// default = false
 	// create = optional
 	// update = optional
+	// default = false
 	CheckLogical *bool `json:"checkLogical,omitempty"`
 	// True if SnapSync data from the source should be compressed over
 	// the network. Enabling this feature will reduce network bandwidth
@@ -10397,9 +10397,9 @@ type OracleLinkedSourceStruct struct {
 	// an encrypted connection. Enabling this feature can decrease the
 	// performance of SnapSync from the source but has no impact on the
 	// performance of VDBs created from the retrieved data.
-	// create = optional
 	// update = optional
 	// default = false
+	// create = optional
 	EncryptedLinkingEnabled *bool `json:"encryptedLinkingEnabled,omitempty"`
 	// External file path.
 	// create = optional
@@ -10407,11 +10407,11 @@ type OracleLinkedSourceStruct struct {
 	// maxLength = 1024
 	ExternalFilePath string `json:"externalFilePath,omitempty"`
 	// Number of data files to include in each RMAN backup set.
-	// minimum = 1
-	// maximum = 64
 	// default = 5
 	// create = optional
 	// update = optional
+	// minimum = 1
+	// maximum = 64
 	FilesPerSet *int `json:"filesPerSet,omitempty"`
 	// Hosts that might affect operations on this source. Property will
 	// be null unless the includeHosts parameter is set when listing
@@ -10427,22 +10427,22 @@ type OracleLinkedSourceStruct struct {
 	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// Total number of transport connections to use during SnapSync.
+	// create = optional
+	// update = optional
 	// default = 1
 	// minimum = 1
 	// maximum = 16
-	// create = optional
-	// update = optional
 	NumberOfConnections *int `json:"numberOfConnections,omitempty"`
 	// User-specified operation hooks for this source.
 	// create = optional
@@ -10486,9 +10486,9 @@ type OracleLiveSourceStruct struct {
 	// update = optional
 	AllowAutoVDBRestartOnHostReboot *bool `json:"allowAutoVDBRestartOnHostReboot,omitempty"`
 	// Archive Log Mode of the Oracle virtual database.
-	// create = optional
 	// update = readonly
 	// default = true
+	// create = optional
 	ArchivelogMode *bool `json:"archivelogMode,omitempty"`
 	// Reference to the configuration for the source.
 	// format = objectReference
@@ -10496,8 +10496,8 @@ type OracleLiveSourceStruct struct {
 	// create = optional
 	Config string `json:"config,omitempty"`
 	// Oracle database configuration parameter overrides.
-	// update = optional
 	// create = optional
+	// update = optional
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional database template to use for provisioning and refresh. If
 	// set, configParams will be ignored on provision or refresh.
@@ -10515,10 +10515,10 @@ type OracleLiveSourceStruct struct {
 	// update = optional
 	CustomEnvVars []OracleCustomEnvVar `json:"customEnvVars,omitempty"`
 	// Amount of tolerable delay for this Oracle LiveSource in seconds.
-	// units = sec
-	// create = optional
 	// update = optional
 	// default = 900
+	// units = sec
+	// create = optional
 	DataAgeWarningThreshold *int `json:"dataAgeWarningThreshold,omitempty"`
 	// A user-provided description of the source.
 	Description string `json:"description,omitempty"`
@@ -10534,19 +10534,19 @@ type OracleLiveSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point to use for the NFS mounts.
 	// create = required
 	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
+	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
-	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -10557,27 +10557,27 @@ type OracleLiveSourceStruct struct {
 	// this Managed Database. Delphix picks one default listener from the
 	// target environment if this list is empty at virtual database
 	// provision time.
-	// update = optional
 	// create = optional
+	// update = optional
 	NodeListeners []string `json:"nodeListeners,omitempty"`
 	// User-specified operation hooks for this source.
 	// create = optional
 	// update = optional
 	Operations *VirtualSourceOperationsStruct `json:"operations,omitempty"`
 	// Number of Online Redo Log Groups.
-	// create = optional
-	// update = readonly
 	// minimum = 2
 	// default = 3
+	// create = optional
+	// update = readonly
 	RedoLogGroups *int `json:"redoLogGroups,omitempty"`
 	// Online Redo Log size in MB.
-	// update = readonly
 	// minimum = 4
 	// create = optional
+	// update = readonly
 	RedoLogSizeInMB *int `json:"redoLogSizeInMB,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Resync status for this Oracle LiveSource.
 	// enum = [RESYNC_NOT_REQUIRED RESYNC_NEEDED RESYNC_IN_PROGRESS APPLY_READY APPLY_IN_PROGRESS APPLY_FAILED]
@@ -10620,8 +10620,8 @@ type OracleLiveSourceRuntimeStruct struct {
 	// units = sec
 	CurrentDataAge *int `json:"currentDataAge,omitempty"`
 	// Operating mode of the database.
-	// enum = [READ_WRITE READ_ONLY STANDBY_READ_ONLY MOUNTED_ONLY UNKNOWN]
 	// default = UNKNOWN
+	// enum = [READ_WRITE READ_ONLY STANDBY_READ_ONLY MOUNTED_ONLY UNKNOWN]
 	DatabaseMode string `json:"databaseMode,omitempty"`
 	// The current role of the database.
 	// default = UNKNOWN
@@ -10727,15 +10727,15 @@ type OracleMultitenantProvisionParametersStruct struct {
 	Credential Credential `json:"credential,omitempty"`
 	// Whether or not to mark this VDB as a masked VDB. It will be marked
 	// as masked if this flag or the masking job are set.
-	// update = readonly
 	// create = optional
+	// update = readonly
 	Masked *bool `json:"masked,omitempty"`
 	// The Masking Job to be run when this dataset is provisioned or
 	// refreshed.
-	// referenceTo = /delphix-masking-job.json
-	// create = optional
 	// update = readonly
 	// format = objectReference
+	// referenceTo = /delphix-masking-job.json
+	// create = optional
 	MaskingJob string `json:"maskingJob,omitempty"`
 	// The pluggable database source that describes an external database
 	// instance.
@@ -10768,40 +10768,40 @@ type OracleNodeListenerStruct struct {
 	// The list of client endpoints for this listener of the format
 	// hostname:port. These are used when constructing the JDBC
 	// connection string.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	ClientEndpoints []string `json:"clientEndpoints,omitempty"`
 	// Whether this listener was automatically discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// Reference to the environment this listener is associated with.
-	// create = required
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
+	// create = required
 	Environment string `json:"environment,omitempty"`
 	// Reference to the host this listener is associated with.
+	// referenceTo = /delphix-host.json
 	// create = required
 	// format = objectReference
-	// referenceTo = /delphix-host.json
 	Host string `json:"host,omitempty"`
 	// Object name.
+	// create = required
 	// update = optional
 	// maxLength = 256
-	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The list of protocol addresses for this listener. These are used
 	// for the local_listener parameter when provisioning VDBs.
+	// update = optional
 	// minItems = 1
 	// create = required
-	// update = optional
 	ProtocolAddresses []string `json:"protocolAddresses,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -10834,9 +10834,9 @@ type OraclePDBAttachDataStruct struct {
 	// create = optional
 	CompressedLinkingEnabled *bool `json:"compressedLinkingEnabled,omitempty"`
 	// Reference to the configuration for the PDB source.
+	// format = objectReference
 	// referenceTo = /delphix-oracle-pdb-config.json
 	// required = true
-	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// The password for the DB user.
 	// required = true
@@ -10861,10 +10861,10 @@ type OraclePDBAttachDataStruct struct {
 	// create = optional
 	ExternalFilePath string `json:"externalFilePath,omitempty"`
 	// Number of data files to include in each RMAN backup set.
-	// default = 5
-	// create = optional
 	// minimum = 1
 	// maximum = 64
+	// default = 5
+	// create = optional
 	FilesPerSet *int `json:"filesPerSet,omitempty"`
 	// True if attach should succeed even if the resetlogs of the
 	// original database does not match the resetlogs of the new database
@@ -10878,8 +10878,8 @@ type OraclePDBAttachDataStruct struct {
 	// create = optional
 	Force *bool `json:"force,omitempty"`
 	// True if initial load should be done immediately.
-	// default = false
 	// create = optional
+	// default = false
 	LinkNow *bool `json:"linkNow,omitempty"`
 	// Total number of transport connections to use during SnapSync.
 	// default = 1
@@ -10908,19 +10908,19 @@ type OraclePDBAttachDataStruct struct {
 type OraclePDBConfigStruct struct {
 	// The DB config of an Oracle multitenant database this pluggable
 	// database belongs to.
+	// format = objectReference
 	// referenceTo = /delphix-oracle-db-config.json
 	// create = optional
 	// update = optional
-	// format = objectReference
 	CdbConfig string `json:"cdbConfig,omitempty"`
 	// The password of the database user. This must be a
 	// PasswordCredential instance.
 	// update = optional
 	Credentials *PasswordCredentialStruct `json:"credentials,omitempty"`
 	// The name of the database.
-	// maxLength = 30
 	// create = required
 	// pattern = ^[a-zA-Z0-9][a-zA-Z0-9_]*$
+	// maxLength = 30
 	DatabaseName string `json:"databaseName,omitempty"`
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
@@ -10949,10 +10949,10 @@ type OraclePDBConfigStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The object reference of the source repository.
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-repository.json
 	// create = optional
+	// update = optional
 	Repository string `json:"repository,omitempty"`
 	// The list of database services.
 	// create = optional
@@ -10989,8 +10989,8 @@ type OraclePDBLinkDataStruct struct {
 	// the network. Enabling this feature will reduce network bandwidth
 	// consumption and may significantly improve throughput, especially
 	// over slow network.
-	// create = optional
 	// default = true
+	// create = optional
 	CompressedLinkingEnabled *bool `json:"compressedLinkingEnabled,omitempty"`
 	// Reference to the configuration for the source.
 	// format = objectReference
@@ -11024,19 +11024,19 @@ type OraclePDBLinkDataStruct struct {
 	// create = optional
 	EncryptedLinkingEnabled *bool `json:"encryptedLinkingEnabled,omitempty"`
 	// Information about the OS user to use for linking.
-	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// required = true
+	// format = objectReference
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// External file path.
 	// maxLength = 1024
 	// create = optional
 	ExternalFilePath string `json:"externalFilePath,omitempty"`
 	// Number of data files to include in each RMAN backup set.
-	// minimum = 1
 	// maximum = 64
 	// default = 5
 	// create = optional
+	// minimum = 1
 	FilesPerSet *int `json:"filesPerSet,omitempty"`
 	// True if initial load should be done immediately.
 	// default = false
@@ -11067,8 +11067,8 @@ type OraclePDBLinkDataStruct struct {
 	// prevents SnapSync if insufficient space is available. This
 	// safeguard can be overridden using this option. This may be useful
 	// when linking highly compressible databases.
-	// create = optional
 	// default = false
+	// create = optional
 	SkipSpaceCheck *bool `json:"skipSpaceCheck,omitempty"`
 	// Policies for managing LogSync and SnapSync across sources.
 	// create = optional
@@ -11095,8 +11095,8 @@ type OraclePDBSourceRuntimeStruct struct {
 	// enum = [READ_WRITE READ_ONLY STANDBY_READ_ONLY MOUNTED_ONLY UNKNOWN]
 	DatabaseMode string `json:"databaseMode,omitempty"`
 	// The current role of the database.
-	// enum = [PHYSICAL_STANDBY LOGICAL_STANDBY SNAPSHOT_STANDBY FAR_SYNC PRIMARY UNKNOWN]
 	// default = UNKNOWN
+	// enum = [PHYSICAL_STANDBY LOGICAL_STANDBY SNAPSHOT_STANDBY FAR_SYNC PRIMARY UNKNOWN]
 	DatabaseRole string `json:"databaseRole,omitempty"`
 	// Size of the database in bytes.
 	// units = B
@@ -11127,8 +11127,8 @@ type OraclePDBSourceRuntimeStruct struct {
 // extends BasePlatformParameters
 type OraclePlatformParametersStruct struct {
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -11178,8 +11178,8 @@ type OracleProvisionParametersStruct struct {
 	SourceConfig OracleDBConfig `json:"sourceConfig,omitempty"`
 	// The TimeFlow point, bookmark, or semantic location to base
 	// provisioning on.
-	// properties = map[type:map[default:TimeflowPointSemantic]]
 	// required = true
+	// properties = map[type:map[default:TimeflowPointSemantic]]
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
 	// required = true
@@ -11195,9 +11195,9 @@ type OracleProvisionParametersStruct struct {
 // extends OracleDBConfig
 type OracleRACConfigStruct struct {
 	// The container type of this database.
+	// enum = [UNKNOWN ROOT_CDB NON_CDB AUX_CDB]
 	// create = readonly
 	// update = readonly
-	// enum = [UNKNOWN ROOT_CDB NON_CDB AUX_CDB]
 	CdbType string `json:"cdbType,omitempty"`
 	// The password of the database user. This must be a
 	// PasswordCredential instance.
@@ -11282,22 +11282,22 @@ type OracleRACConfigStruct struct {
 // extends OracleInstance
 type OracleRACInstanceStruct struct {
 	// The name of the instance.
-	// maxLength = 15
 	// create = required
 	// update = optional
 	// pattern = ^[a-zA-Z0-9_]+$
+	// maxLength = 15
 	InstanceName string `json:"instanceName,omitempty"`
 	// The number of the instance.
-	// create = required
 	// update = optional
 	// minimum = 1
+	// create = required
 	InstanceNumber float64 `json:"instanceNumber,omitempty"`
 	// Reference to the Oracle cluster node that the RAC instance is
 	// running on.
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-oracle-cluster-node.json
 	// create = required
+	// update = optional
 	Node string `json:"node,omitempty"`
 	// Object type.
 	// required = true
@@ -11326,8 +11326,8 @@ type OracleRACSourceConnectionInfoStruct struct {
 	// clusters only).
 	Scan string `json:"scan,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// The database version string.
 	Version string `json:"version,omitempty"`
@@ -11342,10 +11342,10 @@ type OracleRedoLogFileSpecificationStruct struct {
 	// update = optional
 	Filename string `json:"filename,omitempty"`
 	// The size of the log file in MB.
-	// minimum = 100
-	// default = 100
 	// create = optional
 	// update = optional
+	// minimum = 100
+	// default = 100
 	Size *int `json:"size,omitempty"`
 	// Object type.
 	// required = true
@@ -11405,9 +11405,9 @@ type OracleSIConfigStruct struct {
 	// update = optional
 	Credentials *PasswordCredentialStruct `json:"credentials,omitempty"`
 	// The name of the database.
+	// create = required
 	// pattern = ^[a-zA-Z0-9_$#]+$
 	// maxLength = 8
-	// create = required
 	DatabaseName string `json:"databaseName,omitempty"`
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
@@ -11422,23 +11422,23 @@ type OracleSIConfigStruct struct {
 	// update = optional
 	Instance *OracleInstanceStruct `json:"instance,omitempty"`
 	// Whether this source should be used for linking.
-	// create = optional
 	// update = optional
 	// default = true
+	// create = optional
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Object name.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The password of a database user that does not have administrative
 	// privileges.
-	// update = optional
 	// create = optional
+	// update = optional
 	NonSysCredentials string `json:"nonSysCredentials,omitempty"`
 	// The username of a database user that does not have administrative
 	// privileges.
@@ -11461,8 +11461,8 @@ type OracleSIConfigStruct struct {
 	// update = optional
 	Services []*OracleServiceStruct `json:"services,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The unique name.
 	// create = required
@@ -11488,8 +11488,8 @@ type OracleSISourceConnectionInfoStruct struct {
 	// The Oracle installation home.
 	OracleHome string `json:"oracleHome,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// The database version string.
 	Version string `json:"version,omitempty"`
@@ -11518,18 +11518,18 @@ type OracleScanListenerStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The list of protocol addresses for this listener. These are used
 	// for the local_listener parameter when provisioning VDBs.
+	// minItems = 1
 	// create = required
 	// update = optional
-	// minItems = 1
 	ProtocolAddresses []string `json:"protocolAddresses,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -11543,9 +11543,9 @@ type OracleServiceStruct struct {
 	// Whether this service was automatically discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The connection string used to connect to JDBC.
+	// update = optional
 	// format = oracleJDBCConnectionString
 	// create = required
-	// update = optional
 	JdbcConnectionString string `json:"jdbcConnectionString,omitempty"`
 	// Object type.
 	// required = true
@@ -11575,8 +11575,8 @@ type OracleSnapshotStruct struct {
 	// snapshot.
 	FractionTimeflows []string `json:"fractionTimeflows,omitempty"`
 	// True if this snapshot was taken of a standby database.
-	// default = false
 	// create = optional
+	// default = false
 	FromPhysicalStandbyVdb *bool `json:"fromPhysicalStandbyVdb,omitempty"`
 	// The location of the snapshot within the parent TimeFlow
 	// represented by this snapshot.
@@ -11585,13 +11585,13 @@ type OracleSnapshotStruct struct {
 	// this snapshot will be missing nologging changes.
 	MissingNonLoggedData *bool `json:"missingNonLoggedData,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// Online redo log size in bytes when this snapshot was taken.
 	// create = optional
@@ -11732,14 +11732,14 @@ type OracleStagingSourceStruct struct {
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional database template to use for provisioning and refresh. If
 	// set, configParams will be ignored on provision or refresh.
-	// referenceTo = /delphix-database-template.json
-	// create = optional
 	// update = optional
 	// format = objectReference
+	// referenceTo = /delphix-database-template.json
+	// create = optional
 	ConfigTemplate string `json:"configTemplate,omitempty"`
 	// Reference to the container being fed by this source, if any.
-	// referenceTo = /delphix-container.json
 	// format = objectReference
+	// referenceTo = /delphix-container.json
 	Container string `json:"container,omitempty"`
 	// A user-provided description of the source.
 	Description string `json:"description,omitempty"`
@@ -11752,13 +11752,13 @@ type OracleStagingSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point to use for the NFS mounts.
-	// maxLength = 256
 	// create = required
+	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
 	// format = objectName
@@ -11779,8 +11779,8 @@ type OracleStagingSourceStruct struct {
 	// update = optional
 	NodeListeners []string `json:"nodeListeners,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Runtime properties for this Oracle source.
 	Runtime OracleBaseSourceRuntime `json:"runtime,omitempty"`
@@ -11792,8 +11792,8 @@ type OracleStagingSourceStruct struct {
 	// enum = [DEFAULT PENDING_UPGRADE]
 	Status string `json:"status,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Flag indicating whether the source is a virtual source in the
 	// Delphix system.
@@ -11804,32 +11804,32 @@ type OracleStagingSourceStruct struct {
 // extends TypedObject
 type OracleStagingSourceParametersStruct struct {
 	// Oracle database configuration parameter overrides.
-	// create = optional
 	// update = optional
+	// create = optional
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional database template to use for staging database creation.
 	// If set, configParams will be ignored.
-	// create = optional
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-database-template.json
-	ConfigTemplate string `json:"configTemplate,omitempty"`
-	// The user used to create and manage the configuration.
-	// format = objectReference
-	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
 	// update = optional
+	ConfigTemplate string `json:"configTemplate,omitempty"`
+	// The user used to create and manage the configuration.
+	// create = optional
+	// update = optional
+	// format = objectReference
+	// referenceTo = /delphix-source-environment-user.json
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// The base mount point to use for the NFS mounts.
-	// maxLength = 256
 	// create = required
+	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// The object reference of the source repository that will host the
 	// LogSync staging database.
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-oracle-install.json
 	// create = required
+	// update = optional
 	Repository string `json:"repository,omitempty"`
 	// Object type.
 	// required = true
@@ -11881,15 +11881,15 @@ type OracleSyncParametersStruct struct {
 	// datafiles even if already completed from previous failed SnapSync.
 	// This does not force a full backup, if an incremental was in
 	// progress this will start a new incremental snapshot.
-	// create = optional
 	// default = false
+	// create = optional
 	DoNotResume *bool `json:"doNotResume,omitempty"`
 	// True if two SnapSyncs should be performed in immediate succession
 	// to reduce the number of logs required to provision the snapshot.
 	// This may significantly reduce the time necessary to provision from
 	// a snapshot.
-	// default = false
 	// create = optional
+	// default = false
 	DoubleSync *bool `json:"doubleSync,omitempty"`
 	// Whether or not to take another full backup of the source database.
 	// default = false
@@ -11921,13 +11921,13 @@ type OracleSysauxDatafileSpecificationStruct struct {
 	// The size in MB of the next increment of disk space to be allocated
 	// automatically when more extents are required. The default is the
 	// size of one data block.
-	// update = optional
 	// create = optional
+	// update = optional
 	AutoExtendIncrement *int `json:"autoExtendIncrement,omitempty"`
 	// The name of the data file, temporary file, or redo log.
+	// pattern = ^[a-zA-Z0-9_\-\.]+$
 	// create = optional
 	// update = optional
-	// pattern = ^[a-zA-Z0-9_\-\.]+$
 	Filename string `json:"filename,omitempty"`
 	// The maximum disk space allowed for automatic extension of the
 	// datafile. Omit this if you do not want to limit the disk space
@@ -11936,10 +11936,10 @@ type OracleSysauxDatafileSpecificationStruct struct {
 	// update = optional
 	MaxSize *int `json:"maxSize,omitempty"`
 	// The size of the file in MB.
-	// default = 900
 	// create = optional
 	// update = optional
 	// minimum = 900
+	// default = 900
 	Size *int `json:"size,omitempty"`
 	// Object type.
 	// required = true
@@ -11952,9 +11952,9 @@ type OracleSysauxDatafileSpecificationStruct struct {
 type OracleSystemDatafileSpecificationStruct struct {
 	// Enable or disable the automatic extension of a new or existing
 	// datafile or tempfile.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	AutoExtend *bool `json:"autoExtend,omitempty"`
 	// The size in MB of the next increment of disk space to be allocated
 	// automatically when more extents are required. The default is the
@@ -11970,14 +11970,14 @@ type OracleSystemDatafileSpecificationStruct struct {
 	// The maximum disk space allowed for automatic extension of the
 	// datafile. Omit this if you do not want to limit the disk space
 	// that Oracle can allocate to the datafile or tempfile.
-	// update = optional
 	// create = optional
+	// update = optional
 	MaxSize *int `json:"maxSize,omitempty"`
 	// The size of the file in MB.
-	// create = optional
 	// update = optional
 	// minimum = 700
 	// default = 700
+	// create = optional
 	Size *int `json:"size,omitempty"`
 	// Object type.
 	// required = true
@@ -12001,9 +12001,9 @@ type OracleTempfileSpecificationStruct struct {
 	// update = optional
 	AutoExtendIncrement *int `json:"autoExtendIncrement,omitempty"`
 	// The name of the data file, temporary file, or redo log.
+	// pattern = ^[a-zA-Z0-9_\-\.]+$
 	// create = optional
 	// update = optional
-	// pattern = ^[a-zA-Z0-9_\-\.]+$
 	Filename string `json:"filename,omitempty"`
 	// The maximum disk space allowed for automatic extension of the
 	// datafile. Omit this if you do not want to limit the disk space
@@ -12012,10 +12012,10 @@ type OracleTempfileSpecificationStruct struct {
 	// update = optional
 	MaxSize *int `json:"maxSize,omitempty"`
 	// The size of the file in MB.
+	// default = 300
 	// create = optional
 	// update = optional
 	// minimum = 300
-	// default = 300
 	Size *int `json:"size,omitempty"`
 	// Object type.
 	// required = true
@@ -12047,8 +12047,8 @@ type OracleTimeflowStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The origin point on the parent TimeFlow from which this TimeFlow
 	// was provisioned. This will not be present for TimeFlows derived
@@ -12066,8 +12066,8 @@ type OracleTimeflowStruct struct {
 	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Set to true if the TimeFlow represents a warehouse.
 	// featureFlag = CONSPRO
@@ -12092,8 +12092,8 @@ type OracleTimeflowPointStruct struct {
 	// referenceTo = /delphix-oracle-timeflow.json
 	Timeflow string `json:"timeflow,omitempty"`
 	// The logical time corresponding to the TimeFlow location.
-	// create = optional
 	// format = date
+	// create = optional
 	Timestamp string `json:"timestamp,omitempty"`
 	// Object type.
 	// required = true
@@ -12106,9 +12106,9 @@ type OracleTimeflowPointStruct struct {
 type OracleUndoDatafileSpecificationStruct struct {
 	// Enable or disable the automatic extension of a new or existing
 	// datafile or tempfile.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	AutoExtend *bool `json:"autoExtend,omitempty"`
 	// The size in MB of the next increment of disk space to be allocated
 	// automatically when more extents are required. The default is the
@@ -12128,10 +12128,10 @@ type OracleUndoDatafileSpecificationStruct struct {
 	// update = optional
 	MaxSize *int `json:"maxSize,omitempty"`
 	// The size of the file in MB.
-	// default = 300
 	// create = optional
 	// update = optional
 	// minimum = 300
+	// default = 300
 	Size *int `json:"size,omitempty"`
 	// Object type.
 	// required = true
@@ -12186,14 +12186,14 @@ type OracleVirtualCdbSourceStruct struct {
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional database template to use for provisioning and refresh. If
 	// set, configParams will be ignored on provision or refresh.
-	// format = objectReference
 	// referenceTo = /delphix-database-template.json
 	// create = optional
 	// update = optional
+	// format = objectReference
 	ConfigTemplate string `json:"configTemplate,omitempty"`
 	// Reference to the container being fed by this source, if any.
-	// referenceTo = /delphix-container.json
 	// format = objectReference
+	// referenceTo = /delphix-container.json
 	Container string `json:"container,omitempty"`
 	// Custom environment variables for Oracle databases. These can only
 	// be set at the PDB level. Delphix applies the PDB setting to the
@@ -12222,14 +12222,14 @@ type OracleVirtualCdbSourceStruct struct {
 	// create = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point to use for the NFS mounts.
-	// create = required
 	// maxLength = 256
+	// create = required
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -12315,9 +12315,9 @@ type OracleVirtualPdbSourceStruct struct {
 	// update = readonly
 	ArchivelogMode *bool `json:"archivelogMode,omitempty"`
 	// Reference to the configuration for the source.
-	// format = objectReference
 	// referenceTo = /delphix-source-config.json
 	// create = optional
+	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// Oracle database configuration parameter overrides. This is
 	// currently not supported for pluggable databases.
@@ -12327,10 +12327,10 @@ type OracleVirtualPdbSourceStruct struct {
 	// Optional database template to use for provisioning and refresh. If
 	// set, configParams will be ignored on provision or refresh. This is
 	// currently not supported for pluggable databases.
+	// update = readonly
 	// format = objectReference
 	// referenceTo = /delphix-database-template.json
 	// create = readonly
-	// update = readonly
 	ConfigTemplate string `json:"configTemplate,omitempty"`
 	// Reference to the container being fed by this source, if any.
 	// format = objectReference
@@ -12363,10 +12363,10 @@ type OracleVirtualPdbSourceStruct struct {
 	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -12386,13 +12386,13 @@ type OracleVirtualPdbSourceStruct struct {
 	Operations *VirtualSourceOperationsStruct `json:"operations,omitempty"`
 	// Number of Online Redo Log Groups. This is not applicable to
 	// pluggable databases.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	RedoLogGroups *int `json:"redoLogGroups,omitempty"`
 	// Online Redo Log size in MB. This is not applicable to pluggable
 	// databases.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	RedoLogSizeInMB *int `json:"redoLogSizeInMB,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -12421,8 +12421,8 @@ type OracleVirtualPdbSourceStruct struct {
 type OracleVirtualSourceStruct struct {
 	// Indicates whether Delphix should automatically restart this
 	// virtual source when target host reboot is detected.
-	// create = required
 	// update = optional
+	// create = required
 	AllowAutoVDBRestartOnHostReboot *bool `json:"allowAutoVDBRestartOnHostReboot,omitempty"`
 	// Archive Log Mode of the Oracle virtual database.
 	// create = optional
@@ -12430,9 +12430,9 @@ type OracleVirtualSourceStruct struct {
 	// default = true
 	ArchivelogMode *bool `json:"archivelogMode,omitempty"`
 	// Reference to the configuration for the source.
-	// format = objectReference
 	// referenceTo = /delphix-source-config.json
 	// create = optional
+	// format = objectReference
 	Config string `json:"config,omitempty"`
 	// Oracle database configuration parameter overrides.
 	// create = optional
@@ -12440,10 +12440,10 @@ type OracleVirtualSourceStruct struct {
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional database template to use for provisioning and refresh. If
 	// set, configParams will be ignored on provision or refresh.
+	// format = objectReference
 	// referenceTo = /delphix-database-template.json
 	// create = optional
 	// update = optional
-	// format = objectReference
 	ConfigTemplate string `json:"configTemplate,omitempty"`
 	// Reference to the container being fed by this source, if any.
 	// format = objectReference
@@ -12467,19 +12467,19 @@ type OracleVirtualSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// update = optional
 	// default = false
 	// create = optional
-	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point to use for the NFS mounts.
 	// create = required
 	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -12498,10 +12498,10 @@ type OracleVirtualSourceStruct struct {
 	// update = optional
 	Operations *VirtualSourceOperationsStruct `json:"operations,omitempty"`
 	// Number of Online Redo Log Groups.
+	// create = optional
 	// update = readonly
 	// minimum = 2
 	// default = 3
-	// create = optional
 	RedoLogGroups *int `json:"redoLogGroups,omitempty"`
 	// Online Redo Log size in MB.
 	// create = optional
@@ -12535,18 +12535,18 @@ type OracleVirtualSourceStruct struct {
 type OracleWarehouseSourceStruct struct {
 	// Indicates whether Delphix should automatically restart this
 	// virtual source when target host reboot is detected.
-	// update = optional
 	// create = required
+	// update = optional
 	AllowAutoVDBRestartOnHostReboot *bool `json:"allowAutoVDBRestartOnHostReboot,omitempty"`
 	// Archive Log Mode of the Oracle virtual database.
-	// create = optional
 	// update = readonly
 	// default = true
+	// create = optional
 	ArchivelogMode *bool `json:"archivelogMode,omitempty"`
 	// Reference to the configuration for the source.
+	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-config.json
-	// create = optional
 	Config string `json:"config,omitempty"`
 	// Oracle database configuration parameter overrides.
 	// create = optional
@@ -12554,18 +12554,18 @@ type OracleWarehouseSourceStruct struct {
 	ConfigParams map[string]string `json:"configParams,omitempty"`
 	// Optional database template to use for provisioning and refresh. If
 	// set, configParams will be ignored on provision or refresh.
-	// format = objectReference
-	// referenceTo = /delphix-database-template.json
 	// create = optional
 	// update = optional
+	// format = objectReference
+	// referenceTo = /delphix-database-template.json
 	ConfigTemplate string `json:"configTemplate,omitempty"`
 	// Reference to the container being fed by this source, if any.
 	// format = objectReference
 	// referenceTo = /delphix-container.json
 	Container string `json:"container,omitempty"`
 	// Custom environment variables for Oracle databases.
-	// create = optional
 	// update = optional
+	// create = optional
 	CustomEnvVars []OracleCustomEnvVar `json:"customEnvVars,omitempty"`
 	// A user-provided description of the source.
 	Description string `json:"description,omitempty"`
@@ -12581,24 +12581,24 @@ type OracleWarehouseSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// update = optional
 	// default = false
 	// create = optional
-	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point to use for the NFS mounts.
 	// create = required
 	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// A list of object references to Oracle Node Listeners selected for
 	// this Managed Database. Delphix picks one default listener from the
@@ -12608,14 +12608,14 @@ type OracleWarehouseSourceStruct struct {
 	// update = optional
 	NodeListeners []string `json:"nodeListeners,omitempty"`
 	// User-specified operation hooks for this source.
-	// create = optional
 	// update = optional
+	// create = optional
 	Operations *VirtualSourceOperationsStruct `json:"operations,omitempty"`
 	// Number of Online Redo Log Groups.
-	// minimum = 2
-	// default = 3
 	// create = optional
 	// update = readonly
+	// minimum = 2
+	// default = 3
 	RedoLogGroups *int `json:"redoLogGroups,omitempty"`
 	// Online Redo Log size in MB.
 	// create = optional
@@ -12671,20 +12671,20 @@ type PasswordPolicyStruct struct {
 	// update = optional
 	DisallowUsernameAsPassword *bool `json:"disallowUsernameAsPassword,omitempty"`
 	// True if password must contain at least one lowercase letter.
-	// update = optional
 	// create = required
+	// update = optional
 	LowercaseLetter *bool `json:"lowercaseLetter,omitempty"`
 	// Minimum length for the password.
+	// update = optional
 	// minimum = 1
 	// maximum = 128
 	// create = required
-	// update = optional
 	MinLength *int `json:"minLength,omitempty"`
 	// Name of password policy.
-	// create = required
 	// update = optional
 	// minLength = 1
 	// maxLength = 64
+	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -12696,10 +12696,10 @@ type PasswordPolicyStruct struct {
 	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// The password may not be the same as any of previous n passwords.
-	// maximum = 1
-	// create = required
 	// update = optional
 	// minimum = 0
+	// maximum = 1
+	// create = required
 	ReuseDisallowLimit *int `json:"reuseDisallowLimit,omitempty"`
 	// True if password must contain at least one symbol.
 	// create = required
@@ -12739,8 +12739,8 @@ type PemCertificateStruct struct {
 	// required = true
 	Contents string `json:"contents,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -12763,13 +12763,13 @@ type PermissionStruct struct {
 	// Name of the action governed by the permission.
 	ActionType string `json:"actionType,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -12810,15 +12810,15 @@ type PgSQLAttachDataStruct struct {
 	Operations *LinkedSourceOperationsStruct `json:"operations,omitempty"`
 	// Information about the host OS user on the PPT host to use for
 	// linking.
-	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
+	// create = optional
 	PptHostUser string `json:"pptHostUser,omitempty"`
 	// The Postgres installation on the PPT environment that will be used
 	// for pre-provisioning.
+	// format = objectReference
 	// referenceTo = /delphix-pgsql-install.json
 	// required = true
-	// format = objectReference
 	PptRepository string `json:"pptRepository,omitempty"`
 	// Object type.
 	// required = true
@@ -12834,8 +12834,8 @@ type PgSQLCompatibilityCriteriaStruct struct {
 	// architecture (32-bit or 64-bit).
 	Architecture *int `json:"architecture,omitempty"`
 	// Selected repositories are installed on this environment.
-	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
+	// format = objectReference
 	Environment string `json:"environment,omitempty"`
 	// Selected repositories are installed on a host with this OS.
 	// enum = [Linux AIX HPUX SunOS Windows]
@@ -12920,15 +12920,15 @@ type PgSQLDBClusterConfigStruct struct {
 	// Whether this source was discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// The user used to create and manage the configuration.
+	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
 	// create = optional
 	// update = optional
-	// format = objectReference
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Whether this source should be used for linking.
+	// default = true
 	// create = optional
 	// update = optional
-	// default = true
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Object name.
 	// create = readonly
@@ -12941,10 +12941,10 @@ type PgSQLDBClusterConfigStruct struct {
 	Namespace string `json:"namespace,omitempty"`
 	// The port on which the PostgresSQL server for the cluster is
 	// listening.
+	// minimum = 1
 	// maximum = 65535
 	// create = required
 	// update = optional
-	// minimum = 1
 	Port *int `json:"port,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -13035,13 +13035,13 @@ type PgSQLDatabaseContainerStruct struct {
 	// format = date
 	CreationTime string `json:"creationTime,omitempty"`
 	// A reference to the currently active TimeFlow for this container.
-	// referenceTo = /delphix-timeflow.json
 	// format = objectReference
+	// referenceTo = /delphix-timeflow.json
 	CurrentTimeflow string `json:"currentTimeflow,omitempty"`
 	// Optional user-provided description for the container.
+	// maxLength = 1024
 	// create = optional
 	// update = optional
-	// maxLength = 1024
 	Description string `json:"description,omitempty"`
 	// A reference to the group containing this container.
 	// format = objectReference
@@ -13069,8 +13069,8 @@ type PgSQLDatabaseContainerStruct struct {
 	// update = readonly
 	PerformanceMode string `json:"performanceMode,omitempty"`
 	// A reference to the previous TimeFlow for this container.
-	// format = objectReference
 	// referenceTo = /delphix-timeflow.json
+	// format = objectReference
 	PreviousTimeflow string `json:"previousTimeflow,omitempty"`
 	// Native processor type of the original database source system.
 	Processor string `json:"processor,omitempty"`
@@ -13079,8 +13079,8 @@ type PgSQLDatabaseContainerStruct struct {
 	// referenceTo = /delphix-container.json
 	ProvisionContainer string `json:"provisionContainer,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Runtime properties of this container.
 	Runtime *PgSQLDBContainerRuntimeStruct `json:"runtime,omitempty"`
@@ -13091,8 +13091,8 @@ type PgSQLDatabaseContainerStruct struct {
 	// True if this container is a transformation container.
 	Transformation *bool `json:"transformation,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -13162,9 +13162,9 @@ type PgSQLHBAEntryStruct struct {
 	// format = type
 	Type string `json:"type,omitempty"`
 	// The database username this entry matches.
+	// default = all
 	// create = required
 	// maxLength = 63
-	// default = all
 	User string `json:"user,omitempty"`
 }
 
@@ -13198,22 +13198,22 @@ type PgSQLInstallStruct struct {
 	// manually entered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// Reference to the environment containing this repository.
-	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
 	// create = required
+	// format = objectReference
 	Environment string `json:"environment,omitempty"`
 	// Directory path where the installation is located.
 	// create = required
 	// maxLength = 1024
 	InstallationPath string `json:"installationPath,omitempty"`
 	// Flag indicating whether the repository should be used for linking.
-	// default = true
 	// create = optional
 	// update = optional
+	// default = true
 	LinkingEnabled *bool `json:"linkingEnabled,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -13283,15 +13283,15 @@ type PgSQLLinkDataStruct struct {
 	Operations *LinkedSourceOperationsStruct `json:"operations,omitempty"`
 	// Information about the host OS user on the PPT host to use for
 	// linking.
+	// create = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment-user.json
-	// create = optional
 	PptHostUser string `json:"pptHostUser,omitempty"`
 	// The Postgres installation on the PPT environment that will be used
 	// for pre-provisioning.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-pgsql-install.json
-	// required = true
 	PptRepository string `json:"pptRepository,omitempty"`
 	// Policies for managing LogSync and SnapSync across sources.
 	// create = optional
@@ -13311,15 +13311,15 @@ type PgSQLLinkedSourceStruct struct {
 	// create = optional
 	Config string `json:"config,omitempty"`
 	// Reference to the container being fed by this source, if any.
-	// format = objectReference
 	// referenceTo = /delphix-container.json
+	// format = objectReference
 	Container string `json:"container,omitempty"`
 	// A user-provided description of the source.
 	Description string `json:"description,omitempty"`
 	// The external file path.
+	// maxLength = 1024
 	// create = optional
 	// update = optional
-	// maxLength = 1024
 	ExternalFilePath string `json:"externalFilePath,omitempty"`
 	// Hosts that might affect operations on this source. Property will
 	// be null unless the includeHosts parameter is set when listing
@@ -13335,10 +13335,10 @@ type PgSQLLinkedSourceStruct struct {
 	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -13350,8 +13350,8 @@ type PgSQLLinkedSourceStruct struct {
 	// update = optional
 	Operations *LinkedSourceOperationsStruct `json:"operations,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Runtime properties of this source.
 	Runtime *PgSQLSourceRuntimeStruct `json:"runtime,omitempty"`
@@ -13383,8 +13383,8 @@ type PgSQLPlatformParametersStruct struct {
 	// transformation application. This port must be available when the
 	// transformation is applied so that the temporary VDB created during
 	// the transformation process can start and listen to this port.
-	// maximum = 65535
 	// minimum = 1
+	// maximum = 65535
 	Port *int `json:"port,omitempty"`
 	// Object type.
 	// required = true
@@ -13452,8 +13452,8 @@ type PgSQLSnapshotStruct struct {
 	// this snapshot will be missing nologging changes.
 	MissingNonLoggedData *bool `json:"missingNonLoggedData,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -13474,8 +13474,8 @@ type PgSQLSnapshotStruct struct {
 	// state and should not be user visible.
 	Temporary *bool `json:"temporary,omitempty"`
 	// TimeFlow of which this snapshot is a part.
-	// format = objectReference
 	// referenceTo = /delphix-timeflow.json
+	// format = objectReference
 	Timeflow string `json:"timeflow,omitempty"`
 	// Time zone of the source database at the time the snapshot was
 	// taken.
@@ -13564,19 +13564,19 @@ type PgSQLStagingSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point for the NFS mounts on the pre-provisioning
 	// host.
 	// maxLength = 256
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// update = optional
 	// maxLength = 256
 	// format = objectName
 	// create = optional
+	// update = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -13629,9 +13629,9 @@ type PgSQLTimeflowStruct struct {
 	// enum = [INITIAL INDETERMINATE REFRESH ROLLBACK TEMPORARY TRANSFORMATION V2P PDB_PLUG WAREHOUSE ORACLE_LIVE_SOURCE_RESYNC SOURCE_CONTINUITY]
 	CreationType string `json:"creationType,omitempty"`
 	// Object name.
-	// create = required
 	// update = optional
 	// maxLength = 256
+	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -13666,13 +13666,13 @@ type PgSQLTimeflowPointStruct struct {
 	// create = optional
 	Location string `json:"location,omitempty"`
 	// Reference to TimeFlow containing this point.
-	// referenceTo = /delphix-pgsql-timeflow.json
 	// required = true
 	// format = objectReference
+	// referenceTo = /delphix-pgsql-timeflow.json
 	Timeflow string `json:"timeflow,omitempty"`
 	// The logical time corresponding to the TimeFlow location.
-	// format = date
 	// create = optional
+	// format = date
 	Timestamp string `json:"timestamp,omitempty"`
 	// Object type.
 	// required = true
@@ -13721,19 +13721,19 @@ type PgSQLVirtualSourceStruct struct {
 	Linked *bool `json:"linked,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source.
-	// update = optional
 	// default = false
 	// create = optional
+	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// The base mount point to use for the NFS mounts.
 	// maxLength = 256
 	// create = required
 	MountBase string `json:"mountBase,omitempty"`
 	// Object name.
-	// update = optional
-	// maxLength = 256
 	// format = objectName
 	// create = optional
+	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -13789,8 +13789,8 @@ type PolicyApplyTargetParametersStruct struct {
 	// Object references of the targets.
 	Targets []string `json:"targets,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -13801,9 +13801,9 @@ type PolicyCreateAndApplyParametersStruct struct {
 	// required = true
 	Policy Policy `json:"policy,omitempty"`
 	// Object reference of the target.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-user-object.json
-	// required = true
 	Target string `json:"target,omitempty"`
 	// Object type.
 	// required = true
@@ -13823,9 +13823,9 @@ type PopulateCompatibilityParametersStruct struct {
 	Environment string `json:"environment,omitempty"`
 	// The warehouse repository to use as a source of compatibility
 	// information.
+	// required = true
 	// format = objectReference
 	// referenceTo = /delphix-source-repository.json
-	// required = true
 	SourceRepository string `json:"sourceRepository,omitempty"`
 	// Object type.
 	// required = true
@@ -13849,8 +13849,8 @@ type PreProvisioningRuntimeStruct struct {
 	// The status of the pre-provisioning run.
 	Status string `json:"status,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -13909,12 +13909,12 @@ type ProxyConfigurationStruct struct {
 // cliVisibility = [SYSTEM]
 type ProxyServiceStruct struct {
 	// HTTPS proxy configuration.
-	// required = false
 	// update = optional
+	// required = false
 	Https *ProxyConfigurationStruct `json:"https,omitempty"`
 	// SOCKS proxy configuration.
-	// update = optional
 	// required = false
+	// update = optional
 	Socks *ProxyConfigurationStruct `json:"socks,omitempty"`
 	// Object type.
 	// required = true
@@ -14002,10 +14002,10 @@ type PurgeLogsParametersStruct struct {
 	// required = true
 	DryRun *bool `json:"dryRun,omitempty"`
 	// Amount of space in bytes to reclaim as part of purgeLogs process.
-	// required = true
 	// minimum = 1
 	// units = B
 	// base = 1024
+	// required = true
 	StorageSpaceToReclaim float64 `json:"storageSpaceToReclaim,omitempty"`
 	// Object type.
 	// required = true
@@ -14059,15 +14059,15 @@ type QuotaPolicyStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Size of the quota, in bytes.
+	// base = 1024
+	// create = required
 	// update = optional
 	// minimum = 1
 	// units = B
-	// base = 1024
-	// create = required
 	Size float64 `json:"size,omitempty"`
 	// Object type.
 	// required = true
@@ -14120,9 +14120,9 @@ type RefreshPolicyStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// Provision source, either the latest time or latest snapshot.
-	// enum = [LATEST_SNAPSHOT LATEST_TIME_FLOW_LOG]
 	// create = required
 	// update = optional
+	// enum = [LATEST_SNAPSHOT LATEST_TIME_FLOW_LOG]
 	ProvisionSource string `json:"provisionSource,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -14153,8 +14153,8 @@ type RegistrationInfoStruct struct {
 	// The registration portal hostname.
 	RegistrationPortalHostname string `json:"registrationPortalHostname,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// The UUID for this Delphix Engine.
 	Uuid string `json:"uuid,omitempty"`
@@ -14230,15 +14230,15 @@ type RemoteDelphixEngineInfoStruct struct {
 // extends ReplicationObjectSpecification
 type ReplicationListStruct struct {
 	// Object name.
-	// update = optional
-	// maxLength = 256
 	// format = objectName
 	// create = optional
+	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// Objects to replicate, in canonical object reference form.
 	// minItems = 1
@@ -14264,15 +14264,15 @@ type ReplicationSecureListStruct struct {
 	// update = optional
 	Containers []string `json:"containers,omitempty"`
 	// Object name.
+	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
-	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -14294,8 +14294,8 @@ type ReplicationSourceStateStruct struct {
 	ActivePoint string `json:"activePoint,omitempty"`
 	// The last serialization point sent. This can be null prior to the
 	// first replication run.
-	// referenceTo = /delphix-serialization-point.json
 	// format = objectReference
+	// referenceTo = /delphix-serialization-point.json
 	LastPoint string `json:"lastPoint,omitempty"`
 	// Object name.
 	// format = objectName
@@ -14334,15 +14334,15 @@ type ReplicationSpecStruct struct {
 	AutomaticReplication *bool `json:"automaticReplication,omitempty"`
 	// Bandwidth limit (MB/s) for replication network traffic. A value of
 	// 0 means no limit.
+	// minimum = 0
 	// create = optional
 	// update = optional
 	// default = 0
-	// minimum = 0
 	BandwidthLimit *int `json:"bandwidthLimit,omitempty"`
 	// Description of this replication spec.
+	// create = optional
 	// update = optional
 	// maxLength = 4096
-	// create = optional
 	Description string `json:"description,omitempty"`
 	// Encrypt replication network traffic.
 	// create = optional
@@ -14350,10 +14350,10 @@ type ReplicationSpecStruct struct {
 	// default = false
 	Encrypted *bool `json:"encrypted,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -14361,11 +14361,11 @@ type ReplicationSpecStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// Total number of transport connections to use.
-	// maximum = 16
 	// create = optional
 	// update = optional
 	// default = 1
 	// minimum = 1
+	// maximum = 16
 	NumberOfConnections *int `json:"numberOfConnections,omitempty"`
 	// Specification of the objects to replicate.
 	// create = required
@@ -14392,16 +14392,16 @@ type ReplicationSpecStruct struct {
 	// update = optional
 	TargetCredential *PasswordCredentialStruct `json:"targetCredential,omitempty"`
 	// Replication target host address.
+	// format = host
 	// create = required
 	// update = optional
-	// format = host
 	TargetHost string `json:"targetHost,omitempty"`
 	// Target TCP port number for the Delphix Session Protocol.
-	// create = optional
 	// update = optional
 	// minimum = 0
 	// maximum = 65535
 	// default = 8415
+	// create = optional
 	TargetPort *int `json:"targetPort,omitempty"`
 	// Principal name used to authenticate to the replication target
 	// host.
@@ -14414,9 +14414,9 @@ type ReplicationSpecStruct struct {
 	Type string `json:"type,omitempty"`
 	// Connect to the replication target host via the system-wide SOCKS
 	// proxy.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	UseSystemSocksSetting *bool `json:"useSystemSocksSetting,omitempty"`
 }
 
@@ -14448,8 +14448,8 @@ type ReplicationTargetStateStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -14465,8 +14465,8 @@ type ResetIgnoredFaultsParametersStruct struct {
 	// required = true
 	FaultReferences []string `json:"faultReferences,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -14479,12 +14479,12 @@ type ResolveOrIgnoreSelectedFaultsParametersStruct struct {
 	FaultReferences []string `json:"faultReferences,omitempty"`
 	// Flag indicating whether to ignore the selected faults if they are
 	// detected on the same objects in the future.
-	// default = false
 	// required = true
+	// default = false
 	Ignore *bool `json:"ignore,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -14493,8 +14493,8 @@ type ResolveOrIgnoreSelectedFaultsParametersStruct struct {
 type RetentionPolicyStruct struct {
 	// True if this policy is customized specifically for one object.
 	// Customized policies cannot be shared between objects.
-	// create = optional
 	// default = false
+	// create = optional
 	Customized *bool `json:"customized,omitempty"`
 	// Amount of time (in dataUnit units) to keep source data.
 	// create = optional
@@ -14510,9 +14510,9 @@ type RetentionPolicyStruct struct {
 	// update = optional
 	DayOfMonth *int `json:"dayOfMonth,omitempty"`
 	// Day of week upon which to enforce weekly snapshot retention.
+	// enum = [MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY SUNDAY]
 	// create = optional
 	// update = optional
-	// enum = [MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY SUNDAY]
 	DayOfWeek string `json:"dayOfWeek,omitempty"`
 	// Day of year upon which to enforce yearly snapshot retention,
 	// expressed a month / day string (e.g., "Jan 1").
@@ -14537,10 +14537,10 @@ type RetentionPolicyStruct struct {
 	// update = optional
 	LogUnit string `json:"logUnit,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -14548,8 +14548,8 @@ type RetentionPolicyStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// Number of daily snapshots to keep.
-	// create = optional
 	// update = optional
+	// create = optional
 	NumOfDaily *int `json:"numOfDaily,omitempty"`
 	// Number of monthly snapshots to keep.
 	// create = optional
@@ -14587,8 +14587,8 @@ type RoleStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// List of permissions contained in the role.
 	// create = required
@@ -14599,8 +14599,8 @@ type RoleStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -14610,12 +14610,12 @@ type RoleStruct struct {
 type RollbackParametersStruct struct {
 	// The TimeFlow point, bookmark, or semantic location to roll the
 	// database back to.
-	// properties = map[type:map[default:TimeflowPointSemantic]]
 	// required = true
+	// properties = map[type:map[default:TimeflowPointSemantic]]
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -14630,9 +14630,9 @@ type RsaKeyPairStruct struct {
 	KeySize *int `json:"keySize,omitempty"`
 	// The signature algorithm this key pair will use to sign
 	// certificates and CSRs.
+	// create = optional
 	// enum = [SHA256withRSA SHA384withRSA SHA512withRSA]
 	// default = SHA256withRSA
-	// create = optional
 	SignatureAlgorithm string `json:"signatureAlgorithm,omitempty"`
 	// Object type.
 	// required = true
@@ -14663,8 +14663,8 @@ type RunBashOnSourceOperationStruct struct {
 // extends SourceOperation
 type RunCommandOnSourceOperationStruct struct {
 	// The shell command to execute on the target host.
-	// create = required
 	// update = optional
+	// create = required
 	Command string `json:"command,omitempty"`
 	// A name for the source operation.
 	// create = required
@@ -14699,16 +14699,16 @@ type RunExpectOnSourceOperationStruct struct {
 // extends Operation
 type RunMaskingJobOperationStruct struct {
 	// The location this Masking Job will be executed on.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	Host string `json:"host,omitempty"`
 	// The Masking Job ID of the Masking Job to be executed.
 	// create = readonly
 	// update = readonly
 	MaskingJobId string `json:"maskingJobId,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -14753,18 +14753,18 @@ type SMTPConfigStruct struct {
 	Password string `json:"password,omitempty"`
 	// Port number to use. A value of -1 indicates the default (25 or 587
 	// for TLS).
+	// maximum = 65535
 	// default = -1
 	// update = optional
 	// minimum = -1
-	// maximum = 65535
 	Port *int `json:"port,omitempty"`
 	// Maximum timeout to wait, in seconds, when sending mail.
-	// minimum = 1
 	// update = optional
+	// minimum = 1
 	SendTimeout *int `json:"sendTimeout,omitempty"`
 	// IP address or hostname of SMTP relay server.
-	// format = host
 	// update = optional
+	// format = host
 	Server string `json:"server,omitempty"`
 	// True if TLS (transport layer security) should be used.
 	// default = false
@@ -14826,8 +14826,8 @@ type SNMPManagerStruct struct {
 	// format = host
 	Address string `json:"address,omitempty"`
 	// SNMP manager community string.
-	// create = required
 	// update = optional
+	// create = required
 	CommunityString string `json:"communityString,omitempty"`
 	// Describes if the most recent attempt to send a trap succeeded or
 	// failed.
@@ -14842,11 +14842,11 @@ type SNMPManagerStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// SNMP manager port number.
-	// update = optional
 	// minimum = 1
 	// maximum = 65535
 	// default = 162
 	// create = optional
+	// update = optional
 	Port *int `json:"port,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -14858,9 +14858,9 @@ type SNMPManagerStruct struct {
 	Type string `json:"type,omitempty"`
 	// True if INFORM messages are to be sent to this manager, false for
 	// TRAP messages.
-	// create = optional
 	// update = optional
 	// default = false
+	// create = optional
 	UseInform *bool `json:"useInform,omitempty"`
 }
 
@@ -14874,9 +14874,9 @@ type SSHConnectivityStruct struct {
 	// required = true
 	Credentials Credential `json:"credentials,omitempty"`
 	// SSH port on remote server.
+	// default = 22
 	// minimum = 1
 	// maximum = 65535
-	// default = 22
 	Port *int `json:"port,omitempty"`
 	// Mechanism to use for ssh host verification.
 	// required = false
@@ -14953,13 +14953,13 @@ type SamlServiceProviderStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// The signing (public) key that will be used to verify SAML
 	// signatures. Leave empty if responses will not be signed.
-	// create = optional
 	// update = optional
+	// create = optional
 	SigningKey string `json:"signingKey,omitempty"`
 	// Object type.
 	// required = true
@@ -14972,15 +14972,15 @@ type SamlServiceProviderStruct struct {
 type ScheduleStruct struct {
 	// Schedule cron string. See CronTrigger documentation at
 	// http://quartz-scheduler.org/ for details.
-	// update = required
 	// maxLength = 120
 	// create = required
+	// update = required
 	CronString string `json:"cronString,omitempty"`
 	// Cutoff time in seconds. The policy job will suspend if not
 	// completed within the given time limit.
+	// update = optional
 	// units = sec
 	// create = optional
-	// update = optional
 	CutoffTime *int `json:"cutoffTime,omitempty"`
 	// Object type.
 	// required = true
@@ -15066,22 +15066,22 @@ type SerializationPointStruct struct {
 	// units = B/s
 	AverageThroughput float64 `json:"averageThroughput,omitempty"`
 	// Bytes of the serialization point which have been transferred.
-	// base = 1024
 	// units = B
+	// base = 1024
 	BytesTransferred *int `json:"bytesTransferred,omitempty"`
 	// Timestamp of the data being stored in the serialization point.
 	// format = date
 	DataTimestamp string `json:"dataTimestamp,omitempty"`
 	// The elapsed time spent sending the serialization point
 	// (nanoseconds).
-	// base = 1024
 	// units = nsec
+	// base = 1024
 	ElapsedTimeNanos float64 `json:"elapsedTimeNanos,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -15124,8 +15124,8 @@ type SingletonUpdateStruct struct {
 	// format = type
 	ObjectType string `json:"objectType,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -15134,8 +15134,8 @@ type SingletonUpdateStruct struct {
 // cliVisibility = [DOMAIN]
 type SnapshotCapacityDataStruct struct {
 	// Reference to the container to which this snapshot belongs.
-	// referenceTo = /delphix-container.json
 	// format = objectReference
+	// referenceTo = /delphix-container.json
 	Container string `json:"container,omitempty"`
 	// List of VDBs that have been provisioned from this snapshot.
 	DescendantVDBs []string `json:"descendantVDBs,omitempty"`
@@ -15211,10 +15211,10 @@ type SnapshotPolicyStruct struct {
 	// enum = [DIRECT_APPLIED INHERITED]
 	EffectiveType string `json:"effectiveType,omitempty"`
 	// Object name.
-	// format = objectName
 	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -15222,8 +15222,8 @@ type SnapshotPolicyStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// List of Schedule objects representing when the policy will
 	// execute.
@@ -15287,8 +15287,8 @@ type SnapshotSpaceResultStruct struct {
 	// base = 1024
 	TotalSize float64 `json:"totalSize,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -15339,14 +15339,14 @@ type SourceEnableParametersStruct struct {
 // extends NamedUserObject
 type SourceRepositoryTemplateStruct struct {
 	// The reference to the database container.
+	// referenceTo = /delphix-container.json
 	// format = objectReference
 	// create = required
-	// referenceTo = /delphix-container.json
 	Container string `json:"container,omitempty"`
 	// Object name.
+	// create = required
 	// update = optional
 	// maxLength = 256
-	// create = required
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -15363,13 +15363,13 @@ type SourceRepositoryTemplateStruct struct {
 	// referenceTo = /delphix-source-repository.json
 	Repository string `json:"repository,omitempty"`
 	// The reference to the associated template.
+	// referenceTo = /delphix-database-template.json
 	// format = objectReference
 	// create = required
-	// referenceTo = /delphix-database-template.json
 	Template string `json:"template,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -15425,28 +15425,28 @@ type SourcingPolicyStruct struct {
 // cliVisibility = [SYSTEM]
 type SplunkHecConfigStruct struct {
 	// Whether we should send metrics data to Splunk.
-	// default = true
 	// create = required
 	// update = optional
+	// default = true
 	EnableMetrics *bool `json:"enableMetrics,omitempty"`
 	// Whether to use HTTPS to connect to Splunk. This should correspond
 	// to your HTTP Event Collector settings in Splunk.
-	// update = optional
 	// create = required
+	// update = optional
 	EnableSSL *bool `json:"enableSSL,omitempty"`
 	// Whether we should send Delphix Insight data to Splunk using this
 	// configuration.
-	// update = optional
 	// default = false
 	// create = required
+	// update = optional
 	Enabled *bool `json:"enabled,omitempty"`
 	// The frequency in number of seconds at which the Events will be
 	// pushed to Splunk. Defaults to 60 seconds.
+	// update = optional
 	// minimum = 5
 	// maximum = 3600
 	// default = 60
 	// create = optional
-	// update = optional
 	EventsPushFrequency *int `json:"eventsPushFrequency,omitempty"`
 	// The TCP port number for the Splunk HTTP Event Collector (HEC).
 	// maximum = 65535
@@ -15455,8 +15455,8 @@ type SplunkHecConfigStruct struct {
 	// minimum = 1
 	HecPort *int `json:"hecPort,omitempty"`
 	// The token for the Splunk HTTP Event Collector (HEC).
-	// update = optional
 	// create = required
+	// update = optional
 	HecToken string `json:"hecToken,omitempty"`
 	// Splunk host name or IP address.
 	// create = required
@@ -15475,11 +15475,11 @@ type SplunkHecConfigStruct struct {
 	MetricsIndex string `json:"metricsIndex,omitempty"`
 	// The frequency in number of seconds at which the Performance
 	// Metrics will be pushed to Splunk. Defaults to 60 seconds.
-	// maximum = 3600
 	// default = 60
 	// create = optional
 	// update = optional
 	// minimum = 5
+	// maximum = 3600
 	MetricsPushFrequency *int `json:"metricsPushFrequency,omitempty"`
 	// Object name.
 	// format = objectName
@@ -15495,10 +15495,10 @@ type SplunkHecConfigStruct struct {
 	// The resolution of performance metrics data sent to Splunk. The
 	// options are SECOND for 1-second resolution, or MINUTE for 1-minute
 	// resolution.
-	// update = optional
-	// enum = [SECOND MINUTE]
 	// default = MINUTE
 	// create = optional
+	// update = optional
+	// enum = [SECOND MINUTE]
 	PerformanceMetricsResolution string `json:"performanceMetricsResolution,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -15514,8 +15514,8 @@ type SplunkHecConfigStruct struct {
 // extends SshVerificationStrategy
 type SshAcceptAlwaysStruct struct {
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -15523,8 +15523,8 @@ type SshAcceptAlwaysStruct struct {
 // extends SshVerifyBase
 type SshVerifyFingerprintStruct struct {
 	// Base-64 encoded fingerprint of the ssh key of the host.
-	// required = true
 	// format = hostFingerprint
+	// required = true
 	Fingerprint string `json:"fingerprint,omitempty"`
 	// Hash function for the fingerprint.
 	// enum = [SHA256 SHA512]
@@ -15535,8 +15535,8 @@ type SshVerifyFingerprintStruct struct {
 	// required = true
 	KeyType string `json:"keyType,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -15552,8 +15552,8 @@ type SshVerifyRawKeyStruct struct {
 	// format = hostKey
 	RawKey string `json:"rawKey,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -15561,10 +15561,10 @@ type SshVerifyRawKeyStruct struct {
 // extends CompatibleRepositoriesParameters
 type StagingCompatibilityParametersStruct struct {
 	// Restrict returned repositories to this environment.
-	// create = optional
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-source-environment.json
+	// create = optional
+	// update = optional
 	Environment string `json:"environment,omitempty"`
 	// The repository to use as a source of compatibility information.
 	// required = true
@@ -15632,8 +15632,8 @@ type StatisticEnumAxisStruct struct {
 	// of datapoints themselves.
 	StreamAttribute *bool `json:"streamAttribute,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// The type of value this axis will have for collected data.
 	// enum = [INTEGER BOOLEAN STRING HISTOGRAM]
@@ -15653,8 +15653,8 @@ type StatisticSliceStruct struct {
 	// create = required
 	CollectionAxes []string `json:"collectionAxes,omitempty"`
 	// The minimum interval between each reading for this statistic.
-	// create = optional
 	// units = sec
+	// create = optional
 	CollectionInterval *int `json:"collectionInterval,omitempty"`
 	// Object name.
 	// create = required
@@ -15667,8 +15667,8 @@ type StatisticSliceStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Collection state of the slice.
 	// enum = [INITIALIZED RUNNING PAUSED FAILED]
@@ -15691,9 +15691,9 @@ type StorageDeviceStruct struct {
 	// Model ID of the device.
 	Model string `json:"model,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// create = required
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -15781,8 +15781,8 @@ type StorageDeviceRemovalVerifyResultStruct struct {
 	// units = B
 	NewMappingMemory float64 `json:"newMappingMemory,omitempty"`
 	// Free space of the pool before this device is removed, in bytes.
-	// base = 1024
 	// units = B
+	// base = 1024
 	OldFreeBytes float64 `json:"oldFreeBytes,omitempty"`
 	// Amount of memory used by removal mappings before this device is
 	// removed, in bytes.
@@ -15803,13 +15803,13 @@ type StorageTestStruct struct {
 	// format = date
 	EndTime string `json:"endTime,omitempty"`
 	// Object name.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The parameters used to execute the test.
 	Parameters *StorageTestParametersStruct `json:"parameters,omitempty"`
@@ -15855,11 +15855,11 @@ type StorageTestParametersStruct struct {
 	InitializeEntireDevice *bool `json:"initializeEntireDevice,omitempty"`
 	// Total disk space, spread over all devices, used by the test (in
 	// bytes).
-	// create = optional
 	// units = B
 	// base = 1024
 	// minimum = 1.048576e+06
 	// default = 5.49755813888e+11
+	// create = optional
 	TestRegion float64 `json:"testRegion,omitempty"`
 	// The tests that are to be run.
 	// default = ALL
@@ -15867,8 +15867,8 @@ type StorageTestParametersStruct struct {
 	// enum = [ALL MINIMAL READ WRITE RANDREAD]
 	Tests string `json:"tests,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -15939,12 +15939,12 @@ type SupportAccessStateStruct struct {
 	AccessType string `json:"accessType,omitempty"`
 	// If ENABLED_WITH_TOKEN, time that the token will no longer be
 	// valid.
-	// format = date
 	// update = optional
+	// format = date
 	EndTime string `json:"endTime,omitempty"`
 	// If ENABLED_WITH_TOKEN, the time that the token will be valid.
-	// format = date
 	// update = optional
+	// format = date
 	StartTime string `json:"startTime,omitempty"`
 	// If ENABLED_WITH_TOKEN, the token that must be supplied to login.
 	// update = optional
@@ -15964,8 +15964,8 @@ type SupportBundleGenerateParametersStruct struct {
 	// enum = [PHONEHOME MDS OS CORE LOG DROPBOX STORAGE_TEST MASKING ALL]
 	BundleType string `json:"bundleType,omitempty"`
 	// The list of environments from which logs should be collected.
-	// required = false
 	// uniqueItems = true
+	// required = false
 	Environments []string `json:"environments,omitempty"`
 	// Whether or not to include the analytics data in the support bundle
 	// which is generated. Including analytics data may significantly
@@ -15974,8 +15974,8 @@ type SupportBundleGenerateParametersStruct struct {
 	// default = false
 	IncludeAnalyticsData *bool `json:"includeAnalyticsData,omitempty"`
 	// The list of sources from which logs should be collected.
-	// uniqueItems = true
 	// required = false
+	// uniqueItems = true
 	Sources []string `json:"sources,omitempty"`
 	// Object type.
 	// format = type
@@ -16019,8 +16019,8 @@ type SupportBundleUploadParametersStruct struct {
 type SupportContactStruct struct {
 	// An ISO country code, as recognized by modern browsers for
 	// resolving locale.
-	// enum = [-- AF AL DZ AS AD AO AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BA BW BV BR IO BN BG BF BI KH CM CA CV KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CY CZ DK DJ DM DO EC EG SV GQ ER EE ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GN GW GY HT HM HN HK HU IS IN ID IR IQ IE IL IT JM JP JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MK MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL AN NC NZ NI NE NG NU NF MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RE RO RU RW SH KN LC PM VC WS SM ST SA SN RS SC SL SG SK SI SB SO ZA GS ES LK SD SR SJ SZ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW]
 	// required = true
+	// enum = [-- AF AL DZ AS AD AO AQ AG AR AM AW AU AT AZ BS BH BD BB BY BE BZ BJ BM BT BO BA BW BV BR IO BN BG BF BI KH CM CA CV KY CF TD CL CN CX CC CO KM CG CD CK CR CI HR CU CY CZ DK DJ DM DO EC EG SV GQ ER EE ET FK FO FJ FI FR GF PF TF GA GM GE DE GH GI GR GL GD GP GU GT GN GW GY HT HM HN HK HU IS IN ID IR IQ IE IL IT JM JP JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MK MG MW MY MV ML MT MH MQ MR MU YT MX FM MD MC MN ME MS MA MZ MM NA NR NP NL AN NC NZ NI NE NG NU NF MP NO OM PK PW PS PA PG PY PE PH PN PL PT PR QA RE RO RU RW SH KN LC PM VC WS SM ST SA SN RS SC SL SG SK SI SB SO ZA GS ES LK SD SR SJ SZ SE CH SY TW TJ TZ TH TL TG TK TO TT TN TR TM TC TV UG UA AE GB US UM UY UZ VU VE VN VG VI WF EH YE ZM ZW]
 	Country string `json:"country,omitempty"`
 	// A telephone number, formatted in accordance with the norms of the
 	// associated country.
@@ -16072,10 +16072,10 @@ type SyncPolicyStruct struct {
 	// enum = [DIRECT_APPLIED INHERITED]
 	EffectiveType string `json:"effectiveType,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -16155,8 +16155,8 @@ type SyslogServerStruct struct {
 	// default = udp
 	Protocol string `json:"protocol,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -16191,8 +16191,8 @@ type SystemInfoStruct struct {
 	// create = required
 	EngineQualifier string `json:"engineQualifier,omitempty"`
 	// System hostname.
-	// update = optional
 	// format = hostname
+	// update = optional
 	Hostname string `json:"hostname,omitempty"`
 	// The date and time that the Delphix Engine was installed.
 	// format = date
@@ -16226,8 +16226,8 @@ type SystemInfoStruct struct {
 	// base = 1024
 	StorageTotal float64 `json:"storageTotal,omitempty"`
 	// Amount of raw storage used by dSources, VDBs and system metadata.
-	// base = 1024
 	// units = B
+	// base = 1024
 	StorageUsed float64 `json:"storageUsed,omitempty"`
 	// Technical support phone numbers.
 	// create = optional
@@ -16267,16 +16267,16 @@ type SystemInfoStruct struct {
 // extends TypedObject
 type SystemInitializationParametersStruct struct {
 	// Password to use for the default domain administrator.
+	// create = required
 	// format = password
 	// default = delphix
-	// create = required
 	DefaultPassword string `json:"defaultPassword,omitempty"`
 	// Name of the default domain administrator to create.
-	// pattern = ^[a-zA-Z][-_.a-zA-Z0-9]*$
-	// minLength = 1
 	// maxLength = 256
 	// default = delphix_admin
 	// create = optional
+	// pattern = ^[a-zA-Z][-_.a-zA-Z0-9]*$
+	// minLength = 1
 	DefaultUser string `json:"defaultUser,omitempty"`
 	// List of storage devices to use.
 	// create = required
@@ -16301,9 +16301,9 @@ type SystemKeyCredentialStruct struct {
 // cliVisibility = [SYSTEM]
 type SystemPackageStruct struct {
 	// Package name.
+	// maxLength = 256
 	// format = objectName
 	// update = readonly
-	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -16347,8 +16347,8 @@ type SystemVersionStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// DelphixOS is running from this version.
 	OsRunning *bool `json:"osRunning,omitempty"`
@@ -16362,8 +16362,8 @@ type SystemVersionStruct struct {
 	// enum = [PREVIOUS CURRENTLY_RUNNING DEFERRED UPLOADED UNPACKING DELETING VERIFYING VERIFIED APPLYING UNKNOWN DISABLE_FAILED]
 	Status string `json:"status,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Date on which this version was last verified.
 	// format = date
@@ -16404,8 +16404,8 @@ type TCPStatsDatapointStruct struct {
 	// units = usec
 	RoundTripTime *int `json:"roundTripTime,omitempty"`
 	// The size of the peer's receive window.
-	// units = B
 	// base = 1024
+	// units = B
 	SendWindowSize *int `json:"sendWindowSize,omitempty"`
 	// The time this datapoint was collected.
 	// format = date
@@ -16442,8 +16442,8 @@ type TCPStatsDatapointStreamStruct struct {
 	// The network service.
 	Service string `json:"service,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -16452,9 +16452,9 @@ type TCPStatsDatapointStreamStruct struct {
 type TargetFilterStruct struct {
 	// List of object references. Only alerts related to one of the
 	// targets or its children are included.
+	// minItems = 1
 	// create = optional
 	// update = optional
-	// minItems = 1
 	Targets []string `json:"targets,omitempty"`
 	// Object type.
 	// required = true
@@ -16467,9 +16467,9 @@ type TargetFilterStruct struct {
 // extends AlertFilter
 type TargetOwnerFilterStruct struct {
 	// Target owners to match against.
-	// minItems = 1
 	// create = required
 	// update = optional
+	// minItems = 1
 	Owners []string `json:"owners,omitempty"`
 	// Object type.
 	// required = true
@@ -16484,8 +16484,8 @@ type TimeConfigStruct struct {
 	// Current system time. This value can only be set if NTP is
 	// disabled. The management service is automatically restarted if the
 	// time is changed.
-	// update = optional
 	// format = date
+	// update = optional
 	CurrentTime string `json:"currentTime,omitempty"`
 	// NTP configuration.
 	// update = optional
@@ -16517,8 +16517,8 @@ type TimeRangeParametersStruct struct {
 	// create = required
 	EndTime string `json:"endTime,omitempty"`
 	// The date at the beginning of the period.
-	// create = required
 	// format = date
+	// create = required
 	StartTime string `json:"startTime,omitempty"`
 	// Object type.
 	// required = true
@@ -16530,8 +16530,8 @@ type TimeRangeParametersStruct struct {
 // extends TypedObject
 type TimeZoneStruct struct {
 	// The ID of this time zone.
-	// enum = [ACT AET AGT ART AST Africa/Abidjan Africa/Accra Africa/Addis_Ababa Africa/Algiers Africa/Asmara Africa/Asmera Africa/Bamako Africa/Bangui Africa/Banjul Africa/Bissau Africa/Blantyre Africa/Brazzaville Africa/Bujumbura Africa/Cairo Africa/Casablanca Africa/Ceuta Africa/Conakry Africa/Dakar Africa/Dar_es_Salaam Africa/Djibouti Africa/Douala Africa/El_Aaiun Africa/Freetown Africa/Gaborone Africa/Harare Africa/Johannesburg Africa/Juba Africa/Kampala Africa/Khartoum Africa/Kigali Africa/Kinshasa Africa/Lagos Africa/Libreville Africa/Lome Africa/Luanda Africa/Lubumbashi Africa/Lusaka Africa/Malabo Africa/Maputo Africa/Maseru Africa/Mbabane Africa/Mogadishu Africa/Monrovia Africa/Nairobi Africa/Ndjamena Africa/Niamey Africa/Nouakchott Africa/Ouagadougou Africa/Porto-Novo Africa/Sao_Tome Africa/Timbuktu Africa/Tripoli Africa/Tunis Africa/Windhoek America/Adak America/Anchorage America/Anguilla America/Antigua America/Araguaina America/Argentina/Buenos_Aires America/Argentina/Catamarca America/Argentina/ComodRivadavia America/Argentina/Cordoba America/Argentina/Jujuy America/Argentina/La_Rioja America/Argentina/Mendoza America/Argentina/Rio_Gallegos America/Argentina/Salta America/Argentina/San_Juan America/Argentina/San_Luis America/Argentina/Tucuman America/Argentina/Ushuaia America/Aruba America/Asuncion America/Atikokan America/Atka America/Bahia America/Bahia_Banderas America/Barbados America/Belem America/Belize America/Blanc-Sablon America/Boa_Vista America/Bogota America/Boise America/Buenos_Aires America/Cambridge_Bay America/Campo_Grande America/Cancun America/Caracas America/Catamarca America/Cayenne America/Cayman America/Chicago America/Chihuahua America/Coral_Harbour America/Cordoba America/Costa_Rica America/Creston America/Cuiaba America/Curacao America/Danmarkshavn America/Dawson America/Dawson_Creek America/Denver America/Detroit America/Dominica America/Edmonton America/Eirunepe America/El_Salvador America/Ensenada America/Fort_Nelson America/Fort_Wayne America/Fortaleza America/Glace_Bay America/Godthab America/Goose_Bay America/Grand_Turk America/Grenada America/Guadeloupe America/Guatemala America/Guayaquil America/Guyana America/Halifax America/Havana America/Hermosillo America/Indiana/Indianapolis America/Indiana/Knox America/Indiana/Marengo America/Indiana/Petersburg America/Indiana/Tell_City America/Indiana/Vevay America/Indiana/Vincennes America/Indiana/Winamac America/Indianapolis America/Inuvik America/Iqaluit America/Jamaica America/Jujuy America/Juneau America/Kentucky/Louisville America/Kentucky/Monticello America/Knox_IN America/Kralendijk America/La_Paz America/Lima America/Los_Angeles America/Louisville America/Lower_Princes America/Maceio America/Managua America/Manaus America/Marigot America/Martinique America/Matamoros America/Mazatlan America/Mendoza America/Menominee America/Merida America/Metlakatla America/Mexico_City America/Miquelon America/Moncton America/Monterrey America/Montevideo America/Montreal America/Montserrat America/Nassau America/New_York America/Nipigon America/Nome America/Noronha America/North_Dakota/Beulah America/North_Dakota/Center America/North_Dakota/New_Salem America/Ojinaga America/Panama America/Pangnirtung America/Paramaribo America/Phoenix America/Port-au-Prince America/Port_of_Spain America/Porto_Acre America/Porto_Velho America/Puerto_Rico America/Punta_Arenas America/Rainy_River America/Rankin_Inlet America/Recife America/Regina America/Resolute America/Rio_Branco America/Rosario America/Santa_Isabel America/Santarem America/Santiago America/Santo_Domingo America/Sao_Paulo America/Scoresbysund America/Shiprock America/Sitka America/St_Barthelemy America/St_Johns America/St_Kitts America/St_Lucia America/St_Thomas America/St_Vincent America/Swift_Current America/Tegucigalpa America/Thule America/Thunder_Bay America/Tijuana America/Toronto America/Tortola America/Vancouver America/Virgin America/Whitehorse America/Winnipeg America/Yakutat America/Yellowknife Antarctica/Casey Antarctica/Davis Antarctica/DumontDUrville Antarctica/Macquarie Antarctica/Mawson Antarctica/McMurdo Antarctica/Palmer Antarctica/Rothera Antarctica/South_Pole Antarctica/Syowa Antarctica/Troll Antarctica/Vostok Arctic/Longyearbyen Asia/Aden Asia/Almaty Asia/Amman Asia/Anadyr Asia/Aqtau Asia/Aqtobe Asia/Ashgabat Asia/Ashkhabad Asia/Atyrau Asia/Baghdad Asia/Bahrain Asia/Baku Asia/Bangkok Asia/Barnaul Asia/Beirut Asia/Bishkek Asia/Brunei Asia/Calcutta Asia/Chita Asia/Choibalsan Asia/Chongqing Asia/Chungking Asia/Colombo Asia/Dacca Asia/Damascus Asia/Dhaka Asia/Dili Asia/Dubai Asia/Dushanbe Asia/Famagusta Asia/Gaza Asia/Harbin Asia/Hebron Asia/Ho_Chi_Minh Asia/Hong_Kong Asia/Hovd Asia/Irkutsk Asia/Istanbul Asia/Jakarta Asia/Jayapura Asia/Jerusalem Asia/Kabul Asia/Kamchatka Asia/Karachi Asia/Kashgar Asia/Kathmandu Asia/Katmandu Asia/Khandyga Asia/Kolkata Asia/Krasnoyarsk Asia/Kuala_Lumpur Asia/Kuching Asia/Kuwait Asia/Macao Asia/Macau Asia/Magadan Asia/Makassar Asia/Manila Asia/Muscat Asia/Nicosia Asia/Novokuznetsk Asia/Novosibirsk Asia/Omsk Asia/Oral Asia/Phnom_Penh Asia/Pontianak Asia/Pyongyang Asia/Qatar Asia/Qyzylorda Asia/Rangoon Asia/Riyadh Asia/Saigon Asia/Sakhalin Asia/Samarkand Asia/Seoul Asia/Shanghai Asia/Singapore Asia/Srednekolymsk Asia/Taipei Asia/Tashkent Asia/Tbilisi Asia/Tehran Asia/Tel_Aviv Asia/Thimbu Asia/Thimphu Asia/Tomsk Asia/Tokyo Asia/Ujung_Pandang Asia/Ulaanbaatar Asia/Ulan_Bator Asia/Urumqi Asia/Ust-Nera Asia/Vientiane Asia/Vladivostok Asia/Yakutsk Asia/Yangon Asia/Yekaterinburg Asia/Yerevan Atlantic/Azores Atlantic/Bermuda Atlantic/Canary Atlantic/Cape_Verde Atlantic/Faeroe Atlantic/Faroe Atlantic/Jan_Mayen Atlantic/Madeira Atlantic/Reykjavik Atlantic/South_Georgia Atlantic/St_Helena Atlantic/Stanley Australia/ACT Australia/Adelaide Australia/Brisbane Australia/Broken_Hill Australia/Canberra Australia/Currie Australia/Darwin Australia/Eucla Australia/Hobart Australia/LHI Australia/Lindeman Australia/Lord_Howe Australia/Melbourne Australia/NSW Australia/North Australia/Perth Australia/Queensland Australia/South Australia/Sydney Australia/Tasmania Australia/Victoria Australia/West Australia/Yancowinna BET BST Brazil/Acre Brazil/DeNoronha Brazil/East Brazil/West CAT CET CNT CST CST6CDT CTT Canada/Atlantic Canada/Central Canada/Eastern Canada/Mountain Canada/Newfoundland Canada/Pacific Canada/Saskatchewan Canada/Yukon Chile/Continental Chile/EasterIsland Cuba EAT ECT EET EST EST5EDT Egypt Eire Etc/GMT Etc/GMT+0 Etc/GMT+1 Etc/GMT+10 Etc/GMT+11 Etc/GMT+12 Etc/GMT+2 Etc/GMT+3 Etc/GMT+4 Etc/GMT+5 Etc/GMT+6 Etc/GMT+7 Etc/GMT+8 Etc/GMT+9 Etc/GMT-0 Etc/GMT-1 Etc/GMT-10 Etc/GMT-11 Etc/GMT-12 Etc/GMT-13 Etc/GMT-14 Etc/GMT-2 Etc/GMT-3 Etc/GMT-4 Etc/GMT-5 Etc/GMT-6 Etc/GMT-7 Etc/GMT-8 Etc/GMT-9 Etc/GMT0 Etc/Greenwich Etc/UCT Etc/UTC Etc/Universal Etc/Zulu Europe/Amsterdam Europe/Andorra Europe/Astrakhan Europe/Athens Europe/Belfast Europe/Belgrade Europe/Berlin Europe/Bratislava Europe/Brussels Europe/Bucharest Europe/Budapest Europe/Busingen Europe/Chisinau Europe/Copenhagen Europe/Dublin Europe/Gibraltar Europe/Guernsey Europe/Helsinki Europe/Isle_of_Man Europe/Istanbul Europe/Jersey Europe/Kaliningrad Europe/Kiev Europe/Kirov Europe/Lisbon Europe/Ljubljana Europe/London Europe/Luxembourg Europe/Madrid Europe/Malta Europe/Mariehamn Europe/Minsk Europe/Monaco Europe/Moscow Europe/Nicosia Europe/Oslo Europe/Paris Europe/Podgorica Europe/Prague Europe/Riga Europe/Rome Europe/Samara Europe/San_Marino Europe/Sarajevo Europe/Saratov Europe/Simferopol Europe/Skopje Europe/Sofia Europe/Stockholm Europe/Tallinn Europe/Tirane Europe/Tiraspol Europe/Ulyanovsk Europe/Uzhgorod Europe/Vaduz Europe/Vatican Europe/Vienna Europe/Vilnius Europe/Volgograd Europe/Warsaw Europe/Zagreb Europe/Zaporozhye Europe/Zurich GB GB-Eire GMT GMT0 Greenwich HST Hongkong IET IST Iceland Indian/Antananarivo Indian/Chagos Indian/Christmas Indian/Cocos Indian/Comoro Indian/Kerguelen Indian/Mahe Indian/Maldives Indian/Mauritius Indian/Mayotte Indian/Reunion Iran Israel JST Jamaica Japan Kwajalein Libya MET MIT MST MST7MDT Mexico/BajaNorte Mexico/BajaSur Mexico/General NET NST NZ NZ-CHAT Navajo PLT PNT PRC PRT PST PST8PDT Pacific/Apia Pacific/Auckland Pacific/Bougainville Pacific/Chatham Pacific/Chuuk Pacific/Easter Pacific/Efate Pacific/Enderbury Pacific/Fakaofo Pacific/Fiji Pacific/Funafuti Pacific/Galapagos Pacific/Gambier Pacific/Guadalcanal Pacific/Guam Pacific/Honolulu Pacific/Johnston Pacific/Kiritimati Pacific/Kosrae Pacific/Kwajalein Pacific/Majuro Pacific/Marquesas Pacific/Midway Pacific/Nauru Pacific/Niue Pacific/Norfolk Pacific/Noumea Pacific/Pago_Pago Pacific/Palau Pacific/Pitcairn Pacific/Pohnpei Pacific/Ponape Pacific/Port_Moresby Pacific/Rarotonga Pacific/Saipan Pacific/Samoa Pacific/Tahiti Pacific/Tarawa Pacific/Tongatapu Pacific/Truk Pacific/Wake Pacific/Wallis Pacific/Yap Poland Portugal ROK SST Singapore SystemV/AST4 SystemV/AST4ADT SystemV/CST6 SystemV/CST6CDT SystemV/EST5 SystemV/EST5EDT SystemV/HST10 SystemV/MST7 SystemV/MST7MDT SystemV/PST8 SystemV/PST8PDT SystemV/YST9 SystemV/YST9YDT Turkey UCT US/Alaska US/Aleutian US/Arizona US/Central US/East-Indiana US/Eastern US/Hawaii US/Indiana-Starke US/Michigan US/Mountain US/Pacific US/Pacific-New US/Samoa UTC Universal VST W-SU WET Zulu]
 	// required = true
+	// enum = [ACT AET AGT ART AST Africa/Abidjan Africa/Accra Africa/Addis_Ababa Africa/Algiers Africa/Asmara Africa/Asmera Africa/Bamako Africa/Bangui Africa/Banjul Africa/Bissau Africa/Blantyre Africa/Brazzaville Africa/Bujumbura Africa/Cairo Africa/Casablanca Africa/Ceuta Africa/Conakry Africa/Dakar Africa/Dar_es_Salaam Africa/Djibouti Africa/Douala Africa/El_Aaiun Africa/Freetown Africa/Gaborone Africa/Harare Africa/Johannesburg Africa/Juba Africa/Kampala Africa/Khartoum Africa/Kigali Africa/Kinshasa Africa/Lagos Africa/Libreville Africa/Lome Africa/Luanda Africa/Lubumbashi Africa/Lusaka Africa/Malabo Africa/Maputo Africa/Maseru Africa/Mbabane Africa/Mogadishu Africa/Monrovia Africa/Nairobi Africa/Ndjamena Africa/Niamey Africa/Nouakchott Africa/Ouagadougou Africa/Porto-Novo Africa/Sao_Tome Africa/Timbuktu Africa/Tripoli Africa/Tunis Africa/Windhoek America/Adak America/Anchorage America/Anguilla America/Antigua America/Araguaina America/Argentina/Buenos_Aires America/Argentina/Catamarca America/Argentina/ComodRivadavia America/Argentina/Cordoba America/Argentina/Jujuy America/Argentina/La_Rioja America/Argentina/Mendoza America/Argentina/Rio_Gallegos America/Argentina/Salta America/Argentina/San_Juan America/Argentina/San_Luis America/Argentina/Tucuman America/Argentina/Ushuaia America/Aruba America/Asuncion America/Atikokan America/Atka America/Bahia America/Bahia_Banderas America/Barbados America/Belem America/Belize America/Blanc-Sablon America/Boa_Vista America/Bogota America/Boise America/Buenos_Aires America/Cambridge_Bay America/Campo_Grande America/Cancun America/Caracas America/Catamarca America/Cayenne America/Cayman America/Chicago America/Chihuahua America/Coral_Harbour America/Cordoba America/Costa_Rica America/Creston America/Cuiaba America/Curacao America/Danmarkshavn America/Dawson America/Dawson_Creek America/Denver America/Detroit America/Dominica America/Edmonton America/Eirunepe America/El_Salvador America/Ensenada America/Fort_Nelson America/Fort_Wayne America/Fortaleza America/Glace_Bay America/Godthab America/Goose_Bay America/Grand_Turk America/Grenada America/Guadeloupe America/Guatemala America/Guayaquil America/Guyana America/Halifax America/Havana America/Hermosillo America/Indiana/Indianapolis America/Indiana/Knox America/Indiana/Marengo America/Indiana/Petersburg America/Indiana/Tell_City America/Indiana/Vevay America/Indiana/Vincennes America/Indiana/Winamac America/Indianapolis America/Inuvik America/Iqaluit America/Jamaica America/Jujuy America/Juneau America/Kentucky/Louisville America/Kentucky/Monticello America/Knox_IN America/Kralendijk America/La_Paz America/Lima America/Los_Angeles America/Louisville America/Lower_Princes America/Maceio America/Managua America/Manaus America/Marigot America/Martinique America/Matamoros America/Mazatlan America/Mendoza America/Menominee America/Merida America/Metlakatla America/Mexico_City America/Miquelon America/Moncton America/Monterrey America/Montevideo America/Montreal America/Montserrat America/Nassau America/New_York America/Nipigon America/Nome America/Noronha America/North_Dakota/Beulah America/North_Dakota/Center America/North_Dakota/New_Salem America/Ojinaga America/Panama America/Pangnirtung America/Paramaribo America/Phoenix America/Port-au-Prince America/Port_of_Spain America/Porto_Acre America/Porto_Velho America/Puerto_Rico America/Punta_Arenas America/Rainy_River America/Rankin_Inlet America/Recife America/Regina America/Resolute America/Rio_Branco America/Rosario America/Santa_Isabel America/Santarem America/Santiago America/Santo_Domingo America/Sao_Paulo America/Scoresbysund America/Shiprock America/Sitka America/St_Barthelemy America/St_Johns America/St_Kitts America/St_Lucia America/St_Thomas America/St_Vincent America/Swift_Current America/Tegucigalpa America/Thule America/Thunder_Bay America/Tijuana America/Toronto America/Tortola America/Vancouver America/Virgin America/Whitehorse America/Winnipeg America/Yakutat America/Yellowknife Antarctica/Casey Antarctica/Davis Antarctica/DumontDUrville Antarctica/Macquarie Antarctica/Mawson Antarctica/McMurdo Antarctica/Palmer Antarctica/Rothera Antarctica/South_Pole Antarctica/Syowa Antarctica/Troll Antarctica/Vostok Arctic/Longyearbyen Asia/Aden Asia/Almaty Asia/Amman Asia/Anadyr Asia/Aqtau Asia/Aqtobe Asia/Ashgabat Asia/Ashkhabad Asia/Atyrau Asia/Baghdad Asia/Bahrain Asia/Baku Asia/Bangkok Asia/Barnaul Asia/Beirut Asia/Bishkek Asia/Brunei Asia/Calcutta Asia/Chita Asia/Choibalsan Asia/Chongqing Asia/Chungking Asia/Colombo Asia/Dacca Asia/Damascus Asia/Dhaka Asia/Dili Asia/Dubai Asia/Dushanbe Asia/Famagusta Asia/Gaza Asia/Harbin Asia/Hebron Asia/Ho_Chi_Minh Asia/Hong_Kong Asia/Hovd Asia/Irkutsk Asia/Istanbul Asia/Jakarta Asia/Jayapura Asia/Jerusalem Asia/Kabul Asia/Kamchatka Asia/Karachi Asia/Kashgar Asia/Kathmandu Asia/Katmandu Asia/Khandyga Asia/Kolkata Asia/Krasnoyarsk Asia/Kuala_Lumpur Asia/Kuching Asia/Kuwait Asia/Macao Asia/Macau Asia/Magadan Asia/Makassar Asia/Manila Asia/Muscat Asia/Nicosia Asia/Novokuznetsk Asia/Novosibirsk Asia/Omsk Asia/Oral Asia/Phnom_Penh Asia/Pontianak Asia/Pyongyang Asia/Qatar Asia/Qyzylorda Asia/Rangoon Asia/Riyadh Asia/Saigon Asia/Sakhalin Asia/Samarkand Asia/Seoul Asia/Shanghai Asia/Singapore Asia/Srednekolymsk Asia/Taipei Asia/Tashkent Asia/Tbilisi Asia/Tehran Asia/Tel_Aviv Asia/Thimbu Asia/Thimphu Asia/Tomsk Asia/Tokyo Asia/Ujung_Pandang Asia/Ulaanbaatar Asia/Ulan_Bator Asia/Urumqi Asia/Ust-Nera Asia/Vientiane Asia/Vladivostok Asia/Yakutsk Asia/Yangon Asia/Yekaterinburg Asia/Yerevan Atlantic/Azores Atlantic/Bermuda Atlantic/Canary Atlantic/Cape_Verde Atlantic/Faeroe Atlantic/Faroe Atlantic/Jan_Mayen Atlantic/Madeira Atlantic/Reykjavik Atlantic/South_Georgia Atlantic/St_Helena Atlantic/Stanley Australia/ACT Australia/Adelaide Australia/Brisbane Australia/Broken_Hill Australia/Canberra Australia/Currie Australia/Darwin Australia/Eucla Australia/Hobart Australia/LHI Australia/Lindeman Australia/Lord_Howe Australia/Melbourne Australia/NSW Australia/North Australia/Perth Australia/Queensland Australia/South Australia/Sydney Australia/Tasmania Australia/Victoria Australia/West Australia/Yancowinna BET BST Brazil/Acre Brazil/DeNoronha Brazil/East Brazil/West CAT CET CNT CST CST6CDT CTT Canada/Atlantic Canada/Central Canada/Eastern Canada/Mountain Canada/Newfoundland Canada/Pacific Canada/Saskatchewan Canada/Yukon Chile/Continental Chile/EasterIsland Cuba EAT ECT EET EST EST5EDT Egypt Eire Etc/GMT Etc/GMT+0 Etc/GMT+1 Etc/GMT+10 Etc/GMT+11 Etc/GMT+12 Etc/GMT+2 Etc/GMT+3 Etc/GMT+4 Etc/GMT+5 Etc/GMT+6 Etc/GMT+7 Etc/GMT+8 Etc/GMT+9 Etc/GMT-0 Etc/GMT-1 Etc/GMT-10 Etc/GMT-11 Etc/GMT-12 Etc/GMT-13 Etc/GMT-14 Etc/GMT-2 Etc/GMT-3 Etc/GMT-4 Etc/GMT-5 Etc/GMT-6 Etc/GMT-7 Etc/GMT-8 Etc/GMT-9 Etc/GMT0 Etc/Greenwich Etc/UCT Etc/UTC Etc/Universal Etc/Zulu Europe/Amsterdam Europe/Andorra Europe/Astrakhan Europe/Athens Europe/Belfast Europe/Belgrade Europe/Berlin Europe/Bratislava Europe/Brussels Europe/Bucharest Europe/Budapest Europe/Busingen Europe/Chisinau Europe/Copenhagen Europe/Dublin Europe/Gibraltar Europe/Guernsey Europe/Helsinki Europe/Isle_of_Man Europe/Istanbul Europe/Jersey Europe/Kaliningrad Europe/Kiev Europe/Kirov Europe/Lisbon Europe/Ljubljana Europe/London Europe/Luxembourg Europe/Madrid Europe/Malta Europe/Mariehamn Europe/Minsk Europe/Monaco Europe/Moscow Europe/Nicosia Europe/Oslo Europe/Paris Europe/Podgorica Europe/Prague Europe/Riga Europe/Rome Europe/Samara Europe/San_Marino Europe/Sarajevo Europe/Saratov Europe/Simferopol Europe/Skopje Europe/Sofia Europe/Stockholm Europe/Tallinn Europe/Tirane Europe/Tiraspol Europe/Ulyanovsk Europe/Uzhgorod Europe/Vaduz Europe/Vatican Europe/Vienna Europe/Vilnius Europe/Volgograd Europe/Warsaw Europe/Zagreb Europe/Zaporozhye Europe/Zurich GB GB-Eire GMT GMT0 Greenwich HST Hongkong IET IST Iceland Indian/Antananarivo Indian/Chagos Indian/Christmas Indian/Cocos Indian/Comoro Indian/Kerguelen Indian/Mahe Indian/Maldives Indian/Mauritius Indian/Mayotte Indian/Reunion Iran Israel JST Jamaica Japan Kwajalein Libya MET MIT MST MST7MDT Mexico/BajaNorte Mexico/BajaSur Mexico/General NET NST NZ NZ-CHAT Navajo PLT PNT PRC PRT PST PST8PDT Pacific/Apia Pacific/Auckland Pacific/Bougainville Pacific/Chatham Pacific/Chuuk Pacific/Easter Pacific/Efate Pacific/Enderbury Pacific/Fakaofo Pacific/Fiji Pacific/Funafuti Pacific/Galapagos Pacific/Gambier Pacific/Guadalcanal Pacific/Guam Pacific/Honolulu Pacific/Johnston Pacific/Kiritimati Pacific/Kosrae Pacific/Kwajalein Pacific/Majuro Pacific/Marquesas Pacific/Midway Pacific/Nauru Pacific/Niue Pacific/Norfolk Pacific/Noumea Pacific/Pago_Pago Pacific/Palau Pacific/Pitcairn Pacific/Pohnpei Pacific/Ponape Pacific/Port_Moresby Pacific/Rarotonga Pacific/Saipan Pacific/Samoa Pacific/Tahiti Pacific/Tarawa Pacific/Tongatapu Pacific/Truk Pacific/Wake Pacific/Wallis Pacific/Yap Poland Portugal ROK SST Singapore SystemV/AST4 SystemV/AST4ADT SystemV/CST6 SystemV/CST6CDT SystemV/EST5 SystemV/EST5EDT SystemV/HST10 SystemV/MST7 SystemV/MST7MDT SystemV/PST8 SystemV/PST8PDT SystemV/YST9 SystemV/YST9YDT Turkey UCT US/Alaska US/Aleutian US/Arizona US/Central US/East-Indiana US/Eastern US/Hawaii US/Indiana-Starke US/Michigan US/Mountain US/Pacific US/Pacific-New US/Samoa UTC Universal VST W-SU WET Zulu]
 	Id string `json:"id,omitempty"`
 	// The difference, in minutes, between UTC and local time. For
 	// example, if your time zone is UTC -5:00 (Eastern Standard Time),
@@ -16607,8 +16607,8 @@ type TimeflowBookmarkCreateParametersStruct struct {
 	// required = true
 	TimeflowPoint TimeflowPoint `json:"timeflowPoint,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -16664,9 +16664,9 @@ type TimeflowLogFetchParametersStruct struct {
 	// required = true
 	StartLocation string `json:"startLocation,omitempty"`
 	// Reference to the TimeFlow for which to fetch logs.
-	// referenceTo = /delphix-oracle-timeflow.json
 	// required = true
 	// format = objectReference
+	// referenceTo = /delphix-oracle-timeflow.json
 	Timeflow string `json:"timeflow,omitempty"`
 	// Object type.
 	// required = true
@@ -16731,10 +16731,10 @@ type TimeflowPointLocationStruct struct {
 // extends TimeflowPointParameters
 type TimeflowPointSemanticStruct struct {
 	// Reference to the container.
-	// referenceTo = /delphix-container.json
-	// create = optional
 	// update = optional
 	// format = objectReference
+	// referenceTo = /delphix-container.json
+	// create = optional
 	Container string `json:"container,omitempty"`
 	// A semantic description of a TimeFlow location.
 	// create = optional
@@ -16752,9 +16752,9 @@ type TimeflowPointSemanticStruct struct {
 // extends TimeflowPointParameters
 type TimeflowPointSnapshotStruct struct {
 	// Reference to the snapshot.
-	// referenceTo = /delphix-timeflow-snapshot.json
 	// required = true
 	// format = objectReference
+	// referenceTo = /delphix-timeflow-snapshot.json
 	Snapshot string `json:"snapshot,omitempty"`
 	// Object type.
 	// required = true
@@ -16775,8 +16775,8 @@ type TimeflowPointTimestampStruct struct {
 	// required = true
 	Timestamp string `json:"timestamp,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -16835,8 +16835,8 @@ type TimeflowRepairSSHStruct struct {
 	// required = true
 	StartLocation string `json:"startLocation,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 	// User name to authenticate as.
 	// required = true
@@ -16873,8 +16873,8 @@ type ToolkitStruct struct {
 	// locale when messages cannot be localized in a particular locale.
 	// If no messages are specified for the toolkit, the defaultLocale
 	// may be any locale.
-	// required = true
 	// format = locale
+	// required = true
 	DefaultLocale string `json:"defaultLocale,omitempty"`
 	// Definition of how to discover sources of this type.
 	// required = false
@@ -16883,8 +16883,8 @@ type ToolkitStruct struct {
 	// required = true
 	HostTypes []string `json:"hostTypes,omitempty"`
 	// Implementation language for workflows in this toolkit.
-	// required = true
 	// enum = [LUA PYTHON27]
+	// required = true
 	Language string `json:"language,omitempty"`
 	// Definition of how to link sources of this type.
 	// required = true
@@ -16899,8 +16899,8 @@ type ToolkitStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// A human readable name for the toolkit.
 	// required = true
@@ -16972,8 +16972,8 @@ type ToolkitDiscoveryDefinitionStruct struct {
 	// required = true
 	SourceConfigSchema *SchemaDraftV4Struct `json:"sourceConfigSchema,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -17185,10 +17185,10 @@ type TransformationStruct struct {
 	// update = optional
 	EnvironmentUser string `json:"environmentUser,omitempty"`
 	// Object name.
+	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
-	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -17205,9 +17205,9 @@ type TransformationStruct struct {
 	Reference string `json:"reference,omitempty"`
 	// Reference to the repository used during application of the
 	// transformation.
-	// format = objectReference
 	// referenceTo = /delphix-source-repository.json
 	// update = optional
+	// format = objectReference
 	Repository string `json:"repository,omitempty"`
 	// Object type.
 	// required = true
@@ -17219,9 +17219,9 @@ type TransformationStruct struct {
 // extends Host
 type UnixHostStruct struct {
 	// The address associated with the host.
+	// update = optional
 	// format = host
 	// create = required
-	// update = optional
 	Address string `json:"address,omitempty"`
 	// The date the host was added.
 	DateAdded string `json:"dateAdded,omitempty"`
@@ -17231,10 +17231,10 @@ type UnixHostStruct struct {
 	// minLength = 1
 	DspKeystoreAlias string `json:"dspKeystoreAlias,omitempty"`
 	// The password for the user managed DSP keystore.
+	// format = password
 	// create = optional
 	// update = optional
 	// minLength = 1
-	// format = password
 	DspKeystorePassword string `json:"dspKeystorePassword,omitempty"`
 	// The path to the user managed DSP keystore.
 	// create = optional
@@ -17242,15 +17242,15 @@ type UnixHostStruct struct {
 	// minLength = 1
 	DspKeystorePath string `json:"dspKeystorePath,omitempty"`
 	// The password for the user managed DSP truststore.
+	// create = optional
 	// update = optional
 	// minLength = 1
 	// format = password
-	// create = optional
 	DspTruststorePassword string `json:"dspTruststorePassword,omitempty"`
 	// The path to the user managed DSP truststore.
-	// create = optional
 	// update = optional
 	// minLength = 1
+	// create = optional
 	DspTruststorePath string `json:"dspTruststorePath,omitempty"`
 	// The host configuration object associated with the host.
 	HostConfiguration *HostConfigurationStruct `json:"hostConfiguration,omitempty"`
@@ -17262,8 +17262,8 @@ type UnixHostStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The list of host/IP addresses to use for NFS export.
 	// uniqueItems = true
@@ -17271,10 +17271,10 @@ type UnixHostStruct struct {
 	// update = optional
 	NfsAddressList []string `json:"nfsAddressList,omitempty"`
 	// The password for the user managed Oracle JDBC keystore.
-	// format = password
-	// create = optional
 	// update = optional
 	// minLength = 1
+	// format = password
+	// create = optional
 	OracleJdbcKeystorePassword string `json:"oracleJdbcKeystorePassword,omitempty"`
 	// Profile for escalating user privileges.
 	// create = optional
@@ -17287,11 +17287,11 @@ type UnixHostStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// The port number used to connect to the host via SSH.
-	// maximum = 65535
-	// create = optional
 	// update = optional
 	// default = 22
 	// minimum = 1
+	// maximum = 65535
+	// create = optional
 	SshPort *int `json:"sshPort,omitempty"`
 	// Mechanism to use for ssh host verification.
 	// create = optional
@@ -17340,9 +17340,9 @@ type UnixHostEnvironmentStruct struct {
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source
 	// environment.
+	// default = false
 	// create = optional
 	// update = optional
-	// default = false
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
 	// update = optional
@@ -17393,12 +17393,12 @@ type UpgradeCheckResultStruct struct {
 	// update = readonly
 	Action string `json:"action,omitempty"`
 	// A unique identifier for the type of the upgrade check result.
-	// update = readonly
 	// create = readonly
+	// update = readonly
 	BundleId string `json:"bundleId,omitempty"`
 	// A localized, textual description of the error.
-	// create = readonly
 	// update = readonly
+	// create = readonly
 	Description string `json:"description,omitempty"`
 	// A localized, textual description of the impact the error might
 	// have on the system.
@@ -17426,9 +17426,9 @@ type UpgradeCheckResultStruct struct {
 	Reference string `json:"reference,omitempty"`
 	// The severity of the missing upgrade requirement. CRITICAL check
 	// results block the upgrade.
-	// update = readonly
 	// enum = [WARNING CRITICAL INFORMATIONAL]
 	// create = readonly
+	// update = readonly
 	Severity string `json:"severity,omitempty"`
 	// The status of the upgrade check result.
 	// enum = [ACTIVE IGNORED RESOLVED]
@@ -17445,10 +17445,10 @@ type UpgradeCheckResultStruct struct {
 	Type string `json:"type,omitempty"`
 	// A reference to the upgrade version that generated this check
 	// result.
-	// format = objectReference
-	// referenceTo = /delphix-upgrade-version.json
 	// create = readonly
 	// update = readonly
+	// format = objectReference
+	// referenceTo = /delphix-upgrade-version.json
 	Version string `json:"version,omitempty"`
 }
 
@@ -17460,9 +17460,9 @@ type UpgradeCheckResultsVersionParametersStruct struct {
 	// create = optional
 	BundleId string `json:"bundleId,omitempty"`
 	// Reference to a single upgrade check result.
-	// referenceTo = /delphix-upgrade-check-result.json
 	// create = optional
 	// format = objectReference
+	// referenceTo = /delphix-upgrade-check-result.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -17474,10 +17474,10 @@ type UpgradeCheckResultsVersionParametersStruct struct {
 // extends CompatibleRepositoriesParameters
 type UpgradeCompatibilityParametersStruct struct {
 	// Restrict returned repositories to this environment.
+	// referenceTo = /delphix-source-environment.json
 	// create = optional
 	// update = optional
 	// format = objectReference
-	// referenceTo = /delphix-source-environment.json
 	Environment string `json:"environment,omitempty"`
 	// The repository to use as a source of compatibility information.
 	// required = true
@@ -17527,30 +17527,30 @@ type UserStruct struct {
 	// update = optional
 	FirstName string `json:"firstName,omitempty"`
 	// Home phone number of user.
-	// update = optional
 	// maxLength = 32
 	// create = optional
+	// update = optional
 	HomePhoneNumber string `json:"homePhoneNumber,omitempty"`
 	// True if this is the default user and cannot be deleted.
 	// create = optional
 	IsDefault *bool `json:"isDefault,omitempty"`
 	// Last name of user.
-	// create = optional
 	// update = optional
 	// maxLength = 64
+	// create = optional
 	LastName string `json:"lastName,omitempty"`
 	// Preferred locale as an IETF BCP 47 language tag, defaults to
 	// 'en-US'.
-	// maxLength = 16
-	// create = optional
 	// update = optional
 	// format = locale
 	// default = en-US
+	// maxLength = 16
+	// create = optional
 	Locale string `json:"locale,omitempty"`
 	// Mobile phone number of user.
+	// update = optional
 	// maxLength = 32
 	// create = optional
-	// update = optional
 	MobilePhoneNumber string `json:"mobilePhoneNumber,omitempty"`
 	// Name of user.
 	// create = required
@@ -17578,11 +17578,11 @@ type UserStruct struct {
 	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Session timeout in minutes.
-	// default = 30
 	// units = min
 	// create = optional
 	// update = optional
 	// minimum = 1
+	// default = 30
 	SessionTimeout *int `json:"sessionTimeout,omitempty"`
 	// Object type.
 	// required = true
@@ -17643,8 +17643,8 @@ type UserInterfaceConfigStruct struct {
 // extends BasePlatformParameters
 type VMwarePlatformParametersStruct struct {
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -17659,8 +17659,8 @@ type ValidateSMTPParametersStruct struct {
 	// required = true
 	Config *SMTPConfigStruct `json:"config,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -17675,8 +17675,8 @@ type VerifyVersionParametersStruct struct {
 	// default = false
 	Defer *bool `json:"defer,omitempty"`
 	// Object type.
-	// required = true
 	// format = type
+	// required = true
 	Type string `json:"type,omitempty"`
 }
 
@@ -17692,8 +17692,8 @@ type VersionInfoStruct struct {
 	// Patch version number.
 	Patch *int `json:"patch,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -17748,8 +17748,8 @@ type VirtualSourceOperationsStruct struct {
 	// update = optional
 	PostStart []SourceOperation `json:"postStart,omitempty"`
 	// Operations to perform after stopping a virtual source.
-	// create = optional
 	// update = optional
+	// create = optional
 	PostStop []SourceOperation `json:"postStop,omitempty"`
 	// Operations to perform before refreshing a virtual source. These
 	// operations can backup any data or configuration from the running
@@ -17773,12 +17773,12 @@ type VirtualSourceOperationsStruct struct {
 	// update = optional
 	PreStart []SourceOperation `json:"preStart,omitempty"`
 	// Operations to perform before stopping a virtual source.
-	// create = optional
 	// update = optional
+	// create = optional
 	PreStop []SourceOperation `json:"preStop,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -17790,29 +17790,29 @@ type WindowsClusterStruct struct {
 	// update = optional
 	Address string `json:"address,omitempty"`
 	// The environment description.
+	// create = optional
 	// update = optional
 	// maxLength = 1024
-	// create = optional
 	Description string `json:"description,omitempty"`
 	// Indicates whether the source environment is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source
 	// environment.
+	// update = optional
 	// default = false
 	// create = optional
-	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
-	// format = objectName
-	// create = optional
 	// update = optional
 	// maxLength = 256
+	// format = objectName
+	// create = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// referenceTo = /delphix-namespace.json
 	// format = objectReference
+	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// A reference to the primary user for this environment.
 	// format = objectReference
@@ -17821,10 +17821,10 @@ type WindowsClusterStruct struct {
 	PrimaryUser string `json:"primaryUser,omitempty"`
 	// A reference to the proxy that will be used to discover the
 	// cluster.
-	// create = required
-	// update = optional
 	// format = objectReference
 	// referenceTo = /delphix-host.json
+	// create = required
+	// update = optional
 	Proxy string `json:"proxy,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -17832,9 +17832,9 @@ type WindowsClusterStruct struct {
 	Reference string `json:"reference,omitempty"`
 	// A reference to the proxy host that will be used for cluster
 	// support operations.
+	// referenceTo = /delphix-host.json
 	// update = optional
 	// format = objectReference
-	// referenceTo = /delphix-host.json
 	TargetProxy string `json:"targetProxy,omitempty"`
 	// Object type.
 	// required = true
@@ -17878,13 +17878,13 @@ type WindowsClusterNodeStruct struct {
 	// Indicates whether the node is discovered.
 	Discovered *bool `json:"discovered,omitempty"`
 	// A reference to the physical host.
-	// format = objectReference
 	// referenceTo = /delphix-host.json
+	// format = objectReference
 	Host string `json:"host,omitempty"`
 	// Object name.
-	// update = optional
 	// maxLength = 256
 	// create = required
+	// update = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -17892,12 +17892,12 @@ type WindowsClusterNodeStruct struct {
 	// referenceTo = /delphix-namespace.json
 	Namespace string `json:"namespace,omitempty"`
 	// The object reference.
-	// format = objectReference
 	// referenceTo = /delphix-persistent-object.json
+	// format = objectReference
 	Reference string `json:"reference,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -17905,9 +17905,9 @@ type WindowsClusterNodeStruct struct {
 // extends Host
 type WindowsHostStruct struct {
 	// The address associated with the host.
+	// update = optional
 	// format = host
 	// create = required
-	// update = optional
 	Address string `json:"address,omitempty"`
 	// Unique per Delphix key used to authenticate with the remote
 	// Delphix Connector.
@@ -17926,10 +17926,10 @@ type WindowsHostStruct struct {
 	// minLength = 1
 	DspKeystoreAlias string `json:"dspKeystoreAlias,omitempty"`
 	// The password for the user managed DSP keystore.
-	// minLength = 1
-	// format = password
 	// create = optional
 	// update = optional
+	// minLength = 1
+	// format = password
 	DspKeystorePassword string `json:"dspKeystorePassword,omitempty"`
 	// The path to the user managed DSP keystore.
 	// create = optional
@@ -17937,15 +17937,15 @@ type WindowsHostStruct struct {
 	// minLength = 1
 	DspKeystorePath string `json:"dspKeystorePath,omitempty"`
 	// The password for the user managed DSP truststore.
-	// create = optional
-	// update = optional
 	// minLength = 1
 	// format = password
-	DspTruststorePassword string `json:"dspTruststorePassword,omitempty"`
-	// The path to the user managed DSP truststore.
 	// create = optional
 	// update = optional
+	DspTruststorePassword string `json:"dspTruststorePassword,omitempty"`
+	// The path to the user managed DSP truststore.
+	// update = optional
 	// minLength = 1
+	// create = optional
 	DspTruststorePath string `json:"dspTruststorePath,omitempty"`
 	// The host configuration object associated with the host.
 	HostConfiguration *HostConfigurationStruct `json:"hostConfiguration,omitempty"`
@@ -17957,19 +17957,19 @@ type WindowsHostStruct struct {
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
-	// format = objectReference
 	// referenceTo = /delphix-namespace.json
+	// format = objectReference
 	Namespace string `json:"namespace,omitempty"`
 	// The list of host/IP addresses to use for NFS export.
-	// create = optional
 	// update = optional
 	// uniqueItems = true
+	// create = optional
 	NfsAddressList []string `json:"nfsAddressList,omitempty"`
 	// Profile for escalating user privileges.
-	// format = objectReference
 	// create = optional
 	// update = optional
 	// referenceTo = /delphix-host-privilege-elevation-profile.json
+	// format = objectReference
 	PrivilegeElevationProfile string `json:"privilegeElevationProfile,omitempty"`
 	// The object reference.
 	// format = objectReference
@@ -17987,8 +17987,8 @@ type WindowsHostStruct struct {
 	// update = readonly
 	ToolkitPath string `json:"toolkitPath,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -18015,8 +18015,8 @@ type WindowsHostEnvironmentStruct struct {
 	// Indicates whether the source environment is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The reference to the associated host.
-	// referenceTo = /delphix-host.json
 	// format = objectReference
+	// referenceTo = /delphix-host.json
 	Host string `json:"host,omitempty"`
 	// Flag indicating whether it is allowed to collect logs, potentially
 	// containing sensitive information, related to this source
@@ -18026,10 +18026,10 @@ type WindowsHostEnvironmentStruct struct {
 	// update = optional
 	LogCollectionEnabled *bool `json:"logCollectionEnabled,omitempty"`
 	// Object name.
-	// create = optional
-	// update = optional
 	// maxLength = 256
 	// format = objectName
+	// create = optional
+	// update = optional
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -18048,8 +18048,8 @@ type WindowsHostEnvironmentStruct struct {
 	// update = optional
 	Proxy string `json:"proxy,omitempty"`
 	// The object reference.
-	// referenceTo = /delphix-persistent-object.json
 	// format = objectReference
+	// referenceTo = /delphix-persistent-object.json
 	Reference string `json:"reference,omitempty"`
 	// Object type.
 	// required = true
@@ -18061,12 +18061,12 @@ type WindowsHostEnvironmentStruct struct {
 // extends TypedObject
 type WorkflowFunctionDefinitionStruct struct {
 	// The input schema for this function according to DRAFTV4.
-	// create = required
 	// update = optional
+	// create = required
 	InputSchema *SchemaDraftV4Struct `json:"inputSchema,omitempty"`
 	// The name of this function.
-	// update = optional
 	// create = required
+	// update = optional
 	Name string `json:"name,omitempty"`
 	// The output schema for this function according to DRAFTV4.
 	// create = required
@@ -18130,10 +18130,10 @@ type X509CertificateStruct struct {
 	// MD5 fingerprint.
 	Md5Fingerprint string `json:"md5Fingerprint,omitempty"`
 	// Object name.
-	// maxLength = 256
 	// format = objectName
 	// create = optional
 	// update = optional
+	// maxLength = 256
 	Name string `json:"name,omitempty"`
 	// Alternate namespace for this object, for replicated and restored
 	// objects.
@@ -18149,8 +18149,8 @@ type X509CertificateStruct struct {
 	// SHA-1 fingerprint.
 	Sha1Fingerprint string `json:"sha1Fingerprint,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 	// Start of validity.
 	ValidFrom string `json:"validFrom,omitempty"`
@@ -18163,10 +18163,10 @@ type X509CertificateStruct struct {
 // extends CompatibleRepositoriesParameters
 type XPPCompatibilityParametersStruct struct {
 	// Restrict returned repositories to this environment.
-	// format = objectReference
-	// referenceTo = /delphix-source-environment.json
 	// create = optional
 	// update = optional
+	// format = objectReference
+	// referenceTo = /delphix-source-environment.json
 	Environment string `json:"environment,omitempty"`
 	// The TimeFlow point to use as a source of compatibility
 	// information.
@@ -18174,8 +18174,8 @@ type XPPCompatibilityParametersStruct struct {
 	// required = true
 	TimeflowPointParameters TimeflowPointParameters `json:"timeflowPointParameters,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 
@@ -18187,8 +18187,8 @@ type XppLastRunStatusStruct struct {
 	// Last cross-platform provision job run on the container.
 	Job *JobStruct `json:"job,omitempty"`
 	// Object type.
-	// format = type
 	// required = true
+	// format = type
 	Type string `json:"type,omitempty"`
 }
 

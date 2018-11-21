@@ -156,85 +156,85 @@ func TestInitialSetup(t *testing.T) {
 // 	}
 // }
 
-// func TestClient_CreateEnvironment(t *testing.T) {
-// 	type fields struct {
-// 		url      string
-// 		username string
-// 		password string
-// 	}
-// 	type args struct {
-// 		h *HostEnvironmentCreateParameters
-// 	}
-// 	tests := []struct {
-// 		name    string
-// 		fields  fields
-// 		args    args
-// 		want    interface{}
-// 		wantErr bool
-// 	}{
-// 		// TODO: Add test cases.
-// 		{
-// 			name: "test1",
-// 			fields: fields{
-// 				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
-// 				username: testAccDelphixAdminClient.username,
-// 				password: testAccDelphixAdminClient.password,
-// 			},
-// 			want:    "An environment reference",
-// 			wantErr: false,
-// 			args: args{
-// 				h: &HostEnvironmentCreateParameters{
-// 					Type: "HostEnvironmentCreateParameters",
-// 					PrimaryUser: &EnvironmentUser{
-// 						Type: "EnvironmentUser",
-// 						Name: "delphix",
-// 						Credential: &PasswordCredential{
-// 							Type:     "PasswordCredential",
-// 							Password: "delphix",
-// 						},
-// 					},
-// 					HostEnvironment: &UnixHostEnvironment{
-// 						Type: "UnixHostEnvironment",
-// 						Name: "LINUXSOURCE",
-// 					},
-// 					HostParameters: &UnixHostCreateParameters{
-// 						Type: "UnixHostCreateParameters",
-// 						Host: &UnixHost{
-// 							Type:        "UnixHost",
-// 							Address:     "LINUXSOURCE",
-// 							ToolkitPath: "/u01/app/toolkit",
-// 						},
-// 					},
-// 				},
-// 			},
-// 		},
-// 	}
-// 	for _, tt := range tests {
-// 		t.Run(tt.name, func(t *testing.T) {
-// 			c := &Client{
-// 				url:      tt.fields.url,
-// 				username: tt.fields.username,
-// 				password: tt.fields.password,
-// 			}
-// 			fmt.Println(c)
-// 			err := c.LoadAndValidate()
-// 			if err != nil {
-// 				t.Errorf("Cannot get session: %v", err)
-// 				return
-// 			}
-// 			got, err := c.CreateEnvironment(tt.args.h)
-// 			if (err != nil) != tt.wantErr {
-// 				t.Errorf("Client.CreateEnvironment() error = %v, wantErr %v", err, tt.wantErr)
-// 				return
-// 			}
-// 			if got == nil {
-// 				t.Errorf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
-// 			} else {
-// 				log.Printf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
-// 			}
-// 		})
-// 	}
-// }
+func TestClient_CreateEnvironment(t *testing.T) {
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	type args struct {
+		h *HostEnvironmentCreateParametersStruct
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    interface{}
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			name: "test1",
+			fields: fields{
+				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+				username: testAccDelphixAdminClient.username,
+				password: testAccDelphixAdminClient.password,
+			},
+			want:    "An environment reference",
+			wantErr: false,
+			args: args{
+				h: &HostEnvironmentCreateParametersStruct{
+					Type: "HostEnvironmentCreateParameters",
+					PrimaryUser: &EnvironmentUserStruct{
+						Type: "EnvironmentUser",
+						Name: "delphix",
+						Credential: &PasswordCredentialStruct{
+							Type:     "PasswordCredential",
+							Password: "delphix",
+						},
+					},
+					HostEnvironment: &UnixHostEnvironmentStruct{
+						Type: "UnixHostEnvironment",
+						Name: "LINUXSOURCE",
+					},
+					HostParameters: &UnixHostCreateParametersStruct{
+						Type: "UnixHostCreateParameters",
+						Host: &UnixHostStruct{
+							Type:        "UnixHost",
+							Address:     "LINUXSOURCE",
+							ToolkitPath: "/u01/app/toolkit",
+						},
+					},
+				},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			fmt.Println(c)
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			got, err := c.CreateEnvironment(tt.args.h)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.CreateEnvironment() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got == nil {
+				t.Errorf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
+			} else {
+				log.Printf("Client.CreateEnvironment() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 
 // func TestClient_CreateEnvironmentWithKey(t *testing.T) {
 // 	type fields struct {
@@ -499,94 +499,94 @@ func TestInitialSetup(t *testing.T) {
 // 	}
 // }
 
-func TestClient_CreateDatabase(t *testing.T) {
-	f := new(bool)
-	*f = false
+// func TestClient_CreateDatabase(t *testing.T) {
+// 	f := new(bool)
+// 	*f = false
 
-	type fields struct {
-		url      string
-		username string
-		password string
-	}
-	type args struct {
-		o *OracleProvisionParametersStruct
-	}
-	tests := []struct {
-		name    string
-		fields  fields
-		args    args
-		want    interface{}
-		wantErr bool
-	}{
-		// TODO: Add test cases.
-		{
-			name: "test1",
-			fields: fields{
-				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
-				username: testAccDelphixAdminClient.username,
-				password: testAccDelphixAdminClient.password,
-			},
-			want:    "A VDB reference",
-			wantErr: false,
-			args: args{
-				&OracleProvisionParametersStruct{
-					Type: "OracleProvisionParameters",
-					Container: &OracleDatabaseContainerStruct{
-						Type:  "OracleDatabaseContainer",
-						Name:  testAccVDBName,
-						Group: "GROUP-35",
-					},
-					Source: &OracleVirtualSourceStruct{
-						Type:                            "OracleVirtualSource",
-						MountBase:                       "/mnt/provision",
-						AllowAutoVDBRestartOnHostReboot: f,
-					},
-					SourceConfig: &OracleSIConfigStruct{
-						Type:         "OracleSIConfig",
-						Repository:   "ORACLE_INSTALL-38",
-						DatabaseName: "unit",
-						UniqueName:   "unit",
-						Instance: &OracleInstanceStruct{
-							Type:           "OracleInstance",
-							InstanceName:   "unit",
-							InstanceNumber: 1,
-						},
-					},
-					TimeflowPointParameters: TimeflowPointSemanticStruct{
-						Type:      "TimeflowPointSemantic",
-						Container: "ORACLE_DB_CONTAINER-14",
-						Location:  "LATEST_SNAPSHOT",
-					},
-				},
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			c := &Client{
-				url:      tt.fields.url,
-				username: tt.fields.username,
-				password: tt.fields.password,
-			}
-			fmt.Println(c)
-			err := c.LoadAndValidate()
-			if err != nil {
-				t.Errorf("Cannot get session: %v", err)
-				return
-			}
-			got, err := c.CreateDatabase(tt.args.o)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Client.CreateDatabase() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-			if got == nil {
-				t.Errorf("Client.CreateDatabase() got = %v, want %v", got, tt.want)
-			} else {
-				log.Printf("Client.CreateDatabase() got = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
+// 	type fields struct {
+// 		url      string
+// 		username string
+// 		password string
+// 	}
+// 	type args struct {
+// 		o *OracleProvisionParametersStruct
+// 	}
+// 	tests := []struct {
+// 		name    string
+// 		fields  fields
+// 		args    args
+// 		want    interface{}
+// 		wantErr bool
+// 	}{
+// 		// TODO: Add test cases.
+// 		{
+// 			name: "test1",
+// 			fields: fields{
+// 				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+// 				username: testAccDelphixAdminClient.username,
+// 				password: testAccDelphixAdminClient.password,
+// 			},
+// 			want:    "A VDB reference",
+// 			wantErr: false,
+// 			args: args{
+// 				&OracleProvisionParametersStruct{
+// 					Type: "OracleProvisionParameters",
+// 					Container: &OracleDatabaseContainerStruct{
+// 						Type:  "OracleDatabaseContainer",
+// 						Name:  testAccVDBName,
+// 						Group: "GROUP-35",
+// 					},
+// 					Source: &OracleVirtualSourceStruct{
+// 						Type:                            "OracleVirtualSource",
+// 						MountBase:                       "/mnt/provision",
+// 						AllowAutoVDBRestartOnHostReboot: f,
+// 					},
+// 					SourceConfig: &OracleSIConfigStruct{
+// 						Type:         "OracleSIConfig",
+// 						Repository:   "ORACLE_INSTALL-38",
+// 						DatabaseName: "unit",
+// 						UniqueName:   "unit",
+// 						Instance: &OracleInstanceStruct{
+// 							Type:           "OracleInstance",
+// 							InstanceName:   "unit",
+// 							InstanceNumber: 1,
+// 						},
+// 					},
+// 					TimeflowPointParameters: TimeflowPointSemanticStruct{
+// 						Type:      "TimeflowPointSemantic",
+// 						Container: "ORACLE_DB_CONTAINER-14",
+// 						Location:  "LATEST_SNAPSHOT",
+// 					},
+// 				},
+// 			},
+// 		},
+// 	}
+// 	for _, tt := range tests {
+// 		t.Run(tt.name, func(t *testing.T) {
+// 			c := &Client{
+// 				url:      tt.fields.url,
+// 				username: tt.fields.username,
+// 				password: tt.fields.password,
+// 			}
+// 			fmt.Println(c)
+// 			err := c.LoadAndValidate()
+// 			if err != nil {
+// 				t.Errorf("Cannot get session: %v", err)
+// 				return
+// 			}
+// 			got, err := c.CreateDatabase(tt.args.o)
+// 			if (err != nil) != tt.wantErr {
+// 				t.Errorf("Client.CreateDatabase() error = %v, wantErr %v", err, tt.wantErr)
+// 				return
+// 			}
+// 			if got == nil {
+// 				t.Errorf("Client.CreateDatabase() got = %v, want %v", got, tt.want)
+// 			} else {
+// 				log.Printf("Client.CreateDatabase() got = %v, want %v", got, tt.want)
+// 			}
+// 		})
+// 	}
+// }
 
 // func TestClient_CreateDSource(t *testing.T) {
 // 	fbool := new(bool)
@@ -1166,6 +1166,86 @@ func TestClient_SyncDatabase(t *testing.T) {
 			err = c.SyncDatabase(got.(string))
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.SyncDatabase() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+		})
+	}
+}
+
+func TestClient_CreateDSource(t *testing.T) {
+	fbool := new(bool)
+	*fbool = false
+	tbool := new(bool)
+	*tbool = true
+	type fields struct {
+		url      string
+		username string
+		password string
+	}
+	type args struct {
+		n   string
+		g   string
+		dbu string
+		dbp string
+		eu  string
+		oh  string
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		args    args
+		want    interface{}
+		wantErr bool
+	}{
+		// TODO: Add test cases.
+		{
+			name: "test1",
+			fields: fields{
+				url:      testAccDelphixAdminClient.url + "/resources/json/delphix",
+				username: testAccDelphixAdminClient.username,
+				password: testAccDelphixAdminClient.password,
+			},
+			want:    "A dSource reference",
+			wantErr: false,
+			args: args{
+				n:   "Employee Oracle 11G DB",
+				g:   "GROUP-1",
+				dbu: "delphixdb",
+				dbp: "delphixdb",
+				eu:  "delphix",
+				oh:  "/u01/app/oracle/product/11.2.0.4/db_1",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Client{
+				url:      tt.fields.url,
+				username: tt.fields.username,
+				password: tt.fields.password,
+			}
+			err := c.LoadAndValidate()
+			if err != nil {
+				t.Errorf("Cannot get session: %v", err)
+				return
+			}
+			pC := PasswordCredentialFactory(tt.args.dbp)
+			envRef, err := c.FindEnvironmentByName("LINUXSOURCE")
+			euObj, err := c.FindEnvironmentUserRefByNameAndEnvironmentReference(tt.args.eu, envRef.(map[string]interface{})["reference"].(string))
+			repoRef, err := c.FindRepoReferenceByEnvironmentRefAndOracleHome(envRef.(map[string]interface{})["reference"].(string), tt.args.oh)
+			sourceConfig, err := c.FindSourceConfigReferenceByNameAndRepoReference("orcl", repoRef)
+			lD := OracleLinkDataFactory(nil, nil, nil, nil, sourceConfig,
+				&pC, tt.args.dbu, nil, nil, nil, euObj,
+				"", nil, nil, nil, "", nil, nil, nil, nil, nil, nil)
+			groupObj, err := c.FindGroupRefByName("Untitled")
+			params := LinkParametersFactory("", groupObj, lD, tt.args.n)
+			got, err := c.CreateDSource(&params)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Client.CreateDSource() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if got == nil {
+				t.Errorf("Client.CreateDSource() did not return a dSource reference")
 				return
 			}
 		})
