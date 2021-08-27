@@ -3,6 +3,7 @@ package delphix
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	resty "gopkg.in/resty.v1"
@@ -12,8 +13,12 @@ func (c *Client) executePostJobAndReturnObjectReference(u string, p interface{})
 	interface{}, error) {
 
 	postBody := p
+	log.Println("postBody:::")
+	log.Println(postBody)
 	//DEBUG
 	tbEnc, err := json.Marshal(postBody)
+	log.Println("tbEnc:::")
+	log.Println(tbEnc)
 	fmt.Println(string(tbEnc))
 	//DEBUG
 	resp, err := resty.R().

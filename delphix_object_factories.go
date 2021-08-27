@@ -52,6 +52,7 @@ func ASEAttachDataFactory(
 	DbCredentials Credential,
 	DbUser string,
 	DumpCredentials string,
+	DumpHistoryFileEnabled *bool,
 	ExternalFilePath string,
 	LoadBackupPath string,
 	LoadLocation string,
@@ -59,28 +60,31 @@ func ASEAttachDataFactory(
 	Operations *LinkedSourceOperationsStruct,
 	SourceHostUser string,
 	StagingHostUser string,
+	StagingOperations *StagingSourceOperationsStruct,
 	StagingPostScript string,
 	StagingPreScript string,
 	StagingRepository string,
 	ValidatedSyncMode string,
 ) ASEAttachDataStruct {
 	return ASEAttachDataStruct{
-		Type:              "ASEAttachData",
-		Config:            Config,
-		DbCredentials:     DbCredentials,
-		DbUser:            DbUser,
-		DumpCredentials:   DumpCredentials,
-		ExternalFilePath:  ExternalFilePath,
-		LoadBackupPath:    LoadBackupPath,
-		LoadLocation:      LoadLocation,
-		MountBase:         MountBase,
-		Operations:        Operations,
-		SourceHostUser:    SourceHostUser,
-		StagingHostUser:   StagingHostUser,
-		StagingPostScript: StagingPostScript,
-		StagingPreScript:  StagingPreScript,
-		StagingRepository: StagingRepository,
-		ValidatedSyncMode: ValidatedSyncMode,
+		Type:                   "ASEAttachData",
+		Config:                 Config,
+		DbCredentials:          DbCredentials,
+		DbUser:                 DbUser,
+		DumpCredentials:        DumpCredentials,
+		DumpHistoryFileEnabled: DumpHistoryFileEnabled,
+		ExternalFilePath:       ExternalFilePath,
+		LoadBackupPath:         LoadBackupPath,
+		LoadLocation:           LoadLocation,
+		MountBase:              MountBase,
+		Operations:             Operations,
+		SourceHostUser:         SourceHostUser,
+		StagingHostUser:        StagingHostUser,
+		StagingOperations:      StagingOperations,
+		StagingPostScript:      StagingPostScript,
+		StagingPreScript:       StagingPreScript,
+		StagingRepository:      StagingRepository,
+		ValidatedSyncMode:      ValidatedSyncMode,
 	}
 }
 
@@ -129,6 +133,18 @@ func ASECreateTransformationParametersFactory(
 		EnvironmentUser: EnvironmentUser,
 		Operations:      Operations,
 		Repository:      Repository,
+	}
+}
+
+// ASEDBConfigConnectivityFactory is just a simple function to instantiate the ASEDBConfigConnectivityStruct
+func ASEDBConfigConnectivityFactory(
+	Credentials Credential,
+	Username string,
+) ASEDBConfigConnectivityStruct {
+	return ASEDBConfigConnectivityStruct{
+		Type:        "ASEDBConfigConnectivity",
+		Credentials: Credentials,
+		Username:    Username,
 	}
 }
 
@@ -221,12 +237,12 @@ func ASEInstanceFactory(
 	Credentials Credential,
 	DbUser string,
 	Discovered *bool,
+	DumpHistoryFile string,
 	Environment string,
 	InstallationPath string,
 	InstanceName string,
 	InstanceOwner string,
 	IsqlPath string,
-	LinkingEnabled *bool,
 	Name string,
 	Namespace string,
 	PageSize *int,
@@ -242,12 +258,12 @@ func ASEInstanceFactory(
 		Credentials:          Credentials,
 		DbUser:               DbUser,
 		Discovered:           Discovered,
+		DumpHistoryFile:      DumpHistoryFile,
 		Environment:          Environment,
 		InstallationPath:     InstallationPath,
 		InstanceName:         InstanceName,
 		InstanceOwner:        InstanceOwner,
 		IsqlPath:             IsqlPath,
-		LinkingEnabled:       LinkingEnabled,
 		Name:                 Name,
 		Namespace:            Namespace,
 		PageSize:             PageSize,
@@ -261,9 +277,12 @@ func ASEInstanceFactory(
 }
 
 // ASELatestBackupSyncParametersFactory is just a simple function to instantiate the ASELatestBackupSyncParametersStruct
-func ASELatestBackupSyncParametersFactory() ASELatestBackupSyncParametersStruct {
+func ASELatestBackupSyncParametersFactory(
+	DropAndRecreateDevices *bool,
+) ASELatestBackupSyncParametersStruct {
 	return ASELatestBackupSyncParametersStruct{
-		Type: "ASELatestBackupSyncParameters",
+		Type:                   "ASELatestBackupSyncParameters",
+		DropAndRecreateDevices: DropAndRecreateDevices,
 	}
 }
 
@@ -273,6 +292,7 @@ func ASELinkDataFactory(
 	DbCredentials Credential,
 	DbUser string,
 	DumpCredentials string,
+	DumpHistoryFileEnabled *bool,
 	ExternalFilePath string,
 	LoadBackupPath string,
 	LoadLocation string,
@@ -281,6 +301,7 @@ func ASELinkDataFactory(
 	SourceHostUser string,
 	SourcingPolicy *SourcingPolicyStruct,
 	StagingHostUser string,
+	StagingOperations *StagingSourceOperationsStruct,
 	StagingPostScript string,
 	StagingPreScript string,
 	StagingRepository string,
@@ -288,24 +309,26 @@ func ASELinkDataFactory(
 	ValidatedSyncMode string,
 ) ASELinkDataStruct {
 	return ASELinkDataStruct{
-		Type:              "ASELinkData",
-		Config:            Config,
-		DbCredentials:     DbCredentials,
-		DbUser:            DbUser,
-		DumpCredentials:   DumpCredentials,
-		ExternalFilePath:  ExternalFilePath,
-		LoadBackupPath:    LoadBackupPath,
-		LoadLocation:      LoadLocation,
-		MountBase:         MountBase,
-		Operations:        Operations,
-		SourceHostUser:    SourceHostUser,
-		SourcingPolicy:    SourcingPolicy,
-		StagingHostUser:   StagingHostUser,
-		StagingPostScript: StagingPostScript,
-		StagingPreScript:  StagingPreScript,
-		StagingRepository: StagingRepository,
-		SyncParameters:    SyncParameters,
-		ValidatedSyncMode: ValidatedSyncMode,
+		Type:                   "ASELinkData",
+		Config:                 Config,
+		DbCredentials:          DbCredentials,
+		DbUser:                 DbUser,
+		DumpCredentials:        DumpCredentials,
+		DumpHistoryFileEnabled: DumpHistoryFileEnabled,
+		ExternalFilePath:       ExternalFilePath,
+		LoadBackupPath:         LoadBackupPath,
+		LoadLocation:           LoadLocation,
+		MountBase:              MountBase,
+		Operations:             Operations,
+		SourceHostUser:         SourceHostUser,
+		SourcingPolicy:         SourcingPolicy,
+		StagingHostUser:        StagingHostUser,
+		StagingOperations:      StagingOperations,
+		StagingPostScript:      StagingPostScript,
+		StagingPreScript:       StagingPreScript,
+		StagingRepository:      StagingRepository,
+		SyncParameters:         SyncParameters,
+		ValidatedSyncMode:      ValidatedSyncMode,
 	}
 }
 
@@ -315,6 +338,7 @@ func ASELinkedSourceFactory(
 	Container string,
 	Description string,
 	DumpCredentials string,
+	DumpHistoryFileEnabled *bool,
 	ExternalFilePath string,
 	Hosts []string,
 	Linked *bool,
@@ -333,34 +357,38 @@ func ASELinkedSourceFactory(
 	Virtual *bool,
 ) ASELinkedSourceStruct {
 	return ASELinkedSourceStruct{
-		Type:                 "ASELinkedSource",
-		Config:               Config,
-		Container:            Container,
-		Description:          Description,
-		DumpCredentials:      DumpCredentials,
-		ExternalFilePath:     ExternalFilePath,
-		Hosts:                Hosts,
-		Linked:               Linked,
-		LoadBackupPath:       LoadBackupPath,
-		LoadLocation:         LoadLocation,
-		LogCollectionEnabled: LogCollectionEnabled,
-		Name:                 Name,
-		Namespace:            Namespace,
-		Operations:           Operations,
-		Reference:            Reference,
-		Runtime:              Runtime,
-		Staging:              Staging,
-		StagingSource:        StagingSource,
-		Status:               Status,
-		ValidatedSyncMode:    ValidatedSyncMode,
-		Virtual:              Virtual,
+		Type:                   "ASELinkedSource",
+		Config:                 Config,
+		Container:              Container,
+		Description:            Description,
+		DumpCredentials:        DumpCredentials,
+		DumpHistoryFileEnabled: DumpHistoryFileEnabled,
+		ExternalFilePath:       ExternalFilePath,
+		Hosts:                  Hosts,
+		Linked:                 Linked,
+		LoadBackupPath:         LoadBackupPath,
+		LoadLocation:           LoadLocation,
+		LogCollectionEnabled:   LogCollectionEnabled,
+		Name:                   Name,
+		Namespace:              Namespace,
+		Operations:             Operations,
+		Reference:              Reference,
+		Runtime:                Runtime,
+		Staging:                Staging,
+		StagingSource:          StagingSource,
+		Status:                 Status,
+		ValidatedSyncMode:      ValidatedSyncMode,
+		Virtual:                Virtual,
 	}
 }
 
 // ASENewBackupSyncParametersFactory is just a simple function to instantiate the ASENewBackupSyncParametersStruct
-func ASENewBackupSyncParametersFactory() ASENewBackupSyncParametersStruct {
+func ASENewBackupSyncParametersFactory(
+	DropAndRecreateDevices *bool,
+) ASENewBackupSyncParametersStruct {
 	return ASENewBackupSyncParametersStruct{
-		Type: "ASENewBackupSyncParameters",
+		Type:                   "ASENewBackupSyncParameters",
+		DropAndRecreateDevices: DropAndRecreateDevices,
 	}
 }
 
@@ -426,6 +454,7 @@ func ASESnapshotFactory(
 	Consistency string,
 	Container string,
 	CreationTime string,
+	DbEncryptionKey string,
 	FirstChangePoint *ASETimeflowPointStruct,
 	LatestChangePoint *ASETimeflowPointStruct,
 	MissingNonLoggedData *bool,
@@ -444,6 +473,7 @@ func ASESnapshotFactory(
 		Consistency:          Consistency,
 		Container:            Container,
 		CreationTime:         CreationTime,
+		DbEncryptionKey:      DbEncryptionKey,
 		FirstChangePoint:     FirstChangePoint,
 		LatestChangePoint:    LatestChangePoint,
 		MissingNonLoggedData: MissingNonLoggedData,
@@ -516,10 +546,12 @@ func ASESourceRuntimeFactory(
 // ASESpecificBackupSyncParametersFactory is just a simple function to instantiate the ASESpecificBackupSyncParametersStruct
 func ASESpecificBackupSyncParametersFactory(
 	BackupFiles []string,
+	DropAndRecreateDevices *bool,
 ) ASESpecificBackupSyncParametersStruct {
 	return ASESpecificBackupSyncParametersStruct{
-		Type:        "ASESpecificBackupSyncParameters",
-		BackupFiles: BackupFiles,
+		Type:                   "ASESpecificBackupSyncParameters",
+		BackupFiles:            BackupFiles,
+		DropAndRecreateDevices: DropAndRecreateDevices,
 	}
 }
 
@@ -534,6 +566,7 @@ func ASEStagingSourceFactory(
 	MountBase string,
 	Name string,
 	Namespace string,
+	Operations *StagingSourceOperationsStruct,
 	PostScript string,
 	PreScript string,
 	Reference string,
@@ -553,6 +586,7 @@ func ASEStagingSourceFactory(
 		MountBase:            MountBase,
 		Name:                 Name,
 		Namespace:            Namespace,
+		Operations:           Operations,
 		PostScript:           PostScript,
 		PreScript:            PreScript,
 		Reference:            Reference,
@@ -655,7 +689,6 @@ func ActionFactory(
 	OriginIp string,
 	ParentAction string,
 	Reference string,
-	Report string,
 	StartTime string,
 	State string,
 	Title string,
@@ -663,27 +696,35 @@ func ActionFactory(
 	UserAgent string,
 	WorkSource string,
 	WorkSourceName string,
+	WorkSourcePrincipal string,
 ) ActionStruct {
 	return ActionStruct{
-		Type:               "Action",
-		ActionType:         ActionType,
-		Details:            Details,
-		EndTime:            EndTime,
-		FailureAction:      FailureAction,
-		FailureDescription: FailureDescription,
-		FailureMessageCode: FailureMessageCode,
-		Namespace:          Namespace,
-		OriginIp:           OriginIp,
-		ParentAction:       ParentAction,
-		Reference:          Reference,
-		Report:             Report,
-		StartTime:          StartTime,
-		State:              State,
-		Title:              Title,
-		User:               User,
-		UserAgent:          UserAgent,
-		WorkSource:         WorkSource,
-		WorkSourceName:     WorkSourceName,
+		Type:                "Action",
+		ActionType:          ActionType,
+		Details:             Details,
+		EndTime:             EndTime,
+		FailureAction:       FailureAction,
+		FailureDescription:  FailureDescription,
+		FailureMessageCode:  FailureMessageCode,
+		Namespace:           Namespace,
+		OriginIp:            OriginIp,
+		ParentAction:        ParentAction,
+		Reference:           Reference,
+		StartTime:           StartTime,
+		State:               State,
+		Title:               Title,
+		User:                User,
+		UserAgent:           UserAgent,
+		WorkSource:          WorkSource,
+		WorkSourceName:      WorkSourceName,
+		WorkSourcePrincipal: WorkSourcePrincipal,
+	}
+}
+
+// AdvancedSettingsInfoFactory is just a simple function to instantiate the AdvancedSettingsInfoStruct
+func AdvancedSettingsInfoFactory() AdvancedSettingsInfoStruct {
+	return AdvancedSettingsInfoStruct{
+		Type: "AdvancedSettingsInfo",
 	}
 }
 
@@ -749,6 +790,7 @@ func AlertProfileFactory(
 	FilterSpec AlertFilter,
 	Namespace string,
 	Reference string,
+	User string,
 ) AlertProfileStruct {
 	return AlertProfileStruct{
 		Type:       "AlertProfile",
@@ -756,6 +798,7 @@ func AlertProfileFactory(
 		FilterSpec: FilterSpec,
 		Namespace:  Namespace,
 		Reference:  Reference,
+		User:       User,
 	}
 }
 
@@ -880,6 +923,7 @@ func AppDataDirectLinkDataFactory(
 	Operations *LinkedSourceOperationsStruct,
 	Parameters *JsonStruct,
 	SourcingPolicy *SourcingPolicyStruct,
+	SyncParameters *AppDataSyncParametersStruct,
 ) AppDataDirectLinkDataStruct {
 	return AppDataDirectLinkDataStruct{
 		Type:            "AppDataDirectLinkData",
@@ -890,6 +934,7 @@ func AppDataDirectLinkDataFactory(
 		Operations:      Operations,
 		Parameters:      Parameters,
 		SourcingPolicy:  SourcingPolicy,
+		SyncParameters:  SyncParameters,
 	}
 }
 
@@ -1065,7 +1110,7 @@ func AppDataProvisionParametersFactory(
 	Masked *bool,
 	MaskingJob string,
 	Source *AppDataVirtualSourceStruct,
-	SourceConfig AppDataSourceConfig,
+	SourceConfig *AppDataDirectSourceConfigStruct,
 	TimeflowPointParameters TimeflowPointParameters,
 ) AppDataProvisionParametersStruct {
 	return AppDataProvisionParametersStruct{
@@ -1082,7 +1127,6 @@ func AppDataProvisionParametersFactory(
 // AppDataRepositoryFactory is just a simple function to instantiate the AppDataRepositoryStruct
 func AppDataRepositoryFactory(
 	Environment string,
-	LinkingEnabled *bool,
 	Name string,
 	Namespace string,
 	Parameters *JsonStruct,
@@ -1095,7 +1139,6 @@ func AppDataRepositoryFactory(
 	return AppDataRepositoryStruct{
 		Type:                "AppDataRepository",
 		Environment:         Environment,
-		LinkingEnabled:      LinkingEnabled,
 		Name:                Name,
 		Namespace:           Namespace,
 		Parameters:          Parameters,
@@ -1203,6 +1246,7 @@ func AppDataStagedLinkDataFactory(
 	StagingEnvironment string,
 	StagingEnvironmentUser string,
 	StagingMountBase string,
+	SyncParameters *AppDataSyncParametersStruct,
 ) AppDataStagedLinkDataStruct {
 	return AppDataStagedLinkDataStruct{
 		Type:                   "AppDataStagedLinkData",
@@ -1214,6 +1258,7 @@ func AppDataStagedLinkDataFactory(
 		StagingEnvironment:     StagingEnvironment,
 		StagingEnvironmentUser: StagingEnvironmentUser,
 		StagingMountBase:       StagingMountBase,
+		SyncParameters:         SyncParameters,
 	}
 }
 
@@ -1245,11 +1290,11 @@ func AppDataStagedSourceConfigFactory(
 
 // AppDataSyncParametersFactory is just a simple function to instantiate the AppDataSyncParametersStruct
 func AppDataSyncParametersFactory(
-	Resync *bool,
+	Parameters *JsonStruct,
 ) AppDataSyncParametersStruct {
 	return AppDataSyncParametersStruct{
-		Type:   "AppDataSyncParameters",
-		Resync: Resync,
+		Type:       "AppDataSyncParameters",
+		Parameters: Parameters,
 	}
 }
 
@@ -1357,20 +1402,18 @@ func AppDataWindowsTimeflowFactory(
 
 // ApplyVersionParametersFactory is just a simple function to instantiate the ApplyVersionParametersStruct
 func ApplyVersionParametersFactory(
-	Defer *bool,
 	EnableSourcesOnFailure *bool,
 	IgnoreQuiesceSourcesFailures *bool,
 	QuiesceSources *bool,
-	Reboot *bool,
+	UpgradeType string,
 	Verify *bool,
 ) ApplyVersionParametersStruct {
 	return ApplyVersionParametersStruct{
 		Type:                         "ApplyVersionParameters",
-		Defer:                        Defer,
 		EnableSourcesOnFailure:       EnableSourcesOnFailure,
 		IgnoreQuiesceSourcesFailures: IgnoreQuiesceSourcesFailures,
 		QuiesceSources:               QuiesceSources,
-		Reboot:                       Reboot,
+		UpgradeType:                  UpgradeType,
 		Verify:                       Verify,
 	}
 }
@@ -1453,6 +1496,16 @@ func AuthorizationConfigFactory(
 	}
 }
 
+// AvailableUpgradeTypesFactory is just a simple function to instantiate the AvailableUpgradeTypesStruct
+func AvailableUpgradeTypesFactory(
+	UpgradeTypes []string,
+) AvailableUpgradeTypesStruct {
+	return AvailableUpgradeTypesStruct{
+		Type:         "AvailableUpgradeTypes",
+		UpgradeTypes: UpgradeTypes,
+	}
+}
+
 // BatchContainerDeleteParametersFactory is just a simple function to instantiate the BatchContainerDeleteParametersStruct
 func BatchContainerDeleteParametersFactory(
 	Containers []string,
@@ -1514,6 +1567,7 @@ func CPUInfoFactory(
 // CaCertificateFactory is just a simple function to instantiate the CaCertificateStruct
 func CaCertificateFactory(
 	Accepted *bool,
+	IsCertificateAuthority *bool,
 	IssuedByDN string,
 	Issuer string,
 	Md5Fingerprint string,
@@ -1529,6 +1583,7 @@ func CaCertificateFactory(
 	return CaCertificateStruct{
 		Type:                    "CaCertificate",
 		Accepted:                Accepted,
+		IsCertificateAuthority:  IsCertificateAuthority,
 		IssuedByDN:              IssuedByDN,
 		Issuer:                  Issuer,
 		Md5Fingerprint:          Md5Fingerprint,
@@ -1548,6 +1603,8 @@ func CapacityBreakdownFactory(
 	ActiveSpace float64,
 	ActualSpace float64,
 	DescendantSpace float64,
+	FallbackIngestedSizeTimestamp string,
+	IngestedSize float64,
 	LogSpace float64,
 	ManualSpace float64,
 	PolicySpace float64,
@@ -1557,17 +1614,29 @@ func CapacityBreakdownFactory(
 	UnvirtualizedSpace float64,
 ) CapacityBreakdownStruct {
 	return CapacityBreakdownStruct{
-		Type:                       "CapacityBreakdown",
-		ActiveSpace:                ActiveSpace,
-		ActualSpace:                ActualSpace,
-		DescendantSpace:            DescendantSpace,
-		LogSpace:                   LogSpace,
-		ManualSpace:                ManualSpace,
-		PolicySpace:                PolicySpace,
-		SyncSpace:                  SyncSpace,
-		TimeflowUnvirtualizedSpace: TimeflowUnvirtualizedSpace,
-		UnownedSnapshotSpace:       UnownedSnapshotSpace,
-		UnvirtualizedSpace:         UnvirtualizedSpace,
+		Type:                          "CapacityBreakdown",
+		ActiveSpace:                   ActiveSpace,
+		ActualSpace:                   ActualSpace,
+		DescendantSpace:               DescendantSpace,
+		FallbackIngestedSizeTimestamp: FallbackIngestedSizeTimestamp,
+		IngestedSize:                  IngestedSize,
+		LogSpace:                      LogSpace,
+		ManualSpace:                   ManualSpace,
+		PolicySpace:                   PolicySpace,
+		SyncSpace:                     SyncSpace,
+		TimeflowUnvirtualizedSpace:    TimeflowUnvirtualizedSpace,
+		UnownedSnapshotSpace:          UnownedSnapshotSpace,
+		UnvirtualizedSpace:            UnvirtualizedSpace,
+	}
+}
+
+// CapacityDeleteDependenciesParametersFactory is just a simple function to instantiate the CapacityDeleteDependenciesParametersStruct
+func CapacityDeleteDependenciesParametersFactory(
+	DependencyTree *DeletionDependencyStruct,
+) CapacityDeleteDependenciesParametersStruct {
+	return CapacityDeleteDependenciesParametersStruct{
+		Type:           "CapacityDeleteDependenciesParameters",
+		DependencyTree: DependencyTree,
 	}
 }
 
@@ -1677,33 +1746,61 @@ func ChangeCurrentPasswordPolicyParametersFactory(
 	}
 }
 
-// ChecklistFactory is just a simple function to instantiate the ChecklistStruct
-func ChecklistFactory() ChecklistStruct {
-	return ChecklistStruct{
-		Type: "Checklist",
-	}
-}
-
-// ChecklistItemFactory is just a simple function to instantiate the ChecklistItemStruct
-func ChecklistItemFactory() ChecklistItemStruct {
-	return ChecklistItemStruct{
-		Type: "ChecklistItem",
-	}
-}
-
-// ChecklistItemDetailFactory is just a simple function to instantiate the ChecklistItemDetailStruct
-func ChecklistItemDetailFactory(
-	Description string,
-	Message string,
+// CipherSuiteFactory is just a simple function to instantiate the CipherSuiteStruct
+func CipherSuiteFactory(
 	Name string,
-	Status string,
-) ChecklistItemDetailStruct {
-	return ChecklistItemDetailStruct{
-		Type:        "ChecklistItemDetail",
-		Description: Description,
-		Message:     Message,
-		Name:        Name,
-		Status:      Status,
+) CipherSuiteStruct {
+	return CipherSuiteStruct{
+		Type: "CipherSuite",
+		Name: Name,
+	}
+}
+
+// CloudEnableParametersFactory is just a simple function to instantiate the CloudEnableParametersStruct
+func CloudEnableParametersFactory(
+	ProxyConfiguration *ProxyConfigurationStruct,
+	ProxyMode string,
+) CloudEnableParametersStruct {
+	return CloudEnableParametersStruct{
+		Type:               "CloudEnableParameters",
+		ProxyConfiguration: ProxyConfiguration,
+		ProxyMode:          ProxyMode,
+	}
+}
+
+// CloudStatusFactory is just a simple function to instantiate the CloudStatusStruct
+func CloudStatusFactory(
+	CentralManagementProductName string,
+	DelphixDataServicesComponentInfo *DelphixDataServicesComponentInfoStruct,
+	DelphixDataServicesComponentStatus string,
+	ProxyConfiguration *ProxyConfigurationStruct,
+	ProxyMode string,
+) CloudStatusStruct {
+	return CloudStatusStruct{
+		Type:                               "CloudStatus",
+		CentralManagementProductName:       CentralManagementProductName,
+		DelphixDataServicesComponentInfo:   DelphixDataServicesComponentInfo,
+		DelphixDataServicesComponentStatus: DelphixDataServicesComponentStatus,
+		ProxyConfiguration:                 ProxyConfiguration,
+		ProxyMode:                          ProxyMode,
+	}
+}
+
+// CommvaultConnectivityParametersFactory is just a simple function to instantiate the CommvaultConnectivityParametersStruct
+func CommvaultConnectivityParametersFactory(
+	CommserveHostName string,
+	Environment string,
+	EnvironmentUser string,
+	SourceClientName string,
+	StagingClientName string,
+) CommvaultConnectivityParametersStruct {
+	return CommvaultConnectivityParametersStruct{
+		Type:              "CommvaultConnectivityParameters",
+		CommserveHostName: CommserveHostName,
+		Environment:       Environment,
+		EnvironmentUser:   EnvironmentUser,
+		SourceClientName:  SourceClientName,
+		StagingClientName: StagingClientName,
 	}
 }
 
@@ -1742,6 +1839,7 @@ func ConfiguredStorageDeviceFactory(
 	BootDevice *bool,
 	Configured *bool,
 	ExpandableSize float64,
+	Fragmentation string,
 	Model string,
 	Name string,
 	Namespace string,
@@ -1756,6 +1854,7 @@ func ConfiguredStorageDeviceFactory(
 		BootDevice:     BootDevice,
 		Configured:     Configured,
 		ExpandableSize: ExpandableSize,
+		Fragmentation:  Fragmentation,
 		Model:          Model,
 		Name:           Name,
 		Namespace:      Namespace,
@@ -1770,7 +1869,7 @@ func ConfiguredStorageDeviceFactory(
 // ConnectorConnectivityFactory is just a simple function to instantiate the ConnectorConnectivityStruct
 func ConnectorConnectivityFactory(
 	Address string,
-	Credentials *PasswordCredentialStruct,
+	Credentials Credential,
 	Port *int,
 	Proxy string,
 	Username string,
@@ -1869,12 +1968,25 @@ func CredentialUpdateParametersFactory(
 	}
 }
 
+// CredentialsEnvVarsFactory is just a simple function to instantiate the CredentialsEnvVarsStruct
+func CredentialsEnvVarsFactory(
+	BaseVarName string,
+	Credentials Credential,
+) CredentialsEnvVarsStruct {
+	return CredentialsEnvVarsStruct{
+		Type:        "CredentialsEnvVars",
+		BaseVarName: BaseVarName,
+		Credentials: Credentials,
+	}
+}
+
 // CurrentConsumerCapacityDataFactory is just a simple function to instantiate the CurrentConsumerCapacityDataStruct
 func CurrentConsumerCapacityDataFactory(
 	Breakdown *CapacityBreakdownStruct,
 	Container string,
 	Group string,
 	GroupName string,
+	MultiOwner *bool,
 	Name string,
 	Parent string,
 	StorageContainer string,
@@ -1886,6 +1998,7 @@ func CurrentConsumerCapacityDataFactory(
 		Container:        Container,
 		Group:            Group,
 		GroupName:        GroupName,
+		MultiOwner:       MultiOwner,
 		Name:             Name,
 		Parent:           Parent,
 		StorageContainer: StorageContainer,
@@ -1925,15 +2038,67 @@ func CurrentSystemCapacityDataFactory(
 	}
 }
 
+// CyberArkPasswordVaultFactory is just a simple function to instantiate the CyberArkPasswordVaultStruct
+func CyberArkPasswordVaultFactory(
+	ApplicationId string,
+	ClientCertificate ClientCertificate,
+	Host string,
+	Name string,
+	Namespace string,
+	Port *int,
+	Reference string,
+) CyberArkPasswordVaultStruct {
+	return CyberArkPasswordVaultStruct{
+		Type:              "CyberArkPasswordVault",
+		ApplicationId:     ApplicationId,
+		ClientCertificate: ClientCertificate,
+		Host:              Host,
+		Name:              Name,
+		Namespace:         Namespace,
+		Port:              Port,
+		Reference:         Reference,
+	}
+}
+
+// CyberArkPasswordVaultTestParametersFactory is just a simple function to instantiate the CyberArkPasswordVaultTestParametersStruct
+func CyberArkPasswordVaultTestParametersFactory(
+	ApplicationId string,
+	ClientCertificate ClientCertificate,
+	Host string,
+	Port *int,
+) CyberArkPasswordVaultTestParametersStruct {
+	return CyberArkPasswordVaultTestParametersStruct{
+		Type:              "CyberArkPasswordVaultTestParameters",
+		ApplicationId:     ApplicationId,
+		ClientCertificate: ClientCertificate,
+		Host:              Host,
+		Port:              Port,
+	}
+}
+
+// CyberArkVaultCredentialFactory is just a simple function to instantiate the CyberArkVaultCredentialStruct
+func CyberArkVaultCredentialFactory(
+	QueryString string,
+	Vault string,
+) CyberArkVaultCredentialStruct {
+	return CyberArkVaultCredentialStruct{
+		Type:        "CyberArkVaultCredential",
+		QueryString: QueryString,
+		Vault:       Vault,
+	}
+}
+
 // DNSConfigFactory is just a simple function to instantiate the DNSConfigStruct
 func DNSConfigFactory(
 	Domain []string,
 	Servers []string,
+	Source string,
 ) DNSConfigStruct {
 	return DNSConfigStruct{
 		Type:    "DNSConfig",
 		Domain:  Domain,
 		Servers: Servers,
+		Source:  Source,
 	}
 }
 
@@ -2067,12 +2232,72 @@ func DeleteParametersFactory(
 	}
 }
 
+// DeletionDependencyFactory is just a simple function to instantiate the DeletionDependencyStruct
+func DeletionDependencyFactory(
+	Dependencies []TypedObject,
+	DisplayName string,
+	Locked *bool,
+	NamespaceName string,
+	Prerequisites []*DeletionDependencyPrerequisiteStruct,
+	Size float64,
+	TargetReference string,
+	TargetType string,
+) DeletionDependencyStruct {
+	return DeletionDependencyStruct{
+		Type:            "DeletionDependency",
+		Dependencies:    Dependencies,
+		DisplayName:     DisplayName,
+		Locked:          Locked,
+		NamespaceName:   NamespaceName,
+		Prerequisites:   Prerequisites,
+		Size:            Size,
+		TargetReference: TargetReference,
+		TargetType:      TargetType,
+	}
+}
+
+// DeletionDependencyPrerequisiteFactory is just a simple function to instantiate the DeletionDependencyPrerequisiteStruct
+func DeletionDependencyPrerequisiteFactory(
+	DisplayName string,
+	Locked *bool,
+	NamespaceName string,
+	OperationType string,
+	TargetReference string,
+	TargetType string,
+) DeletionDependencyPrerequisiteStruct {
+	return DeletionDependencyPrerequisiteStruct{
+		Type:            "DeletionDependencyPrerequisite",
+		DisplayName:     DisplayName,
+		Locked:          Locked,
+		NamespaceName:   NamespaceName,
+		OperationType:   OperationType,
+		TargetReference: TargetReference,
+		TargetType:      TargetType,
+	}
+}
+
+// DelphixDataServicesComponentInfoFactory is just a simple function to instantiate the DelphixDataServicesComponentInfoStruct
+func DelphixDataServicesComponentInfoFactory(
+	BuildTimestamp string,
+	BuildVersion string,
+	Status string,
+) DelphixDataServicesComponentInfoStruct {
+	return DelphixDataServicesComponentInfoStruct{
+		Type:           "DelphixDataServicesComponentInfo",
+		BuildTimestamp: BuildTimestamp,
+		BuildVersion:   BuildVersion,
+		Status:         Status,
+	}
+}
+
 // DelphixManagedBackupIngestionStrategyFactory is just a simple function to instantiate the DelphixManagedBackupIngestionStrategyStruct
 func DelphixManagedBackupIngestionStrategyFactory(
+	BackupPolicy string,
 	CompressionEnabled *bool,
 ) DelphixManagedBackupIngestionStrategyStruct {
 	return DelphixManagedBackupIngestionStrategyStruct{
 		Type:               "DelphixManagedBackupIngestionStrategy",
+		BackupPolicy:       BackupPolicy,
 		CompressionEnabled: CompressionEnabled,
 	}
 }
@@ -2131,6 +2356,24 @@ func DomainFactory(
 	}
 }
 
+// DspConnectivityFactory is just a simple function to instantiate the DspConnectivityStruct
+func DspConnectivityFactory(
+	Host string,
+	NumberOfConsecutiveConnections *int,
+	NumberOfSeconds *int,
+	NumberOfThreads *int,
+	User string,
+) DspConnectivityStruct {
+	return DspConnectivityStruct{
+		Type:                           "DspConnectivity",
+		Host:                           Host,
+		NumberOfConsecutiveConnections: NumberOfConsecutiveConnections,
+		NumberOfSeconds:                NumberOfSeconds,
+		NumberOfThreads:                NumberOfThreads,
+		User:                           User,
+	}
+}
+
 // DxFsIoQueueOpsDatapointStreamFactory is just a simple function to instantiate the DxFsIoQueueOpsDatapointStreamStruct
 func DxFsIoQueueOpsDatapointStreamFactory(
 	Datapoints []Datapoint,
@@ -2178,6 +2421,7 @@ func EcdsaKeyPairFactory(
 // EndEntityCertificateFactory is just a simple function to instantiate the EndEntityCertificateStruct
 func EndEntityCertificateFactory(
 	EndEntity EndEntity,
+	IsCertificateAuthority *bool,
 	IssuedByDN string,
 	Issuer string,
 	Md5Fingerprint string,
@@ -2193,6 +2437,7 @@ func EndEntityCertificateFactory(
 	return EndEntityCertificateStruct{
 		Type:                    "EndEntityCertificate",
 		EndEntity:               EndEntity,
+		IsCertificateAuthority:  IsCertificateAuthority,
 		IssuedByDN:              IssuedByDN,
 		Issuer:                  Issuer,
 		Md5Fingerprint:          Md5Fingerprint,
@@ -2242,6 +2487,13 @@ func EndEntityDspFactory() EndEntityDspStruct {
 func EndEntityHttpsFactory() EndEntityHttpsStruct {
 	return EndEntityHttpsStruct{
 		Type: "EndEntityHttps",
+	}
+}
+
+// EngineAggregateIngestedSizeFactory is just a simple function to instantiate the EngineAggregateIngestedSizeStruct
+func EngineAggregateIngestedSizeFactory() EngineAggregateIngestedSizeStruct {
+	return EngineAggregateIngestedSizeStruct{
+		Type: "EngineAggregateIngestedSize",
 	}
 }
 
@@ -2451,20 +2703,6 @@ func FileUploadResultFactory(
 	}
 }
 
-// FractionPlugParametersFactory is just a simple function to instantiate the FractionPlugParametersStruct
-func FractionPlugParametersFactory(
-	SchemasPrefix string,
-	TablespacesPrefix string,
-	TimeflowPointParameters TimeflowPointParameters,
-) FractionPlugParametersStruct {
-	return FractionPlugParametersStruct{
-		Type:                    "FractionPlugParameters",
-		SchemasPrefix:           SchemasPrefix,
-		TablespacesPrefix:       TablespacesPrefix,
-		TimeflowPointParameters: TimeflowPointParameters,
-	}
-}
-
 // GetCurrentPasswordPolicyParametersFactory is just a simple function to instantiate the GetCurrentPasswordPolicyParametersStruct
 func GetCurrentPasswordPolicyParametersFactory(
 	UserType string,
@@ -2498,6 +2736,108 @@ func GroupFactory(
 		Name:        Name,
 		Namespace:   Namespace,
 		Reference:   Reference,
+	}
+}
+
+// HashiCorpAppRoleAuthenticationFactory is just a simple function to instantiate the HashiCorpAppRoleAuthenticationStruct
+func HashiCorpAppRoleAuthenticationFactory(
+	RoleId string,
+	SecretId string,
+) HashiCorpAppRoleAuthenticationStruct {
+	return HashiCorpAppRoleAuthenticationStruct{
+		Type:     "HashiCorpAppRoleAuthentication",
+		RoleId:   RoleId,
+		SecretId: SecretId,
+	}
+}
+
+// HashiCorpCertificateAuthenticationFactory is just a simple function to instantiate the HashiCorpCertificateAuthenticationStruct
+func HashiCorpCertificateAuthenticationFactory(
+	ClientCertificate ClientCertificate,
+	RoleName string,
+) HashiCorpCertificateAuthenticationStruct {
+	return HashiCorpCertificateAuthenticationStruct{
+		Type:              "HashiCorpCertificateAuthentication",
+		ClientCertificate: ClientCertificate,
+		RoleName:          RoleName,
+	}
+}
+
+// HashiCorpTokenAuthenticationFactory is just a simple function to instantiate the HashiCorpTokenAuthenticationStruct
+func HashiCorpTokenAuthenticationFactory(
+	Token string,
+) HashiCorpTokenAuthenticationStruct {
+	return HashiCorpTokenAuthenticationStruct{
+		Type:  "HashiCorpTokenAuthentication",
+		Token: Token,
+	}
+}
+
+// HashiCorpVaultFactory is just a simple function to instantiate the HashiCorpVaultStruct
+func HashiCorpVaultFactory(
+	Authentication HashiCorpAuthentication,
+	Host string,
+	Name string,
+	Namespace string,
+	Port *int,
+	Reference string,
+	VaultNamespace string,
+) HashiCorpVaultStruct {
+	return HashiCorpVaultStruct{
+		Type:           "HashiCorpVault",
+		Authentication: Authentication,
+		Host:           Host,
+		Name:           Name,
+		Namespace:      Namespace,
+		Port:           Port,
+		Reference:      Reference,
+		VaultNamespace: VaultNamespace,
+	}
+}
+
+// HashiCorpVaultCredentialFactory is just a simple function to instantiate the HashiCorpVaultCredentialStruct
+func HashiCorpVaultCredentialFactory(
+	Engine string,
+	Path string,
+	SecretKey string,
+	UsernameKey string,
+	Vault string,
+) HashiCorpVaultCredentialStruct {
+	return HashiCorpVaultCredentialStruct{
+		Type:        "HashiCorpVaultCredential",
+		Engine:      Engine,
+		Path:        Path,
+		SecretKey:   SecretKey,
+		UsernameKey: UsernameKey,
+		Vault:       Vault,
+	}
+}
+
+// HashiCorpVaultTestParametersFactory is just a simple function to instantiate the HashiCorpVaultTestParametersStruct
+func HashiCorpVaultTestParametersFactory(
+	Authentication HashiCorpAuthentication,
+	Host string,
+	Port *int,
+	VaultNamespace string,
+) HashiCorpVaultTestParametersStruct {
+	return HashiCorpVaultTestParametersStruct{
+		Type:           "HashiCorpVaultTestParameters",
+		Authentication: Authentication,
+		Host:           Host,
+		Port:           Port,
+		VaultNamespace: VaultNamespace,
+	}
+}
+
+// HeldSpaceCapacityDataFactory is just a simple function to instantiate the HeldSpaceCapacityDataStruct
+func HeldSpaceCapacityDataFactory(
+	Breakdown *CapacityBreakdownStruct,
+	StorageContainer string,
+) HeldSpaceCapacityDataStruct {
+	return HeldSpaceCapacityDataStruct{
+		Type:             "HeldSpaceCapacityData",
+		Breakdown:        Breakdown,
+		StorageContainer: StorageContainer,
 	}
 }
 
@@ -2562,14 +2902,16 @@ func HostConfigurationFactory(
 	LastUpdated string,
 	Machine *HostMachineStruct,
 	OperatingSystem *HostOSStruct,
+	PowerShellVersion string,
 ) HostConfigurationStruct {
 	return HostConfigurationStruct{
-		Type:            "HostConfiguration",
-		Discovered:      Discovered,
-		LastRefreshed:   LastRefreshed,
-		LastUpdated:     LastUpdated,
-		Machine:         Machine,
-		OperatingSystem: OperatingSystem,
+		Type:              "HostConfiguration",
+		Discovered:        Discovered,
+		LastRefreshed:     LastRefreshed,
+		LastUpdated:       LastUpdated,
+		Machine:           Machine,
+		OperatingSystem:   OperatingSystem,
+		PowerShellVersion: PowerShellVersion,
 	}
 }
 
@@ -2685,17 +3027,21 @@ func HostRuntimeFactory(
 
 // HttpConnectorConfigFactory is just a simple function to instantiate the HttpConnectorConfigStruct
 func HttpConnectorConfigFactory(
+	CipherSuites []*CipherSuiteStruct,
 	HttpMode string,
 	HttpPort *int,
 	HttpsPort *int,
+	MaskingLegacyPorts *bool,
 	TlsVersions []string,
 ) HttpConnectorConfigStruct {
 	return HttpConnectorConfigStruct{
-		Type:        "HttpConnectorConfig",
-		HttpMode:    HttpMode,
-		HttpPort:    HttpPort,
-		HttpsPort:   HttpsPort,
-		TlsVersions: TlsVersions,
+		Type:               "HttpConnectorConfig",
+		CipherSuites:       CipherSuites,
+		HttpMode:           HttpMode,
+		HttpPort:           HttpPort,
+		HttpsPort:          HttpsPort,
+		MaskingLegacyPorts: MaskingLegacyPorts,
+		TlsVersions:        TlsVersions,
 	}
 }
 
@@ -2784,6 +3130,66 @@ func IoOpsDatapointFactory(
 		Size:       Size,
 		Throughput: Throughput,
 		Timestamp:  Timestamp,
+	}
+}
+
+// IscsiInitiatorFactory is just a simple function to instantiate the IscsiInitiatorStruct
+func IscsiInitiatorFactory(
+	InitiatorName string,
+) IscsiInitiatorStruct {
+	return IscsiInitiatorStruct{
+		Type:          "IscsiInitiator",
+		InitiatorName: InitiatorName,
+	}
+}
+
+// IscsiTargetFactory is just a simple function to instantiate the IscsiTargetStruct
+func IscsiTargetFactory(
+	ChapPassword string,
+	ChapPasswordIn string,
+	ChapUsername string,
+	ChapUsernameIn string,
+	Iqn string,
+	Name string,
+	Namespace string,
+	Port *int,
+	Portal string,
+	Reference string,
+	State string,
+) IscsiTargetStruct {
+	return IscsiTargetStruct{
+		Type:           "IscsiTarget",
+		ChapPassword:   ChapPassword,
+		ChapPasswordIn: ChapPasswordIn,
+		ChapUsername:   ChapUsername,
+		ChapUsernameIn: ChapUsernameIn,
+		Iqn:            Iqn,
+		Name:           Name,
+		Namespace:      Namespace,
+		Port:           Port,
+		Portal:         Portal,
+		Reference:      Reference,
+		State:          State,
+	}
+}
+
+// IscsiTargetDiscoverParametersFactory is just a simple function to instantiate the IscsiTargetDiscoverParametersStruct
+func IscsiTargetDiscoverParametersFactory(
+	ChapPassword string,
+	ChapPasswordIn string,
+	ChapUsername string,
+	ChapUsernameIn string,
+	Port *int,
+	Portal string,
+) IscsiTargetDiscoverParametersStruct {
+	return IscsiTargetDiscoverParametersStruct{
+		Type:           "IscsiTargetDiscoverParameters",
+		ChapPassword:   ChapPassword,
+		ChapPasswordIn: ChapPasswordIn,
+		ChapUsername:   ChapUsername,
+		ChapUsernameIn: ChapUsernameIn,
+		Port:           Port,
+		Portal:         Portal,
 	}
 }
 
@@ -3620,6 +4026,16 @@ func KeyPairCredentialFactory(
 	}
 }
 
+// KeystoreClientCertificateFactory is just a simple function to instantiate the KeystoreClientCertificateStruct
+func KeystoreClientCertificateFactory(
+	Token string,
+) KeystoreClientCertificateStruct {
+	return KeystoreClientCertificateStruct{
+		Type:  "KeystoreClientCertificate",
+		Token: Token,
+	}
+}
+
 // LdapInfoFactory is just a simple function to instantiate the LdapInfoStruct
 func LdapInfoFactory(
 	Enabled *bool,
@@ -3649,6 +4065,13 @@ func LdapServerFactory(
 		Port:       Port,
 		Reference:  Reference,
 		UseSSL:     UseSSL,
+	}
+}
+
+// LicenseInfoFactory is just a simple function to instantiate the LicenseInfoStruct
+func LicenseInfoFactory() LicenseInfoStruct {
+	return LicenseInfoStruct{
+		Type: "LicenseInfo",
 	}
 }
 
@@ -3685,7 +4108,7 @@ func ListResultFactory(
 	Action string,
 	Job string,
 	Overflow *bool,
-	Result interface{},
+	Result string,
 	Status string,
 	Total *int,
 ) ListResultStruct {
@@ -3716,6 +4139,13 @@ func LocaleSettingsFactory(
 	}
 }
 
+// LocalizedUpgradeCheckResultFactory is just a simple function to instantiate the LocalizedUpgradeCheckResultStruct
+func LocalizedUpgradeCheckResultFactory() LocalizedUpgradeCheckResultStruct {
+	return LocalizedUpgradeCheckResultStruct{
+		Type: "LocalizedUpgradeCheckResult",
+	}
+}
+
 // LoginRequestFactory is just a simple function to instantiate the LoginRequestStruct
 func LoginRequestFactory(
 	KeepAliveMode string,
@@ -3734,41 +4164,25 @@ func LoginRequestFactory(
 
 // MSSqlAttachDataFactory is just a simple function to instantiate the MSSqlAttachDataStruct
 func MSSqlAttachDataFactory(
-	BackupLocationCredentials *PasswordCredentialStruct,
-	BackupLocationUser string,
-	Config string,
-	DbCredentials *PasswordCredentialStruct,
-	DbUser string,
 	EncryptionKey string,
-	ExternalFilePath string,
-	IngestionStrategy IngestionStrategy,
-	MssqlNetbackupConfig string,
 	Operations *LinkedSourceOperationsStruct,
 	PptHostUser string,
 	PptRepository string,
-	SharedBackupLocations []string,
 	SourceHostUser string,
 	StagingPostScript string,
 	StagingPreScript string,
+	SyncStrategy MSSqlSyncStrategy,
 ) MSSqlAttachDataStruct {
 	return MSSqlAttachDataStruct{
-		Type:                      "MSSqlAttachData",
-		BackupLocationCredentials: BackupLocationCredentials,
-		BackupLocationUser:        BackupLocationUser,
-		Config:                    Config,
-		DbCredentials:             DbCredentials,
-		DbUser:                    DbUser,
-		EncryptionKey:             EncryptionKey,
-		ExternalFilePath:          ExternalFilePath,
-		IngestionStrategy:         IngestionStrategy,
-		MssqlNetbackupConfig:      MssqlNetbackupConfig,
-		Operations:                Operations,
-		PptHostUser:               PptHostUser,
-		PptRepository:             PptRepository,
-		SharedBackupLocations:     SharedBackupLocations,
-		SourceHostUser:            SourceHostUser,
-		StagingPostScript:         StagingPostScript,
-		StagingPreScript:          StagingPreScript,
+		Type:              "MSSqlAttachData",
+		EncryptionKey:     EncryptionKey,
+		Operations:        Operations,
+		PptHostUser:       PptHostUser,
+		PptRepository:     PptRepository,
+		SourceHostUser:    SourceHostUser,
+		StagingPostScript: StagingPostScript,
+		StagingPreScript:  StagingPreScript,
+		SyncStrategy:      SyncStrategy,
 	}
 }
 
@@ -3777,8 +4191,6 @@ func MSSqlAvailabilityGroupFactory(
 	Environment string,
 	FulltextInstalled *bool,
 	Instances []MSSqlBaseClusterInstance,
-	InternalVersion *int,
-	LinkingEnabled *bool,
 	Listeners []MSSqlBaseClusterListener,
 	Name string,
 	Namespace string,
@@ -3792,8 +4204,6 @@ func MSSqlAvailabilityGroupFactory(
 		Environment:         Environment,
 		FulltextInstalled:   FulltextInstalled,
 		Instances:           Instances,
-		InternalVersion:     InternalVersion,
-		LinkingEnabled:      LinkingEnabled,
 		Listeners:           Listeners,
 		Name:                Name,
 		Namespace:           Namespace,
@@ -3806,31 +4216,31 @@ func MSSqlAvailabilityGroupFactory(
 
 // MSSqlAvailabilityGroupDBConfigFactory is just a simple function to instantiate the MSSqlAvailabilityGroupDBConfigStruct
 func MSSqlAvailabilityGroupDBConfigFactory(
-	Credentials Credential,
 	DatabaseName string,
 	Discovered *bool,
 	EnvironmentUser string,
 	LinkingEnabled *bool,
+	MirroringState string,
+	MssqlUser MSSqlUser,
 	Name string,
 	Namespace string,
 	RecoveryModel string,
 	Reference string,
 	Repository string,
-	User string,
 ) MSSqlAvailabilityGroupDBConfigStruct {
 	return MSSqlAvailabilityGroupDBConfigStruct{
 		Type:            "MSSqlAvailabilityGroupDBConfig",
-		Credentials:     Credentials,
 		DatabaseName:    DatabaseName,
 		Discovered:      Discovered,
 		EnvironmentUser: EnvironmentUser,
 		LinkingEnabled:  LinkingEnabled,
+		MirroringState:  MirroringState,
+		MssqlUser:       MssqlUser,
 		Name:            Name,
 		Namespace:       Namespace,
 		RecoveryModel:   RecoveryModel,
 		Reference:       Reference,
 		Repository:      Repository,
-		User:            User,
 	}
 }
 
@@ -3865,6 +4275,24 @@ func MSSqlClusterInstanceFactory(
 		Port:          Port,
 		ServerName:    ServerName,
 		Version:       Version,
+	}
+}
+
+// MSSqlCommvaultConfigFactory is just a simple function to instantiate the MSSqlCommvaultConfigStruct
+func MSSqlCommvaultConfigFactory(
+	CommserveHostName string,
+	ConfigParams map[string]string,
+	ConfigTemplate string,
+	SourceClientName string,
+	StagingClientName string,
+) MSSqlCommvaultConfigStruct {
+	return MSSqlCommvaultConfigStruct{
+		Type:              "MSSqlCommvaultConfig",
+		CommserveHostName: CommserveHostName,
+		ConfigParams:      ConfigParams,
+		ConfigTemplate:    ConfigTemplate,
+		SourceClientName:  SourceClientName,
+		StagingClientName: StagingClientName,
 	}
 }
 
@@ -3956,6 +4384,56 @@ func MSSqlDatabaseContainerFactory(
 	}
 }
 
+// MSSqlDatabaseUserFactory is just a simple function to instantiate the MSSqlDatabaseUserStruct
+func MSSqlDatabaseUserFactory(
+	Password *PasswordCredentialStruct,
+	User string,
+) MSSqlDatabaseUserStruct {
+	return MSSqlDatabaseUserStruct{
+		Type:     "MSSqlDatabaseUser",
+		Password: Password,
+		User:     User,
+	}
+}
+
+// MSSqlDelphixManagedSyncStrategyFactory is just a simple function to instantiate the MSSqlDelphixManagedSyncStrategyStruct
+func MSSqlDelphixManagedSyncStrategyFactory(
+	BackupPolicy string,
+	CompressionEnabled *bool,
+	Config string,
+	MssqlUser MSSqlUser,
+) MSSqlDelphixManagedSyncStrategyStruct {
+	return MSSqlDelphixManagedSyncStrategyStruct{
+		Type:               "MSSqlDelphixManagedSyncStrategy",
+		BackupPolicy:       BackupPolicy,
+		CompressionEnabled: CompressionEnabled,
+		Config:             Config,
+		MssqlUser:          MssqlUser,
+	}
+}
+
+// MSSqlDomainUserFactory is just a simple function to instantiate the MSSqlDomainUserStruct
+func MSSqlDomainUserFactory(
+	Password Credential,
+	User string,
+) MSSqlDomainUserStruct {
+	return MSSqlDomainUserStruct{
+		Type:     "MSSqlDomainUser",
+		Password: Password,
+		User:     User,
+	}
+}
+
+// MSSqlEnvironmentUserFactory is just a simple function to instantiate the MSSqlEnvironmentUserStruct
+func MSSqlEnvironmentUserFactory(
+	User string,
+) MSSqlEnvironmentUserStruct {
+	return MSSqlEnvironmentUserStruct{
+		Type: "MSSqlEnvironmentUser",
+		User: User,
+	}
+}
+
 // MSSqlExistingMostRecentBackupSyncParametersFactory is just a simple function to instantiate the MSSqlExistingMostRecentBackupSyncParametersStruct
 func MSSqlExistingMostRecentBackupSyncParametersFactory() MSSqlExistingMostRecentBackupSyncParametersStruct {
 	return MSSqlExistingMostRecentBackupSyncParametersStruct{
@@ -3976,6 +4454,7 @@ func MSSqlExistingSpecificBackupSyncParametersFactory(
 // MSSqlExportParametersFactory is just a simple function to instantiate the MSSqlExportParametersStruct
 func MSSqlExportParametersFactory(
 	ConfigParams map[string]string,
+	EnableCdc *bool,
 	FileMappingRules string,
 	FilesystemLayout *TimeflowFilesystemLayoutStruct,
 	RecoverDatabase *bool,
@@ -3986,6 +4465,7 @@ func MSSqlExportParametersFactory(
 	return MSSqlExportParametersStruct{
 		Type:                    "MSSqlExportParameters",
 		ConfigParams:            ConfigParams,
+		EnableCdc:               EnableCdc,
 		FileMappingRules:        FileMappingRules,
 		FilesystemLayout:        FilesystemLayout,
 		RecoverDatabase:         RecoverDatabase,
@@ -3995,35 +4475,55 @@ func MSSqlExportParametersFactory(
 	}
 }
 
+// MSSqlExternalManagedSourceSyncStrategyFactory is just a simple function to instantiate the MSSqlExternalManagedSourceSyncStrategyStruct
+func MSSqlExternalManagedSourceSyncStrategyFactory(
+	Config string,
+	MssqlCommvaultConfig string,
+	MssqlNetbackupConfig string,
+	MssqlUser MSSqlUser,
+	SharedBackupLocations []string,
+	ValidatedSyncMode string,
+) MSSqlExternalManagedSourceSyncStrategyStruct {
+	return MSSqlExternalManagedSourceSyncStrategyStruct{
+		Type:                  "MSSqlExternalManagedSourceSyncStrategy",
+		Config:                Config,
+		MssqlCommvaultConfig:  MssqlCommvaultConfig,
+		MssqlNetbackupConfig:  MssqlNetbackupConfig,
+		MssqlUser:             MssqlUser,
+		SharedBackupLocations: SharedBackupLocations,
+		ValidatedSyncMode:     ValidatedSyncMode,
+	}
+}
+
 // MSSqlFailoverClusterDBConfigFactory is just a simple function to instantiate the MSSqlFailoverClusterDBConfigStruct
 func MSSqlFailoverClusterDBConfigFactory(
-	Credentials Credential,
 	DatabaseName string,
 	Discovered *bool,
 	DriveLetter string,
 	EnvironmentUser string,
 	LinkingEnabled *bool,
+	MirroringState string,
+	MssqlUser MSSqlUser,
 	Name string,
 	Namespace string,
 	RecoveryModel string,
 	Reference string,
 	Repository string,
-	User string,
 ) MSSqlFailoverClusterDBConfigStruct {
 	return MSSqlFailoverClusterDBConfigStruct{
 		Type:            "MSSqlFailoverClusterDBConfig",
-		Credentials:     Credentials,
 		DatabaseName:    DatabaseName,
 		Discovered:      Discovered,
 		DriveLetter:     DriveLetter,
 		EnvironmentUser: EnvironmentUser,
 		LinkingEnabled:  LinkingEnabled,
+		MirroringState:  MirroringState,
+		MssqlUser:       MssqlUser,
 		Name:            Name,
 		Namespace:       Namespace,
 		RecoveryModel:   RecoveryModel,
 		Reference:       Reference,
 		Repository:      Repository,
-		User:            User,
 	}
 }
 
@@ -4079,8 +4579,6 @@ func MSSqlFailoverClusterRepositoryFactory(
 	Environment string,
 	FulltextInstalled *bool,
 	Instances []MSSqlBaseClusterInstance,
-	InternalVersion *int,
-	LinkingEnabled *bool,
 	Listeners []MSSqlBaseClusterListener,
 	Name string,
 	Namespace string,
@@ -4095,8 +4593,6 @@ func MSSqlFailoverClusterRepositoryFactory(
 		Environment:         Environment,
 		FulltextInstalled:   FulltextInstalled,
 		Instances:           Instances,
-		InternalVersion:     InternalVersion,
-		LinkingEnabled:      LinkingEnabled,
 		Listeners:           Listeners,
 		Name:                Name,
 		Namespace:           Namespace,
@@ -4115,8 +4611,6 @@ func MSSqlInstanceFactory(
 	InstallationPath string,
 	InstanceName string,
 	InstanceOwner string,
-	InternalVersion *int,
-	LinkingEnabled *bool,
 	Name string,
 	Namespace string,
 	Port *int,
@@ -4134,8 +4628,6 @@ func MSSqlInstanceFactory(
 		InstallationPath:    InstallationPath,
 		InstanceName:        InstanceName,
 		InstanceOwner:       InstanceOwner,
-		InternalVersion:     InternalVersion,
-		LinkingEnabled:      LinkingEnabled,
 		Name:                Name,
 		Namespace:           Namespace,
 		Port:                Port,
@@ -4149,61 +4641,43 @@ func MSSqlInstanceFactory(
 
 // MSSqlLinkDataFactory is just a simple function to instantiate the MSSqlLinkDataStruct
 func MSSqlLinkDataFactory(
-	BackupLocationCredentials *PasswordCredentialStruct,
-	BackupLocationUser string,
-	Config string,
-	DbCredentials *PasswordCredentialStruct,
-	DbUser string,
 	EncryptionKey string,
-	ExternalFilePath string,
-	IngestionStrategy IngestionStrategy,
-	MssqlNetbackupConfig string,
 	Operations *LinkedSourceOperationsStruct,
 	PptHostUser string,
 	PptRepository string,
-	SharedBackupLocations []string,
 	SourceHostUser string,
 	SourcingPolicy *SourcingPolicyStruct,
 	StagingPostScript string,
 	StagingPreScript string,
 	SyncParameters MSSqlSyncParameters,
+	SyncStrategy MSSqlSyncStrategy,
 ) MSSqlLinkDataStruct {
 	return MSSqlLinkDataStruct{
-		Type:                      "MSSqlLinkData",
-		BackupLocationCredentials: BackupLocationCredentials,
-		BackupLocationUser:        BackupLocationUser,
-		Config:                    Config,
-		DbCredentials:             DbCredentials,
-		DbUser:                    DbUser,
-		EncryptionKey:             EncryptionKey,
-		ExternalFilePath:          ExternalFilePath,
-		IngestionStrategy:         IngestionStrategy,
-		MssqlNetbackupConfig:      MssqlNetbackupConfig,
-		Operations:                Operations,
-		PptHostUser:               PptHostUser,
-		PptRepository:             PptRepository,
-		SharedBackupLocations:     SharedBackupLocations,
-		SourceHostUser:            SourceHostUser,
-		SourcingPolicy:            SourcingPolicy,
-		StagingPostScript:         StagingPostScript,
-		StagingPreScript:          StagingPreScript,
-		SyncParameters:            SyncParameters,
+		Type:              "MSSqlLinkData",
+		EncryptionKey:     EncryptionKey,
+		Operations:        Operations,
+		PptHostUser:       PptHostUser,
+		PptRepository:     PptRepository,
+		SourceHostUser:    SourceHostUser,
+		SourcingPolicy:    SourcingPolicy,
+		StagingPostScript: StagingPostScript,
+		StagingPreScript:  StagingPreScript,
+		SyncParameters:    SyncParameters,
+		SyncStrategy:      SyncStrategy,
 	}
 }
 
 // MSSqlLinkedSourceFactory is just a simple function to instantiate the MSSqlLinkedSourceStruct
 func MSSqlLinkedSourceFactory(
-	BackupLocationCredentials *PasswordCredentialStruct,
-	BackupLocationUser string,
 	Config string,
 	Container string,
 	Description string,
 	EncryptionKey string,
-	ExternalFilePath string,
 	Hosts []string,
 	IngestionStrategy IngestionStrategy,
 	Linked *bool,
 	LogCollectionEnabled *bool,
+	MssqlCommvaultConfig string,
 	MssqlNetbackupConfig string,
 	Name string,
 	Namespace string,
@@ -4217,29 +4691,27 @@ func MSSqlLinkedSourceFactory(
 	Virtual *bool,
 ) MSSqlLinkedSourceStruct {
 	return MSSqlLinkedSourceStruct{
-		Type:                      "MSSqlLinkedSource",
-		BackupLocationCredentials: BackupLocationCredentials,
-		BackupLocationUser:        BackupLocationUser,
-		Config:                    Config,
-		Container:                 Container,
-		Description:               Description,
-		EncryptionKey:             EncryptionKey,
-		ExternalFilePath:          ExternalFilePath,
-		Hosts:                     Hosts,
-		IngestionStrategy:         IngestionStrategy,
-		Linked:                    Linked,
-		LogCollectionEnabled:      LogCollectionEnabled,
-		MssqlNetbackupConfig:      MssqlNetbackupConfig,
-		Name:                      Name,
-		Namespace:                 Namespace,
-		Operations:                Operations,
-		Reference:                 Reference,
-		Runtime:                   Runtime,
-		SharedBackupLocations:     SharedBackupLocations,
-		Staging:                   Staging,
-		StagingSource:             StagingSource,
-		Status:                    Status,
-		Virtual:                   Virtual,
+		Type:                  "MSSqlLinkedSource",
+		Config:                Config,
+		Container:             Container,
+		Description:           Description,
+		EncryptionKey:         EncryptionKey,
+		Hosts:                 Hosts,
+		IngestionStrategy:     IngestionStrategy,
+		Linked:                Linked,
+		LogCollectionEnabled:  LogCollectionEnabled,
+		MssqlCommvaultConfig:  MssqlCommvaultConfig,
+		MssqlNetbackupConfig:  MssqlNetbackupConfig,
+		Name:                  Name,
+		Namespace:             Namespace,
+		Operations:            Operations,
+		Reference:             Reference,
+		Runtime:               Runtime,
+		SharedBackupLocations: SharedBackupLocations,
+		Staging:               Staging,
+		StagingSource:         StagingSource,
+		Status:                Status,
+		Virtual:               Virtual,
 	}
 }
 
@@ -4273,10 +4745,12 @@ func MSSqlNetbackupConfigFactory(
 
 // MSSqlNewCopyOnlyFullBackupSyncParametersFactory is just a simple function to instantiate the MSSqlNewCopyOnlyFullBackupSyncParametersStruct
 func MSSqlNewCopyOnlyFullBackupSyncParametersFactory(
+	BackupPolicy string,
 	CompressionEnabled *bool,
 ) MSSqlNewCopyOnlyFullBackupSyncParametersStruct {
 	return MSSqlNewCopyOnlyFullBackupSyncParametersStruct{
 		Type:               "MSSqlNewCopyOnlyFullBackupSyncParameters",
+		BackupPolicy:       BackupPolicy,
 		CompressionEnabled: CompressionEnabled,
 	}
 }
@@ -4310,31 +4784,31 @@ func MSSqlProvisionParametersFactory(
 
 // MSSqlSIConfigFactory is just a simple function to instantiate the MSSqlSIConfigStruct
 func MSSqlSIConfigFactory(
-	Credentials Credential,
 	DatabaseName string,
 	Discovered *bool,
 	EnvironmentUser string,
 	LinkingEnabled *bool,
+	MirroringState string,
+	MssqlUser MSSqlUser,
 	Name string,
 	Namespace string,
 	RecoveryModel string,
 	Reference string,
 	Repository string,
-	User string,
 ) MSSqlSIConfigStruct {
 	return MSSqlSIConfigStruct{
 		Type:            "MSSqlSIConfig",
-		Credentials:     Credentials,
 		DatabaseName:    DatabaseName,
 		Discovered:      Discovered,
 		EnvironmentUser: EnvironmentUser,
 		LinkingEnabled:  LinkingEnabled,
+		MirroringState:  MirroringState,
+		MssqlUser:       MssqlUser,
 		Name:            Name,
 		Namespace:       Namespace,
 		RecoveryModel:   RecoveryModel,
 		Reference:       Reference,
 		Repository:      Repository,
-		User:            User,
 	}
 }
 
@@ -4387,6 +4861,16 @@ func MSSqlSnapshotRuntimeFactory(
 	return MSSqlSnapshotRuntimeStruct{
 		Type:          "MSSqlSnapshotRuntime",
 		Provisionable: Provisionable,
+	}
+}
+
+// MSSqlSourceConfigConnectivityFactory is just a simple function to instantiate the MSSqlSourceConfigConnectivityStruct
+func MSSqlSourceConfigConnectivityFactory(
+	MssqlUser MSSqlUser,
+) MSSqlSourceConfigConnectivityStruct {
+	return MSSqlSourceConfigConnectivityStruct{
+		Type:      "MSSqlSourceConfigConnectivity",
+		MssqlUser: MssqlUser,
 	}
 }
 
@@ -4515,6 +4999,7 @@ func MSSqlVirtualSourceFactory(
 	ConfigParams map[string]string,
 	Container string,
 	Description string,
+	EnableCdcOnProvision *bool,
 	FileMappingRules string,
 	Hosts []string,
 	Linked *bool,
@@ -4538,6 +5023,7 @@ func MSSqlVirtualSourceFactory(
 		ConfigParams:                    ConfigParams,
 		Container:                       Container,
 		Description:                     Description,
+		EnableCdcOnProvision:            EnableCdcOnProvision,
 		FileMappingRules:                FileMappingRules,
 		Hosts:                           Hosts,
 		Linked:                          Linked,
@@ -4607,6 +5093,16 @@ func MigrateCompatibilityParametersFactory(
 		Type:             "MigrateCompatibilityParameters",
 		Environment:      Environment,
 		SourceRepository: SourceRepository,
+	}
+}
+
+// MinimalPhoneHomeFactory is just a simple function to instantiate the MinimalPhoneHomeStruct
+func MinimalPhoneHomeFactory(
+	Enabled *bool,
+) MinimalPhoneHomeStruct {
+	return MinimalPhoneHomeStruct{
+		Type:    "MinimalPhoneHome",
+		Enabled: Enabled,
 	}
 }
 
@@ -4784,7 +5280,6 @@ func MySQLInstallFactory(
 	Environment string,
 	InstallationPath string,
 	InternalVersion *MySQLVersionStruct,
-	LinkingEnabled *bool,
 	Name string,
 	Namespace string,
 	ProvisioningEnabled *bool,
@@ -4798,7 +5293,6 @@ func MySQLInstallFactory(
 		Environment:         Environment,
 		InstallationPath:    InstallationPath,
 		InternalVersion:     InternalVersion,
-		LinkingEnabled:      LinkingEnabled,
 		Name:                Name,
 		Namespace:           Namespace,
 		ProvisioningEnabled: ProvisioningEnabled,
@@ -5193,11 +5687,38 @@ func NTPConfigFactory(
 	}
 }
 
+// NamedKeyPairCredentialFactory is just a simple function to instantiate the NamedKeyPairCredentialStruct
+func NamedKeyPairCredentialFactory(
+	PrivateKey string,
+	PublicKey string,
+	Username string,
+) NamedKeyPairCredentialStruct {
+	return NamedKeyPairCredentialStruct{
+		Type:       "NamedKeyPairCredential",
+		PrivateKey: PrivateKey,
+		PublicKey:  PublicKey,
+		Username:   Username,
+	}
+}
+
+// NamedPasswordCredentialFactory is just a simple function to instantiate the NamedPasswordCredentialStruct
+func NamedPasswordCredentialFactory(
+	Password string,
+	Username string,
+) NamedPasswordCredentialStruct {
+	return NamedPasswordCredentialStruct{
+		Type:     "NamedPasswordCredential",
+		Password: Password,
+		Username: Username,
+	}
+}
+
 // NamespaceFactory is just a simple function to instantiate the NamespaceStruct
 func NamespaceFactory(
 	Description string,
 	FailedOver *bool,
 	FailoverReport string,
+	Locked *bool,
 	Name string,
 	Namespace string,
 	NamespaceType string,
@@ -5211,6 +5732,7 @@ func NamespaceFactory(
 		Description:     Description,
 		FailedOver:      FailedOver,
 		FailoverReport:  FailoverReport,
+		Locked:          Locked,
 		Name:            Name,
 		Namespace:       Namespace,
 		NamespaceType:   NamespaceType,
@@ -5289,6 +5811,7 @@ func NetworkDSPTestParametersFactory(
 	RemoteDelphixEngineInfo *RemoteDelphixEngineInfoStruct,
 	RemoteHost string,
 	SendSocketBuffer *int,
+	XportScheduler string,
 ) NetworkDSPTestParametersStruct {
 	return NetworkDSPTestParametersStruct{
 		Type:                    "NetworkDSPTestParameters",
@@ -5304,6 +5827,7 @@ func NetworkDSPTestParametersFactory(
 		RemoteDelphixEngineInfo: RemoteDelphixEngineInfo,
 		RemoteHost:              RemoteHost,
 		SendSocketBuffer:        SendSocketBuffer,
+		XportScheduler:          XportScheduler,
 	}
 }
 
@@ -5489,6 +6013,16 @@ func NetworkThroughputTestParametersFactory(
 	}
 }
 
+// NfsConfigFactory is just a simple function to instantiate the NfsConfigStruct
+func NfsConfigFactory(
+	MountVersion string,
+) NfsConfigStruct {
+	return NfsConfigStruct{
+		Type:         "NfsConfig",
+		MountVersion: MountVersion,
+	}
+}
+
 // NfsOpsDatapointStreamFactory is just a simple function to instantiate the NfsOpsDatapointStreamStruct
 func NfsOpsDatapointStreamFactory(
 	Cached *bool,
@@ -5497,6 +6031,7 @@ func NfsOpsDatapointStreamFactory(
 	Op string,
 	Path string,
 	Sync *bool,
+	Ver string,
 ) NfsOpsDatapointStreamStruct {
 	return NfsOpsDatapointStreamStruct{
 		Type:       "NfsOpsDatapointStream",
@@ -5506,6 +6041,7 @@ func NfsOpsDatapointStreamFactory(
 		Op:         Op,
 		Path:       Path,
 		Sync:       Sync,
+		Ver:        Ver,
 	}
 }
 
@@ -5550,7 +6086,7 @@ func NullConstraintFactory(
 func OKResultFactory(
 	Action string,
 	Job string,
-	Result interface{},
+	Result string,
 	Status string,
 ) OKResultStruct {
 	return OKResultStruct{
@@ -5643,8 +6179,6 @@ func OracleAttachDataFactory(
 	CheckLogical *bool,
 	CompressedLinkingEnabled *bool,
 	Config string,
-	DbCredentials *PasswordCredentialStruct,
-	DbUser string,
 	DoubleSync *bool,
 	EncryptedLinkingEnabled *bool,
 	EnvironmentUser string,
@@ -5654,27 +6188,29 @@ func OracleAttachDataFactory(
 	LinkNow *bool,
 	NumberOfConnections *int,
 	Operations *LinkedSourceOperationsStruct,
+	OracleFallbackCredentials Credential,
+	OracleFallbackUser string,
 	RmanChannels *int,
 ) OracleAttachDataStruct {
 	return OracleAttachDataStruct{
-		Type:                     "OracleAttachData",
-		BackupLevelEnabled:       BackupLevelEnabled,
-		BandwidthLimit:           BandwidthLimit,
-		CheckLogical:             CheckLogical,
-		CompressedLinkingEnabled: CompressedLinkingEnabled,
-		Config:                   Config,
-		DbCredentials:            DbCredentials,
-		DbUser:                   DbUser,
-		DoubleSync:               DoubleSync,
-		EncryptedLinkingEnabled:  EncryptedLinkingEnabled,
-		EnvironmentUser:          EnvironmentUser,
-		ExternalFilePath:         ExternalFilePath,
-		FilesPerSet:              FilesPerSet,
-		Force:                    Force,
-		LinkNow:                  LinkNow,
-		NumberOfConnections:      NumberOfConnections,
-		Operations:               Operations,
-		RmanChannels:             RmanChannels,
+		Type:                      "OracleAttachData",
+		BackupLevelEnabled:        BackupLevelEnabled,
+		BandwidthLimit:            BandwidthLimit,
+		CheckLogical:              CheckLogical,
+		CompressedLinkingEnabled:  CompressedLinkingEnabled,
+		Config:                    Config,
+		DoubleSync:                DoubleSync,
+		EncryptedLinkingEnabled:   EncryptedLinkingEnabled,
+		EnvironmentUser:           EnvironmentUser,
+		ExternalFilePath:          ExternalFilePath,
+		FilesPerSet:               FilesPerSet,
+		Force:                     Force,
+		LinkNow:                   LinkNow,
+		NumberOfConnections:       NumberOfConnections,
+		Operations:                Operations,
+		OracleFallbackCredentials: OracleFallbackCredentials,
+		OracleFallbackUser:        OracleFallbackUser,
+		RmanChannels:              RmanChannels,
 	}
 }
 
@@ -5703,7 +6239,6 @@ func OracleClusterFactory(
 	RemoteListener string,
 	Scan string,
 	ScanManual *bool,
-	Version string,
 ) OracleClusterStruct {
 	return OracleClusterStruct{
 		Type:                 "OracleCluster",
@@ -5720,7 +6255,6 @@ func OracleClusterFactory(
 		RemoteListener:       RemoteListener,
 		Scan:                 Scan,
 		ScanManual:           ScanManual,
-		Version:              Version,
 	}
 }
 
@@ -5866,31 +6400,27 @@ func OracleCustomEnvVarSIPairFactory(
 
 // OracleDBConfigConnectivityFactory is just a simple function to instantiate the OracleDBConfigConnectivityStruct
 func OracleDBConfigConnectivityFactory(
-	Password string,
+	Credentials Credential,
 	Username string,
 ) OracleDBConfigConnectivityStruct {
 	return OracleDBConfigConnectivityStruct{
-		Type:     "OracleDBConfigConnectivity",
-		Password: Password,
-		Username: Username,
+		Type:        "OracleDBConfigConnectivity",
+		Credentials: Credentials,
+		Username:    Username,
 	}
 }
 
 // OracleDBContainerRuntimeFactory is just a simple function to instantiate the OracleDBContainerRuntimeStruct
 func OracleDBContainerRuntimeFactory(
-	CrossPlatformEligible *bool,
-	CrossPlatformScriptUploaded *bool,
 	LiveSourceEligible *bool,
 	LogSyncActive *bool,
 	PreProvisioningStatus *PreProvisioningRuntimeStruct,
 ) OracleDBContainerRuntimeStruct {
 	return OracleDBContainerRuntimeStruct{
-		Type:                        "OracleDBContainerRuntime",
-		CrossPlatformEligible:       CrossPlatformEligible,
-		CrossPlatformScriptUploaded: CrossPlatformScriptUploaded,
-		LiveSourceEligible:          LiveSourceEligible,
-		LogSyncActive:               LogSyncActive,
-		PreProvisioningStatus:       PreProvisioningStatus,
+		Type:                  "OracleDBContainerRuntime",
+		LiveSourceEligible:    LiveSourceEligible,
+		LogSyncActive:         LogSyncActive,
+		PreProvisioningStatus: PreProvisioningStatus,
 	}
 }
 
@@ -5898,9 +6428,7 @@ func OracleDBContainerRuntimeFactory(
 func OracleDatabaseContainerFactory(
 	ContentType string,
 	CreationTime string,
-	CrossPlatformReady *bool,
 	CurrentTimeflow string,
-	DatabaseFraction *bool,
 	Description string,
 	DiagnoseNoLoggingFaults *bool,
 	Group string,
@@ -5915,6 +6443,7 @@ func OracleDatabaseContainerFactory(
 	PreviousTimeflow string,
 	Processor string,
 	ProvisionContainer string,
+	RacMaxInstanceLag *int,
 	Reference string,
 	Runtime *OracleDBContainerRuntimeStruct,
 	SourcingPolicy *OracleSourcingPolicyStruct,
@@ -5924,9 +6453,7 @@ func OracleDatabaseContainerFactory(
 		Type:                    "OracleDatabaseContainer",
 		ContentType:             ContentType,
 		CreationTime:            CreationTime,
-		CrossPlatformReady:      CrossPlatformReady,
 		CurrentTimeflow:         CurrentTimeflow,
-		DatabaseFraction:        DatabaseFraction,
 		Description:             Description,
 		DiagnoseNoLoggingFaults: DiagnoseNoLoggingFaults,
 		Group:                   Group,
@@ -5941,60 +6468,11 @@ func OracleDatabaseContainerFactory(
 		PreviousTimeflow:        PreviousTimeflow,
 		Processor:               Processor,
 		ProvisionContainer:      ProvisionContainer,
+		RacMaxInstanceLag:       RacMaxInstanceLag,
 		Reference:               Reference,
 		Runtime:                 Runtime,
 		SourcingPolicy:          SourcingPolicy,
 		Transformation:          Transformation,
-	}
-}
-
-// OracleDatabaseCreationParametersFactory is just a simple function to instantiate the OracleDatabaseCreationParametersStruct
-func OracleDatabaseCreationParametersFactory(
-	CharacterSet string,
-	Container *OracleDatabaseContainerStruct,
-	DelphixPassword string,
-	DelphixUsername string,
-	ForceLogging *bool,
-	GrantSelectAnyDictionary *bool,
-	MaxDataFiles *int,
-	MaxInstances *int,
-	MaxLogFiles *int,
-	MaxLogHistory *int,
-	NationalCharacterSet string,
-	RedoLogs []*OracleRedoLogFileSpecificationStruct,
-	Source *OracleWarehouseSourceStruct,
-	SourceConfig OracleBaseDBConfig,
-	SysDatafile *OracleSystemDatafileSpecificationStruct,
-	SysPassword string,
-	SysauxDatafile *OracleSysauxDatafileSpecificationStruct,
-	SystemPassword string,
-	TempTablespace *OracleTempfileSpecificationStruct,
-	TimezoneFileVersion *int,
-	UndoTablespace *OracleUndoDatafileSpecificationStruct,
-) OracleDatabaseCreationParametersStruct {
-	return OracleDatabaseCreationParametersStruct{
-		Type:                     "OracleDatabaseCreationParameters",
-		CharacterSet:             CharacterSet,
-		Container:                Container,
-		DelphixPassword:          DelphixPassword,
-		DelphixUsername:          DelphixUsername,
-		ForceLogging:             ForceLogging,
-		GrantSelectAnyDictionary: GrantSelectAnyDictionary,
-		MaxDataFiles:             MaxDataFiles,
-		MaxInstances:             MaxInstances,
-		MaxLogFiles:              MaxLogFiles,
-		MaxLogHistory:            MaxLogHistory,
-		NationalCharacterSet:     NationalCharacterSet,
-		RedoLogs:                 RedoLogs,
-		Source:                   Source,
-		SourceConfig:             SourceConfig,
-		SysDatafile:              SysDatafile,
-		SysPassword:              SysPassword,
-		SysauxDatafile:           SysauxDatafile,
-		SystemPassword:           SystemPassword,
-		TempTablespace:           TempTablespace,
-		TimezoneFileVersion:      TimezoneFileVersion,
-		UndoTablespace:           UndoTablespace,
 	}
 }
 
@@ -6135,7 +6613,6 @@ func OracleInstallFactory(
 	GroupId *int,
 	GroupName string,
 	InstallationHome string,
-	LinkingEnabled *bool,
 	LogsyncPossible *bool,
 	Name string,
 	Namespace string,
@@ -6157,7 +6634,6 @@ func OracleInstallFactory(
 		GroupId:             GroupId,
 		GroupName:           GroupName,
 		InstallationHome:    InstallationHome,
-		LinkingEnabled:      LinkingEnabled,
 		LogsyncPossible:     LogsyncPossible,
 		Name:                Name,
 		Namespace:           Namespace,
@@ -6175,7 +6651,7 @@ func OracleInstallFactory(
 // OracleInstanceFactory is just a simple function to instantiate the OracleInstanceStruct
 func OracleInstanceFactory(
 	InstanceName string,
-	InstanceNumber float64,
+	InstanceNumber *int,
 ) OracleInstanceStruct {
 	return OracleInstanceStruct{
 		Type:           "OracleInstance",
@@ -6184,55 +6660,54 @@ func OracleInstanceFactory(
 	}
 }
 
-// OracleLinkDataFactory is just a simple function to instantiate the OracleLinkDataStruct
-func OracleLinkDataFactory(
+// OracleLinkFromExternalFactory is just a simple function to instantiate the OracleLinkFromExternalStruct
+func OracleLinkFromExternalFactory(
 	BackupLevelEnabled *bool,
 	BandwidthLimit *int,
 	CheckLogical *bool,
 	CompressedLinkingEnabled *bool,
 	Config string,
-	DbCredentials *PasswordCredentialStruct,
-	DbUser string,
 	DiagnoseNoLoggingFaults *bool,
-	DoubleSync *bool,
 	EncryptedLinkingEnabled *bool,
 	EnvironmentUser string,
-	ExternalFilePath string,
+	//ExternalFilePath string,
 	FilesPerSet *int,
 	LinkNow *bool,
-	NonSysCredentials *PasswordCredentialStruct,
+	NonSysCredentials Credential,
 	NonSysUser string,
 	NumberOfConnections *int,
 	Operations *LinkedSourceOperationsStruct,
+	OracleFallbackCredentials Credential,
+	OracleFallbackUser string,
 	PreProvisioningEnabled *bool,
 	RmanChannels *int,
-	SkipSpaceCheck *bool,
 	SourcingPolicy *OracleSourcingPolicyStruct,
-) OracleLinkDataStruct {
-	return OracleLinkDataStruct{
-		Type:                     "OracleLinkData",
+	//SyncParameters OracleSyncParameters,
+	SyncParameters OracleSyncFromExternalParametersStruct,
+) OracleLinkFromExternalStruct {
+	return OracleLinkFromExternalStruct{
+		Type:                     "OracleLinkFromExternal",
 		BackupLevelEnabled:       BackupLevelEnabled,
 		BandwidthLimit:           BandwidthLimit,
 		CheckLogical:             CheckLogical,
 		CompressedLinkingEnabled: CompressedLinkingEnabled,
 		Config:                   Config,
-		DbCredentials:            DbCredentials,
-		DbUser:                   DbUser,
 		DiagnoseNoLoggingFaults:  DiagnoseNoLoggingFaults,
-		DoubleSync:               DoubleSync,
 		EncryptedLinkingEnabled:  EncryptedLinkingEnabled,
 		EnvironmentUser:          EnvironmentUser,
-		ExternalFilePath:         ExternalFilePath,
-		FilesPerSet:              FilesPerSet,
-		LinkNow:                  LinkNow,
-		NonSysCredentials:        NonSysCredentials,
-		NonSysUser:               NonSysUser,
-		NumberOfConnections:      NumberOfConnections,
-		Operations:               Operations,
-		PreProvisioningEnabled:   PreProvisioningEnabled,
-		RmanChannels:             RmanChannels,
-		SkipSpaceCheck:           SkipSpaceCheck,
-		SourcingPolicy:           SourcingPolicy,
+		//ExternalFilePath: ExternalFilePath,
+		FilesPerSet:               FilesPerSet,
+		LinkNow:                   LinkNow,
+		NonSysCredentials:         NonSysCredentials,
+		NonSysUser:                NonSysUser,
+		NumberOfConnections:       NumberOfConnections,
+		Operations:                Operations,
+		OracleFallbackCredentials: OracleFallbackCredentials,
+		OracleFallbackUser:        OracleFallbackUser,
+		PreProvisioningEnabled:    PreProvisioningEnabled,
+		RmanChannels:              RmanChannels,
+		SourcingPolicy:            SourcingPolicy,
+		SyncParameters:            SyncParameters,
 	}
 }
 
@@ -6489,8 +6964,6 @@ func OraclePDBAttachDataFactory(
 	CheckLogical *bool,
 	CompressedLinkingEnabled *bool,
 	Config string,
-	DbCredentials *PasswordCredentialStruct,
-	DbUser string,
 	EncryptedLinkingEnabled *bool,
 	EnvironmentUser string,
 	ExternalFilePath string,
@@ -6499,72 +6972,75 @@ func OraclePDBAttachDataFactory(
 	LinkNow *bool,
 	NumberOfConnections *int,
 	Operations *LinkedSourceOperationsStruct,
+	OracleFallbackCredentials Credential,
+	OracleFallbackUser string,
 	RmanChannels *int,
 ) OraclePDBAttachDataStruct {
 	return OraclePDBAttachDataStruct{
-		Type:                     "OraclePDBAttachData",
-		BackupLevelEnabled:       BackupLevelEnabled,
-		BandwidthLimit:           BandwidthLimit,
-		CheckLogical:             CheckLogical,
-		CompressedLinkingEnabled: CompressedLinkingEnabled,
-		Config:                   Config,
-		DbCredentials:            DbCredentials,
-		DbUser:                   DbUser,
-		EncryptedLinkingEnabled:  EncryptedLinkingEnabled,
-		EnvironmentUser:          EnvironmentUser,
-		ExternalFilePath:         ExternalFilePath,
-		FilesPerSet:              FilesPerSet,
-		Force:                    Force,
-		LinkNow:                  LinkNow,
-		NumberOfConnections:      NumberOfConnections,
-		Operations:               Operations,
-		RmanChannels:             RmanChannels,
+		Type:                      "OraclePDBAttachData",
+		BackupLevelEnabled:        BackupLevelEnabled,
+		BandwidthLimit:            BandwidthLimit,
+		CheckLogical:              CheckLogical,
+		CompressedLinkingEnabled:  CompressedLinkingEnabled,
+		Config:                    Config,
+		EncryptedLinkingEnabled:   EncryptedLinkingEnabled,
+		EnvironmentUser:           EnvironmentUser,
+		ExternalFilePath:          ExternalFilePath,
+		FilesPerSet:               FilesPerSet,
+		Force:                     Force,
+		LinkNow:                   LinkNow,
+		NumberOfConnections:       NumberOfConnections,
+		Operations:                Operations,
+		OracleFallbackCredentials: OracleFallbackCredentials,
+		OracleFallbackUser:        OracleFallbackUser,
+		RmanChannels:              RmanChannels,
 	}
 }
 
 // OraclePDBConfigFactory is just a simple function to instantiate the OraclePDBConfigStruct
 func OraclePDBConfigFactory(
 	CdbConfig string,
-	Credentials *PasswordCredentialStruct,
+	Credentials Credential,
 	DatabaseName string,
 	Discovered *bool,
 	EnvironmentUser string,
 	LinkingEnabled *bool,
 	Name string,
 	Namespace string,
+	NonSysCredentials string,
+	NonSysUser string,
 	Reference string,
 	Repository string,
 	Services []*OracleServiceStruct,
 	User string,
 ) OraclePDBConfigStruct {
 	return OraclePDBConfigStruct{
-		Type:            "OraclePDBConfig",
-		CdbConfig:       CdbConfig,
-		Credentials:     Credentials,
-		DatabaseName:    DatabaseName,
-		Discovered:      Discovered,
-		EnvironmentUser: EnvironmentUser,
-		LinkingEnabled:  LinkingEnabled,
-		Name:            Name,
-		Namespace:       Namespace,
-		Reference:       Reference,
-		Repository:      Repository,
-		Services:        Services,
-		User:            User,
+		Type:              "OraclePDBConfig",
+		CdbConfig:         CdbConfig,
+		Credentials:       Credentials,
+		DatabaseName:      DatabaseName,
+		Discovered:        Discovered,
+		EnvironmentUser:   EnvironmentUser,
+		LinkingEnabled:    LinkingEnabled,
+		Name:              Name,
+		Namespace:         Namespace,
+		NonSysCredentials: NonSysCredentials,
+		NonSysUser:        NonSysUser,
+		Reference:         Reference,
+		Repository:        Repository,
+		Services:          Services,
+		User:              User,
 	}
 }
 
-// OraclePDBLinkDataFactory is just a simple function to instantiate the OraclePDBLinkDataStruct
-func OraclePDBLinkDataFactory(
+// OraclePDBLinkFromExternalFactory is just a simple function to instantiate the OraclePDBLinkFromExternalStruct
+func OraclePDBLinkFromExternalFactory(
 	BackupLevelEnabled *bool,
 	BandwidthLimit *int,
 	CheckLogical *bool,
 	CompressedLinkingEnabled *bool,
 	Config string,
-	DbCredentials *PasswordCredentialStruct,
-	DbUser string,
 	DiagnoseNoLoggingFaults *bool,
-	DoubleSync *bool,
 	EncryptedLinkingEnabled *bool,
 	EnvironmentUser string,
 	ExternalFilePath string,
@@ -6572,33 +7048,34 @@ func OraclePDBLinkDataFactory(
 	LinkNow *bool,
 	NumberOfConnections *int,
 	Operations *LinkedSourceOperationsStruct,
+	OracleFallbackCredentials Credential,
+	OracleFallbackUser string,
 	PreProvisioningEnabled *bool,
 	RmanChannels *int,
-	SkipSpaceCheck *bool,
 	SourcingPolicy *OracleSourcingPolicyStruct,
-) OraclePDBLinkDataStruct {
-	return OraclePDBLinkDataStruct{
-		Type:                     "OraclePDBLinkData",
-		BackupLevelEnabled:       BackupLevelEnabled,
-		BandwidthLimit:           BandwidthLimit,
-		CheckLogical:             CheckLogical,
-		CompressedLinkingEnabled: CompressedLinkingEnabled,
-		Config:                   Config,
-		DbCredentials:            DbCredentials,
-		DbUser:                   DbUser,
-		DiagnoseNoLoggingFaults:  DiagnoseNoLoggingFaults,
-		DoubleSync:               DoubleSync,
-		EncryptedLinkingEnabled:  EncryptedLinkingEnabled,
-		EnvironmentUser:          EnvironmentUser,
-		ExternalFilePath:         ExternalFilePath,
-		FilesPerSet:              FilesPerSet,
-		LinkNow:                  LinkNow,
-		NumberOfConnections:      NumberOfConnections,
-		Operations:               Operations,
-		PreProvisioningEnabled:   PreProvisioningEnabled,
-		RmanChannels:             RmanChannels,
-		SkipSpaceCheck:           SkipSpaceCheck,
-		SourcingPolicy:           SourcingPolicy,
+	SyncParameters OracleSyncParameters,
+) OraclePDBLinkFromExternalStruct {
+	return OraclePDBLinkFromExternalStruct{
+		Type:                      "OraclePDBLinkFromExternal",
+		BackupLevelEnabled:        BackupLevelEnabled,
+		BandwidthLimit:            BandwidthLimit,
+		CheckLogical:              CheckLogical,
+		CompressedLinkingEnabled:  CompressedLinkingEnabled,
+		Config:                    Config,
+		DiagnoseNoLoggingFaults:   DiagnoseNoLoggingFaults,
+		EncryptedLinkingEnabled:   EncryptedLinkingEnabled,
+		EnvironmentUser:           EnvironmentUser,
+		ExternalFilePath:          ExternalFilePath,
+		FilesPerSet:               FilesPerSet,
+		LinkNow:                   LinkNow,
+		NumberOfConnections:       NumberOfConnections,
+		Operations:                Operations,
+		OracleFallbackCredentials: OracleFallbackCredentials,
+		OracleFallbackUser:        OracleFallbackUser,
+		PreProvisioningEnabled:    PreProvisioningEnabled,
+		RmanChannels:              RmanChannels,
+		SourcingPolicy:            SourcingPolicy,
+		SyncParameters:            SyncParameters,
 	}
 }
 
@@ -6671,7 +7148,7 @@ func OracleProvisionParametersFactory(
 
 // OracleRACConfigFactory is just a simple function to instantiate the OracleRACConfigStruct
 func OracleRACConfigFactory(
-	Credentials *PasswordCredentialStruct,
+	Credentials Credential,
 	CrsDatabaseName string,
 	DatabaseName string,
 	Discovered *bool,
@@ -6685,34 +7162,36 @@ func OracleRACConfigFactory(
 	Reference string,
 	Repository string,
 	Services []*OracleServiceStruct,
+	TdeKeystorePassword string,
 	UniqueName string,
 	User string,
 ) OracleRACConfigStruct {
 	return OracleRACConfigStruct{
-		Type:              "OracleRACConfig",
-		Credentials:       Credentials,
-		CrsDatabaseName:   CrsDatabaseName,
-		DatabaseName:      DatabaseName,
-		Discovered:        Discovered,
-		EnvironmentUser:   EnvironmentUser,
-		Instances:         Instances,
-		LinkingEnabled:    LinkingEnabled,
-		Name:              Name,
-		Namespace:         Namespace,
-		NonSysCredentials: NonSysCredentials,
-		NonSysUser:        NonSysUser,
-		Reference:         Reference,
-		Repository:        Repository,
-		Services:          Services,
-		UniqueName:        UniqueName,
-		User:              User,
+		Type:                "OracleRACConfig",
+		Credentials:         Credentials,
+		CrsDatabaseName:     CrsDatabaseName,
+		DatabaseName:        DatabaseName,
+		Discovered:          Discovered,
+		EnvironmentUser:     EnvironmentUser,
+		Instances:           Instances,
+		LinkingEnabled:      LinkingEnabled,
+		Name:                Name,
+		Namespace:           Namespace,
+		NonSysCredentials:   NonSysCredentials,
+		NonSysUser:          NonSysUser,
+		Reference:           Reference,
+		Repository:          Repository,
+		Services:            Services,
+		TdeKeystorePassword: TdeKeystorePassword,
+		UniqueName:          UniqueName,
+		User:                User,
 	}
 }
 
 // OracleRACInstanceFactory is just a simple function to instantiate the OracleRACInstanceStruct
 func OracleRACInstanceFactory(
 	InstanceName string,
-	InstanceNumber float64,
+	InstanceNumber *int,
 	Node string,
 ) OracleRACInstanceStruct {
 	return OracleRACInstanceStruct{
@@ -6789,7 +7268,7 @@ func OracleRollbackParametersFactory(
 
 // OracleSIConfigFactory is just a simple function to instantiate the OracleSIConfigStruct
 func OracleSIConfigFactory(
-	Credentials *PasswordCredentialStruct,
+	Credentials Credential,
 	DatabaseName string,
 	Discovered *bool,
 	EnvironmentUser string,
@@ -6802,26 +7281,28 @@ func OracleSIConfigFactory(
 	Reference string,
 	Repository string,
 	Services []*OracleServiceStruct,
+	TdeKeystorePassword string,
 	UniqueName string,
 	User string,
 ) OracleSIConfigStruct {
 	return OracleSIConfigStruct{
-		Type:              "OracleSIConfig",
-		Credentials:       Credentials,
-		DatabaseName:      DatabaseName,
-		Discovered:        Discovered,
-		EnvironmentUser:   EnvironmentUser,
-		Instance:          Instance,
-		LinkingEnabled:    LinkingEnabled,
-		Name:              Name,
-		Namespace:         Namespace,
-		NonSysCredentials: NonSysCredentials,
-		NonSysUser:        NonSysUser,
-		Reference:         Reference,
-		Repository:        Repository,
-		Services:          Services,
-		UniqueName:        UniqueName,
-		User:              User,
+		Type:                "OracleSIConfig",
+		Credentials:         Credentials,
+		DatabaseName:        DatabaseName,
+		Discovered:          Discovered,
+		EnvironmentUser:     EnvironmentUser,
+		Instance:            Instance,
+		LinkingEnabled:      LinkingEnabled,
+		Name:                Name,
+		Namespace:           Namespace,
+		NonSysCredentials:   NonSysCredentials,
+		NonSysUser:          NonSysUser,
+		Reference:           Reference,
+		Repository:          Repository,
+		Services:            Services,
+		TdeKeystorePassword: TdeKeystorePassword,
+		UniqueName:          UniqueName,
+		User:                User,
 	}
 }
 
@@ -6840,6 +7321,48 @@ func OracleSISourceConnectionInfoFactory(
 		JdbcStrings:  JdbcStrings,
 		OracleHome:   OracleHome,
 		Version:      Version,
+	}
+}
+
+// OracleSTConvertedToPDBAttachDataFactory is just a simple function to instantiate the OracleSTConvertedToPDBAttachDataStruct
+func OracleSTConvertedToPDBAttachDataFactory(
+	BackupLevelEnabled *bool,
+	BandwidthLimit *int,
+	CheckLogical *bool,
+	CompressedLinkingEnabled *bool,
+	Config string,
+	EncryptedLinkingEnabled *bool,
+	EnvironmentUser string,
+	ExternalFilePath string,
+	FilesPerSet *int,
+	Force *bool,
+	LinkNow *bool,
+	NewPdbContainerName string,
+	NumberOfConnections *int,
+	Operations *LinkedSourceOperationsStruct,
+	OracleFallbackCredentials Credential,
+	OracleFallbackUser string,
+	RmanChannels *int,
+) OracleSTConvertedToPDBAttachDataStruct {
+	return OracleSTConvertedToPDBAttachDataStruct{
+		Type:                      "OracleSTConvertedToPDBAttachData",
+		BackupLevelEnabled:        BackupLevelEnabled,
+		BandwidthLimit:            BandwidthLimit,
+		CheckLogical:              CheckLogical,
+		CompressedLinkingEnabled:  CompressedLinkingEnabled,
+		Config:                    Config,
+		EncryptedLinkingEnabled:   EncryptedLinkingEnabled,
+		EnvironmentUser:           EnvironmentUser,
+		ExternalFilePath:          ExternalFilePath,
+		FilesPerSet:               FilesPerSet,
+		Force:                     Force,
+		LinkNow:                   LinkNow,
+		NewPdbContainerName:       NewPdbContainerName,
+		NumberOfConnections:       NumberOfConnections,
+		Operations:                Operations,
+		OracleFallbackCredentials: OracleFallbackCredentials,
+		OracleFallbackUser:        OracleFallbackUser,
+		RmanChannels:              RmanChannels,
 	}
 }
 
@@ -6881,13 +7404,12 @@ func OracleSnapshotFactory(
 	Container string,
 	CreationTime string,
 	FirstChangePoint *OracleTimeflowPointStruct,
-	FractionTimeflows []string,
 	FromPhysicalStandbyVdb *bool,
 	LatestChangePoint *OracleTimeflowPointStruct,
 	MissingNonLoggedData *bool,
 	Name string,
 	Namespace string,
-	RedoLogSizeInBytes float64,
+	RedoLogSizeInBytes *int,
 	Reference string,
 	Retention *int,
 	Runtime *OracleSnapshotRuntimeStruct,
@@ -6902,7 +7424,6 @@ func OracleSnapshotFactory(
 		Container:              Container,
 		CreationTime:           CreationTime,
 		FirstChangePoint:       FirstChangePoint,
-		FractionTimeflows:      FractionTimeflows,
 		FromPhysicalStandbyVdb: FromPhysicalStandbyVdb,
 		LatestChangePoint:      LatestChangePoint,
 		MissingNonLoggedData:   MissingNonLoggedData,
@@ -7046,7 +7567,7 @@ func OracleStagingSourceParametersFactory(
 // OracleStartParametersFactory is just a simple function to instantiate the OracleStartParametersStruct
 func OracleStartParametersFactory(
 	Credential Credential,
-	Instances []float64,
+	Instances []*int,
 	Username string,
 ) OracleStartParametersStruct {
 	return OracleStartParametersStruct{
@@ -7061,7 +7582,7 @@ func OracleStartParametersFactory(
 func OracleStopParametersFactory(
 	Abort *bool,
 	Credential Credential,
-	Instances []float64,
+	Instances []*int,
 	Username string,
 ) OracleStopParametersStruct {
 	return OracleStopParametersStruct{
@@ -7073,19 +7594,21 @@ func OracleStopParametersFactory(
 	}
 }
 
-// OracleSyncParametersFactory is just a simple function to instantiate the OracleSyncParametersStruct
-func OracleSyncParametersFactory(
+// OracleSyncFromExternalParametersFactory is just a simple function to instantiate the OracleSyncFromExternalParametersStruct
+func OracleSyncFromExternalParametersFactory(
 	DoNotResume *bool,
 	DoubleSync *bool,
+	FilesForFullBackup []*int,
 	ForceFullBackup *bool,
 	SkipSpaceCheck *bool,
-) OracleSyncParametersStruct {
-	return OracleSyncParametersStruct{
-		Type:            "OracleSyncParameters",
-		DoNotResume:     DoNotResume,
-		DoubleSync:      DoubleSync,
-		ForceFullBackup: ForceFullBackup,
-		SkipSpaceCheck:  SkipSpaceCheck,
+) OracleSyncFromExternalParametersStruct {
+	return OracleSyncFromExternalParametersStruct{
+		Type:               "OracleSyncFromExternalParameters",
+		DoNotResume:        DoNotResume,
+		DoubleSync:         DoubleSync,
+		FilesForFullBackup: FilesForFullBackup,
+		ForceFullBackup:    ForceFullBackup,
+		SkipSpaceCheck:     SkipSpaceCheck,
 	}
 }
 
@@ -7154,22 +7677,18 @@ func OracleTimeflowFactory(
 	ParentPoint *OracleTimeflowPointStruct,
 	ParentSnapshot string,
 	Reference string,
-	Warehouse *bool,
-	WarehouseTimeflow string,
 ) OracleTimeflowStruct {
 	return OracleTimeflowStruct{
-		Type:              "OracleTimeflow",
-		CdbTimeflow:       CdbTimeflow,
-		Container:         Container,
-		CreationType:      CreationType,
-		IncarnationID:     IncarnationID,
-		Name:              Name,
-		Namespace:         Namespace,
-		ParentPoint:       ParentPoint,
-		ParentSnapshot:    ParentSnapshot,
-		Reference:         Reference,
-		Warehouse:         Warehouse,
-		WarehouseTimeflow: WarehouseTimeflow,
+		Type:           "OracleTimeflow",
+		CdbTimeflow:    CdbTimeflow,
+		Container:      Container,
+		CreationType:   CreationType,
+		IncarnationID:  IncarnationID,
+		Name:           Name,
+		Namespace:      Namespace,
+		ParentPoint:    ParentPoint,
+		ParentSnapshot: ParentSnapshot,
+		Reference:      Reference,
 	}
 }
 
@@ -7308,12 +7827,15 @@ func OracleVirtualPdbSourceFactory(
 	Namespace string,
 	NodeListeners []string,
 	Operations *VirtualSourceOperationsStruct,
+	ParentTdeKeystorePassword string,
+	ParentTdeKeystorePath string,
 	RedoLogGroups *int,
 	RedoLogSizeInMB *int,
 	Reference string,
 	Runtime OracleBaseSourceRuntime,
 	Staging *bool,
 	Status string,
+	TdeExportedKeyFileSecret string,
 	Virtual *bool,
 ) OracleVirtualPdbSourceStruct {
 	return OracleVirtualPdbSourceStruct{
@@ -7335,12 +7857,15 @@ func OracleVirtualPdbSourceFactory(
 		Namespace:                       Namespace,
 		NodeListeners:                   NodeListeners,
 		Operations:                      Operations,
+		ParentTdeKeystorePassword:       ParentTdeKeystorePassword,
+		ParentTdeKeystorePath:           ParentTdeKeystorePath,
 		RedoLogGroups:                   RedoLogGroups,
 		RedoLogSizeInMB:                 RedoLogSizeInMB,
 		Reference:                       Reference,
 		Runtime:                         Runtime,
 		Staging:                         Staging,
 		Status:                          Status,
+		TdeExportedKeyFileSecret:        TdeExportedKeyFileSecret,
 		Virtual:                         Virtual,
 	}
 }
@@ -7374,62 +7899,6 @@ func OracleVirtualSourceFactory(
 ) OracleVirtualSourceStruct {
 	return OracleVirtualSourceStruct{
 		Type:                            "OracleVirtualSource",
-		AllowAutoVDBRestartOnHostReboot: AllowAutoVDBRestartOnHostReboot,
-		ArchivelogMode:                  ArchivelogMode,
-		Config:                          Config,
-		ConfigParams:                    ConfigParams,
-		ConfigTemplate:                  ConfigTemplate,
-		Container:                       Container,
-		CustomEnvVars:                   CustomEnvVars,
-		Description:                     Description,
-		FileMappingRules:                FileMappingRules,
-		Hosts:                           Hosts,
-		Linked:                          Linked,
-		LogCollectionEnabled:            LogCollectionEnabled,
-		MountBase:                       MountBase,
-		Name:                            Name,
-		Namespace:                       Namespace,
-		NodeListeners:                   NodeListeners,
-		Operations:                      Operations,
-		RedoLogGroups:                   RedoLogGroups,
-		RedoLogSizeInMB:                 RedoLogSizeInMB,
-		Reference:                       Reference,
-		Runtime:                         Runtime,
-		Staging:                         Staging,
-		Status:                          Status,
-		Virtual:                         Virtual,
-	}
-}
-
-// OracleWarehouseSourceFactory is just a simple function to instantiate the OracleWarehouseSourceStruct
-func OracleWarehouseSourceFactory(
-	AllowAutoVDBRestartOnHostReboot *bool,
-	ArchivelogMode *bool,
-	Config string,
-	ConfigParams map[string]string,
-	ConfigTemplate string,
-	Container string,
-	CustomEnvVars []OracleCustomEnvVar,
-	Description string,
-	FileMappingRules string,
-	Hosts []string,
-	Linked *bool,
-	LogCollectionEnabled *bool,
-	MountBase string,
-	Name string,
-	Namespace string,
-	NodeListeners []string,
-	Operations *VirtualSourceOperationsStruct,
-	RedoLogGroups *int,
-	RedoLogSizeInMB *int,
-	Reference string,
-	Runtime OracleBaseSourceRuntime,
-	Staging *bool,
-	Status string,
-	Virtual *bool,
-) OracleWarehouseSourceStruct {
-	return OracleWarehouseSourceStruct{
-		Type:                            "OracleWarehouseSource",
 		AllowAutoVDBRestartOnHostReboot: AllowAutoVDBRestartOnHostReboot,
 		ArchivelogMode:                  ArchivelogMode,
 		Config:                          Config,
@@ -7524,6 +7993,18 @@ func PemCertificateChainFactory(
 	return PemCertificateChainStruct{
 		Type:  "PemCertificateChain",
 		Chain: Chain,
+	}
+}
+
+// PemClientCertificateFactory is just a simple function to instantiate the PemClientCertificateStruct
+func PemClientCertificateFactory(
+	ClientCertificateChain *PemCertificateChainStruct,
+	PrivateKey string,
+) PemClientCertificateStruct {
+	return PemClientCertificateStruct{
+		Type:                   "PemClientCertificate",
+		ClientCertificateChain: ClientCertificateChain,
+		PrivateKey:             PrivateKey,
 	}
 }
 
@@ -7638,20 +8119,6 @@ func PgSQLDBClusterConfigFactory(
 		Reference:            Reference,
 		Repository:           Repository,
 		User:                 User,
-	}
-}
-
-// PgSQLDBClusterConfigConnectivityFactory is just a simple function to instantiate the PgSQLDBClusterConfigConnectivityStruct
-func PgSQLDBClusterConfigConnectivityFactory(
-	ConnectionDatabase string,
-	Password string,
-	Username string,
-) PgSQLDBClusterConfigConnectivityStruct {
-	return PgSQLDBClusterConfigConnectivityStruct{
-		Type:               "PgSQLDBClusterConfigConnectivity",
-		ConnectionDatabase: ConnectionDatabase,
-		Password:           Password,
-		Username:           Username,
 	}
 }
 
@@ -7787,7 +8254,6 @@ func PgSQLInstallFactory(
 	Discovered *bool,
 	Environment string,
 	InstallationPath string,
-	LinkingEnabled *bool,
 	Name string,
 	Namespace string,
 	ProvisioningEnabled *bool,
@@ -7803,7 +8269,6 @@ func PgSQLInstallFactory(
 		Discovered:          Discovered,
 		Environment:         Environment,
 		InstallationPath:    InstallationPath,
-		LinkingEnabled:      LinkingEnabled,
 		Name:                Name,
 		Namespace:           Namespace,
 		ProvisioningEnabled: ProvisioningEnabled,
@@ -8129,6 +8594,179 @@ func PhoneHomeServiceFactory(
 	}
 }
 
+// PluginFactory is just a simple function to instantiate the PluginStruct
+func PluginFactory(
+	BuildApi *APIVersionStruct,
+	BuildNumber string,
+	DefaultLocale string,
+	DiscoveryDefinition *PluginDiscoveryDefinitionStruct,
+	EntryPoint string,
+	ExtendedStartStopHooks *bool,
+	ExternalVersion string,
+	HostTypes []string,
+	Language string,
+	LinkedSourceDefinition PluginLinkedSourceDefinition,
+	LuaName string,
+	Manifest *PluginManifestStruct,
+	Messages []*ToolkitLocaleStruct,
+	MinimumLuaVersion string,
+	Name string,
+	Namespace string,
+	PluginId string,
+	Reference string,
+	RootSquashEnabled *bool,
+	SnapshotParametersDefinition *PluginSnapshotParametersDefinitionStruct,
+	SnapshotSchema *SchemaDraftV4Struct,
+	SourceCode string,
+	UpgradeDefinition *PluginUpgradeDefinitionStruct,
+	VirtualSourceDefinition *PluginVirtualSourceDefinitionStruct,
+) PluginStruct {
+	return PluginStruct{
+		Type:                         "Plugin",
+		BuildApi:                     BuildApi,
+		BuildNumber:                  BuildNumber,
+		DefaultLocale:                DefaultLocale,
+		DiscoveryDefinition:          DiscoveryDefinition,
+		EntryPoint:                   EntryPoint,
+		ExtendedStartStopHooks:       ExtendedStartStopHooks,
+		ExternalVersion:              ExternalVersion,
+		HostTypes:                    HostTypes,
+		Language:                     Language,
+		LinkedSourceDefinition:       LinkedSourceDefinition,
+		LuaName:                      LuaName,
+		Manifest:                     Manifest,
+		Messages:                     Messages,
+		MinimumLuaVersion:            MinimumLuaVersion,
+		Name:                         Name,
+		Namespace:                    Namespace,
+		PluginId:                     PluginId,
+		Reference:                    Reference,
+		RootSquashEnabled:            RootSquashEnabled,
+		SnapshotParametersDefinition: SnapshotParametersDefinition,
+		SnapshotSchema:               SnapshotSchema,
+		SourceCode:                   SourceCode,
+		UpgradeDefinition:            UpgradeDefinition,
+		VirtualSourceDefinition:      VirtualSourceDefinition,
+	}
+}
+
+// PluginDiscoveryDefinitionFactory is just a simple function to instantiate the PluginDiscoveryDefinitionStruct
+func PluginDiscoveryDefinitionFactory(
+	ManualSourceConfigDiscovery *bool,
+	RepositoryIdentityFields []string,
+	RepositoryNameField string,
+	RepositorySchema *SchemaDraftV4Struct,
+	SourceConfigIdentityFields []string,
+	SourceConfigNameField string,
+	SourceConfigSchema *SchemaDraftV4Struct,
+) PluginDiscoveryDefinitionStruct {
+	return PluginDiscoveryDefinitionStruct{
+		Type:                        "PluginDiscoveryDefinition",
+		ManualSourceConfigDiscovery: ManualSourceConfigDiscovery,
+		RepositoryIdentityFields:    RepositoryIdentityFields,
+		RepositoryNameField:         RepositoryNameField,
+		RepositorySchema:            RepositorySchema,
+		SourceConfigIdentityFields:  SourceConfigIdentityFields,
+		SourceConfigNameField:       SourceConfigNameField,
+		SourceConfigSchema:          SourceConfigSchema,
+	}
+}
+
+// PluginLinkedDirectSourceDefinitionFactory is just a simple function to instantiate the PluginLinkedDirectSourceDefinitionStruct
+func PluginLinkedDirectSourceDefinitionFactory(
+	Parameters *SchemaDraftV4Struct,
+) PluginLinkedDirectSourceDefinitionStruct {
+	return PluginLinkedDirectSourceDefinitionStruct{
+		Type:       "PluginLinkedDirectSourceDefinition",
+		Parameters: Parameters,
+	}
+}
+
+// PluginLinkedStagedSourceDefinitionFactory is just a simple function to instantiate the PluginLinkedStagedSourceDefinitionStruct
+func PluginLinkedStagedSourceDefinitionFactory(
+	Parameters *SchemaDraftV4Struct,
+) PluginLinkedStagedSourceDefinitionStruct {
+	return PluginLinkedStagedSourceDefinitionStruct{
+		Type:       "PluginLinkedStagedSourceDefinition",
+		Parameters: Parameters,
+	}
+}
+
+// PluginManifestFactory is just a simple function to instantiate the PluginManifestStruct
+func PluginManifestFactory(
+	HasInitialize *bool,
+	HasLinkedMountSpecification *bool,
+	HasLinkedPostSnapshot *bool,
+	HasLinkedPreSnapshot *bool,
+	HasLinkedStartStaging *bool,
+	HasLinkedStatus *bool,
+	HasLinkedStopStaging *bool,
+	HasLinkedWorker *bool,
+	HasRepositoryDiscovery *bool,
+	HasSourceConfigDiscovery *bool,
+	HasVirtualConfigure *bool,
+	HasVirtualMountSpecification *bool,
+	HasVirtualPostSnapshot *bool,
+	HasVirtualPreSnapshot *bool,
+	HasVirtualReconfigure *bool,
+	HasVirtualStart *bool,
+	HasVirtualStatus *bool,
+	HasVirtualStop *bool,
+	HasVirtualUnconfigure *bool,
+	MigrationIdList []string,
+) PluginManifestStruct {
+	return PluginManifestStruct{
+		Type:                         "PluginManifest",
+		HasInitialize:                HasInitialize,
+		HasLinkedMountSpecification:  HasLinkedMountSpecification,
+		HasLinkedPostSnapshot:        HasLinkedPostSnapshot,
+		HasLinkedPreSnapshot:         HasLinkedPreSnapshot,
+		HasLinkedStartStaging:        HasLinkedStartStaging,
+		HasLinkedStatus:              HasLinkedStatus,
+		HasLinkedStopStaging:         HasLinkedStopStaging,
+		HasLinkedWorker:              HasLinkedWorker,
+		HasRepositoryDiscovery:       HasRepositoryDiscovery,
+		HasSourceConfigDiscovery:     HasSourceConfigDiscovery,
+		HasVirtualConfigure:          HasVirtualConfigure,
+		HasVirtualMountSpecification: HasVirtualMountSpecification,
+		HasVirtualPostSnapshot:       HasVirtualPostSnapshot,
+		HasVirtualPreSnapshot:        HasVirtualPreSnapshot,
+		HasVirtualReconfigure:        HasVirtualReconfigure,
+		HasVirtualStart:              HasVirtualStart,
+		HasVirtualStatus:             HasVirtualStatus,
+		HasVirtualStop:               HasVirtualStop,
+		HasVirtualUnconfigure:        HasVirtualUnconfigure,
+		MigrationIdList:              MigrationIdList,
+	}
+}
+
+// PluginSnapshotParametersDefinitionFactory is just a simple function to instantiate the PluginSnapshotParametersDefinitionStruct
+func PluginSnapshotParametersDefinitionFactory(
+	Schema *SchemaDraftV4Struct,
+) PluginSnapshotParametersDefinitionStruct {
+	return PluginSnapshotParametersDefinitionStruct{
+		Type:   "PluginSnapshotParametersDefinition",
+		Schema: Schema,
+	}
+}
+
+// PluginUpgradeDefinitionFactory is just a simple function to instantiate the PluginUpgradeDefinitionStruct
+func PluginUpgradeDefinitionFactory() PluginUpgradeDefinitionStruct {
+	return PluginUpgradeDefinitionStruct{
+		Type: "PluginUpgradeDefinition",
+	}
+}
+
+// PluginVirtualSourceDefinitionFactory is just a simple function to instantiate the PluginVirtualSourceDefinitionStruct
+func PluginVirtualSourceDefinitionFactory(
+	Parameters *SchemaDraftV4Struct,
+) PluginVirtualSourceDefinitionStruct {
+	return PluginVirtualSourceDefinitionStruct{
+		Type:       "PluginVirtualSourceDefinition",
+		Parameters: Parameters,
+	}
+}
+
 // PolicyApplyTargetParametersFactory is just a simple function to instantiate the PolicyApplyTargetParametersStruct
 func PolicyApplyTargetParametersFactory(
 	Target string,
@@ -8150,18 +8788,6 @@ func PolicyCreateAndApplyParametersFactory(
 		Type:   "PolicyCreateAndApplyParameters",
 		Policy: Policy,
 		Target: Target,
-	}
-}
-
-// PopulateCompatibilityParametersFactory is just a simple function to instantiate the PopulateCompatibilityParametersStruct
-func PopulateCompatibilityParametersFactory(
-	Environment string,
-	SourceRepository string,
-) PopulateCompatibilityParametersStruct {
-	return PopulateCompatibilityParametersStruct{
-		Type:             "PopulateCompatibilityParameters",
-		Environment:      Environment,
-		SourceRepository: SourceRepository,
 	}
 }
 
@@ -8232,16 +8858,22 @@ func PublicSystemInfoFactory(
 	BuildTimestamp string,
 	BuildTitle string,
 	BuildVersion *VersionInfoStruct,
+	CentralManagementProductName string,
 	Configured *bool,
 	CurrentLocale string,
 	EnabledFeatures []string,
 	EngineQualifier string,
+	EngineType string,
 	KernelName string,
 	Locales []string,
 	ProductName string,
 	ProductType string,
+	SsoEnabled *bool,
 	SupportContacts []*SupportContactStruct,
 	SupportURL string,
+	Theme *SchemaDraftV4Struct,
+	ToggleableFeatures []string,
+	UserManagementEnabled *bool,
 	VendorAddress []string,
 	VendorEmail string,
 	VendorName string,
@@ -8249,27 +8881,33 @@ func PublicSystemInfoFactory(
 	VendorURL string,
 ) PublicSystemInfoStruct {
 	return PublicSystemInfoStruct{
-		Type:              "PublicSystemInfo",
-		ApiVersion:        ApiVersion,
-		Banner:            Banner,
-		BuildTimestamp:    BuildTimestamp,
-		BuildTitle:        BuildTitle,
-		BuildVersion:      BuildVersion,
-		Configured:        Configured,
-		CurrentLocale:     CurrentLocale,
-		EnabledFeatures:   EnabledFeatures,
-		EngineQualifier:   EngineQualifier,
-		KernelName:        KernelName,
-		Locales:           Locales,
-		ProductName:       ProductName,
-		ProductType:       ProductType,
-		SupportContacts:   SupportContacts,
-		SupportURL:        SupportURL,
-		VendorAddress:     VendorAddress,
-		VendorEmail:       VendorEmail,
-		VendorName:        VendorName,
-		VendorPhoneNumber: VendorPhoneNumber,
-		VendorURL:         VendorURL,
+		Type:                         "PublicSystemInfo",
+		ApiVersion:                   ApiVersion,
+		Banner:                       Banner,
+		BuildTimestamp:               BuildTimestamp,
+		BuildTitle:                   BuildTitle,
+		BuildVersion:                 BuildVersion,
+		CentralManagementProductName: CentralManagementProductName,
+		Configured:                   Configured,
+		CurrentLocale:                CurrentLocale,
+		EnabledFeatures:              EnabledFeatures,
+		EngineQualifier:              EngineQualifier,
+		EngineType:                   EngineType,
+		KernelName:                   KernelName,
+		Locales:                      Locales,
+		ProductName:                  ProductName,
+		ProductType:                  ProductType,
+		SsoEnabled:                   SsoEnabled,
+		SupportContacts:              SupportContacts,
+		SupportURL:                   SupportURL,
+		Theme:                        Theme,
+		ToggleableFeatures:           ToggleableFeatures,
+		UserManagementEnabled:        UserManagementEnabled,
+		VendorAddress:                VendorAddress,
+		VendorEmail:                  VendorEmail,
+		VendorName:                   VendorName,
+		VendorPhoneNumber:            VendorPhoneNumber,
+		VendorURL:                    VendorURL,
 	}
 }
 
@@ -8419,6 +9057,30 @@ func RemoteDelphixEngineInfoFactory(
 	}
 }
 
+// ReplicaRetentionPolicyFactory is just a simple function to instantiate the ReplicaRetentionPolicyStruct
+func ReplicaRetentionPolicyFactory(
+	Customized *bool,
+	Default *bool,
+	Duration *int,
+	DurationUnit string,
+	EffectiveType string,
+	Name string,
+	Namespace string,
+	Reference string,
+) ReplicaRetentionPolicyStruct {
+	return ReplicaRetentionPolicyStruct{
+		Type:          "ReplicaRetentionPolicy",
+		Customized:    Customized,
+		Default:       Default,
+		Duration:      Duration,
+		DurationUnit:  DurationUnit,
+		EffectiveType: EffectiveType,
+		Name:          Name,
+		Namespace:     Namespace,
+		Reference:     Reference,
+	}
+}
+
 // ReplicationListFactory is just a simple function to instantiate the ReplicationListStruct
 func ReplicationListFactory(
 	Name string,
@@ -8477,6 +9139,7 @@ func ReplicationSpecFactory(
 	BandwidthLimit *int,
 	Description string,
 	Encrypted *bool,
+	LockedProfile *bool,
 	Name string,
 	Namespace string,
 	NumberOfConnections *int,
@@ -8497,6 +9160,7 @@ func ReplicationSpecFactory(
 		BandwidthLimit:        BandwidthLimit,
 		Description:           Description,
 		Encrypted:             Encrypted,
+		LockedProfile:         LockedProfile,
 		Name:                  Name,
 		Namespace:             Namespace,
 		NumberOfConnections:   NumberOfConnections,
@@ -8544,6 +9208,16 @@ func ResetIgnoredFaultsParametersFactory(
 	return ResetIgnoredFaultsParametersStruct{
 		Type:            "ResetIgnoredFaultsParameters",
 		FaultReferences: FaultReferences,
+	}
+}
+
+// ResolveOrIgnoreSelectedChecksParametersFactory is just a simple function to instantiate the ResolveOrIgnoreSelectedChecksParametersStruct
+func ResolveOrIgnoreSelectedChecksParametersFactory(
+	CheckReferences []string,
+) ResolveOrIgnoreSelectedChecksParametersStruct {
+	return ResolveOrIgnoreSelectedChecksParametersStruct{
+		Type:            "ResolveOrIgnoreSelectedChecksParameters",
+		CheckReferences: CheckReferences,
 	}
 }
 
@@ -8644,36 +9318,84 @@ func RsaKeyPairFactory(
 // RunBashOnSourceOperationFactory is just a simple function to instantiate the RunBashOnSourceOperationStruct
 func RunBashOnSourceOperationFactory(
 	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
 	Name string,
 ) RunBashOnSourceOperationStruct {
 	return RunBashOnSourceOperationStruct{
-		Type:    "RunBashOnSourceOperation",
-		Command: Command,
-		Name:    Name,
+		Type:                   "RunBashOnSourceOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
 	}
 }
 
 // RunCommandOnSourceOperationFactory is just a simple function to instantiate the RunCommandOnSourceOperationStruct
 func RunCommandOnSourceOperationFactory(
 	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
 	Name string,
 ) RunCommandOnSourceOperationStruct {
 	return RunCommandOnSourceOperationStruct{
-		Type:    "RunCommandOnSourceOperation",
-		Command: Command,
-		Name:    Name,
+		Type:                   "RunCommandOnSourceOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
+	}
+}
+
+// RunCommandOperationFactory is just a simple function to instantiate the RunCommandOperationStruct
+func RunCommandOperationFactory(
+	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
+	Name string,
+) RunCommandOperationStruct {
+	return RunCommandOperationStruct{
+		Type:                   "RunCommandOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
+	}
+}
+
+// RunDefaultPowerShellOnSourceOperationFactory is just a simple function to instantiate the RunDefaultPowerShellOnSourceOperationStruct
+func RunDefaultPowerShellOnSourceOperationFactory(
+	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
+	Name string,
+) RunDefaultPowerShellOnSourceOperationStruct {
+	return RunDefaultPowerShellOnSourceOperationStruct{
+		Type:                   "RunDefaultPowerShellOnSourceOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
 	}
 }
 
 // RunExpectOnSourceOperationFactory is just a simple function to instantiate the RunExpectOnSourceOperationStruct
 func RunExpectOnSourceOperationFactory(
 	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
 	Name string,
 ) RunExpectOnSourceOperationStruct {
 	return RunExpectOnSourceOperationStruct{
-		Type:    "RunExpectOnSourceOperation",
-		Command: Command,
-		Name:    Name,
+		Type:                   "RunExpectOnSourceOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
+	}
+}
+
+// RunExpectOperationFactory is just a simple function to instantiate the RunExpectOperationStruct
+func RunExpectOperationFactory(
+	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
+	Name string,
+) RunExpectOperationStruct {
+	return RunExpectOperationStruct{
+		Type:                   "RunExpectOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
 	}
 }
 
@@ -8687,12 +9409,14 @@ func RunMaskingJobOperationFactory() RunMaskingJobOperationStruct {
 // RunPowerShellOnSourceOperationFactory is just a simple function to instantiate the RunPowerShellOnSourceOperationStruct
 func RunPowerShellOnSourceOperationFactory(
 	Command string,
+	CredentialsEnvVarsList []*CredentialsEnvVarsStruct,
 	Name string,
 ) RunPowerShellOnSourceOperationStruct {
 	return RunPowerShellOnSourceOperationStruct{
-		Type:    "RunPowerShellOnSourceOperation",
-		Command: Command,
-		Name:    Name,
+		Type:                   "RunPowerShellOnSourceOperation",
+		Command:                Command,
+		CredentialsEnvVarsList: CredentialsEnvVarsList,
+		Name:                   Name,
 	}
 }
 
@@ -8722,16 +9446,16 @@ func SMTPConfigFactory(
 	}
 }
 
-// SNMPConfigFactory is just a simple function to instantiate the SNMPConfigStruct
-func SNMPConfigFactory(
+// SNMPV2ConfigFactory is just a simple function to instantiate the SNMPV2ConfigStruct
+func SNMPV2ConfigFactory(
 	AuthorizedNetwork string,
 	Community string,
 	Enabled *bool,
 	Location string,
 	Severity string,
-) SNMPConfigStruct {
-	return SNMPConfigStruct{
-		Type:              "SNMPConfig",
+) SNMPV2ConfigStruct {
+	return SNMPV2ConfigStruct{
+		Type:              "SNMPV2Config",
 		AuthorizedNetwork: AuthorizedNetwork,
 		Community:         Community,
 		Enabled:           Enabled,
@@ -8740,23 +9464,87 @@ func SNMPConfigFactory(
 	}
 }
 
-// SNMPManagerFactory is just a simple function to instantiate the SNMPManagerStruct
-func SNMPManagerFactory(
+// SNMPV2ManagerFactory is just a simple function to instantiate the SNMPV2ManagerStruct
+func SNMPV2ManagerFactory(
 	Address string,
 	CommunityString string,
 	Namespace string,
 	Port *int,
 	Reference string,
 	UseInform *bool,
-) SNMPManagerStruct {
-	return SNMPManagerStruct{
-		Type:            "SNMPManager",
+) SNMPV2ManagerStruct {
+	return SNMPV2ManagerStruct{
+		Type:            "SNMPV2Manager",
 		Address:         Address,
 		CommunityString: CommunityString,
 		Namespace:       Namespace,
 		Port:            Port,
 		Reference:       Reference,
 		UseInform:       UseInform,
+	}
+}
+
+// SNMPV3ConfigFactory is just a simple function to instantiate the SNMPV3ConfigStruct
+func SNMPV3ConfigFactory(
+	Enabled *bool,
+	Location string,
+	Severity string,
+) SNMPV3ConfigStruct {
+	return SNMPV3ConfigStruct{
+		Type:     "SNMPV3Config",
+		Enabled:  Enabled,
+		Location: Location,
+		Severity: Severity,
+	}
+}
+
+// SNMPV3ManagerFactory is just a simple function to instantiate the SNMPV3ManagerStruct
+func SNMPV3ManagerFactory(
+	Address string,
+	AuthenticationPassphrase string,
+	AuthenticationProtocol string,
+	Namespace string,
+	Port *int,
+	PrivacyPassphrase string,
+	PrivacyProtocol string,
+	Reference string,
+	UseInform *bool,
+	Username string,
+) SNMPV3ManagerStruct {
+	return SNMPV3ManagerStruct{
+		Type:                     "SNMPV3Manager",
+		Address:                  Address,
+		AuthenticationPassphrase: AuthenticationPassphrase,
+		AuthenticationProtocol:   AuthenticationProtocol,
+		Namespace:                Namespace,
+		Port:                     Port,
+		PrivacyPassphrase:        PrivacyPassphrase,
+		PrivacyProtocol:          PrivacyProtocol,
+		Reference:                Reference,
+		UseInform:                UseInform,
+		Username:                 Username,
+	}
+}
+
+// SNMPV3USMUserConfigFactory is just a simple function to instantiate the SNMPV3USMUserConfigStruct
+func SNMPV3USMUserConfigFactory(
+	AuthenticationPassphrase string,
+	AuthenticationProtocol string,
+	Namespace string,
+	PrivacyPassphrase string,
+	PrivacyProtocol string,
+	Reference string,
+	Username string,
+) SNMPV3USMUserConfigStruct {
+	return SNMPV3USMUserConfigStruct{
+		Type:                     "SNMPV3USMUserConfig",
+		AuthenticationPassphrase: AuthenticationPassphrase,
+		AuthenticationProtocol:   AuthenticationProtocol,
+		Namespace:                Namespace,
+		PrivacyPassphrase:        PrivacyPassphrase,
+		PrivacyProtocol:          PrivacyProtocol,
+		Reference:                Reference,
+		Username:                 Username,
 	}
 }
 
@@ -8775,54 +9563,6 @@ func SSHConnectivityFactory(
 		Port:                    Port,
 		SshVerificationStrategy: SshVerificationStrategy,
 		Username:                Username,
-	}
-}
-
-// SamlAuthParametersFactory is just a simple function to instantiate the SamlAuthParametersStruct
-func SamlAuthParametersFactory(
-	EncodeRequest *bool,
-) SamlAuthParametersStruct {
-	return SamlAuthParametersStruct{
-		Type:          "SamlAuthParameters",
-		EncodeRequest: EncodeRequest,
-	}
-}
-
-// SamlInfoFactory is just a simple function to instantiate the SamlInfoStruct
-func SamlInfoFactory(
-	Enabled *bool,
-) SamlInfoStruct {
-	return SamlInfoStruct{
-		Type:    "SamlInfo",
-		Enabled: Enabled,
-	}
-}
-
-// SamlServiceProviderFactory is just a simple function to instantiate the SamlServiceProviderStruct
-func SamlServiceProviderFactory(
-	BaseUrl string,
-	DecryptingKey string,
-	Destination string,
-	EntityId string,
-	HashAlgUrl string,
-	IssuerId string,
-	Name string,
-	Namespace string,
-	Reference string,
-	SigningKey string,
-) SamlServiceProviderStruct {
-	return SamlServiceProviderStruct{
-		Type:          "SamlServiceProvider",
-		BaseUrl:       BaseUrl,
-		DecryptingKey: DecryptingKey,
-		Destination:   Destination,
-		EntityId:      EntityId,
-		HashAlgUrl:    HashAlgUrl,
-		IssuerId:      IssuerId,
-		Name:          Name,
-		Namespace:     Namespace,
-		Reference:     Reference,
-		SigningKey:    SigningKey,
 	}
 }
 
@@ -8872,13 +9612,15 @@ func ScrubStatusFactory(
 func SecurityConfigFactory(
 	AllowedCORSOrigins string,
 	Banner string,
+	EnableCORSSupportsCredentials *bool,
 	IsCORSEnabled *bool,
 ) SecurityConfigStruct {
 	return SecurityConfigStruct{
-		Type:               "SecurityConfig",
-		AllowedCORSOrigins: AllowedCORSOrigins,
-		Banner:             Banner,
-		IsCORSEnabled:      IsCORSEnabled,
+		Type:                          "SecurityConfig",
+		AllowedCORSOrigins:            AllowedCORSOrigins,
+		Banner:                        Banner,
+		EnableCORSSupportsCredentials: EnableCORSSupportsCredentials,
+		IsCORSEnabled:                 IsCORSEnabled,
 	}
 }
 
@@ -8931,20 +9673,26 @@ func SnapshotCapacityDataFactory(
 	Container string,
 	DescendantVDBs []string,
 	ManualRetention *int,
+	Namespace string,
 	PolicyRetention *bool,
 	Snapshot string,
+	SnapshotLatestChange string,
 	SnapshotTimestamp string,
+	SnapshotTimezone string,
 	Space float64,
 ) SnapshotCapacityDataStruct {
 	return SnapshotCapacityDataStruct{
-		Type:              "SnapshotCapacityData",
-		Container:         Container,
-		DescendantVDBs:    DescendantVDBs,
-		ManualRetention:   ManualRetention,
-		PolicyRetention:   PolicyRetention,
-		Snapshot:          Snapshot,
-		SnapshotTimestamp: SnapshotTimestamp,
-		Space:             Space,
+		Type:                 "SnapshotCapacityData",
+		Container:            Container,
+		DescendantVDBs:       DescendantVDBs,
+		ManualRetention:      ManualRetention,
+		Namespace:            Namespace,
+		PolicyRetention:      PolicyRetention,
+		Snapshot:             Snapshot,
+		SnapshotLatestChange: SnapshotLatestChange,
+		SnapshotTimestamp:    SnapshotTimestamp,
+		SnapshotTimezone:     SnapshotTimezone,
+		Space:                Space,
 	}
 }
 
@@ -9066,6 +9814,13 @@ func SourceEnableParametersFactory(
 	}
 }
 
+// SourceIngestionDataFactory is just a simple function to instantiate the SourceIngestionDataStruct
+func SourceIngestionDataFactory() SourceIngestionDataStruct {
+	return SourceIngestionDataStruct{
+		Type: "SourceIngestionData",
+	}
+}
+
 // SourceRepositoryTemplateFactory is just a simple function to instantiate the SourceRepositoryTemplateStruct
 func SourceRepositoryTemplateFactory(
 	Container string,
@@ -9097,6 +9852,13 @@ func SourceStartParametersFactory() SourceStartParametersStruct {
 func SourceStopParametersFactory() SourceStopParametersStruct {
 	return SourceStopParametersStruct{
 		Type: "SourceStopParameters",
+	}
+}
+
+// SourceTypeAggregateIngestedSizeFactory is just a simple function to instantiate the SourceTypeAggregateIngestedSizeStruct
+func SourceTypeAggregateIngestedSizeFactory() SourceTypeAggregateIngestedSizeStruct {
+	return SourceTypeAggregateIngestedSizeStruct{
+		Type: "SourceTypeAggregateIngestedSize",
 	}
 }
 
@@ -9189,6 +9951,26 @@ func SshVerifyRawKeyFactory(
 	}
 }
 
+// SsoConfigFactory is just a simple function to instantiate the SsoConfigStruct
+func SsoConfigFactory(
+	CloudSso *bool,
+	Enabled *bool,
+	EntityId string,
+	MaxAuthenticationAge string,
+	ResponseSkewTime string,
+	SamlMetadata string,
+) SsoConfigStruct {
+	return SsoConfigStruct{
+		Type:                 "SsoConfig",
+		CloudSso:             CloudSso,
+		Enabled:              Enabled,
+		EntityId:             EntityId,
+		MaxAuthenticationAge: MaxAuthenticationAge,
+		ResponseSkewTime:     ResponseSkewTime,
+		SamlMetadata:         SamlMetadata,
+	}
+}
+
 // StagingCompatibilityParametersFactory is just a simple function to instantiate the StagingCompatibilityParametersStruct
 func StagingCompatibilityParametersFactory(
 	Environment string,
@@ -9198,6 +9980,36 @@ func StagingCompatibilityParametersFactory(
 		Type:             "StagingCompatibilityParameters",
 		Environment:      Environment,
 		SourceRepository: SourceRepository,
+	}
+}
+
+// StagingSourceOperationsFactory is just a simple function to instantiate the StagingSourceOperationsStruct
+func StagingSourceOperationsFactory(
+	PostValidatedSync []SourceOperation,
+	PreValidatedSync []SourceOperation,
+) StagingSourceOperationsStruct {
+	return StagingSourceOperationsStruct{
+		Type:              "StagingSourceOperations",
+		PostValidatedSync: PostValidatedSync,
+		PreValidatedSync:  PreValidatedSync,
+	}
+}
+
+// StaticHostAddressFactory is just a simple function to instantiate the StaticHostAddressStruct
+func StaticHostAddressFactory(
+	Addresses []string,
+	Hostname string,
+	Name string,
+	Namespace string,
+	Reference string,
+) StaticHostAddressStruct {
+	return StaticHostAddressStruct{
+		Type:      "StaticHostAddress",
+		Addresses: Addresses,
+		Hostname:  Hostname,
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
 	}
 }
 
@@ -9446,16 +10258,28 @@ func StringEqualConstraintFactory(
 // SupportAccessStateFactory is just a simple function to instantiate the SupportAccessStateStruct
 func SupportAccessStateFactory(
 	AccessType string,
+	AuthenticationMethod string,
 	EndTime string,
 	StartTime string,
 	Token string,
 ) SupportAccessStateStruct {
 	return SupportAccessStateStruct{
-		Type:       "SupportAccessState",
-		AccessType: AccessType,
-		EndTime:    EndTime,
-		StartTime:  StartTime,
-		Token:      Token,
+		Type:                 "SupportAccessState",
+		AccessType:           AccessType,
+		AuthenticationMethod: AuthenticationMethod,
+		EndTime:              EndTime,
+		StartTime:            StartTime,
+		Token:                Token,
+	}
+}
+
+// SupportBundleConfigurationFactory is just a simple function to instantiate the SupportBundleConfigurationStruct
+func SupportBundleConfigurationFactory(
+	MaxActions string,
+) SupportBundleConfigurationStruct {
+	return SupportBundleConfigurationStruct{
+		Type:       "SupportBundleConfiguration",
+		MaxActions: MaxActions,
 	}
 }
 
@@ -9464,6 +10288,7 @@ func SupportBundleGenerateParametersFactory(
 	BundleType string,
 	Environments []string,
 	IncludeAnalyticsData *bool,
+	Plugin string,
 	Sources []string,
 ) SupportBundleGenerateParametersStruct {
 	return SupportBundleGenerateParametersStruct{
@@ -9471,6 +10296,7 @@ func SupportBundleGenerateParametersFactory(
 		BundleType:           BundleType,
 		Environments:         Environments,
 		IncludeAnalyticsData: IncludeAnalyticsData,
+		Plugin:               Plugin,
 		Sources:              Sources,
 	}
 }
@@ -9481,6 +10307,7 @@ func SupportBundleUploadParametersFactory(
 	CaseNumber *int,
 	Environments []string,
 	IncludeAnalyticsData *bool,
+	Plugin string,
 	Sources []string,
 ) SupportBundleUploadParametersStruct {
 	return SupportBundleUploadParametersStruct{
@@ -9489,6 +10316,7 @@ func SupportBundleUploadParametersFactory(
 		CaseNumber:           CaseNumber,
 		Environments:         Environments,
 		IncludeAnalyticsData: IncludeAnalyticsData,
+		Plugin:               Plugin,
 		Sources:              Sources,
 	}
 }
@@ -9502,6 +10330,16 @@ func SupportContactFactory(
 		Type:        "SupportContact",
 		Country:     Country,
 		PhoneNumber: PhoneNumber,
+	}
+}
+
+// SwitchSessionUserParametersFactory is just a simple function to instantiate the SwitchSessionUserParametersStruct
+func SwitchSessionUserParametersFactory(
+	User string,
+) SwitchSessionUserParametersStruct {
+	return SwitchSessionUserParametersStruct{
+		Type: "SwitchSessionUserParameters",
+		User: User,
 	}
 }
 
@@ -9585,27 +10423,35 @@ func SystemInfoFactory(
 	BuildTimestamp string,
 	BuildTitle string,
 	BuildVersion *VersionInfoStruct,
+	CentralManagementProductName string,
 	Configured *bool,
 	CpuReservation float64,
 	CurrentLocale string,
 	EnabledFeatures []string,
 	EngineQualifier string,
+	EngineType string,
 	Hostname string,
+	Hotfixes string,
 	InstallationTime string,
 	KernelName string,
 	Locales []string,
 	MemoryReservation float64,
 	MemorySize float64,
 	Platform string,
+	PoolFragmentation float64,
 	Processors []*CPUInfoStruct,
 	ProductName string,
 	ProductType string,
 	SshPublicKey string,
+	SsoEnabled *bool,
 	StorageTotal float64,
 	StorageUsed float64,
 	SupportContacts []*SupportContactStruct,
 	SupportURL string,
+	Theme *SchemaDraftV4Struct,
+	ToggleableFeatures []string,
 	UpTime *UpTimeInfoStruct,
+	UserManagementEnabled *bool,
 	Uuid string,
 	VendorAddress []string,
 	VendorEmail string,
@@ -9614,50 +10460,60 @@ func SystemInfoFactory(
 	VendorURL string,
 ) SystemInfoStruct {
 	return SystemInfoStruct{
-		Type:              "SystemInfo",
-		ApiVersion:        ApiVersion,
-		Banner:            Banner,
-		BuildTimestamp:    BuildTimestamp,
-		BuildTitle:        BuildTitle,
-		BuildVersion:      BuildVersion,
-		Configured:        Configured,
-		CpuReservation:    CpuReservation,
-		CurrentLocale:     CurrentLocale,
-		EnabledFeatures:   EnabledFeatures,
-		EngineQualifier:   EngineQualifier,
-		Hostname:          Hostname,
-		InstallationTime:  InstallationTime,
-		KernelName:        KernelName,
-		Locales:           Locales,
-		MemoryReservation: MemoryReservation,
-		MemorySize:        MemorySize,
-		Platform:          Platform,
-		Processors:        Processors,
-		ProductName:       ProductName,
-		ProductType:       ProductType,
-		SshPublicKey:      SshPublicKey,
-		StorageTotal:      StorageTotal,
-		StorageUsed:       StorageUsed,
-		SupportContacts:   SupportContacts,
-		SupportURL:        SupportURL,
-		UpTime:            UpTime,
-		Uuid:              Uuid,
-		VendorAddress:     VendorAddress,
-		VendorEmail:       VendorEmail,
-		VendorName:        VendorName,
-		VendorPhoneNumber: VendorPhoneNumber,
-		VendorURL:         VendorURL,
+		Type:                         "SystemInfo",
+		ApiVersion:                   ApiVersion,
+		Banner:                       Banner,
+		BuildTimestamp:               BuildTimestamp,
+		BuildTitle:                   BuildTitle,
+		BuildVersion:                 BuildVersion,
+		CentralManagementProductName: CentralManagementProductName,
+		Configured:                   Configured,
+		CpuReservation:               CpuReservation,
+		CurrentLocale:                CurrentLocale,
+		EnabledFeatures:              EnabledFeatures,
+		EngineQualifier:              EngineQualifier,
+		EngineType:                   EngineType,
+		Hostname:                     Hostname,
+		Hotfixes:                     Hotfixes,
+		InstallationTime:             InstallationTime,
+		KernelName:                   KernelName,
+		Locales:                      Locales,
+		MemoryReservation:            MemoryReservation,
+		MemorySize:                   MemorySize,
+		Platform:                     Platform,
+		PoolFragmentation:            PoolFragmentation,
+		Processors:                   Processors,
+		ProductName:                  ProductName,
+		ProductType:                  ProductType,
+		SshPublicKey:                 SshPublicKey,
+		SsoEnabled:                   SsoEnabled,
+		StorageTotal:                 StorageTotal,
+		StorageUsed:                  StorageUsed,
+		SupportContacts:              SupportContacts,
+		SupportURL:                   SupportURL,
+		Theme:                        Theme,
+		ToggleableFeatures:           ToggleableFeatures,
+		UpTime:                       UpTime,
+		UserManagementEnabled:        UserManagementEnabled,
+		Uuid:                         Uuid,
+		VendorAddress:                VendorAddress,
+		VendorEmail:                  VendorEmail,
+		VendorName:                   VendorName,
+		VendorPhoneNumber:            VendorPhoneNumber,
+		VendorURL:                    VendorURL,
 	}
 }
 
 // SystemInitializationParametersFactory is just a simple function to instantiate the SystemInitializationParametersStruct
 func SystemInitializationParametersFactory(
+	DefaultEmail string,
 	DefaultPassword string,
 	DefaultUser string,
 	Devices []string,
 ) SystemInitializationParametersStruct {
 	return SystemInitializationParametersStruct{
 		Type:            "SystemInitializationParameters",
+		DefaultEmail:    DefaultEmail,
 		DefaultPassword: DefaultPassword,
 		DefaultUser:     DefaultUser,
 		Devices:         Devices,
@@ -9689,35 +10545,49 @@ func SystemPackageFactory(
 	}
 }
 
+// SystemStatusFactory is just a simple function to instantiate the SystemStatusStruct
+func SystemStatusFactory(
+	Name string,
+	Namespace string,
+	Reference string,
+) SystemStatusStruct {
+	return SystemStatusStruct{
+		Type:      "SystemStatus",
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
+	}
+}
+
 // SystemVersionFactory is just a simple function to instantiate the SystemVersionStruct
 func SystemVersionFactory(
 	BuildDate string,
+	HotfixVersion string,
 	InstallDate string,
-	MinOsVersion string,
+	MinRebootOptionalVersion string,
 	MinVersion string,
 	Name string,
 	Namespace string,
-	OsRunning *bool,
-	OsVersion string,
 	Reference string,
 	Status string,
+	VerificationVersion string,
 	VerifyDate string,
 	Version string,
 ) SystemVersionStruct {
 	return SystemVersionStruct{
-		Type:         "SystemVersion",
-		BuildDate:    BuildDate,
-		InstallDate:  InstallDate,
-		MinOsVersion: MinOsVersion,
-		MinVersion:   MinVersion,
-		Name:         Name,
-		Namespace:    Namespace,
-		OsRunning:    OsRunning,
-		OsVersion:    OsVersion,
-		Reference:    Reference,
-		Status:       Status,
-		VerifyDate:   VerifyDate,
-		Version:      Version,
+		Type:                     "SystemVersion",
+		BuildDate:                BuildDate,
+		HotfixVersion:            HotfixVersion,
+		InstallDate:              InstallDate,
+		MinRebootOptionalVersion: MinRebootOptionalVersion,
+		MinVersion:               MinVersion,
+		Name:                     Name,
+		Namespace:                Namespace,
+		Reference:                Reference,
+		Status:                   Status,
+		VerificationVersion:      VerificationVersion,
+		VerifyDate:               VerifyDate,
+		Version:                  Version,
 	}
 }
 
@@ -9729,6 +10599,7 @@ func TCPStatsDatapointFactory(
 	OutBytes *int,
 	ReceiveWindowSize *int,
 	RetransmittedBytes *int,
+	RetransmittedSegs *int,
 	RoundTripTime *int,
 	SendWindowSize *int,
 	Timestamp string,
@@ -9743,6 +10614,7 @@ func TCPStatsDatapointFactory(
 		OutBytes:             OutBytes,
 		ReceiveWindowSize:    ReceiveWindowSize,
 		RetransmittedBytes:   RetransmittedBytes,
+		RetransmittedSegs:    RetransmittedSegs,
 		RoundTripTime:        RoundTripTime,
 		SendWindowSize:       SendWindowSize,
 		Timestamp:            Timestamp,
@@ -9788,6 +10660,34 @@ func TargetOwnerFilterFactory(
 	return TargetOwnerFilterStruct{
 		Type:   "TargetOwnerFilter",
 		Owners: Owners,
+	}
+}
+
+// ThemeFactory is just a simple function to instantiate the ThemeStruct
+func ThemeFactory(
+	Active *bool,
+	Name string,
+	Namespace string,
+	Reference string,
+	Values *SchemaDraftV4Struct,
+) ThemeStruct {
+	return ThemeStruct{
+		Type:      "Theme",
+		Active:    Active,
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
+		Values:    Values,
+	}
+}
+
+// ThemeReferenceParameterFactory is just a simple function to instantiate the ThemeReferenceParameterStruct
+func ThemeReferenceParameterFactory(
+	Reference string,
+) ThemeReferenceParameterStruct {
+	return ThemeReferenceParameterStruct{
+		Type:      "ThemeReferenceParameter",
+		Reference: Reference,
 	}
 }
 
@@ -9872,6 +10772,32 @@ func TimeflowBookmarkCreateParametersFactory(
 		RetentionProof: RetentionProof,
 		Tag:            Tag,
 		TimeflowPoint:  TimeflowPoint,
+	}
+}
+
+// TimeflowDeletionDependencyFactory is just a simple function to instantiate the TimeflowDeletionDependencyStruct
+func TimeflowDeletionDependencyFactory(
+	ContainerName string,
+	Dependencies []TypedObject,
+	DisplayName string,
+	Locked *bool,
+	NamespaceName string,
+	Prerequisites []*DeletionDependencyPrerequisiteStruct,
+	Size float64,
+	TargetReference string,
+	TargetType string,
+) TimeflowDeletionDependencyStruct {
+	return TimeflowDeletionDependencyStruct{
+		Type:            "TimeflowDeletionDependency",
+		ContainerName:   ContainerName,
+		Dependencies:    Dependencies,
+		DisplayName:     DisplayName,
+		Locked:          Locked,
+		NamespaceName:   NamespaceName,
+		Prerequisites:   Prerequisites,
+		Size:            Size,
+		TargetReference: TargetReference,
+		TargetType:      TargetType,
 	}
 }
 
@@ -10069,6 +10995,7 @@ func ToolkitFactory(
 	PrettyName string,
 	Reference string,
 	Resources map[string]string,
+	RootSquashEnabled *bool,
 	SnapshotSchema *SchemaDraftV4Struct,
 	UpgradeDefinition *ToolkitUpgradeDefinitionStruct,
 	Version string,
@@ -10088,6 +11015,7 @@ func ToolkitFactory(
 		PrettyName:              PrettyName,
 		Reference:               Reference,
 		Resources:               Resources,
+		RootSquashEnabled:       RootSquashEnabled,
 		SnapshotSchema:          SnapshotSchema,
 		UpgradeDefinition:       UpgradeDefinition,
 		Version:                 Version,
@@ -10177,6 +11105,16 @@ func ToolkitLocaleFactory(
 	}
 }
 
+// ToolkitSnapshotParametersDefinitionFactory is just a simple function to instantiate the ToolkitSnapshotParametersDefinitionStruct
+func ToolkitSnapshotParametersDefinitionFactory(
+	Schema *SchemaDraftV4Struct,
+) ToolkitSnapshotParametersDefinitionStruct {
+	return ToolkitSnapshotParametersDefinitionStruct{
+		Type:   "ToolkitSnapshotParametersDefinition",
+		Schema: Schema,
+	}
+}
+
 // ToolkitUpgradeDefinitionFactory is just a simple function to instantiate the ToolkitUpgradeDefinitionStruct
 func ToolkitUpgradeDefinitionFactory(
 	FromVersion string,
@@ -10261,6 +11199,50 @@ func TransformationFactory(
 	}
 }
 
+// TunableFactory is just a simple function to instantiate the TunableStruct
+func TunableFactory(
+	Name string,
+	Subsystem string,
+	Value string,
+) TunableStruct {
+	return TunableStruct{
+		Type:      "Tunable",
+		Name:      Name,
+		Subsystem: Subsystem,
+		Value:     Value,
+	}
+}
+
+// TunableIdentifierFactory is just a simple function to instantiate the TunableIdentifierStruct
+func TunableIdentifierFactory(
+	Name string,
+	Subsystem string,
+) TunableIdentifierStruct {
+	return TunableIdentifierStruct{
+		Type:      "TunableIdentifier",
+		Name:      Name,
+		Subsystem: Subsystem,
+	}
+}
+
+// UnixConnectivityParametersFactory is just a simple function to instantiate the UnixConnectivityParametersStruct
+func UnixConnectivityParametersFactory(
+	Address string,
+	Credentials Credential,
+	Port *int,
+	SshVerificationStrategy SshVerificationStrategy,
+	Username string,
+) UnixConnectivityParametersStruct {
+	return UnixConnectivityParametersStruct{
+		Type:                    "UnixConnectivityParameters",
+		Address:                 Address,
+		Credentials:             Credentials,
+		Port:                    Port,
+		SshVerificationStrategy: SshVerificationStrategy,
+		Username:                Username,
+	}
+}
+
 // UnixHostFactory is just a simple function to instantiate the UnixHostStruct
 func UnixHostFactory(
 	Address string,
@@ -10272,6 +11254,7 @@ func UnixHostFactory(
 	DspTruststorePath string,
 	HostConfiguration *HostConfigurationStruct,
 	HostRuntime *HostRuntimeStruct,
+	JavaHome string,
 	Name string,
 	Namespace string,
 	NfsAddressList []string,
@@ -10293,6 +11276,7 @@ func UnixHostFactory(
 		DspTruststorePath:          DspTruststorePath,
 		HostConfiguration:          HostConfiguration,
 		HostRuntime:                HostRuntime,
+		JavaHome:                   JavaHome,
 		Name:                       Name,
 		Namespace:                  Namespace,
 		NfsAddressList:             NfsAddressList,
@@ -10338,6 +11322,20 @@ func UnixHostEnvironmentFactory(
 		Namespace:                    Namespace,
 		PrimaryUser:                  PrimaryUser,
 		Reference:                    Reference,
+	}
+}
+
+// UnixRuntimeMountInformationFactory is just a simple function to instantiate the UnixRuntimeMountInformationStruct
+func UnixRuntimeMountInformationFactory(
+	Name string,
+	Namespace string,
+	Reference string,
+) UnixRuntimeMountInformationStruct {
+	return UnixRuntimeMountInformationStruct{
+		Type:      "UnixRuntimeMountInformation",
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
 	}
 }
 
@@ -10398,8 +11396,47 @@ func UpgradeNotificationFactory() UpgradeNotificationStruct {
 	}
 }
 
+// UpgradeVerificationReportFactory is just a simple function to instantiate the UpgradeVerificationReportStruct
+func UpgradeVerificationReportFactory(
+	Name string,
+	Namespace string,
+	Reference string,
+) UpgradeVerificationReportStruct {
+	return UpgradeVerificationReportStruct{
+		Type:      "UpgradeVerificationReport",
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
+	}
+}
+
+// UpgradeVerificationStepsFactory is just a simple function to instantiate the UpgradeVerificationStepsStruct
+func UpgradeVerificationStepsFactory(
+	Name string,
+	Namespace string,
+	Reference string,
+) UpgradeVerificationStepsStruct {
+	return UpgradeVerificationStepsStruct{
+		Type:      "UpgradeVerificationSteps",
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
+	}
+}
+
+// UpgradeVersionChecksParameterFactory is just a simple function to instantiate the UpgradeVersionChecksParameterStruct
+func UpgradeVersionChecksParameterFactory(
+	UpgradeVersionReference string,
+) UpgradeVersionChecksParameterStruct {
+	return UpgradeVersionChecksParameterStruct{
+		Type:                    "UpgradeVersionChecksParameter",
+		UpgradeVersionReference: UpgradeVersionReference,
+	}
+}
+
 // UserFactory is just a simple function to instantiate the UserStruct
 func UserFactory(
+	ApiUser *bool,
 	AuthenticationType string,
 	Credential *PasswordCredentialStruct,
 	EmailAddress string,
@@ -10414,7 +11451,7 @@ func UserFactory(
 	Namespace string,
 	PasswordUpdateRequest string,
 	Principal string,
-	PublicKey string,
+	PublicKey []string,
 	Reference string,
 	SessionTimeout *int,
 	UserType string,
@@ -10422,6 +11459,7 @@ func UserFactory(
 ) UserStruct {
 	return UserStruct{
 		Type:                  "User",
+		ApiUser:               ApiUser,
 		AuthenticationType:    AuthenticationType,
 		Credential:            Credential,
 		EmailAddress:          EmailAddress,
@@ -10472,10 +11510,33 @@ func UserInterfaceConfigFactory(
 	}
 }
 
-// VMwarePlatformParametersFactory is just a simple function to instantiate the VMwarePlatformParametersStruct
-func VMwarePlatformParametersFactory() VMwarePlatformParametersStruct {
-	return VMwarePlatformParametersStruct{
-		Type: "VMwarePlatformParameters",
+// UserPathStorageFactory is just a simple function to instantiate the UserPathStorageStruct
+func UserPathStorageFactory(
+	Description string,
+	Namespace string,
+	Path string,
+	Pathtype string,
+	Reference string,
+) UserPathStorageStruct {
+	return UserPathStorageStruct{
+		Type:        "UserPathStorage",
+		Description: Description,
+		Namespace:   Namespace,
+		Path:        Path,
+		Pathtype:    Pathtype,
+		Reference:   Reference,
+	}
+}
+
+// ValidateJavaParametersFactory is just a simple function to instantiate the ValidateJavaParametersStruct
+func ValidateJavaParametersFactory(
+	ConnectivityParameters ConnectivityParameters,
+	JavaHome string,
+) ValidateJavaParametersStruct {
+	return ValidateJavaParametersStruct{
+		Type:                   "ValidateJavaParameters",
+		ConnectivityParameters: ConnectivityParameters,
+		JavaHome:               JavaHome,
 	}
 }
 
@@ -10503,17 +11564,21 @@ func VerifyVersionParametersFactory(
 
 // VersionInfoFactory is just a simple function to instantiate the VersionInfoStruct
 func VersionInfoFactory(
+	BuildMetadata []string,
 	Major *int,
 	Micro *int,
 	Minor *int,
 	Patch *int,
+	PreRelease []string,
 ) VersionInfoStruct {
 	return VersionInfoStruct{
-		Type:  "VersionInfo",
-		Major: Major,
-		Micro: Micro,
-		Minor: Minor,
-		Patch: Patch,
+		Type:          "VersionInfo",
+		BuildMetadata: BuildMetadata,
+		Major:         Major,
+		Micro:         Micro,
+		Minor:         Minor,
+		Patch:         Patch,
+		PreRelease:    PreRelease,
 	}
 }
 
@@ -10562,6 +11627,32 @@ func VirtualSourceOperationsFactory(
 		PreSnapshot:    PreSnapshot,
 		PreStart:       PreStart,
 		PreStop:        PreStop,
+	}
+}
+
+// VirtualizationPlatformAPIRangeFactory is just a simple function to instantiate the VirtualizationPlatformAPIRangeStruct
+func VirtualizationPlatformAPIRangeFactory(
+	Max *VirtualizationPlatformAPIVersionStruct,
+	Min *VirtualizationPlatformAPIVersionStruct,
+) VirtualizationPlatformAPIRangeStruct {
+	return VirtualizationPlatformAPIRangeStruct{
+		Type: "VirtualizationPlatformAPIRange",
+		Max:  Max,
+		Min:  Min,
+	}
+}
+
+// VirtualizationPlatformAPIVersionFactory is just a simple function to instantiate the VirtualizationPlatformAPIVersionStruct
+func VirtualizationPlatformAPIVersionFactory(
+	Major *int,
+	Micro *int,
+	Minor *int,
+) VirtualizationPlatformAPIVersionStruct {
+	return VirtualizationPlatformAPIVersionStruct{
+		Type:  "VirtualizationPlatformAPIVersion",
+		Major: Major,
+		Micro: Micro,
+		Minor: Minor,
 	}
 }
 
@@ -10629,6 +11720,22 @@ func WindowsClusterNodeFactory(
 	}
 }
 
+// WindowsConnectivityParametersFactory is just a simple function to instantiate the WindowsConnectivityParametersStruct
+func WindowsConnectivityParametersFactory(
+	Address string,
+	Credentials Credential,
+	Port *int,
+	Username string,
+) WindowsConnectivityParametersStruct {
+	return WindowsConnectivityParametersStruct{
+		Type:        "WindowsConnectivityParameters",
+		Address:     Address,
+		Credentials: Credentials,
+		Port:        Port,
+		Username:    Username,
+	}
+}
+
 // WindowsHostFactory is just a simple function to instantiate the WindowsHostStruct
 func WindowsHostFactory(
 	Address string,
@@ -10642,6 +11749,7 @@ func WindowsHostFactory(
 	DspTruststorePath string,
 	HostConfiguration *HostConfigurationStruct,
 	HostRuntime *HostRuntimeStruct,
+	JavaHome string,
 	Name string,
 	Namespace string,
 	NfsAddressList []string,
@@ -10662,6 +11770,7 @@ func WindowsHostFactory(
 		DspTruststorePath:          DspTruststorePath,
 		HostConfiguration:          HostConfiguration,
 		HostRuntime:                HostRuntime,
+		JavaHome:                   JavaHome,
 		Name:                       Name,
 		Namespace:                  Namespace,
 		NfsAddressList:             NfsAddressList,
@@ -10707,6 +11816,20 @@ func WindowsHostEnvironmentFactory(
 	}
 }
 
+// WindowsRuntimeMountInformationFactory is just a simple function to instantiate the WindowsRuntimeMountInformationStruct
+func WindowsRuntimeMountInformationFactory(
+	Name string,
+	Namespace string,
+	Reference string,
+) WindowsRuntimeMountInformationStruct {
+	return WindowsRuntimeMountInformationStruct{
+		Type:      "WindowsRuntimeMountInformation",
+		Name:      Name,
+		Namespace: Namespace,
+		Reference: Reference,
+	}
+}
+
 // WorkflowFunctionDefinitionFactory is just a simple function to instantiate the WorkflowFunctionDefinitionStruct
 func WorkflowFunctionDefinitionFactory(
 	InputSchema *SchemaDraftV4Struct,
@@ -10748,123 +11871,5 @@ func X500DistinguishedNameFieldsFactory(
 		Organization:     Organization,
 		OrganizationUnit: OrganizationUnit,
 		StateRegion:      StateRegion,
-	}
-}
-
-// X509CertificateFactory is just a simple function to instantiate the X509CertificateStruct
-func X509CertificateFactory(
-	Accepted *bool,
-	IssuedByDN string,
-	IssuedToDN string,
-	Md5Fingerprint string,
-	Name string,
-	Namespace string,
-	Reference string,
-	SerialNumber string,
-	Sha1Fingerprint string,
-	ValidFrom string,
-	ValidTo string,
-) X509CertificateStruct {
-	return X509CertificateStruct{
-		Type:            "X509Certificate",
-		Accepted:        Accepted,
-		IssuedByDN:      IssuedByDN,
-		IssuedToDN:      IssuedToDN,
-		Md5Fingerprint:  Md5Fingerprint,
-		Name:            Name,
-		Namespace:       Namespace,
-		Reference:       Reference,
-		SerialNumber:    SerialNumber,
-		Sha1Fingerprint: Sha1Fingerprint,
-		ValidFrom:       ValidFrom,
-		ValidTo:         ValidTo,
-	}
-}
-
-// XPPCompatibilityParametersFactory is just a simple function to instantiate the XPPCompatibilityParametersStruct
-func XPPCompatibilityParametersFactory(
-	Environment string,
-	TimeflowPointParameters TimeflowPointParameters,
-) XPPCompatibilityParametersStruct {
-	return XPPCompatibilityParametersStruct{
-		Type:                    "XPPCompatibilityParameters",
-		Environment:             Environment,
-		TimeflowPointParameters: TimeflowPointParameters,
-	}
-}
-
-// XppLastRunStatusFactory is just a simple function to instantiate the XppLastRunStatusStruct
-func XppLastRunStatusFactory(
-	ErrorMessage string,
-	Job *JobStruct,
-) XppLastRunStatusStruct {
-	return XppLastRunStatusStruct{
-		Type:         "XppLastRunStatus",
-		ErrorMessage: ErrorMessage,
-		Job:          Job,
-	}
-}
-
-// XppStagingStatusFactory is just a simple function to instantiate the XppStagingStatusStruct
-func XppStagingStatusFactory(
-	Description string,
-	Message string,
-	Name string,
-	Status string,
-) XppStagingStatusStruct {
-	return XppStagingStatusStruct{
-		Type:        "XppStagingStatus",
-		Description: Description,
-		Message:     Message,
-		Name:        Name,
-		Status:      Status,
-	}
-}
-
-// XppStatusFactory is just a simple function to instantiate the XppStatusStruct
-func XppStatusFactory(
-	LastRunStatus *XppLastRunStatusStruct,
-	StagingStatus *XppStagingStatusStruct,
-	TargetStatus *XppTargetStatusStruct,
-	ValidateStatus *XppValidateStatusStruct,
-) XppStatusStruct {
-	return XppStatusStruct{
-		Type:           "XppStatus",
-		LastRunStatus:  LastRunStatus,
-		StagingStatus:  StagingStatus,
-		TargetStatus:   TargetStatus,
-		ValidateStatus: ValidateStatus,
-	}
-}
-
-// XppTargetStatusFactory is just a simple function to instantiate the XppTargetStatusStruct
-func XppTargetStatusFactory(
-	Description string,
-	Message string,
-	Name string,
-	Status string,
-) XppTargetStatusStruct {
-	return XppTargetStatusStruct{
-		Type:        "XppTargetStatus",
-		Description: Description,
-		Message:     Message,
-		Name:        Name,
-		Status:      Status,
-	}
-}
-
-// XppValidateStatusFactory is just a simple function to instantiate the XppValidateStatusStruct
-func XppValidateStatusFactory(
-	Description string,
-	Message string,
-	Name string,
-	Status string,
-) XppValidateStatusStruct {
-	return XppValidateStatusStruct{
-		Type:        "XppValidateStatus",
-		Description: Description,
-		Message:     Message,
-		Name:        Name,
-		Status:      Status,
 	}
 }

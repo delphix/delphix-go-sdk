@@ -6,3 +6,5 @@
 delphix.bad
 *.test
 test-data/
+.idea
+delphix-go-sdk.iml
