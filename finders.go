@@ -117,20 +117,63 @@ func (c *Client) FindDatabaseByName(n string) (interface{}, error) {
 }
 
 // FindGroupByName returns the group object (interface) of the named (n) group
+//func (c *Client) FindGroupByName(n string) (interface{}, error) {
+//	obj, err := c.FindObjectByName("/group", n)
+//	return obj, err
+//}
+
+// FindGroupByName returns the environment object (interface) of the named (n) environment
 func (c *Client) FindGroupByName(n string) (interface{}, error) {
-	obj, err := c.FindObjectByName("/group", n)
+	var err error
+	resp, err := resty.R().
+		SetHeader("Content-Type", "application/json").
+		Get(c.url + "/group") //grab all the groups
+	if err != nil {
+		return nil, err
+	}
+
+	if http.StatusOK != resp.StatusCode() { //check to make sure our query was good
+		errorMessage := string(resp.Body())
+		err = fmt.Errorf(errorMessage)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	groups := resp.Body()
+
+	var dat map[string]interface{}
+	if err = json.Unmarshal(groups, &dat); err != nil { //convert the json to go objects
+		return nil, err
+	}
+	results := dat["result"].([]interface{}) //grab the query results
+	for _, result := range results {         //loop through the groups
+		name := result.(map[string]interface{})["name"] //grab the group name
+		if n == name {                                  //if the name matches our specified group
+			return result, nil //return the group object
+		}
+	}
+	log.Printf("Was unable to find group \"%s\" in %s", n, string(resp.Body()))
+	return nil, nil
+}
+
+
+// FindGroupByRef returns the group object (interface) of the named (n) group
+func (c *Client) FindGroupByRef(n string) (interface{}, error) {
+	log.Println("------n:" + n)
+	obj, err := c.FindObjectByReference("/group", n)
 	return obj, err
 }
 
 // FindGroupRefByName returns the group reference (string) of the named (n) group
-func (c *Client) FindGroupRefByName(n string) (string, error) {
+func (c *Client) FindGroupRefByName(n string) (interface{}, error) {
 	obj, err := c.FindGroupByName(n)
 	return obj.(map[string]interface{})["reference"].(string), err
 }
 
 // FindRepoReferenceByEnvironmentRefAndOracleHome returns the reference of the Repository by
 // environment reference (e) and oracle home (oh) path
-func (c *Client) FindRepoReferenceByEnvironmentRefAndOracleHome(e string, oh string) (string, error) {
+func (c *Client) FindRepoReferenceByEnvironmentRefAndOracleHome(e string, oh string) (interface{}, error) {
 	var err error
 	resp, err := resty.R().
 		SetHeader("Content-Type", "application/json").
@@ -214,7 +257,7 @@ func (c *Client) FindUserByName(n string) (interface{}, error) {
 
 // FindSourceConfigReferenceByNameAndRepoReference returns the sourceconfig reference (string) of the
 // named (n) sourceconfig for the specified repo reference (r)
-func (c *Client) FindSourceConfigReferenceByNameAndRepoReference(n string, r string) (string, error) {
+func (c *Client) FindSourceConfigReferenceByNameAndRepoReference(n string, r string) (interface{}, error) {
 	url := fmt.Sprintf("/sourceconfig?repository=%s", r)
 	results, err := c.executeListAndReturnResults(url) //grab the query results
 	if err != nil {
@@ -229,7 +272,7 @@ func (c *Client) FindSourceConfigReferenceByNameAndRepoReference(n string, r str
 
 // FindEnvironmentUserByNameAndEnvironmentReference returns the reference of the environment user by
 // environment user name (n) and environment reference (r)
-func (c *Client) FindEnvironmentUserRefByNameAndEnvironmentReference(n string, r string) (string, error) {
+func (c *Client) FindEnvironmentUserRefByNameAndEnvironmentReference(n string, r string) (interface{}, error) {
 	url := fmt.Sprintf("/environment/user?environment=%s", r)
 	results, err := c.executeListAndReturnResults(url)
 	if err != nil {

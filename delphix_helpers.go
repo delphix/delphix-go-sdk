@@ -356,12 +356,40 @@ func (c *Client) UpdateEnvironment(r string, h *UnixHostEnvironmentStruct) error
 	return err
 }
 
+// CreateGroup creates a new group in Delphix
+func (c *Client) CreateGroup(h *GroupStruct) (
+	interface{}, error) {
+	url := "/group"
+	reference, err := c.executePostJobAndReturnObjectReference(url, h)
+
+	return reference, err
+}
+
+// DeleteGroup deletes an group in Delphix
+func (c *Client) DeleteGroup(r string) error {
+	url := fmt.Sprintf("/group/%s/delete", strings.ToUpper(r))
+	err := c.executePostJobAndReturnErrOnly(url, "{}")
+
+	return err
+}
+
+// UpdateGroup updates an group in Delphix
+func (c *Client) UpdateGroup(r string, h *GroupStruct) error {
+	url := fmt.Sprintf("/group/%s", r)
+
+	err := c.executePostJobAndReturnErrOnly(url, h)
+
+	return err
+}
+
 // CreateDSource creates a dSource in Delphix
 func (c *Client) CreateDSource(l *LinkParametersStruct) (
 	interface{}, error) {
 
 	sync := false
 	resultdat, err := mapifyStruct(l)
+	log.Println("resultdat")
+	log.Println(resultdat)
 	if err != nil {
 		return nil, err
 	}
@@ -404,7 +432,7 @@ func (c *Client) SyncDatabase(r string) error {
 	// oracleSyncParameters := OracleSyncParameters{
 	// 	Type: "OracleSyncParameters",
 	// }
-	oracleSyncParameters := CreateOracleSyncParameters(nil, nil, nil, nil)
+	oracleSyncParameters := CreateOracleSyncParameters(nil, nil, nil, nil, nil)
 	err := c.executePostJobAndReturnErrOnly(url, oracleSyncParameters)
 	return err
 }
